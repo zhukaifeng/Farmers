@@ -1,0 +1,43 @@
+<resources>
+    <string name="app_name">Farmers</string>
+    <string name="login">登录</string>
+    <string name="register">注册</string>
+    <string name="place_input_username">请输入账号</string>
+    <string name="place_input_password">请输入登录密码</string>
+    <string name="forget_password">忘记密码</string>
+    <string name="place_input_phone">请输入手机号码</string>
+    <string name="place_input_code">请输入短信验证码</string>
+    <string name="place_input_new_password">请输入新密码</string>
+    <string name="place_input_reg_password">请输入密码</string>
+    <string name="check_password">确认密码</string>
+    <string name="confirm">确定</string>
+    <string name="sms_verification">短信验证</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="next">下一步</string>
+    <string name="place_input_merchant">请输入商户名称</string>
+    <string name="place_input_corporation">请输入法人姓名</string>
+    <string name="place_input_organize">请输入组织代码</string>
+    <string name="scan_certificate_of_business">扫描营业执照二维码录入信息</string>
+    <string name="confirm_submission">确认提交</string>
+    <string name="retrospect">追溯</string>
+    <string name="sampling">采样</string>
+    <string name="booking">记账</string>
+    <string name="check">检测</string>
+    <string name="purchasing">进货</string>
+    <string name="operator_management">经营户管理</string>
+    <string name="stock">库存</string>
+    <string name="appraise">评价</string>
+    <string name="appraise_management">评价管理</string>
+    <string name="marketing_management">市场部管理</string>
+    <string name="charge">收费管理</string>
+    <string name="sell">销售</string>
+    
+    <string name="stock_purchase">进货</string>
+    <string name="add_stock_list">新增进货单</string>
+    <string name="stock_goods">库存</string>
+    <string name="pay">缴费</string>
+
+
+</resources>
