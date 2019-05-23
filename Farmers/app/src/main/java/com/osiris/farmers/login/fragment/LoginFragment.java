@@ -1,5 +1,6 @@
 package com.osiris.farmers.login.fragment;
 
+import android.content.Intent;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -44,7 +45,15 @@ public class LoginFragment extends BaseFragment {
                 toClass(getActivity(), ForgetPwdActivity.class);
                 break;
             case R.id.btn_login:
-                toClass(getActivity(), HomeActivity.class);
+                Intent intent = new Intent(getActivity(),HomeActivity.class);
+                if (etLoginUsername.getText().equals("1")){
+                    intent.putExtra("type",1);
+                }else if (etLoginUsername.getText().equals("2")){
+                    intent.putExtra("type",2);
+                }else if (etLoginUsername.getText().equals("3")){
+                    intent.putExtra("type",3);
+                }
+                startActivity(intent);
                 break;
         }
     }

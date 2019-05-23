@@ -77,4 +77,7 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener 
         }
         transaction.commit();
     }
+
+
+
 }

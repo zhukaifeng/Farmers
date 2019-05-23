@@ -31,7 +31,8 @@
             android:name="com.google.android.actions"
             android:resource="@xml/network_security_config" />
 
-        <activity android:name=".login.MainActivity">
+        <activity android:name=".login.MainActivity"/>
+        <activity android:name=".view.AccountActivity"/>
 
             <!-- <intent-filter> -->
             <!-- <action android:name="android.intent.action.MAIN" /> -->
@@ -39,7 +40,6 @@
 
             <!-- <category android:name="android.intent.category.LAUNCHER" /> -->
             <!-- </intent-filter> -->
-        </activity>
         <activity android:name=".login.MenuHomeActivity"/>
 
     </application>

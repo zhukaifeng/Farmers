@@ -1,6 +1,8 @@
 package com.osiris.farmers.login.fragment;
 
 import android.annotation.SuppressLint;
+import android.app.Dialog;
+import android.content.DialogInterface;
 import android.os.Handler;
 import android.text.TextUtils;
 import android.view.View;
@@ -12,6 +14,8 @@ import android.widget.TextView;
 import com.osiris.farmers.R;
 import com.osiris.farmers.base.BaseFragment;
 import com.osiris.farmers.utils.T;
+import com.osiris.farmers.view.dialog.DialogClickListener;
+import com.osiris.farmers.view.dialog.RegistDialog;
 
 public class RegisterFragment extends BaseFragment {
     private RelativeLayout rlRegFirst;
@@ -84,7 +88,8 @@ public class RegisterFragment extends BaseFragment {
     }
 
     private void submit() {
-        getActivity().finish();
+        //getActivity().finish();
+        showSubmitRegistDialog();
     }
 
     public void getCode() {
@@ -130,5 +135,29 @@ public class RegisterFragment extends BaseFragment {
             }
         }
     };
+
+    private void showSubmitRegistDialog() {
+        RegistDialog.Builder builder = new RegistDialog.Builder(getActivity());
+        builder.setPositiveButton(new DialogClickListener() {
+            @Override
+            public void onClick(Dialog dialog, String msg) {
+
+            }
+
+            @Override
+            public void onClick(Dialog dialog) {
+                dialog.dismiss();
+            }
+        });
+
+        builder.setNegativeButton(new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialogInterface, int i) {
+                dialogInterface.dismiss();
+            }
+        });
+        builder.create().show();
+    }
+
 
 }
