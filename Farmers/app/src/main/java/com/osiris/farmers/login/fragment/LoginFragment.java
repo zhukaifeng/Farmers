@@ -9,7 +9,7 @@ import android.widget.LinearLayout;
 import com.osiris.farmers.R;
 import com.osiris.farmers.base.BaseFragment;
 import com.osiris.farmers.login.ForgetPwdActivity;
-import com.osiris.farmers.login.HomeActivity;
+import com.osiris.farmers.view.PersonalInforActivity;
 
 public class LoginFragment extends BaseFragment {
 
@@ -45,7 +45,7 @@ public class LoginFragment extends BaseFragment {
                 toClass(getActivity(), ForgetPwdActivity.class);
                 break;
             case R.id.btn_login:
-                Intent intent = new Intent(getActivity(),HomeActivity.class);
+                Intent intent = new Intent(getActivity(), PersonalInforActivity.class);
                 if (etLoginUsername.getText().equals("1")){
                     intent.putExtra("type",1);
                 }else if (etLoginUsername.getText().equals("2")){

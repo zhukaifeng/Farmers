@@ -33,6 +33,7 @@
 
         <activity android:name=".login.MainActivity"/>
         <activity android:name=".view.AccountActivity"/>
+        <activity android:name=".view.PersonalInforActivity"/>
 
             <!-- <intent-filter> -->
             <!-- <action android:name="android.intent.action.MAIN" /> -->
