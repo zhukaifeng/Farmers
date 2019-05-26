@@ -98,5 +98,15 @@
     <string name="collect_fees">收费</string>
     <string name="sale_goods_list">出货清单</string>
     <string name="organization_datebackto">检测机构追溯</string>
+    <string name="sale_type">进销类型</string>
+    <string name="search">搜索</string>
+    <string name="datebackto_num">追溯编号</string>
+    <string name="sales_name">商品名称</string>
+    <string name="store_info">商户信息</string>
+    <string name="buy">采购</string>
+
+
+
+
 
 </resources>

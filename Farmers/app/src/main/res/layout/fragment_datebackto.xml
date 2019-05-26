@@ -3,6 +3,7 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/write"
     android:orientation="vertical"
     >
 
@@ -13,22 +14,6 @@
         android:background="@drawable/bg_top_goods"
         >
 
-        <RelativeLayout
-            android:layout_width="wrap_content"
-            android:layout_height="@dimen/dp33"
-            android:layout_marginLeft="@dimen/dp20"
-            android:layout_marginTop="@dimen/dp20"
-            >
-
-            <ImageView
-                android:id="@+id/iv_back"
-                android:layout_width="@dimen/dp9"
-                android:layout_height="@dimen/dp16"
-                android:layout_centerVertical="true"
-                android:layout_gravity="center_vertical"
-                android:background="@drawable/bg_back"
-                />
-        </RelativeLayout>
 
         <RelativeLayout
             android:layout_width="@dimen/dp223"
@@ -42,7 +27,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_centerInParent="true"
-                android:text="@string/sale_goods_list"
+                android:text="@string/organization_datebackto"
                 android:textColor="@color/write"
                 android:textSize="@dimen/sp15"
                 />
@@ -50,57 +35,186 @@
 
         </RelativeLayout>
 
-        
+
         <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="@dimen/dp71"
-            android:background="@drawable/bg_rectange"
             android:layout_alignParentBottom="true"
+            android:background="@drawable/bg_rectange"
             >
-
 
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:layout_marginLeft="@dimen/dp29"
+                android:layout_toRightOf="@+id/linear_month"
                 android:text="百花农贸市场~摊位号12"
                 android:textColor="@color/write"
                 android:textSize="@dimen/sp16"
-                android:layout_centerVertical="true"
-                android:layout_toRightOf="@+id/linear_month"
-                android:layout_marginLeft="@dimen/dp29"
                 />
+
             <ImageView
                 android:layout_width="@dimen/dp9"
                 android:layout_height="@dimen/dp15"
-                android:background="@drawable/bg_arrow_to"
-                android:layout_toLeftOf="@+id/tv_date"
                 android:layout_centerVertical="true"
                 android:layout_marginRight="@dimen/dp40"
+                android:layout_toLeftOf="@+id/tv_date"
+                android:background="@drawable/bg_arrow_to"
                 />
 
 
-                <TextView
-                    android:id="@+id/tv_date"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="2019-03-20"
-                    android:layout_centerVertical="true"
-                    android:layout_alignParentRight="true"
-                    android:layout_marginRight="@dimen/dp24"
-                    android:textColor="@color/write"
-                    android:textSize="@dimen/sp18"
-                    />
-
+            <TextView
+                android:id="@+id/tv_date"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:layout_centerVertical="true"
+                android:layout_marginRight="@dimen/dp24"
+                android:text="2019-03-20"
+                android:textColor="@color/write"
+                android:textSize="@dimen/sp18"
+                />
 
 
         </RelativeLayout>
-        
 
 
     </RelativeLayout>
-    
-    
-    
-    
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/dp59"
+        android:background="@color/bg_gray_e9"
+        android:orientation="horizontal"
+        >
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:layout_marginLeft="@dimen/dp29"
+            android:text="@string/sale_type"
+            android:textColor="@color/txt_black_51"
+            />
+
+
+        <LinearLayout
+            android:layout_width="@dimen/dp156"
+            android:layout_height="@dimen/dp26"
+            android:layout_gravity="center_vertical"
+            android:layout_marginLeft="@dimen/dp10"
+            android:background="@drawable/bg_datebackto"
+            android:paddingLeft="3dp"
+            android:paddingRight="3dp">
+
+            <TextView
+                android:id="@+id/tv_login"
+                android:layout_width="0dp"
+                android:layout_height="21dp"
+                android:layout_gravity="center_vertical"
+                android:layout_weight="1"
+                android:background="@drawable/bg_green_round"
+                android:gravity="center"
+                android:text="@string/sell"
+                android:textColor="@color/write"
+                android:textSize="@dimen/sp14"/>
+
+            <TextView
+                android:id="@+id/tv_register"
+                android:layout_width="0dp"
+                android:layout_height="21dp"
+                android:layout_gravity="center_vertical"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:text="@string/buy"
+                android:textColor="@color/write"
+                android:textSize="@dimen/sp14"/>
+
+        </LinearLayout>
+
+        <TextView
+            android:id="@+id/tv_search"
+            android:layout_width="@dimen/dp82"
+            android:layout_height="26dp"
+            android:layout_gravity="center_vertical"
+            android:layout_marginLeft="@dimen/dp15"
+            android:background="@drawable/bg_green_round"
+            android:gravity="center"
+            android:text="@string/search"
+            android:textColor="@color/write"
+            android:textSize="@dimen/sp14"/>
+
+
+    </LinearLayout>
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/dp59"
+        android:layout_marginTop="@dimen/dp10"
+        android:background="@color/bg_gray_e9"
+        android:orientation="horizontal"
+        >
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:text="@string/datebackto_num"
+            android:gravity="center"
+            android:textStyle="bold"
+            />
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:text="@string/sales_name"
+            android:gravity="center"
+            android:textStyle="bold"
+
+            />
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:text="@string/sale_type"
+            android:textStyle="bold"
+
+            />
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:text="@string/store_info"
+            android:textStyle="bold"
+
+            />
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+
+            />
+
+
+    </LinearLayout>
+
+
+  <android.support.v7.widget.RecyclerView
+      android:id="@+id/rv_data"
+      android:layout_width="match_parent"
+      android:layout_height="match_parent"/>
+
+
+
+
 </LinearLayout>
