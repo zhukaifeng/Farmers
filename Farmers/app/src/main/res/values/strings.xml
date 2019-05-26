@@ -53,6 +53,50 @@
     <string name="my_busniss_name">商户名称</string>
     <string name="my_legal_name">法人姓名</string>
     <string name="my_organization_count">组织机构代码</string>
+    <string name="my_sales_accounting">销售记账</string>
+    <string name="my_sales_count">销售额</string>
+    <string name="save">保存</string>
+    <string name="remember">记一笔</string>
+    <string name="account">账户</string>
+    <string name="type">分类</string>
+    <string name="price">单价</string>
+    <string name="count">数量</string>
+    <string name="evaluate">评价</string>
+    <string name="invoice_for_payment">凭证</string>
+    <string name="remarks">备注</string>
+    <string name="txt_new_market_score">新建市场监管部打分</string>
+    <string name="cancel">取消</string>
+    <string name="evaluate_type">评价类型</string>
+    <string name="total_score">总分</string>
+    <string name="pic">照片</string>
+    <string name="score">分数</string>
+    <string name="safe_quality">安全质量</string>
+    <string name="service">服务态度</string>
+    <string name="scale">经营规模</string>
+    <string name="discount">让利</string>
+    <string name="clean">整\t洁\t度</string>
+    <string name="amount">合\t\t\t\t计</string>
 
+    <string name="operator_input_info">经营者信息录入</string>
+    <string name="merchant_name">商户名</string>
+    <string name="contract_info">联系方式</string>
+    <string name="credit_degree">信用度</string>
+    <string name="managerment_type">经营类型</string>
+    <string name="upload_business_lincense">点击上传营业执照</string>
+    <string name="upload_certificates">点击上传联系人身份证</string>
+    <string name="remarks_operator_input_info">注：所有证件仅用于市场信息登记</string>
+
+
+    <string name="date_back_to">追溯</string>
+    <string name="sample">采样</string>
+    <string name="examine_menu">检测</string>
+    <string name="mine">我的</string>
+
+
+    <string name="operating_households">经营户</string>
+    <string name="market">市场</string>
+    <string name="collect_fees">收费</string>
+    <string name="sale_goods_list">出货清单</string>
+    <string name="organization_datebackto">检测机构追溯</string>
 
 </resources>

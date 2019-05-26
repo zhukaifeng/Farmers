@@ -1,6 +1,7 @@
 package com.osiris.farmers.login;
 
 import android.content.Intent;
+import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
@@ -63,7 +64,7 @@ public class HomeActivity extends BaseActivity {
 	private void initView() {
 
 		pageType = getIntent().getIntExtra("type", 1);
-
+		Log.d("zkf","type:" + pageType);
 		changeViewStatus(pageType);
 	}
 
@@ -92,11 +93,11 @@ public class HomeActivity extends BaseActivity {
 			case R.id.ll_home_2:
 				Intent intent2 = new Intent(this, MenuHomeActivity.class);
 				if (pageType == 1) {
-					intent2.putExtra("type", 4);
+					intent2.putExtra("type", 1);
 				} else if (pageType == 2) {
-					intent2.putExtra("type", 5);
+					intent2.putExtra("type", 2);
 				} else {
-					intent2.putExtra("type", 6);
+					intent2.putExtra("type", 3);
 				}
 				startActivity(intent2);
 				break;
@@ -104,13 +105,13 @@ public class HomeActivity extends BaseActivity {
 			case R.id.ll_home_3:
 				Intent intent3 = new Intent(this, MenuHomeActivity.class);
 				if (pageType == 1) {
-					intent3.putExtra("type", 7);
+					intent3.putExtra("type", 1);
 
 				} else if (pageType == 2) {
-					intent3.putExtra("type", 8);
+					intent3.putExtra("type", 2);
 
 				} else {
-					intent3.putExtra("type", 9);
+					intent3.putExtra("type", 3);
 
 				}
 				startActivity(intent3);
@@ -119,13 +120,13 @@ public class HomeActivity extends BaseActivity {
 			case R.id.ll_home_4:
 				Intent intent4 = new Intent(this, MenuHomeActivity.class);
 				if (pageType == 1) {
-					intent4.putExtra("type", 10);
+					intent4.putExtra("type", 1);
 
 				} else if (pageType == 2) {
-					intent4.putExtra("type", 11);
+					intent4.putExtra("type", 2);
 
 				} else {
-					intent4.putExtra("type", 12);
+					intent4.putExtra("type", 3);
 
 				}
 				startActivity(intent4);
@@ -138,7 +139,7 @@ public class HomeActivity extends BaseActivity {
 
 	private void changeViewStatus(int type) {
 		switch (type) {
-			case 0:
+			case 1:
 				ivHome1.setBackgroundResource(R.drawable.bg_home_purchasing);
 				tvHome1.setText(getString(R.string.purchasing));
 				ivHome2.setBackgroundResource(R.drawable.bg_home_sell);
@@ -149,7 +150,7 @@ public class HomeActivity extends BaseActivity {
 				tvHome4.setText(getString(R.string.booking));
 				break;
 
-			case 1:
+			case 2:
 				ivHome1.setBackgroundResource(R.drawable.bg_home_retrospect);
 				tvHome1.setText(getString(R.string.retrospect));
 				ivHome2.setBackgroundResource(R.drawable.bg_home_sampling);
@@ -160,7 +161,7 @@ public class HomeActivity extends BaseActivity {
 				tvHome4.setText(getString(R.string.appraise));
 				break;
 
-			case 2:
+			case 3:
 				ivHome1.setBackgroundResource(R.drawable.bg_home_operator_management);
 				tvHome1.setText(getString(R.string.operator_management));
 				ivHome2.setBackgroundResource(R.drawable.bg_home_marketing_management);

@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    >
+
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/dp181"
+        android:background="@drawable/bg_top_goods"
+        >
+
+        <RelativeLayout
+            android:layout_width="wrap_content"
+            android:layout_height="@dimen/dp33"
+            android:layout_marginLeft="@dimen/dp20"
+            android:layout_marginTop="@dimen/dp20"
+            >
+
+            <ImageView
+                android:id="@+id/iv_back"
+                android:layout_width="@dimen/dp9"
+                android:layout_height="@dimen/dp16"
+                android:layout_centerVertical="true"
+                android:layout_gravity="center_vertical"
+                android:background="@drawable/bg_back"
+                />
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:layout_width="@dimen/dp223"
+            android:layout_height="@dimen/dp33"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="@dimen/dp20"
+            android:background="@drawable/bg_round_title"
+            >
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerInParent="true"
+                android:text="@string/sale_goods_list"
+                android:textColor="@color/write"
+                android:textSize="@dimen/sp15"
+                />
+
+
+        </RelativeLayout>
+
+        
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/dp71"
+            android:background="@drawable/bg_rectange"
+            android:layout_alignParentBottom="true"
+            >
+
+
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="百花农贸市场~摊位号12"
+                android:textColor="@color/write"
+                android:textSize="@dimen/sp16"
+                android:layout_centerVertical="true"
+                android:layout_toRightOf="@+id/linear_month"
+                android:layout_marginLeft="@dimen/dp29"
+                />
+            <ImageView
+                android:layout_width="@dimen/dp9"
+                android:layout_height="@dimen/dp15"
+                android:background="@drawable/bg_arrow_to"
+                android:layout_toLeftOf="@+id/tv_date"
+                android:layout_centerVertical="true"
+                android:layout_marginRight="@dimen/dp40"
+                />
+
+
+                <TextView
+                    android:id="@+id/tv_date"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="2019-03-20"
+                    android:layout_centerVertical="true"
+                    android:layout_alignParentRight="true"
+                    android:layout_marginRight="@dimen/dp24"
+                    android:textColor="@color/write"
+                    android:textSize="@dimen/sp18"
+                    />
+
+
+
+        </RelativeLayout>
+        
+
+
+    </RelativeLayout>
+    
+    
+    
+    
+</LinearLayout>

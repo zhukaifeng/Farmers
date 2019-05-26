@@ -12,6 +12,7 @@ import com.osiris.farmers.goods.fragment.StockGoodsFragment;
 import com.osiris.farmers.goods.fragment.StockListFragment;
 import com.osiris.farmers.goods.fragment.StockPurchaseFragment;
 import com.osiris.farmers.view.TabItem;
+import com.osiris.farmers.view.fragment.DatebacktoFragment;
 
 import butterknife.BindView;
 
@@ -80,17 +81,17 @@ public class MenuHomeActivity extends BaseActivity {
 			case 2:
 
 				tabhostMainMenu.addTab(tabhostMainMenu.newTabSpec(tag_stock_purchase).setIndicator(new TabItem
-						(this, R.drawable.tab_stock_purchase, R.string.stock_purchase, 0)), StockPurchaseFragment.class, null);
+						(this, R.drawable.tab_date_back_to, R.string.date_back_to, 0)), DatebacktoFragment.class, null);
 
 				tabhostMainMenu.addTab(tabhostMainMenu.newTabSpec(tag_stock_list).setIndicator(new
-						TabItem(this, R.drawable.tab_stock_lis, R.string
-						.add_stock_list, 0)), StockListFragment.class, null);
+						TabItem(this, R.drawable.tab_sample, R.string
+						.sample, 0)), StockListFragment.class, null);
 
-				tabhostMainMenu.addTab(tabhostMainMenu.newTabSpec(tag_stock_goods).setIndicator(new TabItem(this, R.drawable.tab_stock_goods, R.string.stock_goods, 0)),
+				tabhostMainMenu.addTab(tabhostMainMenu.newTabSpec(tag_stock_goods).setIndicator(new TabItem(this, R.drawable.tab_examine, R.string.examine_menu, 0)),
 						StockGoodsFragment.class, null);
 
 				tabhostMainMenu.addTab(tabhostMainMenu.newTabSpec(tag_stock_pay).setIndicator(new
-								TabItem(this, R.drawable.tab_stock_pay, R.string.pay, 0)),
+								TabItem(this, R.drawable.tab_mine, R.string.mine, 0)),
 						PayFragment.class, null);
 
 				tabhostMainMenu.setOnTabChangedListener(new TabHost.OnTabChangeListener() {
@@ -112,305 +113,18 @@ public class MenuHomeActivity extends BaseActivity {
 			case 3:
 
 				tabhostMainMenu.addTab(tabhostMainMenu.newTabSpec(tag_stock_purchase).setIndicator(new TabItem
-						(this, R.drawable.tab_stock_purchase, R.string.stock_purchase, 0)), StockPurchaseFragment.class, null);
+						(this, R.drawable.tab_operating, R.string.operating_households, 0)), StockPurchaseFragment.class, null);
 
 				tabhostMainMenu.addTab(tabhostMainMenu.newTabSpec(tag_stock_list).setIndicator(new
-						TabItem(this, R.drawable.tab_stock_lis, R.string
-						.add_stock_list, 0)), StockListFragment.class, null);
+						TabItem(this, R.drawable.tab_market, R.string
+						.market, 0)), StockListFragment.class, null);
 
-				tabhostMainMenu.addTab(tabhostMainMenu.newTabSpec(tag_stock_goods).setIndicator(new TabItem(this, R.drawable.tab_stock_goods, R.string.stock_goods, 0)),
+				tabhostMainMenu.addTab(tabhostMainMenu.newTabSpec(tag_stock_goods).setIndicator(new
+								TabItem(this, R.drawable.tab_collect_feels, R.string.collect_fees, 0)),
 						StockGoodsFragment.class, null);
 
 				tabhostMainMenu.addTab(tabhostMainMenu.newTabSpec(tag_stock_pay).setIndicator(new
-								TabItem(this, R.drawable.tab_stock_pay, R.string.pay, 0)),
-						PayFragment.class, null);
-
-				tabhostMainMenu.setOnTabChangedListener(new TabHost.OnTabChangeListener() {
-					@Override
-					public void onTabChanged(String tabId) {
-						switch (tabId) {
-							case tag_stock_purchase:
-								break;
-							case tag_stock_list:
-								break;
-							case tag_stock_goods:
-								break;
-							case tag_stock_pay:
-								break;
-						}
-					}
-				});
-				break;
-			case 4:
-
-				tabhostMainMenu.addTab(tabhostMainMenu.newTabSpec(tag_stock_purchase).setIndicator(new TabItem
-						(this, R.drawable.tab_stock_purchase, R.string.stock_purchase, 0)), StockPurchaseFragment.class, null);
-
-				tabhostMainMenu.addTab(tabhostMainMenu.newTabSpec(tag_stock_list).setIndicator(new
-						TabItem(this, R.drawable.tab_stock_lis, R.string
-						.add_stock_list, 0)), StockListFragment.class, null);
-
-				tabhostMainMenu.addTab(tabhostMainMenu.newTabSpec(tag_stock_goods).setIndicator(new TabItem(this, R.drawable.tab_stock_goods, R.string.stock_goods, 0)),
-						StockGoodsFragment.class, null);
-
-				tabhostMainMenu.addTab(tabhostMainMenu.newTabSpec(tag_stock_pay).setIndicator(new
-								TabItem(this, R.drawable.tab_stock_pay, R.string.pay, 0)),
-						PayFragment.class, null);
-
-				tabhostMainMenu.setOnTabChangedListener(new TabHost.OnTabChangeListener() {
-					@Override
-					public void onTabChanged(String tabId) {
-						switch (tabId) {
-							case tag_stock_purchase:
-								break;
-							case tag_stock_list:
-								break;
-							case tag_stock_goods:
-								break;
-							case tag_stock_pay:
-								break;
-						}
-					}
-				});
-				break;
-			case 5:
-
-				tabhostMainMenu.addTab(tabhostMainMenu.newTabSpec(tag_stock_purchase).setIndicator(new TabItem
-						(this, R.drawable.tab_stock_purchase, R.string.stock_purchase, 0)), StockPurchaseFragment.class, null);
-
-				tabhostMainMenu.addTab(tabhostMainMenu.newTabSpec(tag_stock_list).setIndicator(new
-						TabItem(this, R.drawable.tab_stock_lis, R.string
-						.add_stock_list, 0)), StockListFragment.class, null);
-
-				tabhostMainMenu.addTab(tabhostMainMenu.newTabSpec(tag_stock_goods).setIndicator(new TabItem(this, R.drawable.tab_stock_goods, R.string.stock_goods, 0)),
-						StockGoodsFragment.class, null);
-
-				tabhostMainMenu.addTab(tabhostMainMenu.newTabSpec(tag_stock_pay).setIndicator(new
-								TabItem(this, R.drawable.tab_stock_pay, R.string.pay, 0)),
-						PayFragment.class, null);
-
-				tabhostMainMenu.setOnTabChangedListener(new TabHost.OnTabChangeListener() {
-					@Override
-					public void onTabChanged(String tabId) {
-						switch (tabId) {
-							case tag_stock_purchase:
-								break;
-							case tag_stock_list:
-								break;
-							case tag_stock_goods:
-								break;
-							case tag_stock_pay:
-								break;
-						}
-					}
-				});
-				break;
-			case 6:
-
-				tabhostMainMenu.addTab(tabhostMainMenu.newTabSpec(tag_stock_purchase).setIndicator(new TabItem
-						(this, R.drawable.tab_stock_purchase, R.string.stock_purchase, 0)), StockPurchaseFragment.class, null);
-
-				tabhostMainMenu.addTab(tabhostMainMenu.newTabSpec(tag_stock_list).setIndicator(new
-						TabItem(this, R.drawable.tab_stock_lis, R.string
-						.add_stock_list, 0)), StockListFragment.class, null);
-
-				tabhostMainMenu.addTab(tabhostMainMenu.newTabSpec(tag_stock_goods).setIndicator(new TabItem(this, R.drawable.tab_stock_goods, R.string.stock_goods, 0)),
-						StockGoodsFragment.class, null);
-
-				tabhostMainMenu.addTab(tabhostMainMenu.newTabSpec(tag_stock_pay).setIndicator(new
-								TabItem(this, R.drawable.tab_stock_pay, R.string.pay, 0)),
-						PayFragment.class, null);
-
-				tabhostMainMenu.setOnTabChangedListener(new TabHost.OnTabChangeListener() {
-					@Override
-					public void onTabChanged(String tabId) {
-						switch (tabId) {
-							case tag_stock_purchase:
-								break;
-							case tag_stock_list:
-								break;
-							case tag_stock_goods:
-								break;
-							case tag_stock_pay:
-								break;
-						}
-					}
-				});
-				break;
-			case 7:
-
-				tabhostMainMenu.addTab(tabhostMainMenu.newTabSpec(tag_stock_purchase).setIndicator(new TabItem
-						(this, R.drawable.tab_stock_purchase, R.string.stock_purchase, 0)), StockPurchaseFragment.class, null);
-
-				tabhostMainMenu.addTab(tabhostMainMenu.newTabSpec(tag_stock_list).setIndicator(new
-						TabItem(this, R.drawable.tab_stock_lis, R.string
-						.add_stock_list, 0)), StockListFragment.class, null);
-
-				tabhostMainMenu.addTab(tabhostMainMenu.newTabSpec(tag_stock_goods).setIndicator(new TabItem(this, R.drawable.tab_stock_goods, R.string.stock_goods, 0)),
-						StockGoodsFragment.class, null);
-
-				tabhostMainMenu.addTab(tabhostMainMenu.newTabSpec(tag_stock_pay).setIndicator(new
-								TabItem(this, R.drawable.tab_stock_pay, R.string.pay, 0)),
-						PayFragment.class, null);
-
-				tabhostMainMenu.setOnTabChangedListener(new TabHost.OnTabChangeListener() {
-					@Override
-					public void onTabChanged(String tabId) {
-						switch (tabId) {
-							case tag_stock_purchase:
-								break;
-							case tag_stock_list:
-								break;
-							case tag_stock_goods:
-								break;
-							case tag_stock_pay:
-								break;
-						}
-					}
-				});
-				break;
-			case 8:
-
-				tabhostMainMenu.addTab(tabhostMainMenu.newTabSpec(tag_stock_purchase).setIndicator(new TabItem
-						(this, R.drawable.tab_stock_purchase, R.string.stock_purchase, 0)), StockPurchaseFragment.class, null);
-
-				tabhostMainMenu.addTab(tabhostMainMenu.newTabSpec(tag_stock_list).setIndicator(new
-						TabItem(this, R.drawable.tab_stock_lis, R.string
-						.add_stock_list, 0)), StockListFragment.class, null);
-
-				tabhostMainMenu.addTab(tabhostMainMenu.newTabSpec(tag_stock_goods).setIndicator(new TabItem(this, R.drawable.tab_stock_goods, R.string.stock_goods, 0)),
-						StockGoodsFragment.class, null);
-
-				tabhostMainMenu.addTab(tabhostMainMenu.newTabSpec(tag_stock_pay).setIndicator(new
-								TabItem(this, R.drawable.tab_stock_pay, R.string.pay, 0)),
-						PayFragment.class, null);
-
-				tabhostMainMenu.setOnTabChangedListener(new TabHost.OnTabChangeListener() {
-					@Override
-					public void onTabChanged(String tabId) {
-						switch (tabId) {
-							case tag_stock_purchase:
-								break;
-							case tag_stock_list:
-								break;
-							case tag_stock_goods:
-								break;
-							case tag_stock_pay:
-								break;
-						}
-					}
-				});
-				break;
-			case 9:
-
-				tabhostMainMenu.addTab(tabhostMainMenu.newTabSpec(tag_stock_purchase).setIndicator(new TabItem
-						(this, R.drawable.tab_stock_purchase, R.string.stock_purchase, 0)), StockPurchaseFragment.class, null);
-
-				tabhostMainMenu.addTab(tabhostMainMenu.newTabSpec(tag_stock_list).setIndicator(new
-						TabItem(this, R.drawable.tab_stock_lis, R.string
-						.add_stock_list, 0)), StockListFragment.class, null);
-
-				tabhostMainMenu.addTab(tabhostMainMenu.newTabSpec(tag_stock_goods).setIndicator(new TabItem(this, R.drawable.tab_stock_goods, R.string.stock_goods, 0)),
-						StockGoodsFragment.class, null);
-
-				tabhostMainMenu.addTab(tabhostMainMenu.newTabSpec(tag_stock_pay).setIndicator(new
-								TabItem(this, R.drawable.tab_stock_pay, R.string.pay, 0)),
-						PayFragment.class, null);
-
-				tabhostMainMenu.setOnTabChangedListener(new TabHost.OnTabChangeListener() {
-					@Override
-					public void onTabChanged(String tabId) {
-						switch (tabId) {
-							case tag_stock_purchase:
-								break;
-							case tag_stock_list:
-								break;
-							case tag_stock_goods:
-								break;
-							case tag_stock_pay:
-								break;
-						}
-					}
-				});
-				break;
-			case 10:
-
-				tabhostMainMenu.addTab(tabhostMainMenu.newTabSpec(tag_stock_purchase).setIndicator(new TabItem
-						(this, R.drawable.tab_stock_purchase, R.string.stock_purchase, 0)), StockPurchaseFragment.class, null);
-
-				tabhostMainMenu.addTab(tabhostMainMenu.newTabSpec(tag_stock_list).setIndicator(new
-						TabItem(this, R.drawable.tab_stock_lis, R.string
-						.add_stock_list, 0)), StockListFragment.class, null);
-
-				tabhostMainMenu.addTab(tabhostMainMenu.newTabSpec(tag_stock_goods).setIndicator(new TabItem(this, R.drawable.tab_stock_goods, R.string.stock_goods, 0)),
-						StockGoodsFragment.class, null);
-
-				tabhostMainMenu.addTab(tabhostMainMenu.newTabSpec(tag_stock_pay).setIndicator(new
-								TabItem(this, R.drawable.tab_stock_pay, R.string.pay, 0)),
-						PayFragment.class, null);
-
-				tabhostMainMenu.setOnTabChangedListener(new TabHost.OnTabChangeListener() {
-					@Override
-					public void onTabChanged(String tabId) {
-						switch (tabId) {
-							case tag_stock_purchase:
-								break;
-							case tag_stock_list:
-								break;
-							case tag_stock_goods:
-								break;
-							case tag_stock_pay:
-								break;
-						}
-					}
-				});
-				break;
-			case 11:
-
-				tabhostMainMenu.addTab(tabhostMainMenu.newTabSpec(tag_stock_purchase).setIndicator(new TabItem
-						(this, R.drawable.tab_stock_purchase, R.string.stock_purchase, 0)), StockPurchaseFragment.class, null);
-
-				tabhostMainMenu.addTab(tabhostMainMenu.newTabSpec(tag_stock_list).setIndicator(new
-						TabItem(this, R.drawable.tab_stock_lis, R.string
-						.add_stock_list, 0)), StockListFragment.class, null);
-
-				tabhostMainMenu.addTab(tabhostMainMenu.newTabSpec(tag_stock_goods).setIndicator(new TabItem(this, R.drawable.tab_stock_goods, R.string.stock_goods, 0)),
-						StockGoodsFragment.class, null);
-
-				tabhostMainMenu.addTab(tabhostMainMenu.newTabSpec(tag_stock_pay).setIndicator(new
-								TabItem(this, R.drawable.tab_stock_pay, R.string.pay, 0)),
-						PayFragment.class, null);
-
-				tabhostMainMenu.setOnTabChangedListener(new TabHost.OnTabChangeListener() {
-					@Override
-					public void onTabChanged(String tabId) {
-						switch (tabId) {
-							case tag_stock_purchase:
-								break;
-							case tag_stock_list:
-								break;
-							case tag_stock_goods:
-								break;
-							case tag_stock_pay:
-								break;
-						}
-					}
-				});
-				break;
-			case 12:
-
-				tabhostMainMenu.addTab(tabhostMainMenu.newTabSpec(tag_stock_purchase).setIndicator(new TabItem
-						(this, R.drawable.tab_stock_purchase, R.string.stock_purchase, 0)), StockPurchaseFragment.class, null);
-
-				tabhostMainMenu.addTab(tabhostMainMenu.newTabSpec(tag_stock_list).setIndicator(new
-						TabItem(this, R.drawable.tab_stock_lis, R.string
-						.add_stock_list, 0)), StockListFragment.class, null);
-
-				tabhostMainMenu.addTab(tabhostMainMenu.newTabSpec(tag_stock_goods).setIndicator(new TabItem(this, R.drawable.tab_stock_goods, R.string.stock_goods, 0)),
-						StockGoodsFragment.class, null);
-
-				tabhostMainMenu.addTab(tabhostMainMenu.newTabSpec(tag_stock_pay).setIndicator(new
-								TabItem(this, R.drawable.tab_stock_pay, R.string.pay, 0)),
+								TabItem(this, R.drawable.tab_mine, R.string.mine, 0)),
 						PayFragment.class, null);
 
 				tabhostMainMenu.setOnTabChangedListener(new TabHost.OnTabChangeListener() {
@@ -434,8 +148,6 @@ public class MenuHomeActivity extends BaseActivity {
 				break;
 
 		}
-
-
 
 
 	}
