@@ -14,5 +14,35 @@
         <item name="android:windowIsFloating">false</item>
         <item name="android:backgroundDimEnabled">true</item><!--模糊-->
     </style>
+    <style name="CustomTabPageIndicator.Text" parent="android:TextAppearance.Medium">
+        <item name="android:typeface">monospace</item>
+    </style>
+    <style name="pagertab_style">
+       <!-- <item name="android:background">@drawable/tab_bg_normal</item>
+        <item name="apTabBackground">@color/bg_gray_e9</item>
+        <item name="android:textSize">13sp</item>
+        <item name="android:textAppearance">@style/CustomTabPageIndicator.Text</item>
+        <item name="android:textColor">@drawable/tab_color_select</item>
+        <item name="apTabIndicatorColor">@color/color_00d39d</item>
+        <item name="apTabUnderlineColor">@color/color_00d39d</item>
+        <item name="apTabDividerColor">@color/color_00d39d</item>
+        <item name="apTabIndicatorHeight">8dp</item>
+        <item name="apTabShouldExpand">false</item>
+        <item name="apTabPaddingLeftRight">8dp</item>
+        <item name="apTabDrawMode">text</item>
+        <item name="apTabTextSelectColor">@color/color_00d39d</item>-->
+        <item name="android:background">@drawable/tab_bg_normal</item>
+        <item name="apTabBackground">@drawable/tab_bg_transparent</item>
+        <item name="android:textSize">13sp</item>
+        <item name="android:textAppearance">@style/CustomTabPageIndicator.Text</item>
+        <item name="android:textColor">@drawable/tab_color_select</item>
+        <item name="apTabIndicatorColor">@color/color_00d39d</item>
+        <item name="apTabUnderlineColor">@color/bg_gray_e9</item>
+        <item name="apTabDividerColor">#00000000</item>
+        <item name="apTabShouldExpand">false</item>
+        <item name="apTabDrawMode">text</item>
+        <item name="apTabIndicatorHeight">3dp</item>
+        <item name="apTabTextSelectColor">@color/color_00d39d</item>
+    </style>
 
 </resources>

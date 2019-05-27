@@ -12,7 +12,7 @@ public class StockListFragment extends BaseFragment {
     }
 
     @Override
-    protected void initView(View view) {
+    protected void initView( ) {
 
     }
 
@@ -21,8 +21,5 @@ public class StockListFragment extends BaseFragment {
 
     }
 
-    @Override
-    public void onClick(View v) {
 
-    }
 }

@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical">
+
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/dp181"
+        android:background="@drawable/bg_top_my">
+
+
+        <RelativeLayout
+            android:layout_width="@dimen/dp223"
+            android:layout_height="@dimen/dp33"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="@dimen/dp20"
+            android:background="@drawable/bg_round_title">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerInParent="true"
+                android:text="@string/mine"
+                android:textColor="@color/write"
+                android:textSize="@dimen/sp15" />
+
+
+        </RelativeLayout>
+
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/dp71"
+            android:layout_alignParentBottom="true"
+            android:background="@drawable/bg_rectange">
+
+            <ImageView
+                android:id="@+id/iv_avatar"
+                android:layout_width="@dimen/dp35"
+                android:layout_height="@dimen/dp35"
+                android:layout_centerVertical="true"
+                android:layout_marginLeft="@dimen/dp35"
+                />
+
+            <TextView
+                android:id="@+id/tv_location"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:layout_marginLeft="@dimen/dp10"
+                android:layout_toRightOf="@+id/iv_avatar"
+                android:text="阳光农贸市场1号摊位"
+                android:textColor="@color/write"
+                android:textSize="@dimen/sp16" />
+            <RelativeLayout
+                android:id="@+id/rl_setting"
+                android:layout_width="@dimen/dp70"
+                android:layout_height="match_parent"
+                android:layout_alignParentRight="true"
+                android:layout_marginRight="@dimen/dp42"
+                >
+            <ImageView
+                android:id="@+id/iv_setting"
+                android:layout_width="@dimen/dp20"
+                android:layout_height="@dimen/dp20"
+                android:layout_centerInParent="true"
+                android:background="@drawable/bg_my_setting"
+                />
+            </RelativeLayout>
+        </RelativeLayout>
+
+
+
+    </RelativeLayout>
+
+
+
+    <com.osiris.farmers.view.widget.AdvancedPagerSlidingTabStrip
+        android:id="@+id/tab_strip"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/dp60"
+        style="@style/pagertab_style"
+        android:fillViewport="false"/>
+    <com.osiris.farmers.view.widget.APSTSViewPager
+        android:id="@+id/viewPager"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@id/tab_strip"/>
+</LinearLayout>

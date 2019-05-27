@@ -17,20 +17,36 @@ import com.osiris.farmers.utils.T;
 import com.osiris.farmers.view.dialog.DialogClickListener;
 import com.osiris.farmers.view.dialog.RegistDialog;
 
+import butterknife.BindView;
+import butterknife.OnClick;
+
 public class RegisterFragment extends BaseFragment {
-    private RelativeLayout rlRegFirst;
-    private EditText etRegPhone;
-    private TextView tvRegSend;
-    private EditText etRegCode;
-    private EditText etRegPassword;
-    private EditText etRegCheckPassword;
-    private Button btnRegNext;
-    private RelativeLayout rlRegSound;
-    private EditText etRegMerchant;
-    private EditText etRegCorporation;
-    private EditText etRegOrganize;
-    private TextView etRegCheckScan;
-    private Button btnRegSubmit;
+    @BindView(R.id.rl_reg_first)
+    RelativeLayout rlRegFirst;
+    @BindView(R.id.et_reg_phone)
+    EditText etRegPhone;
+    @BindView(R.id.tv_reg_send)
+    TextView tvRegSend;
+    @BindView(R.id.et_reg_code)
+    EditText etRegCode;
+    @BindView(R.id.et_reg_password)
+    EditText etRegPassword;
+    @BindView(R.id.et_reg_check_password)
+    EditText etRegCheckPassword;
+    @BindView(R.id.btn_reg_next)
+    Button btnRegNext;
+    @BindView(R.id.rl_reg_sound)
+    RelativeLayout rlRegSound;
+    @BindView(R.id.et_reg_merchant)
+    EditText etRegMerchant;
+    @BindView(R.id.et_reg_corporation)
+    EditText etRegCorporation;
+    @BindView(R.id.et_reg_organize)
+    EditText etRegOrganize;
+    @BindView(R.id.et_reg_check_scan)
+    TextView etRegCheckScan;
+    @BindView(R.id.btn_reg_submit)
+    Button btnRegSubmit;
 
     private int mCodeTime = 60;
 
@@ -40,24 +56,21 @@ public class RegisterFragment extends BaseFragment {
     }
 
     @Override
-    protected void initView(View view) {
-        rlRegFirst = (RelativeLayout) view.findViewById(R.id.rl_reg_first);
-        etRegPhone = (EditText) view.findViewById(R.id.et_reg_phone);
-        tvRegSend = (TextView) view.findViewById(R.id.tv_reg_send);
-        etRegCode = (EditText) view.findViewById(R.id.et_reg_code);
-        etRegPassword = (EditText) view.findViewById(R.id.et_reg_password);
-        etRegCheckPassword = (EditText) view.findViewById(R.id.et_reg_check_password);
-        btnRegNext = (Button) view.findViewById(R.id.btn_reg_next);
-        rlRegSound = (RelativeLayout) view.findViewById(R.id.rl_reg_sound);
-        etRegMerchant = (EditText) view.findViewById(R.id.et_reg_merchant);
-        etRegCorporation = (EditText) view.findViewById(R.id.et_reg_corporation);
-        etRegOrganize = (EditText) view.findViewById(R.id.et_reg_organize);
-        etRegCheckScan = (TextView) view.findViewById(R.id.et_reg_check_scan);
-        btnRegSubmit = (Button) view.findViewById(R.id.btn_reg_submit);
+    protected void initView() {
+//        rlRegFirst = (RelativeLayout) getActivity().findViewById(R.id.rl_reg_first);
+//        etRegPhone = (EditText) getActivity().findViewById(R.id.et_reg_phone);
+//        tvRegSend = (TextView) getActivity().findViewById(R.id.tv_reg_send);
+//        etRegCode = (EditText) getActivity().findViewById(R.id.et_reg_code);
+//        etRegPassword = (EditText) getActivity().findViewById(R.id.et_reg_password);
+//        etRegCheckPassword = (EditText) getActivity().findViewById(R.id.et_reg_check_password);
+//        btnRegNext = (Button) getActivity().findViewById(R.id.btn_reg_next);
+//        rlRegSound = (RelativeLayout) getActivity().findViewById(R.id.rl_reg_sound);
+//        etRegMerchant = (EditText) getActivity().findViewById(R.id.et_reg_merchant);
+//        etRegCorporation = (EditText) getActivity().findViewById(R.id.et_reg_corporation);
+//        etRegOrganize = (EditText) getActivity().findViewById(R.id.et_reg_organize);
+//        etRegCheckScan = (TextView) getActivity().findViewById(R.id.et_reg_check_scan);
+//        btnRegSubmit = (Button) getActivity().findViewById(R.id.btn_reg_submit);
 
-        tvRegSend.setOnClickListener(this);
-        btnRegNext.setOnClickListener(this);
-        btnRegSubmit.setOnClickListener(this);
     }
 
     @Override
@@ -65,8 +78,8 @@ public class RegisterFragment extends BaseFragment {
 
     }
 
-    @Override
-    public void onClick(View view) {
+    @OnClick({R.id.btn_reg_next, R.id.btn_reg_submit, R.id.tv_forget_send})
+    void onClick(View view) {
         switch (view.getId()) {
             case R.id.btn_reg_next:
                 checkCode();

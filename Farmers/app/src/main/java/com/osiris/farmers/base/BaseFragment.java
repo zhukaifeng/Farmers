@@ -11,7 +11,7 @@ import android.view.ViewGroup;
 
 import butterknife.ButterKnife;
 
-public abstract class BaseFragment extends Fragment implements View.OnClickListener {
+public abstract class BaseFragment extends Fragment  {
     protected Context mContext;
     protected View contentView;
 
@@ -32,6 +32,7 @@ public abstract class BaseFragment extends Fragment implements View.OnClickListe
         if (contentView == null) {
             contentView = inflater.inflate(setLayout(), container, false);
             ButterKnife.bind(this, contentView);
+            initView();
         }
         return contentView;
     }
@@ -46,13 +47,12 @@ public abstract class BaseFragment extends Fragment implements View.OnClickListe
     @Override
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        initView(view);
     }
 
     /**
      * 初始化组件
      */
-    protected abstract void initView(View view);
+    protected abstract void initView();
 
     @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {

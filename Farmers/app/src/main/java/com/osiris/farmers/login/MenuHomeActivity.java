@@ -13,6 +13,7 @@ import com.osiris.farmers.goods.fragment.StockListFragment;
 import com.osiris.farmers.goods.fragment.StockPurchaseFragment;
 import com.osiris.farmers.view.TabItem;
 import com.osiris.farmers.view.fragment.DatebacktoFragment;
+import com.osiris.farmers.view.fragment.MyFragment;
 
 import butterknife.BindView;
 
@@ -92,7 +93,7 @@ public class MenuHomeActivity extends BaseActivity {
 
 				tabhostMainMenu.addTab(tabhostMainMenu.newTabSpec(tag_stock_pay).setIndicator(new
 								TabItem(this, R.drawable.tab_mine, R.string.mine, 0)),
-						PayFragment.class, null);
+						MyFragment.class, null);
 
 				tabhostMainMenu.setOnTabChangedListener(new TabHost.OnTabChangeListener() {
 					@Override
@@ -125,7 +126,7 @@ public class MenuHomeActivity extends BaseActivity {
 
 				tabhostMainMenu.addTab(tabhostMainMenu.newTabSpec(tag_stock_pay).setIndicator(new
 								TabItem(this, R.drawable.tab_mine, R.string.mine, 0)),
-						PayFragment.class, null);
+						MyFragment.class, null);
 
 				tabhostMainMenu.setOnTabChangedListener(new TabHost.OnTabChangeListener() {
 					@Override

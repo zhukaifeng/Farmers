@@ -104,9 +104,17 @@
     <string name="sales_name">商品名称</string>
     <string name="store_info">商户信息</string>
     <string name="buy">采购</string>
-
-
-
-
+    <string name="pay_detail">  缴费明细  </string>
+    <string name="unpaid">  未缴费  </string>
+    <string name="category">类别</string>
+    <string name="traceability_coding">溯源编码</string>
+    <string name="purchasing_id">进货单号</string>
+    <string name="purchasing_company">进货单位</string>
+    <string name="total">合计</string>
+    <string name="detection_information">检测信息</string>
+    <string name="see">查看</string>
+    <string name="detected">已检测</string>
+    <string name="organization_datebackto_detail">检测机构追溯详情</string>
+    <string name="take_sample">检测机构采样费用</string>
 
 </resources>

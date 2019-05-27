@@ -12,57 +12,60 @@ import com.osiris.farmers.base.BaseFragment;
 import com.osiris.farmers.login.ForgetPwdActivity;
 import com.osiris.farmers.login.HomeActivity;
 
+import butterknife.BindView;
+import butterknife.OnClick;
+
 public class LoginFragment extends BaseFragment {
 
-	private LinearLayout llLoginForget;
-	private EditText etLoginUsername;
-	private EditText etLoginPassword;
-	private Button btnLogin;
+    @BindView(R.id.ll_login_forget)
+    LinearLayout llLoginForget;
+    @BindView(R.id.et_login_username)
+    EditText etLoginUsername;
+    @BindView(R.id.et_login_password)
+    EditText etLoginPassword;
+    @BindView(R.id.btn_login)
+    Button btnLogin;
 
-	@Override
-	protected int setLayout() {
-		return R.layout.fragment_login;
-	}
+    @Override
+    protected int setLayout() {
+        return R.layout.fragment_login;
+    }
 
-	@Override
-	protected void initView(View view) {
-		llLoginForget = (LinearLayout) view.findViewById(R.id.ll_login_forget);
-		etLoginUsername = (EditText) view.findViewById(R.id.et_login_username);
-		etLoginPassword = (EditText) view.findViewById(R.id.et_login_password);
-		btnLogin = (Button) view.findViewById(R.id.btn_login);
-		llLoginForget.setOnClickListener(this);
-		btnLogin.setOnClickListener(this);
-	}
-
-	@Override
-	protected void initData() {
-
-	}
-
-	@Override
-	public void onClick(View view) {
-		switch (view.getId()) {
-			case R.id.ll_login_forget:
-				toClass(getActivity(), ForgetPwdActivity.class);
-				break;
-			case R.id.btn_login:
-				Intent intent = new Intent(getActivity(), HomeActivity.class);
-
-				if (TextUtils.isEmpty(etLoginUsername.getText().toString())) {
-					intent.putExtra("type", 1);
-				} else {
-					if (Integer.parseInt(etLoginUsername.getText().toString()) == 1) {
-						intent.putExtra("type", 1);
-					} else if (Integer.parseInt(etLoginUsername.getText().toString()) == 2) {
-						intent.putExtra("type", 2);
-					} else if (Integer.parseInt(etLoginUsername.getText().toString()) == 3) {
-						intent.putExtra("type", 3);
-					}
-				}
+    @Override
+    protected void initView() {
 
 
-				startActivity(intent);
-				break;
-		}
-	}
+    }
+
+    @Override
+    protected void initData() {
+
+    }
+
+    @OnClick({R.id.ll_login_forget, R.id.btn_login})
+    void onClick(View view) {
+        switch (view.getId()) {
+            case R.id.ll_login_forget:
+                toClass(getActivity(), ForgetPwdActivity.class);
+                break;
+            case R.id.btn_login:
+                Intent intent = new Intent(getActivity(), HomeActivity.class);
+
+                if (TextUtils.isEmpty(etLoginUsername.getText().toString())) {
+                    intent.putExtra("type", 2);
+                } else {
+                    if (Integer.parseInt(etLoginUsername.getText().toString()) == 1) {
+                        intent.putExtra("type", 1);
+                    } else if (Integer.parseInt(etLoginUsername.getText().toString()) == 2) {
+                        intent.putExtra("type", 2);
+                    } else if (Integer.parseInt(etLoginUsername.getText().toString()) == 3) {
+                        intent.putExtra("type", 3);
+                    }
+                }
+
+
+                startActivity(intent);
+                break;
+        }
+    }
 }
