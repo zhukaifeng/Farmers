@@ -1,6 +1,316 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="vertical" android:layout_width="match_parent"
-    android:layout_height="match_parent">
+              android:layout_width="match_parent"
+              android:layout_height="match_parent"
+              android:orientation="vertical">
 
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/dp181"
+        android:background="@drawable/bg_take_sample">
+
+        <RelativeLayout
+            android:id="@+id/rl_back"
+            android:layout_width="@dimen/dp60"
+            android:layout_height="@dimen/dp60"
+            android:layout_marginTop="@dimen/dp20"
+            android:visibility="visible">
+
+            <ImageView
+                android:id="@+id/iv_back"
+                android:layout_width="@dimen/dp9"
+                android:layout_height="@dimen/dp16"
+                android:layout_marginTop="@dimen/dp9"
+                android:layout_gravity="center_vertical"
+                android:layout_marginLeft="@dimen/dp20"
+                android:background="@drawable/bg_back"/>
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:layout_width="@dimen/dp223"
+            android:layout_height="@dimen/dp33"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="@dimen/dp20"
+            android:background="@drawable/bg_round_title">
+
+            <TextView
+                android:id="@+id/tv_title"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerInParent="true"
+                android:text="@string/take_sample"
+                android:textColor="@color/write"
+                android:textSize="@dimen/sp15"/>
+
+
+        </RelativeLayout>
+
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/dp71"
+            android:layout_alignParentBottom="true"
+            android:background="@drawable/bg_rectange">
+
+
+            <TextView
+                android:id="@+id/tv_pay"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerHorizontal="true"
+                android:layout_marginLeft="@dimen/dp29"
+                android:layout_marginTop="@dimen/dp10"
+                android:layout_toRightOf="@+id/linear_month"
+                android:text="@string/pay_money"
+                android:textColor="@color/color_00d39d"
+                android:textSize="@dimen/sp15"/>
+
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/tv_pay"
+                android:layout_centerHorizontal="true"
+                android:layout_marginTop="@dimen/dp5"
+                android:layout_marginRight="@dimen/dp24"
+                android:text="￥35.98"
+                android:textColor="@color/write"
+                android:textSize="@dimen/sp20"/>
+
+
+        </RelativeLayout>
+
+
+    </RelativeLayout>
+
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/bg_gray"
+        >
+
+
+
+            <RelativeLayout
+                android:id="@+id/rl_pay"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/dp50"
+                android:background="@color/write"
+                >
+
+                <ImageView
+                    android:id="@+id/iv_paycompany"
+                    android:layout_width="@dimen/dp32"
+                    android:layout_height="@dimen/dp26"
+                    android:layout_centerVertical="true"
+                    android:layout_marginLeft="@dimen/dp35"
+                    android:background="@drawable/bg_paycompany"
+                    />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:layout_marginLeft="@dimen/dp10"
+                    android:layout_toRightOf="@+id/iv_paycompany"
+                    android:text="@string/pay_company"
+                    />
+
+                <ImageView
+                    android:layout_width="@dimen/dp8"
+                    android:layout_height="@dimen/dp15"
+                    android:layout_alignParentRight="true"
+                    android:layout_centerVertical="true"
+                    android:layout_marginRight="@dimen/dp35"
+                    android:background="@drawable/bg_arrow_black_to"
+
+                    />
+
+            </RelativeLayout>
+            <View
+                android:id="@+id/line_pay"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/dp1"
+                android:layout_marginLeft="@dimen/dp20"
+                android:layout_below="@+id/rl_pay"
+                android:background="@drawable/bg_gray_line"
+                />
+            <RelativeLayout
+                android:id="@+id/rl_pay_market"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/dp50"
+                android:background="@color/write"
+                android:layout_below="@+id/line_pay"
+                >
+
+                <ImageView
+                    android:id="@+id/iv_market"
+                    android:layout_width="@dimen/dp32"
+                    android:layout_height="@dimen/dp26"
+                    android:layout_centerVertical="true"
+                    android:layout_marginLeft="@dimen/dp35"
+                    />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:layout_marginLeft="@dimen/dp10"
+                    android:layout_toRightOf="@+id/iv_market"
+                    android:text="百花农贸市场"
+                    />
+
+
+            </RelativeLayout>
+            <RelativeLayout
+                android:id="@+id/rl_stall"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/dp50"
+                android:background="@color/write"
+                android:layout_below="@+id/rl_pay_market"
+                android:layout_marginTop="@dimen/dp10"
+                >
+
+                <ImageView
+                    android:id="@+id/iv_stall"
+                    android:layout_width="@dimen/dp32"
+                    android:layout_height="@dimen/dp26"
+                    android:layout_centerVertical="true"
+                    android:layout_marginLeft="@dimen/dp35"
+                    android:background="@drawable/bg_stall"
+                    />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:layout_marginLeft="@dimen/dp10"
+                    android:layout_toRightOf="@+id/iv_stall"
+                    android:text="@string/pay_stall"
+                    />
+
+                <ImageView
+                    android:layout_width="@dimen/dp8"
+                    android:layout_height="@dimen/dp15"
+                    android:layout_alignParentRight="true"
+                    android:layout_centerVertical="true"
+                    android:layout_marginRight="@dimen/dp35"
+                    android:background="@drawable/bg_arrow_black_to"
+
+                    />
+
+            </RelativeLayout>
+            <View
+                android:id="@+id/line_stall"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/dp1"
+                android:layout_below="@+id/rl_stall"
+                android:layout_marginLeft="@dimen/dp20"
+                android:background="@drawable/bg_gray_line"
+                />
+            <RelativeLayout
+                android:id="@+id/rl_stall_num"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/dp50"
+                android:background="@color/write"
+                android:layout_below="@+id/line_stall"
+                >
+
+                <ImageView
+                    android:id="@+id/iv_stall_name"
+                    android:layout_width="@dimen/dp32"
+                    android:layout_height="@dimen/dp26"
+                    android:layout_centerVertical="true"
+                    android:layout_marginLeft="@dimen/dp35"
+                    />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:layout_marginLeft="@dimen/dp10"
+                    android:layout_toRightOf="@+id/iv_stall_name"
+                    android:text="2号摊位"
+                    />
+
+
+            </RelativeLayout>
+
+        <RelativeLayout
+            android:id="@+id/rl_remark"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/dp50"
+            android:background="@color/write"
+            android:layout_below="@+id/rl_stall_num"
+            android:layout_marginTop="@dimen/dp10"
+            >
+
+            <ImageView
+                android:id="@+id/iv_remark"
+                android:layout_width="@dimen/dp32"
+                android:layout_height="@dimen/dp26"
+                android:layout_centerVertical="true"
+                android:layout_marginLeft="@dimen/dp35"
+                android:background="@drawable/bg_remark"
+                />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:layout_marginLeft="@dimen/dp10"
+                android:layout_toRightOf="@+id/iv_remark"
+                android:text="@string/remarks"
+                />
+
+        </RelativeLayout>
+        <View
+            android:id="@+id/line_remark"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/dp1"
+            android:layout_marginLeft="@dimen/dp20"
+            android:layout_below="@+id/rl_remark"
+            android:background="@drawable/bg_gray_line"
+            />
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/dp50"
+            android:background="@color/write"
+            android:layout_below="@+id/line_remark"
+            >
+
+            <ImageView
+                android:id="@+id/iv_print"
+                android:layout_width="@dimen/dp32"
+                android:layout_height="@dimen/dp26"
+                android:layout_centerVertical="true"
+                android:layout_marginLeft="@dimen/dp35"
+                android:background="@drawable/bg_print"
+                />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:layout_marginLeft="@dimen/dp10"
+                android:layout_toRightOf="@+id/iv_print"
+                android:text="@string/print"
+                />
+
+
+        </RelativeLayout>
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/dp50"
+            android:text="@string/notice_pay"
+            android:gravity="center"
+            android:textSize="@dimen/sp16"
+            android:textColor="@color/write"
+            android:layout_alignParentBottom="true"
+            android:background="@color/color_00d39d"
+            />
+
+    </RelativeLayout>
 </LinearLayout>

@@ -35,6 +35,10 @@ public class DatebacktoFragment extends BaseFragment {
     TextView tv_title;
     @BindView(R.id.iv_right_arrow)
     ImageView iv_right_arrow;
+    @BindView(R.id.tv_sell)
+    TextView tv_sell;
+    @BindView(R.id.tv_buy)
+    TextView tv_buy;
 
     private List<DateBackto> dataList = new ArrayList<>();
     private DatebacktoAdapter dataAdapter = new DatebacktoAdapter(dataList);
@@ -71,7 +75,7 @@ public class DatebacktoFragment extends BaseFragment {
 
     }
 
-    @OnClick({R.id.rl_back})
+    @OnClick({R.id.rl_back,R.id.tv_sell,R.id.tv_buy})
     void onClick(View v){
         switch (v.getId()){
             case R.id.rl_back:
@@ -81,8 +85,27 @@ public class DatebacktoFragment extends BaseFragment {
                 linear_datebackto.setVisibility(View.VISIBLE);
                 linear_datebackto_detail.setVisibility(View.GONE);
                 break;
+            case R.id.tv_sell:
+
+                tv_sell.setBackgroundResource(R.drawable.bg_green_round);
+                tv_sell.setTextColor(getActivity().getResources().getColor(R.color.write));
+                tv_buy.setBackgroundResource(R.color.bg_gray);
+                tv_buy.setTextColor(getActivity().getResources().getColor(R.color.txt_black_51));
+                break;
+            case R.id.tv_buy:
+
+                tv_buy.setBackgroundResource(R.drawable.bg_green_round);
+                tv_buy.setTextColor(getActivity().getResources().getColor(R.color.write));
+                tv_sell.setBackgroundResource(R.color.bg_gray);
+                tv_sell.setTextColor(getActivity().getResources().getColor(R.color.txt_black_51));
+                break;
         }
     }
+
+
+
+
+
 
 
 }

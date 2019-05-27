@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              xmlns:app="http://schemas.android.com/apk/res-auto"
+              android:layout_width="match_parent"
+              android:layout_height="match_parent"
+              android:gravity="center"
+              android:orientation="vertical">
+
+
+    <LinearLayout
+        android:layout_width="@dimen/dp349"
+        android:layout_height="@dimen/dp535"
+        android:orientation="vertical"
+        >
+
+
+        <RadioGroup
+            android:id="@+id/rg_infant_food_option_type_container"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:paddingTop="@dimen/dp10">
+
+            <android.support.v7.widget.AppCompatRadioButton
+                android:id="@+id/rb_food"
+                style="@style/CheckSelectTopItem"
+                android:checked="true"
+                android:drawableTop="@drawable/bg_location"
+                android:text="@string/pay_company"/>
+
+            <android.support.v7.widget.AppCompatRadioButton
+                android:id="@+id/rb_bottle"
+                style="@style/CheckSelectTopItem"
+                android:text="@string/pay_stall"/>
+        </RadioGroup>
+
+
+    </LinearLayout>
+
+
+</LinearLayout>

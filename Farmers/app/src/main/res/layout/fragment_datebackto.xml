@@ -22,7 +22,7 @@
                 android:id="@+id/iv_back"
                 android:layout_width="@dimen/dp9"
                 android:layout_height="@dimen/dp16"
-                android:layout_centerVertical="true"
+                android:layout_marginTop="@dimen/dp9"
                 android:layout_gravity="center_vertical"
                 android:layout_marginLeft="@dimen/dp20"
                 android:background="@drawable/bg_back" />
@@ -115,7 +115,7 @@
 
             <LinearLayout
                 android:layout_width="@dimen/dp156"
-                android:layout_height="@dimen/dp26"
+                android:layout_height="@dimen/dp30"
                 android:layout_gravity="center_vertical"
                 android:layout_marginLeft="@dimen/dp10"
                 android:background="@drawable/bg_datebackto"
@@ -123,9 +123,9 @@
                 android:paddingRight="3dp">
 
                 <TextView
-                    android:id="@+id/tv_login"
+                    android:id="@+id/tv_sell"
                     android:layout_width="0dp"
-                    android:layout_height="21dp"
+                    android:layout_height="20dp"
                     android:layout_gravity="center_vertical"
                     android:layout_weight="1"
                     android:background="@drawable/bg_green_round"
@@ -135,14 +135,14 @@
                     android:textSize="@dimen/sp14" />
 
                 <TextView
-                    android:id="@+id/tv_register"
+                    android:id="@+id/tv_buy"
                     android:layout_width="0dp"
-                    android:layout_height="21dp"
+                    android:layout_height="20dp"
                     android:layout_gravity="center_vertical"
                     android:layout_weight="1"
                     android:gravity="center"
                     android:text="@string/buy"
-                    android:textColor="@color/write"
+                    android:textColor="@color/txt_black_51"
                     android:textSize="@dimen/sp14" />
 
             </LinearLayout>
@@ -150,7 +150,7 @@
             <TextView
                 android:id="@+id/tv_search"
                 android:layout_width="@dimen/dp82"
-                android:layout_height="26dp"
+                android:layout_height="30dp"
                 android:layout_gravity="center_vertical"
                 android:layout_marginLeft="@dimen/dp15"
                 android:background="@drawable/bg_green_round"

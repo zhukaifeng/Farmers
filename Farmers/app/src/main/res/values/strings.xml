@@ -65,6 +65,7 @@
     <string name="invoice_for_payment">凭证</string>
     <string name="remarks">备注</string>
     <string name="txt_new_market_score">新建市场监管部打分</string>
+    <string name="txt_market_score_detail">市场部打分详情</string>
     <string name="cancel">取消</string>
     <string name="evaluate_type">评价类型</string>
     <string name="total_score">总分</string>
@@ -116,5 +117,16 @@
     <string name="detected">已检测</string>
     <string name="organization_datebackto_detail">检测机构追溯详情</string>
     <string name="take_sample">检测机构采样费用</string>
+    <string name="pay_money">需支付金额（元）</string>
+    <string name="pay_company">缴费单位</string>
+    <string name="pay_stall">摊位号</string>
+    <string name="print">打印</string>
+    <string name="notice_pay">通知缴费</string>
+    <string name="takesample_num">采样编号</string>
+    <string name="takesample_type">商品类型</string>
+    <string name="takesample_count">采样数量</string>
+    <string name="takesample_time">采样时间</string>
+    <string name="take_sample_list">检测机构采样列表</string>
+
 
 </resources>
