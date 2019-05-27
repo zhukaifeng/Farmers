@@ -47,8 +47,8 @@
 
 
     <style name="CheckSelectTopItem">
-        <item name="android:layout_width">@dimen/dp75</item>
-        <item name="android:layout_height">@dimen/dp50</item>
+        <item name="android:layout_width">@dimen/dp150</item>
+        <item name="android:layout_height">@dimen/dp52</item>
         <item name="android:layout_margin">@dimen/dp5</item>
         <item name="android:layout_weight">1</item>
         <item name="android:background">@drawable/bg_check_select_top_amount</item>

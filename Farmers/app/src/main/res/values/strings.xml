@@ -127,6 +127,9 @@
     <string name="takesample_count">采样数量</string>
     <string name="takesample_time">采样时间</string>
     <string name="take_sample_list">检测机构采样列表</string>
+    <string name="product_market">农贸市场</string>
+    <string name="company_name">单位名称</string>
+    <string name="write_context">请输入内容</string>
 
 
 </resources>
