@@ -130,6 +130,26 @@
     <string name="product_market">农贸市场</string>
     <string name="company_name">单位名称</string>
     <string name="write_context">请输入内容</string>
-
+    <string name="choose_rules">选择条款</string>
+    <string name="vegetable">蔬菜</string>
+    <string name="ok">确认</string>
+    <string name="supplier">采购商</string>
+    <string name="add">添加</string>
+    <string name="wholesale_market">批发市场</string>
+    <string name="add_bill_of_sales">新增出货单</string>
+    <string name="date">日期</string>
+    <string name="odd_numbers">单号</string>
+    <string name="ware_house">仓库</string>
+    <string name="choose_goods">选择商品</string>
+    <string name="product_name">产品名称</string>
+    <string name="total_price">总价</string>
+    <string name="supplier_name">采购商名称</string>
+    <string name="card_num">身份证号/营业执照</string>
+    <string name="check_status">检测状态</string>
+    <string name="remark_store_list">注：点击右上角扫描营业执照二维码可快速录入</string>
+    <string name="add_other_supplier">其他采购商信息录入</string>
+    <string name="add_new_supplier">新增采购商</string>
+    <string name="shipping_stock">出货库存</string>
+    <string name="left_count">剩余数量</string>
 
 </resources>

@@ -14,6 +14,7 @@ import com.osiris.farmers.goods.fragment.StockPurchaseFragment;
 import com.osiris.farmers.view.TabItem;
 import com.osiris.farmers.view.fragment.DatebacktoFragment;
 import com.osiris.farmers.view.fragment.MyFragment;
+import com.osiris.farmers.view.fragment.ShippingStockFragment;
 import com.osiris.farmers.view.fragment.TakeSampleFragment;
 import com.osiris.farmers.view.fragment.TakeSampleListFragment;
 
@@ -58,7 +59,7 @@ public class MenuHomeActivity extends BaseActivity {
 						.add_stock_list, 0)), StockListFragment.class, null);
 
 				tabhostMainMenu.addTab(tabhostMainMenu.newTabSpec(tag_stock_goods).setIndicator(new TabItem(this, R.drawable.tab_stock_goods, R.string.stock_goods, 0)),
-						StockGoodsFragment.class, null);
+						ShippingStockFragment.class, null);
 
 				tabhostMainMenu.addTab(tabhostMainMenu.newTabSpec(tag_stock_pay).setIndicator(new
 								TabItem(this, R.drawable.tab_stock_pay, R.string.pay, 0)),

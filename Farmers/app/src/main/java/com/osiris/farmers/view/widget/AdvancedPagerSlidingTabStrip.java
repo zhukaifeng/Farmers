@@ -374,6 +374,7 @@ public class AdvancedPagerSlidingTabStrip extends HorizontalScrollView {
         layoutParams.height = RelativeLayout.LayoutParams.WRAP_CONTENT;
         dot_layout.setText(dotTxt);
         dot_layout.setVisibility(View.VISIBLE);
+
     }
 
     public void hideDot(int index) {

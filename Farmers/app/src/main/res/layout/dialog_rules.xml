@@ -27,19 +27,10 @@
                 android:id="@+id/rb_purchaser"
                 android:layout_width="@dimen/dp75"
                 android:layout_height="@dimen/dp50"
-                android:background="@drawable/bg_radiobutton_select_purchaser"
+                android:background="@drawable/bg_rules"
                 android:button="@null"
                 android:checked="true" />
 
-            <android.support.v7.widget.AppCompatRadioButton
-                android:id="@+id/rb_warehouse"
-                android:layout_width="@dimen/dp75"
-                android:layout_height="@dimen/dp50"
-                android:layout_marginLeft="@dimen/dp10"
-                android:background="@drawable/bg_radiobutton_select_warehouse"
-                android:button="@null"
-
-                />
         </RadioGroup>
 
 
@@ -91,13 +82,14 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_vertical"
                 android:layout_marginLeft="@dimen/dp10"
-                android:text="@string/product_market"
+                android:text="@string/choose_rules"
                 android:textSize="@dimen/sp16"
                 android:textStyle="bold"
 
                 />
 
         </LinearLayout>
+
         <com.osiris.farmers.view.widget.MyRadioGroup
             android:id="@+id/rg_company_option_type_container"
             android:layout_width="fill_parent"
@@ -116,12 +108,12 @@
                     android:id="@+id/rb_one_middle"
                     style="@style/CheckSelectTopItem"
                     android:checked="true"
-                    android:text="南区农贸市场" />
+                    android:text="不守规章制度" />
 
                 <android.support.v7.widget.AppCompatRadioButton
                     android:id="@+id/rb_two_middle"
                     style="@style/CheckSelectTopItem"
-                    android:text="南区农贸市场" />
+                    android:text="不守规章制度" />
             </LinearLayout>
 
             <LinearLayout
@@ -132,90 +124,72 @@
                 <android.support.v7.widget.AppCompatRadioButton
                     android:id="@+id/rb_three_middle"
                     style="@style/CheckSelectTopItem"
-                    android:text="南区农贸市场" />
+                    android:text="不守规章制度" />
 
                 <android.support.v7.widget.AppCompatRadioButton
                     android:id="@+id/rb_four_middle"
                     style="@style/CheckSelectTopItem"
-                    android:text="南区农贸市场" />
+                    android:text="不守规章制度" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <android.support.v7.widget.AppCompatRadioButton
+                    android:id="@+id/rb__middle"
+                    style="@style/CheckSelectTopItem"
+                    android:text="不守规章制度" />
+
+                <android.support.v7.widget.AppCompatRadioButton
+                    android:id="@+id/rb_six_middle"
+                    style="@style/CheckSelectTopItem"
+                    android:text="不守规章制度" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <android.support.v7.widget.AppCompatRadioButton
+                    android:id="@+id/rb_seven_middle"
+                    style="@style/CheckSelectTopItem"
+                    android:text="不守规章制度" />
+
+                <android.support.v7.widget.AppCompatRadioButton
+                    android:id="@+id/rb_eight_middle"
+                    style="@style/CheckSelectTopItem"
+                    android:text="不守规章制度" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <android.support.v7.widget.AppCompatRadioButton
+                    android:id="@+id/rb_nine_middle"
+                    style="@style/CheckSelectTopItem"
+                    android:text="不守规章制度" />
+
+                <android.support.v7.widget.AppCompatRadioButton
+                    android:id="@+id/rb_ten_middle"
+                    style="@style/CheckSelectTopItem"
+                    android:text="不守规章制度" />
             </LinearLayout>
         </com.osiris.farmers.view.widget.MyRadioGroup>
 
         <View
             android:layout_width="match_parent"
             android:layout_height="@dimen/dp1"
-            android:layout_marginTop="@dimen/dp12"
             android:layout_marginLeft="@dimen/dp21"
+            android:layout_marginRight="@dimen/dp21"
+            android:layout_marginTop="@dimen/dp12"
             android:background="@drawable/bg_gray_line" />
 
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="@dimen/dp21"
-            android:layout_marginTop="@dimen/dp17"
-            android:orientation="horizontal">
 
-            <ImageView
-                android:layout_width="@dimen/dp46"
-                android:layout_height="@dimen/dp25"
-                android:layout_gravity="center_vertical"
-                android:background="@drawable/bg_icon_company" />
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center_vertical"
-                android:layout_marginLeft="@dimen/dp10"
-                android:text="@string/company_name"
-                android:textSize="@dimen/sp16"
-                android:textStyle="bold"
-
-                />
-
-        </LinearLayout>
-
-        <com.osiris.farmers.view.widget.MyRadioGroup
-            android:id="@+id/rg_market_option_type_container"
-            android:layout_width="fill_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="@dimen/dp21"
-            android:layout_marginTop="@dimen/dp10"
-            android:orientation="vertical">
-
-
-            <LinearLayout
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal">
-
-                <android.support.v7.widget.AppCompatRadioButton
-                    android:id="@+id/rb_one_bottom"
-                    style="@style/CheckSelectTopItem"
-                    android:checked="true"
-                    android:text="南区农贸市场" />
-
-                <android.support.v7.widget.AppCompatRadioButton
-                    android:id="@+id/rb_two_bottom"
-                    style="@style/CheckSelectTopItem"
-                    android:text="南区农贸市场" />
-            </LinearLayout>
-
-            <LinearLayout
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal">
-
-                <android.support.v7.widget.AppCompatRadioButton
-                    android:id="@+id/rb_three_bottom"
-                    style="@style/CheckSelectTopItem"
-                    android:text="南区农贸市场" />
-
-                <android.support.v7.widget.AppCompatRadioButton
-                    android:id="@+id/rb_four_bottom"
-                    style="@style/CheckSelectTopItem"
-                    android:text="南区农贸市场" />
-            </LinearLayout>
-        </com.osiris.farmers.view.widget.MyRadioGroup>
     </LinearLayout>
 
     <ImageView
