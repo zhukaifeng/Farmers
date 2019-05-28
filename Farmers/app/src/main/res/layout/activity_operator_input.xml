@@ -11,10 +11,11 @@
         android:id="@+id/rl_top"
         android:layout_width="match_parent"
         android:layout_height="@dimen/dp181"
-        android:background="@drawable/bg_evaluate"
+        android:background="@drawable/bg_operator"
         >
 
         <RelativeLayout
+            android:id="@+id/rl_back"
             android:layout_width="wrap_content"
             android:layout_height="@dimen/dp33"
             android:layout_marginLeft="@dimen/dp20"

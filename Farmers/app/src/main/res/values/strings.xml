@@ -35,12 +35,11 @@
     <string name="marketing_management">市场部管理</string>
     <string name="charge">收费管理</string>
     <string name="sell">销售</string>
-    
+
     <string name="stock_purchase">进货</string>
     <string name="add_stock_list">新增进货单</string>
     <string name="stock_goods">库存</string>
     <string name="pay">缴费</string>
-
 
 
     <string name="my_account_setting">账户设置</string>
@@ -151,5 +150,12 @@
     <string name="add_new_supplier">新增采购商</string>
     <string name="shipping_stock">出货库存</string>
     <string name="left_count">剩余数量</string>
+    <string name="operator_inquiry">经营户查询</string>
+    <string name="hint_input_market">请输入市场名称</string>
+    <string name="business_license">营业执照</string>
+    <string name="connect">联系人</string>
+    <string name="sales_count">销售金额</string>
+    <string name="buy_count">采购金额</string>
+
 
 </resources>

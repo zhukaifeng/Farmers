@@ -38,9 +38,9 @@
                 android:id="@+id/iv_function"
                 android:layout_width="@dimen/dp17"
                 android:layout_height="@dimen/dp17"
+                android:layout_alignParentRight="true"
                 android:layout_gravity="center_vertical"
                 android:layout_marginTop="@dimen/dp9"
-                android:layout_alignParentRight="true"
                 android:layout_marginRight="@dimen/dp22"
                 android:background="@drawable/bg_add"/>
         </RelativeLayout>
@@ -96,10 +96,10 @@
                 android:id="@+id/iv_arrow_to"
                 android:layout_width="@dimen/dp17"
                 android:layout_height="@dimen/dp20"
-                android:layout_centerVertical="true"
-                android:background="@drawable/bg_arrow_to"
                 android:layout_alignParentRight="true"
+                android:layout_centerVertical="true"
                 android:layout_marginRight="@dimen/dp20"
+                android:background="@drawable/bg_arrow_to"
                 />
 
             <TextView
@@ -107,19 +107,20 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_centerVertical="true"
-                android:layout_toLeftOf="@+id/iv_arrow_to"
                 android:layout_marginRight="@dimen/dp40"
+                android:layout_toLeftOf="@+id/iv_arrow_to"
                 android:text="摊位号12"
                 android:textColor="@color/write"
                 android:textSize="@dimen/sp16"
                 />
+
             <ImageView
                 android:layout_width="@dimen/dp20"
                 android:layout_height="@dimen/dp16"
                 android:layout_centerVertical="true"
-                android:background="@drawable/bg_shop"
                 android:layout_marginRight="@dimen/dp10"
                 android:layout_toLeftOf="@+id/tv_shop_num"
+                android:background="@drawable/bg_shop"
                 />
 
         </RelativeLayout>
@@ -127,72 +128,141 @@
 
     </RelativeLayout>
 
-
-
     <LinearLayout
+        android:id="@+id/linear_list"
         android:layout_width="match_parent"
-        android:layout_height="@dimen/dp59"
-        android:background="@color/bg_gray_e9"
-        android:orientation="horizontal">
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        >
 
-        <TextView
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:layout_weight="1"
-            android:gravity="center"
-            android:textSize="@dimen/sp16"
-            android:text="@string/takesample_num"
-            android:textStyle="bold" />
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/dp59"
+            android:background="@color/bg_gray_e9"
+            android:orientation="horizontal">
 
-        <TextView
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:layout_weight="1"
-            android:gravity="center"
-            android:textSize="@dimen/sp16"
-            android:text="@string/takesample_type"
-            android:textStyle="bold"
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:text="@string/takesample_num"
+                android:textSize="@dimen/sp16"
+                android:textStyle="bold"/>
 
-            />
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:text="@string/takesample_type"
+                android:textSize="@dimen/sp16"
+                android:textStyle="bold"
 
-        <TextView
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:layout_weight="1"
-            android:gravity="center"
-            android:textSize="@dimen/sp16"
-            android:text="@string/takesample_count"
-            android:textStyle="bold"
+                />
 
-            />
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:text="@string/takesample_count"
+                android:textSize="@dimen/sp16"
+                android:textStyle="bold"
 
-        <TextView
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:layout_weight="1"
-            android:gravity="center"
-            android:textSize="@dimen/sp16"
-            android:text="@string/takesample_time"
-            android:textStyle="bold"
+                />
 
-            />
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:text="@string/takesample_time"
+                android:textSize="@dimen/sp16"
+                android:textStyle="bold"
 
-        <TextView
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:layout_weight="1"
+                />
 
-            />
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+
+                />
 
 
+        </LinearLayout>
+
+
+        <android.support.v7.widget.RecyclerView
+            android:id="@+id/rv_data"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"/>
     </LinearLayout>
 
-
-    <android.support.v7.widget.RecyclerView
-        android:id="@+id/rv_data"
+    <LinearLayout
+        android:id="@+id/linear_add"
         android:layout_width="match_parent"
-        android:layout_height="match_parent" />
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:visibility="gone"
+        >
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/dp48"
+            android:background="@color/color_00d39d"
+            android:orientation="horizontal"
+            >
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:text="@string/total"
+                android:textColor="@color/write"
+                android:textSize="@dimen/sp16"
+                />
+
+            <View
+                android:layout_width="@dimen/dp1"
+                android:layout_height="match_parent"
+                android:background="@color/write"
+                />
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:text="40元"
+                android:textColor="@color/write"
+                android:textSize="@dimen/sp16"
+                />
 
 
+        </LinearLayout>
+
+        <RelativeLayout
+            android:id="@+id/rl_add"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/dp48"
+            android:background="@color/bg_gray_e9"
+            android:orientation="horizontal"
+
+            >
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerInParent="true"
+                android:text="+"
+                android:textColor="@color/color_00d39d"
+                android:textSize="@dimen/sp22"
+                />
+
+        </RelativeLayout>
+    </LinearLayout>
 
 </LinearLayout>

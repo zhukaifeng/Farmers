@@ -36,6 +36,7 @@
         <activity android:name=".view.PersonalInforActivity"/>
         <activity android:name=".view.NewMarketScoreActivity"/>
         <activity android:name=".view.OperatorInputActivity"/>
+        <activity android:name=".view.SalsersAccountActivity"/>
 
             <!-- <intent-filter> -->
             <!-- <action android:name="android.intent.action.MAIN" /> -->

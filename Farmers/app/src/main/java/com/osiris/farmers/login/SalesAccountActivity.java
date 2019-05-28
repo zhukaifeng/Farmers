@@ -34,7 +34,7 @@ public class SalesAccountActivity extends BaseActivity {
 	}
 
 
-	@OnClick({R.id.iv_one,R.id.iv_two,R.id.iv_three,R.id.iv_four,R.id.iv_five})
+	@OnClick({R.id.iv_one,R.id.iv_two,R.id.iv_three,R.id.iv_four,R.id.iv_five,R.id.rl_back})
 	void onClick(View v){
 		switch (v.getId()){
 			case R.id.iv_one:
@@ -71,6 +71,10 @@ public class SalesAccountActivity extends BaseActivity {
 				iv_three.setBackgroundResource(R.drawable.bg_yellow_star);
 				iv_four.setBackgroundResource(R.drawable.bg_yellow_star);
 				iv_five.setBackgroundResource(R.drawable.bg_yellow_star);
+				break;
+			case R.id.rl_back:
+				finish();
+
 				break;
 		}
 	}

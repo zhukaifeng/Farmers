@@ -1,0 +1,250 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              android:layout_width="match_parent"
+              android:layout_height="match_parent"
+              android:orientation="vertical">
+
+    <RelativeLayout
+        android:id="@+id/rl_top"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/dp302"
+        android:background="@drawable/bg_sales_account"
+        >
+
+        <RelativeLayout
+            android:layout_width="wrap_content"
+            android:layout_height="@dimen/dp33"
+            android:layout_marginLeft="@dimen/dp20"
+            android:layout_marginTop="@dimen/dp20"
+            >
+
+            <ImageView
+                android:id="@+id/iv_back"
+                android:layout_width="@dimen/dp9"
+                android:layout_height="@dimen/dp16"
+                android:layout_centerVertical="true"
+                android:layout_gravity="center_vertical"
+                android:background="@drawable/bg_back"
+                />
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:layout_width="@dimen/dp223"
+            android:layout_height="@dimen/dp33"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="@dimen/dp20"
+            android:background="@drawable/bg_round_title"
+            >
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerInParent="true"
+                android:text="@string/my_sales_accounting"
+                android:textColor="@color/write"
+                android:textSize="@dimen/sp15"
+                />
+
+
+        </RelativeLayout>
+
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/dp71"
+            android:layout_above="@+id/linear_calendar"
+            android:background="@drawable/bg_account_bottom"
+            >
+
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:orientation="vertical"
+                >
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:layout_marginLeft="@dimen/dp43"
+                    android:gravity="right"
+                    android:text="@string/my_sales_count"
+                    android:textColor="@color/write"
+                    android:textSize="@dimen/sp18"
+                    />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:layout_marginLeft="@dimen/dp43"
+                    android:layout_marginTop="@dimen/dp4"
+                    android:text="2019年8月"
+                    android:textColor="@color/write"
+                    android:textSize="@dimen/sp14"
+                    />
+
+            </LinearLayout>
+
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerHorizontal="true"
+                android:layout_centerVertical="true"
+                android:layout_marginRight="@dimen/dp43"
+                android:text="6863.0元"
+                android:textColor="@color/write"
+                android:textSize="@dimen/sp35"
+                />
+
+        </RelativeLayout>
+
+        <LinearLayout
+            android:id="@+id/linear_calendar"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/dp122"
+            android:layout_alignParentBottom="true"
+
+            android:background="@drawable/bg_account_bottom"
+            android:orientation="vertical"
+            >
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/dp122"
+                android:background="@drawable/bg_calendar"
+                android:orientation="vertical"
+                >
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp"
+                    android:layout_weight="1">
+
+                    <android.support.v7.widget.RecyclerView
+                        android:id="@+id/rv_month"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_centerVertical="true"
+                        />
+                </RelativeLayout>
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp"
+                    android:layout_weight="1">
+
+                    <android.support.v7.widget.RecyclerView
+                        android:id="@+id/rv_year"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_centerVertical="true"
+                        />
+                </RelativeLayout>
+
+            </LinearLayout>
+        </LinearLayout>
+
+    </RelativeLayout>
+
+
+    <LinearLayout
+        android:id="@+id/linear_count"
+        android:layout_below="@+id/rl_top"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/dp56"
+        android:orientation="horizontal"
+        >
+
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:orientation="vertical"
+            android:layout_gravity="center"
+            >
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/sales_count"
+                android:textColor="@color/txt_black_51"
+                android:layout_marginTop="@dimen/dp10"
+                android:layout_marginLeft="@dimen/dp50"
+                android:textSize="@dimen/sp12"
+                />
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="6000.0元"
+                android:layout_marginLeft="@dimen/dp50"
+                android:textColor="@color/color_00d39d"
+                android:textSize="@dimen/sp18"
+                />
+
+
+        </LinearLayout>
+
+        <View
+            android:layout_width="@dimen/dp1"
+            android:layout_height="match_parent"
+            android:layout_marginBottom="@dimen/dp5"
+            android:layout_marginTop="@dimen/dp5"
+            android:background="@color/color_00d39d"/>
+
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:orientation="vertical"
+            >
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/buy_count"
+                android:textColor="@color/txt_black_51"
+                android:layout_marginTop="@dimen/dp10"
+                android:layout_marginLeft="@dimen/dp50"
+                android:textSize="@dimen/sp12"
+                />
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="4000.0元"
+                android:layout_marginLeft="@dimen/dp50"
+                android:textColor="@color/color_00d39d"
+                android:textSize="@dimen/sp18"
+                />
+
+        </LinearLayout>
+
+
+    </LinearLayout>
+
+
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/rv_data"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/linear_count"
+        />
+
+    <TextView
+        android:id="@+id/tv_remeber"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/dp60"
+        android:background="@color/color_00d39d"
+        android:gravity="center"
+        android:text="@string/remember"
+        android:textColor="@color/write"
+        android:textSize="@dimen/sp20"
+        android:layout_alignParentBottom="true"
+        />
+
+
+
+</RelativeLayout>

@@ -7,6 +7,7 @@ public class TakeSampleList {
 	private String sampleType;
 	private String sampleCount;
 	private String sampleTime;
+	private boolean delete;
 
 
 	public TakeSampleList(int sampleId, String sampleType, String sampleCount, String sampleTime) {
@@ -14,6 +15,14 @@ public class TakeSampleList {
 		this.sampleType = sampleType;
 		this.sampleCount = sampleCount;
 		this.sampleTime = sampleTime;
+	}
+
+	public boolean isDelete() {
+		return delete;
+	}
+
+	public void setDelete(boolean delete) {
+		this.delete = delete;
 	}
 
 	public int getSampleId() {

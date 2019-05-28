@@ -9,6 +9,7 @@ import android.widget.TextView;
 
 import com.osiris.farmers.R;
 import com.osiris.farmers.base.BaseActivity;
+import com.osiris.farmers.view.SalsersAccountActivity;
 
 import butterknife.BindView;
 import butterknife.OnClick;
@@ -118,14 +119,17 @@ public class HomeActivity extends BaseActivity {
 				break;
 
 			case R.id.ll_home_4:
-				Intent intent4 = new Intent(this, MenuHomeActivity.class);
+				Intent intent4;
 				if (pageType == 1) {
+					intent4 = new Intent(this, SalsersAccountActivity.class);
 					intent4.putExtra("type", 1);
 
 				} else if (pageType == 2) {
+					intent4 = new Intent(this, MenuHomeActivity.class);
 					intent4.putExtra("type", 2);
 
 				} else {
+					intent4 = new Intent(this, MenuHomeActivity.class);
 					intent4.putExtra("type", 3);
 
 				}
