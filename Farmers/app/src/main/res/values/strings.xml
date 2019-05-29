@@ -156,6 +156,16 @@
     <string name="connect">联系人</string>
     <string name="sales_count">销售金额</string>
     <string name="buy_count">采购金额</string>
-
-
+    <string name="market_add_new_punish">市场管理处罚新增</string>
+    <string name="person_charge">负责人</string>
+    <string name="punish">处罚</string>
+    <string name="violation_of_regulations">违反条例</string>
+    <string name="unselect">选择</string>
+    <string name="select">已选择</string>
+    <string name="already_evaluated">已评价</string>
+    <string name="not_evaluated">已评价</string>
+    <string name="all">全部</string>
+    <string name="hint_input_company">请输入单位名称</string>
+    <string name="market_name">市场</string>
+    <string name="jurisdiction_unit">管辖单位</string>
 </resources>

@@ -94,6 +94,8 @@
                         android:hint="@string/hint_input_market"
                         android:textColorHint="@color/write"
                         android:textSize="@dimen/sp14"
+                        android:focusable="false"
+                        android:focusableInTouchMode="false"
                         android:layout_marginLeft="@dimen/dp20"
                         android:textColor="@color/write"
                         />
@@ -114,6 +116,8 @@
                         android:layout_height="match_parent"
                         android:background="@null"
                         android:hint="@string/pay_stall"
+                        android:focusable="false"
+                        android:focusableInTouchMode="false"
                         android:textColorHint="@color/write"
                         android:textColor="@color/write"
                         android:layout_marginLeft="@dimen/dp20"

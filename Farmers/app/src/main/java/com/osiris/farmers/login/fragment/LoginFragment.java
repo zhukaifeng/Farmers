@@ -13,6 +13,7 @@ import com.osiris.farmers.R;
 import com.osiris.farmers.base.BaseFragment;
 import com.osiris.farmers.login.ForgetPwdActivity;
 import com.osiris.farmers.login.HomeActivity;
+import com.osiris.farmers.view.MarketEvaluateActivity;
 import com.osiris.farmers.view.dialog.BillOfSalesDetailDialog;
 import com.osiris.farmers.view.dialog.BillOflandingDialog;
 import com.osiris.farmers.view.dialog.ChooseRulesDialog;
@@ -55,13 +56,13 @@ public class LoginFragment extends BaseFragment {
             case R.id.ll_login_forget:
                 //toClass(getActivity(), ForgetPwdActivity.class);
 
-
+                toClass(getActivity(), MarketEvaluateActivity.class);
                 break;
             case R.id.btn_login:
                 Intent intent = new Intent(getActivity(), HomeActivity.class);
 
                 if (TextUtils.isEmpty(etLoginUsername.getText().toString())) {
-                    intent.putExtra("type", 1);
+                    intent.putExtra("type", 3);
                 } else {
                     if (Integer.parseInt(etLoginUsername.getText().toString()) == 1) {
                         intent.putExtra("type", 1);
@@ -76,28 +77,6 @@ public class LoginFragment extends BaseFragment {
                 startActivity(intent);
                 break;
         }
-    }
-    private void showChooseRulesDialog() {
-        ChooseRulesDialog.Builder builder = new ChooseRulesDialog.Builder(getActivity());
-        builder.setPositiveButton(new DialogClickListener() {
-            @Override
-            public void onClick(Dialog dialog, String msg) {
-
-            }
-
-            @Override
-            public void onClick(Dialog dialog) {
-                dialog.dismiss();
-            }
-        });
-
-        builder.setNegativeButton(new DialogInterface.OnClickListener() {
-            @Override
-            public void onClick(DialogInterface dialogInterface, int i) {
-                dialogInterface.dismiss();
-            }
-        });
-        builder.create().show();
     }
 
 
