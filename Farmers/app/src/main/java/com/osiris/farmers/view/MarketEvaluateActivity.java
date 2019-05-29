@@ -32,6 +32,9 @@ public class MarketEvaluateActivity extends BaseActivity {
         dataList.add(new MarketEvaluate("百花市场", "泰州市市场监管局", "90分", "2019.03.20"));
         dataList.add(new MarketEvaluate("百花市场", "泰州市市场监管局", "90分", "2019.03.20"));
         dataList.add(new MarketEvaluate("百花市场", "泰州市市场监管局", "90分", "2019.03.20"));
+        dataList.add(new MarketEvaluate("百花市场", "泰州市市场监管局", "90分", "2019.03.20"));
+        dataList.add(new MarketEvaluate("百花市场", "泰州市市场监管局", "90分", "2019.03.20"));
+        dataList.add(new MarketEvaluate("百花市场", "泰州市市场监管局", "90分", "2019.03.20"));
 
         rv_data.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false));
         rv_data.setAdapter(dataAdapter);

@@ -52,7 +52,7 @@
                 android:id="@+id/tv_date"
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
-                android:layout_weight="1"
+                android:layout_weight="1.2"
                 android:gravity="center"
                 android:text="2019.03.20"
                 android:textColor="@color/color_00d39d"
@@ -60,7 +60,7 @@
             <LinearLayout
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
-                android:layout_weight="0.3"
+                android:layout_weight="0.5"
                 android:orientation="horizontal">
 
 

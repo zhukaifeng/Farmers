@@ -2,7 +2,7 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/background_gray">
+    android:background="@color/write">
 
     <RelativeLayout
         android:id="@+id/rl_top"
@@ -266,7 +266,7 @@
         <TextView
             android:layout_width="0dp"
             android:layout_height="match_parent"
-            android:layout_weight="1"
+            android:layout_weight="1.2"
             android:gravity="center"
             android:text="@string/date"
             android:textColor="@color/txt_black_51"
@@ -276,7 +276,7 @@
         <TextView
             android:layout_width="0dp"
             android:layout_height="match_parent"
-            android:layout_weight="0.3"
+            android:layout_weight="0.5"
             android:gravity="center"
             android:textColor="@color/color_00d39d"
             android:textSize="@dimen/sp14" />
