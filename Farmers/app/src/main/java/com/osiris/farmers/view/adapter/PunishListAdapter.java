@@ -5,11 +5,11 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.osiris.farmers.R;
-import com.osiris.farmers.model.DateModel;
 import com.osiris.farmers.model.PunishList;
 
 import java.util.ArrayList;
@@ -24,6 +24,8 @@ public class PunishListAdapter extends RecyclerView.Adapter<RecyclerView.ViewHol
     private MyItemClickListener myItemClickListener;
 
     private List<PunishList> dataList = new ArrayList<>();
+    private View.OnClickListener onButtonClickListener;
+    private View.OnClickListener onNameClickListener;
 
 
     public PunishListAdapter(List<PunishList> dataList) {
@@ -54,7 +56,13 @@ public class PunishListAdapter extends RecyclerView.Adapter<RecyclerView.ViewHol
         return dataList.size();
     }
 
+    public void setOnNameClickListener(View.OnClickListener onNameClickListener) {
+        this.onNameClickListener = onNameClickListener;
+    }
 
+    public void setOnButtonClickListener(View.OnClickListener onPhotoClickListener) {
+        this.onButtonClickListener = onButtonClickListener;
+    }
 
     class PunishListHolder extends RecyclerView.ViewHolder implements View.OnClickListener{
 
@@ -75,7 +83,8 @@ public class PunishListAdapter extends RecyclerView.Adapter<RecyclerView.ViewHol
         RelativeLayout rl_bg;
         @BindView(R.id.iv_tri)
         ImageView iv_tri;
-
+        @BindView(R.id.linear_item)
+        LinearLayout linear_item;
 
         private MyItemClickListener myItemClickListener;
 
@@ -94,6 +103,11 @@ public class PunishListAdapter extends RecyclerView.Adapter<RecyclerView.ViewHol
         }
 
         public void bindData(PunishList data){
+            if (getLayoutPosition()%2 == 1){
+                linear_item.setBackgroundColor(itemView.getResources().getColor(R.color.bg_gray_e9));
+            }else {
+                linear_item.setBackgroundColor(itemView.getResources().getColor(R.color.write));
+            }
             tv_date.setText(data.getDate());
             tv_pay_stall.setText(data.getPayStall());
             tv_price.setText(data.getPrice());
@@ -111,6 +125,14 @@ public class PunishListAdapter extends RecyclerView.Adapter<RecyclerView.ViewHol
             }else {
                 rl_bg.setVisibility(View.GONE);
                 iv_tri.setBackgroundResource(R.drawable.bg_arrow_down_tri);
+            }
+            if (onNameClickListener != null) {
+                tv_punish.setTag(R.id.tag_punish_name, getLayoutPosition());
+                tv_punish.setOnClickListener(onNameClickListener);
+            }
+            if (onButtonClickListener != null) {
+                tv_punish.setTag(R.id.tag_punish_button, getLayoutPosition());
+                tv_punish.setOnClickListener(onButtonClickListener);
             }
         }
     }

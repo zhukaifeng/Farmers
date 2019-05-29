@@ -9,6 +9,7 @@ import android.widget.TextView;
 
 import com.osiris.farmers.R;
 import com.osiris.farmers.base.BaseActivity;
+import com.osiris.farmers.view.MarketEvaluateActivity;
 import com.osiris.farmers.view.SalsersAccountActivity;
 
 import butterknife.BindView;
@@ -129,7 +130,7 @@ public class HomeActivity extends BaseActivity {
 					intent4.putExtra("type", 2);
 
 				} else {
-					intent4 = new Intent(this, MenuHomeActivity.class);
+					intent4 = new Intent(this, MarketEvaluateActivity.class);
 					intent4.putExtra("type", 3);
 
 				}

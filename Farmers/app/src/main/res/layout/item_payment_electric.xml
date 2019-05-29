@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              android:orientation="vertical"
+              android:layout_width="match_parent"
+              android:layout_height="wrap_content">
+
+
+    <RelativeLayout
+        android:id="@+id/rl_bg"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/dp52">
+
+        <TextView
+            android:id="@+id/tv_num"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="编号01"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="@dimen/dp36"
+            android:textSize="@dimen/sp14"
+            android:textColor="@color/txt_black_51"
+            />
+        <TextView
+            android:id="@+id/tv_name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="张浩"
+            android:layout_toRightOf="@+id/tv_num"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="@dimen/dp10"
+            android:textSize="@dimen/sp14"
+            android:textColor="@color/txt_black_51"
+            />
+
+
+        <ImageView
+            android:id="@+id/iv_remind"
+            android:layout_width="@dimen/dp77"
+            android:layout_height="@dimen/dp27"
+            android:background="@drawable/bg_remind_pay"
+            android:layout_alignParentRight="true"
+            android:layout_marginRight="@dimen/dp35"
+            android:layout_centerVertical="true"
+            />
+
+        <TextView
+            android:id="@+id/tv_pay"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="-65.32"
+            android:layout_toLeftOf="@+id/iv_remind"
+            android:layout_centerVertical="true"
+            android:layout_marginRight="@dimen/dp21"
+            android:layout_marginLeft="@dimen/dp10"
+            android:textSize="@dimen/sp14"
+            android:textColor="@color/color_00d39d"
+            />
+
+    </RelativeLayout>
+
+
+</LinearLayout>

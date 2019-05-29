@@ -168,4 +168,23 @@
     <string name="hint_input_company">请输入单位名称</string>
     <string name="market_name">市场</string>
     <string name="jurisdiction_unit">管辖单位</string>
+    <string name="market_score">市场部打分</string>
+    <string name="serial_num">序号</string>
+    <string name="regulations">条例</string>
+    <string name="forfeit">罚款</string>
+    <string name="violation_of_regulation">违反规定条例</string>
+    <string name="life_payment">生活缴费</string>
+    <string name="payments_record">缴费记录</string>
+
+    <string name="charge_water">水费</string>
+    <string name="charge_electric">电费</string>
+    <string name="charge_stall">摊位费</string>
+    <string name="charge_bond">保证金</string>
+    <string name="charge_fee">物业费</string>
+    <string name="charge_health">卫生费</string>
+    <string name="charge_lift">电梯费</string>
+    <string name="charge_other">电梯费</string>
+    <string name="charge_electric_not_pay">电费·未交</string>
+    <string name="charge_other_not_pay">其他·罚款·未交</string>
+
 </resources>

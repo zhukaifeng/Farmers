@@ -38,6 +38,7 @@
         <activity android:name=".view.OperatorInputActivity"/>
         <activity android:name=".view.SalsersAccountActivity"/>
         <activity android:name=".view.MarketEvaluateActivity"/>
+        <activity android:name=".view.ScoringDetailActivity"/>
 
             <!-- <intent-filter> -->
             <!-- <action android:name="android.intent.action.MAIN" /> -->

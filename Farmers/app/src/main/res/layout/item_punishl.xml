@@ -14,8 +14,8 @@
             android:layout_width="match_parent"
             android:layout_height="@dimen/dp48"
             android:layout_below="@+id/rl_choose"
-            android:layout_marginLeft="@dimen/dp10"
-            android:layout_marginRight="@dimen/dp10"
+            android:paddingLeft="@dimen/dp10"
+            android:paddingRight="@dimen/dp10"
             android:background="@color/bg_gray_e9"
             android:orientation="horizontal">
 
@@ -104,8 +104,6 @@
             android:layout_width="wrap_content"
             android:layout_height="@dimen/dp53"
             android:layout_below="@+id/linear_item"
-            android:layout_marginLeft="@dimen/dp10"
-            android:layout_marginRight="@dimen/dp10"
             android:visibility="gone"
             android:background="@drawable/bg_center_detail_info">
 

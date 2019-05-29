@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content">
+
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/bg_gray_e9">
+
+        <LinearLayout
+            android:id="@+id/linear_item"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/dp48"
+            android:layout_below="@+id/rl_choose"
+            android:background="@color/bg_gray_e9"
+            android:orientation="horizontal">
+            <LinearLayout
+                android:id="@+id/linear_title_type"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="horizontal"
+                >
+
+                <TextView
+                    android:id="@+id/tv_serial_num"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:text="@string/serial_num"
+                    android:textColor="@color/txt_black_51"
+                    android:textSize="@dimen/sp15"
+                    android:gravity="center"
+                    />
+                <TextView
+                    android:id="@+id/tv_regulations"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:text="@string/regulations"
+                    android:textColor="@color/txt_black_51"
+                    android:textSize="@dimen/sp15"
+                    android:gravity="center"
+                    />
+
+                <TextView
+                    android:id="@+id/tv_forfeit"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:text="@string/forfeit"
+                    android:textColor="@color/txt_black_51"
+                    android:textSize="@dimen/sp15"
+                    android:gravity="center"
+                    />
+
+
+            </LinearLayout>
+        </LinearLayout>
+    </RelativeLayout>
+
+
+</RelativeLayout>
+
+

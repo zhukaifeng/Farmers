@@ -2,17 +2,21 @@ package com.osiris.farmers.view;
 
 import android.app.Dialog;
 import android.content.DialogInterface;
+import android.support.v4.widget.NestedScrollView;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
+import android.widget.LinearLayout;
+import android.widget.RelativeLayout;
+import android.widget.TextView;
 
 import com.osiris.farmers.R;
 import com.osiris.farmers.base.BaseFragment;
+import com.osiris.farmers.model.PunishDetail;
 import com.osiris.farmers.model.PunishList;
-import com.osiris.farmers.model.StockListData;
 import com.osiris.farmers.view.adapter.MyItemClickListener;
+import com.osiris.farmers.view.adapter.PunishDetailAdapter;
 import com.osiris.farmers.view.adapter.PunishListAdapter;
-import com.osiris.farmers.view.adapter.StockListAdapter;
 import com.osiris.farmers.view.dialog.ChooseRulesDialog;
 import com.osiris.farmers.view.dialog.DialogClickListener;
 
@@ -27,8 +31,33 @@ public class AddPunishFragment extends BaseFragment {
     @BindView(R.id.rv_data)
     RecyclerView rv_data;
 
+
+
+    @BindView(R.id.linear_search)
+    LinearLayout linear_search;
+    @BindView(R.id.scroll_context)
+    NestedScrollView scroll_context;
+    @BindView(R.id.linear_item)
+    LinearLayout linear_item;
+
+    @BindView(R.id.linear_title_type)
+    LinearLayout linear_title_type;
+    @BindView(R.id.rv_data_detail)
+    RecyclerView rv_data_detail;
+
+    @BindView(R.id.rl_back)
+    RelativeLayout rl_back;
+
+    @BindView(R.id.tv_title)
+    TextView tv_title;
+    @BindView(R.id.rl_right)
+    RelativeLayout rl_right;
+
+
     private List<PunishList> dataList = new ArrayList<>();
     private PunishListAdapter dataAdapter = new PunishListAdapter(dataList);
+    private List<PunishDetail> detailList = new ArrayList<>();
+    private PunishDetailAdapter detailAdapter = new PunishDetailAdapter(detailList);
 
     @Override
     protected int setLayout() {
@@ -42,12 +71,45 @@ public class AddPunishFragment extends BaseFragment {
         dataList.add(new PunishList("镇江江南", "028", "张浩", "200元","03.22",true));
         dataList.add(new PunishList("镇江江南", "028", "张浩", "200元","03.22",true));
 
+        //01                      不守规章制度                    200元
+        detailList.add(new PunishDetail("01","不守规章制度","200元"));
+        detailList.add(new PunishDetail("02","不守规章制度","200元"));
+        detailList.add(new PunishDetail("03","不守规章制度","200元"));
+
+        rv_data_detail.setLayoutManager(new LinearLayoutManager(this.getActivity(), LinearLayoutManager.VERTICAL, false));
+        rv_data_detail.setAdapter(detailAdapter);
+        detailAdapter.notifyDataSetChanged();
+
+
         rv_data.setLayoutManager(new LinearLayoutManager(this.getActivity(), LinearLayoutManager.VERTICAL, false));
         rv_data.setAdapter(dataAdapter);
         dataAdapter.notifyDataSetChanged();
         dataAdapter.setOnItemClick(new MyItemClickListener() {
             @Override
             public void onItemClick(View view, int position) {
+
+                linear_search.setVisibility(View.GONE);
+                scroll_context.setVisibility(View.GONE);
+                linear_item.setVisibility(View.GONE);
+                linear_title_type.setVisibility(View.VISIBLE);
+                rv_data_detail.setVisibility(View.VISIBLE);
+                rl_right.setVisibility(View.GONE);
+                rl_back.setVisibility(View.VISIBLE);
+                tv_title.setText(getString(R.string.violation_of_regulation));
+            }
+        });
+
+        dataAdapter.setOnNameClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Object positionTag = v.getTag(R.id.tag_punish_name);
+                if (positionTag == null ) {
+                    return;
+                }
+                if (!(positionTag instanceof Integer)) {
+                    return;
+                }
+                int position = (int) positionTag;
                 if (!dataList.get(position).isClicked()){
                     dataList.get(position).setClicked(true);
                 }else {
@@ -56,6 +118,20 @@ public class AddPunishFragment extends BaseFragment {
                 dataAdapter.notifyDataSetChanged();
             }
         });
+
+        dataAdapter.setOnButtonClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Object positionTag = v.getTag(R.id.tag_punish_button);
+                if (positionTag == null ) {
+                    return;
+                }
+                if (!(positionTag instanceof Integer)) {
+                    return;
+                }
+            }
+        });
+
     }
 
     @Override
@@ -63,11 +139,23 @@ public class AddPunishFragment extends BaseFragment {
 
     }
 
-    @OnClick({R.id.rl_add})
+    @OnClick({R.id.rl_add,R.id.rl_back})
     void onClick(View v){
         switch (v.getId()){
             case R.id.rl_add:
                 showChooseRulesDialog();
+                break;
+
+            case R.id.rl_back:
+                linear_search.setVisibility(View.VISIBLE);
+                scroll_context.setVisibility(View.VISIBLE);
+                linear_item.setVisibility(View.VISIBLE);
+                linear_title_type.setVisibility(View.GONE);
+                rv_data_detail.setVisibility(View.GONE);
+                rl_back.setVisibility(View.GONE);
+                rl_right.setVisibility(View.VISIBLE);
+                tv_title.setText(getString(R.string.market_add_new_punish));
+
                 break;
         }
     }

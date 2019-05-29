@@ -13,12 +13,8 @@ import com.osiris.farmers.R;
 import com.osiris.farmers.base.BaseFragment;
 import com.osiris.farmers.login.ForgetPwdActivity;
 import com.osiris.farmers.login.HomeActivity;
-import com.osiris.farmers.view.MarketEvaluateActivity;
 import com.osiris.farmers.view.dialog.BillOfSalesDetailDialog;
-import com.osiris.farmers.view.dialog.BillOflandingDialog;
-import com.osiris.farmers.view.dialog.ChooseRulesDialog;
 import com.osiris.farmers.view.dialog.DialogClickListener;
-import com.osiris.farmers.view.dialog.RegistDialog;
 
 import butterknife.BindView;
 import butterknife.OnClick;
@@ -54,9 +50,9 @@ public class LoginFragment extends BaseFragment {
     void onClick(View view) {
         switch (view.getId()) {
             case R.id.ll_login_forget:
-                //toClass(getActivity(), ForgetPwdActivity.class);
+                toClass(getActivity(), ForgetPwdActivity.class);
 
-                toClass(getActivity(), MarketEvaluateActivity.class);
+                //toClass(getActivity(), MarketEvaluateActivity.class);
                 break;
             case R.id.btn_login:
                 Intent intent = new Intent(getActivity(), HomeActivity.class);

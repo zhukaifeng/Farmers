@@ -8,12 +8,12 @@ import android.widget.TabHost;
 import com.osiris.farmers.R;
 import com.osiris.farmers.base.BaseActivity;
 import com.osiris.farmers.goods.fragment.PayFragment;
-import com.osiris.farmers.goods.fragment.StockGoodsFragment;
 import com.osiris.farmers.goods.fragment.StockListFragment;
 import com.osiris.farmers.goods.fragment.StockPurchaseFragment;
 import com.osiris.farmers.view.AddPunishFragment;
 import com.osiris.farmers.view.TabItem;
 import com.osiris.farmers.view.fragment.DatebacktoFragment;
+import com.osiris.farmers.view.fragment.LifePayFragment;
 import com.osiris.farmers.view.fragment.MyFragment;
 import com.osiris.farmers.view.fragment.OperatorInquiryFragment;
 import com.osiris.farmers.view.fragment.ShippingStockFragment;
@@ -127,7 +127,7 @@ public class MenuHomeActivity extends BaseActivity {
 
 				tabhostMainMenu.addTab(tabhostMainMenu.newTabSpec(tag_stock_goods).setIndicator(new
 								TabItem(this, R.drawable.tab_collect_feels, R.string.collect_fees, 0)),
-						StockGoodsFragment.class, null);
+						LifePayFragment.class, null);
 
 				tabhostMainMenu.addTab(tabhostMainMenu.newTabSpec(tag_stock_pay).setIndicator(new
 								TabItem(this, R.drawable.tab_mine, R.string.mine, 0)),
