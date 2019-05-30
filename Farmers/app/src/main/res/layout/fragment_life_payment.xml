@@ -1,11 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/write"
-    android:orientation="vertical"
-    >
+    android:orientation="vertical">
 
     <RelativeLayout
         android:layout_width="match_parent"
@@ -18,7 +16,7 @@
             android:background="@drawable/bg_life_payments">
 
             <RelativeLayout
-                android:id="@+id/rl_top"
+                android:id="@+id/rl_back"
                 android:layout_width="wrap_content"
                 android:layout_height="@dimen/dp33"
                 android:layout_marginLeft="@dimen/dp20"
@@ -31,7 +29,7 @@
                     android:layout_height="@dimen/dp16"
                     android:layout_centerVertical="true"
                     android:layout_gravity="center_vertical"
-                    android:background="@drawable/bg_back"/>
+                    android:background="@drawable/bg_back" />
             </RelativeLayout>
 
             <RelativeLayout
@@ -42,17 +40,75 @@
                 android:background="@drawable/bg_round_title">
 
                 <TextView
+                    android:id="@+id/tv_title"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_centerInParent="true"
                     android:text="@string/life_payment"
                     android:textColor="@color/write"
-                    android:textSize="@dimen/sp15"/>
+                    android:textSize="@dimen/sp15" />
 
 
             </RelativeLayout>
 
+            <RelativeLayout
+                android:id="@+id/rl_record_select"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/dp71"
+                android:layout_alignParentBottom="true"
+                android:visibility="gone"
+                android:background="@drawable/bg_account_bottom">
 
+                <TextView
+                    android:id="@+id/tv_select"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:text="本年"
+                    android:layout_marginLeft="@dimen/dp39"
+                    android:textColor="@color/write"
+                    android:textSize="@dimen/sp17" />
+                <ImageView
+                    android:id="@+id/iv_select"
+                    android:layout_width="@dimen/dp9"
+                    android:layout_height="@dimen/dp5"
+                    android:layout_centerVertical="true"
+                    android:layout_toRightOf="@+id/tv_select"
+                    android:layout_marginLeft="@dimen/dp6"
+                    android:background="@drawable/bg_arrow_up" />
+
+                <ImageView
+                    android:layout_width="@dimen/dp8"
+                    android:layout_height="@dimen/dp15"
+                    android:layout_alignParentRight="true"
+                    android:layout_centerVertical="true"
+                    android:layout_marginRight="@dimen/dp45"
+                    android:background="@drawable/bg_arrow_to"
+                    android:text="138xxxxxxxx"
+                    android:textSize="@dimen/sp16"
+                    android:visibility="gone" />
+
+                <ImageView
+                    android:layout_width="@dimen/dp12"
+                    android:layout_height="@dimen/dp14"
+                    android:background="@drawable/bg_location"
+                    android:layout_toLeftOf="@+id/tv_location"
+                    android:layout_centerVertical="true"
+                    />
+
+                <TextView
+                    android:id="@+id/tv_location"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentRight="true"
+                    android:layout_centerVertical="true"
+                    android:layout_marginLeft="@dimen/dp9"
+                    android:layout_marginRight="@dimen/dp41"
+                    android:text="泰州市"
+                    android:textColor="@color/write"
+                    android:textSize="@dimen/sp14" />
+
+            </RelativeLayout>
             <RelativeLayout
                 android:id="@+id/rl_location"
                 android:layout_width="match_parent"
@@ -66,7 +122,7 @@
                     android:layout_height="@dimen/dp25"
                     android:layout_centerVertical="true"
                     android:layout_marginLeft="@dimen/dp41"
-                    android:background="@drawable/bg_location"/>
+                    android:background="@drawable/bg_location" />
 
                 <TextView
                     android:layout_width="wrap_content"
@@ -76,7 +132,7 @@
                     android:layout_toRightOf="@+id/iv_location"
                     android:text="百花农贸市场"
                     android:textColor="@color/write"
-                    android:textSize="@dimen/sp17"/>
+                    android:textSize="@dimen/sp17" />
 
 
                 <ImageView
@@ -88,9 +144,10 @@
                     android:background="@drawable/bg_arrow_to"
                     android:text="138xxxxxxxx"
                     android:textSize="@dimen/sp16"
-                    android:visibility="gone"/>
+                    android:visibility="gone" />
 
                 <TextView
+                    android:id="@+id/tv_pay_record"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_alignParentRight="true"
@@ -99,7 +156,7 @@
                     android:layout_marginRight="@dimen/dp41"
                     android:text="@string/payments_record"
                     android:textColor="@color/write"
-                    android:textSize="@dimen/sp14"/>
+                    android:textSize="@dimen/sp14" />
 
             </RelativeLayout>
 
@@ -116,47 +173,142 @@
             <android.support.v7.widget.RecyclerView
                 android:id="@+id/rv_type"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_centerVertical="true"
-                />
+                android:layout_height="match_parent"
+                android:layout_centerVertical="true" />
 
         </RelativeLayout>
     </RelativeLayout>
 
 
+    <LinearLayout
+        android:id="@+id/linear_details"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:visibility="gone"
+        android:orientation="vertical">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/dp76"
+            android:background="@color/bg_gray_e9"
+            android:layout_marginTop="@dimen/dp3"
+            android:orientation="horizontal">
+
+            <RelativeLayout
+                android:layout_width="0dp"
+                android:layout_height="@dimen/dp27"
+                android:layout_gravity="center_vertical"
+                android:layout_weight="1">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textColor="@color/color_00d39d"
+                    android:text="@string/charge_pay"
+                    android:layout_toLeftOf="@+id/tv_pay_count"
+                    android:layout_alignParentBottom="true"
+                    android:textSize="@dimen/sp14"
+                    />
+                <TextView
+                    android:id="@+id/tv_pay_count"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textColor="@color/color_00d39d"
+                    android:text="200"
+                    android:layout_alignParentBottom="true"
+                    android:layout_centerInParent="true"
+                    android:textSize="@dimen/sp26"
+                    />
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textColor="@color/color_00d39d"
+                    android:text="元"
+                    android:layout_alignParentBottom="true"
+                    android:layout_toRightOf="@+id/tv_pay_count"
+                    android:layout_centerInParent="true"
+                    android:textSize="@dimen/sp14"
+                    />
+            </RelativeLayout>
+            <View
+                android:layout_width="@dimen/dp1"
+                android:layout_height="@dimen/dp33"
+                android:layout_gravity="center_vertical"
+                android:background="@color/color_00d39d"/>
+            <RelativeLayout
+                android:layout_width="0dp"
+                android:layout_height="@dimen/dp27"
+                android:layout_gravity="center_vertical"
+                android:layout_weight="1">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textColor="@color/color_00d39d"
+                    android:text="@string/charge_not_pay"
+                    android:layout_toLeftOf="@+id/tv_paddingpay_count"
+                    android:layout_alignParentBottom="true"
+                    android:textSize="@dimen/sp14"
+                    />
+                <TextView
+                    android:id="@+id/tv_paddingpay_count"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textColor="@color/color_00d39d"
+                    android:text="300"
+                    android:layout_alignParentBottom="true"
+                    android:layout_centerInParent="true"
+                    android:textSize="@dimen/sp26"
+                    />
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textColor="@color/color_00d39d"
+                    android:text="元"
+                    android:layout_alignParentBottom="true"
+                    android:layout_toRightOf="@+id/tv_paddingpay_count"
+                    android:layout_centerInParent="true"
+                    android:textSize="@dimen/sp14"
+                    />
+            </RelativeLayout>
+        </LinearLayout>
+
+        <android.support.v7.widget.RecyclerView
+            android:id="@+id/rv_pay_detail"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+    </LinearLayout>
+
     <android.support.v4.widget.NestedScrollView
+        android:id="@+id/scroll_context"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="@dimen/dp3"
         android:scrollbars="none"
-        >
+       >
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="vertical"
-            >
+            android:orientation="vertical">
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:background="@color/background_gray"
-                android:orientation="vertical"
-                >
+                android:orientation="vertical">
 
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="@dimen/dp70"
                     android:layout_marginTop="@dimen/dp3"
-                    android:orientation="horizontal"
-                    >
+                    android:orientation="horizontal">
 
                     <RelativeLayout
                         android:layout_width="0dp"
                         android:layout_height="match_parent"
                         android:layout_weight="1"
-                        android:orientation="vertical"
-                        >
+                        android:orientation="vertical">
 
                         <ImageView
                             android:layout_width="@dimen/dp37"
@@ -164,8 +316,7 @@
                             android:layout_centerHorizontal="true"
                             android:layout_gravity="center_horizontal"
                             android:layout_marginTop="@dimen/dp10"
-                            android:background="@drawable/bg_charge_water"
-                            />
+                            android:background="@drawable/bg_charge_water" />
 
                         <TextView
                             android:layout_width="wrap_content"
@@ -176,15 +327,13 @@
                             android:layout_marginBottom="@dimen/dp5"
                             android:text="@string/charge_water"
                             android:textColor="@color/txt_black_51"
-                            android:textSize="@dimen/sp13"
-                            />
+                            android:textSize="@dimen/sp13" />
                     </RelativeLayout>
 
                     <RelativeLayout
                         android:layout_width="0dp"
                         android:layout_height="match_parent"
-                        android:layout_weight="1"
-                        >
+                        android:layout_weight="1">
 
                         <ImageView
                             android:layout_width="@dimen/dp48"
@@ -192,8 +341,7 @@
                             android:layout_centerHorizontal="true"
                             android:layout_gravity="center_horizontal"
                             android:layout_marginTop="@dimen/dp7"
-                            android:background="@drawable/bg_charge_electric"
-                            />
+                            android:background="@drawable/bg_charge_electric" />
 
                         <TextView
                             android:layout_width="wrap_content"
@@ -204,15 +352,13 @@
                             android:layout_marginBottom="@dimen/dp5"
                             android:text="@string/charge_electric"
                             android:textColor="@color/txt_black_51"
-                            android:textSize="@dimen/sp13"
-                            />
+                            android:textSize="@dimen/sp13" />
                     </RelativeLayout>
 
                     <RelativeLayout
                         android:layout_width="0dp"
                         android:layout_height="match_parent"
-                        android:layout_weight="1"
-                        >
+                        android:layout_weight="1">
 
                         <ImageView
                             android:layout_width="@dimen/dp43"
@@ -220,8 +366,7 @@
                             android:layout_centerHorizontal="true"
                             android:layout_gravity="center_horizontal"
                             android:layout_marginTop="@dimen/dp8"
-                            android:background="@drawable/bg_charge_stall"
-                            />
+                            android:background="@drawable/bg_charge_stall" />
 
                         <TextView
                             android:layout_width="wrap_content"
@@ -233,15 +378,13 @@
                             android:layout_marginBottom="@dimen/dp5"
                             android:text="@string/charge_stall"
                             android:textColor="@color/txt_black_51"
-                            android:textSize="@dimen/sp13"
-                            />
+                            android:textSize="@dimen/sp13" />
                     </RelativeLayout>
 
                     <RelativeLayout
                         android:layout_width="0dp"
                         android:layout_height="match_parent"
-                        android:layout_weight="1"
-                        >
+                        android:layout_weight="1">
 
                         <ImageView
                             android:layout_width="@dimen/dp59"
@@ -249,8 +392,7 @@
                             android:layout_centerHorizontal="true"
                             android:layout_gravity="center_horizontal"
                             android:layout_marginTop="@dimen/dp11"
-                            android:background="@drawable/bg_charge_bond"
-                            />
+                            android:background="@drawable/bg_charge_bond" />
 
                         <TextView
                             android:layout_width="wrap_content"
@@ -262,8 +404,7 @@
                             android:layout_marginBottom="@dimen/dp5"
                             android:text="@string/charge_bond"
                             android:textColor="@color/txt_black_51"
-                            android:textSize="@dimen/sp13"
-                            />
+                            android:textSize="@dimen/sp13" />
                     </RelativeLayout>
                 </LinearLayout>
 
@@ -271,15 +412,13 @@
                     android:layout_width="match_parent"
                     android:layout_height="@dimen/dp70"
                     android:layout_marginTop="@dimen/dp3"
-                    android:orientation="horizontal"
-                    >
+                    android:orientation="horizontal">
 
                     <RelativeLayout
                         android:layout_width="0dp"
                         android:layout_height="match_parent"
                         android:layout_weight="1"
-                        android:orientation="vertical"
-                        >
+                        android:orientation="vertical">
 
                         <ImageView
                             android:layout_width="@dimen/dp35"
@@ -287,8 +426,7 @@
                             android:layout_centerHorizontal="true"
                             android:layout_gravity="center_horizontal"
                             android:layout_marginTop="@dimen/dp7"
-                            android:background="@drawable/bg_charge_fee"
-                            />
+                            android:background="@drawable/bg_charge_fee" />
 
                         <TextView
                             android:layout_width="wrap_content"
@@ -300,16 +438,14 @@
                             android:layout_marginBottom="@dimen/dp5"
                             android:text="@string/charge_fee"
                             android:textColor="@color/txt_black_51"
-                            android:textSize="@dimen/sp13"
-                            />
+                            android:textSize="@dimen/sp13" />
                     </RelativeLayout>
 
                     <RelativeLayout
                         android:layout_width="0dp"
                         android:layout_height="match_parent"
                         android:layout_weight="1"
-                        android:orientation="vertical"
-                        >
+                        android:orientation="vertical">
 
                         <ImageView
                             android:layout_width="@dimen/dp46"
@@ -317,8 +453,7 @@
                             android:layout_centerHorizontal="true"
                             android:layout_gravity="center_horizontal"
                             android:layout_marginTop="@dimen/dp10"
-                            android:background="@drawable/bg_charge_health"
-                            />
+                            android:background="@drawable/bg_charge_health" />
 
                         <TextView
                             android:layout_width="wrap_content"
@@ -330,16 +465,14 @@
                             android:layout_marginBottom="@dimen/dp5"
                             android:text="@string/charge_health"
                             android:textColor="@color/txt_black_51"
-                            android:textSize="@dimen/sp13"
-                            />
+                            android:textSize="@dimen/sp13" />
                     </RelativeLayout>
 
                     <RelativeLayout
                         android:layout_width="0dp"
                         android:layout_height="match_parent"
                         android:layout_weight="1"
-                        android:orientation="vertical"
-                        >
+                        android:orientation="vertical">
 
                         <ImageView
                             android:layout_width="@dimen/dp60"
@@ -347,8 +480,7 @@
                             android:layout_centerHorizontal="true"
                             android:layout_gravity="center_horizontal"
                             android:layout_marginTop="@dimen/dp11"
-                            android:background="@drawable/bg_charge_lift"
-                            />
+                            android:background="@drawable/bg_charge_lift" />
 
                         <TextView
                             android:layout_width="wrap_content"
@@ -360,16 +492,14 @@
                             android:layout_marginBottom="@dimen/dp5"
                             android:text="@string/charge_lift"
                             android:textColor="@color/txt_black_51"
-                            android:textSize="@dimen/sp13"
-                            />
+                            android:textSize="@dimen/sp13" />
                     </RelativeLayout>
 
                     <RelativeLayout
                         android:layout_width="0dp"
                         android:layout_height="match_parent"
                         android:layout_weight="1"
-                        android:orientation="vertical"
-                        >
+                        android:orientation="vertical">
 
                         <ImageView
                             android:layout_width="@dimen/dp48"
@@ -377,8 +507,7 @@
                             android:layout_centerHorizontal="true"
                             android:layout_gravity="center_horizontal"
                             android:layout_marginTop="@dimen/dp6"
-                            android:background="@drawable/bg_charge_other"
-                            />
+                            android:background="@drawable/bg_charge_other" />
 
                         <TextView
                             android:layout_width="wrap_content"
@@ -390,8 +519,7 @@
                             android:layout_marginBottom="@dimen/dp5"
                             android:text="@string/charge_other"
                             android:textColor="@color/txt_black_51"
-                            android:textSize="@dimen/sp13"
-                            />
+                            android:textSize="@dimen/sp13" />
                     </RelativeLayout>
                 </LinearLayout>
             </LinearLayout>
@@ -409,8 +537,7 @@
                     android:layout_height="@dimen/dp37"
                     android:layout_gravity="center_vertical"
                     android:layout_marginLeft="@dimen/dp32"
-                    android:background="@drawable/bg_charge_electric"
-                    />
+                    android:background="@drawable/bg_charge_electric" />
 
                 <TextView
                     android:layout_width="wrap_content"
@@ -419,14 +546,13 @@
                     android:layout_marginLeft="@dimen/dp10"
                     android:text="@string/charge_electric_not_pay"
                     android:textColor="@color/txt_black_51"
-                    android:textSize="@dimen/sp16"
-                    />
+                    android:textSize="@dimen/sp16" />
             </LinearLayout>
 
             <android.support.v7.widget.RecyclerView
                 android:id="@+id/rv_data_electric"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"/>
+                android:layout_height="wrap_content" />
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -440,8 +566,7 @@
                     android:layout_height="@dimen/dp39"
                     android:layout_gravity="center_vertical"
                     android:layout_marginLeft="@dimen/dp32"
-                    android:background="@drawable/bg_charge_other"
-                    />
+                    android:background="@drawable/bg_charge_other" />
 
                 <TextView
                     android:layout_width="wrap_content"
@@ -450,14 +575,13 @@
                     android:layout_marginLeft="@dimen/dp10"
                     android:text="@string/charge_other_not_pay"
                     android:textColor="@color/txt_black_51"
-                    android:textSize="@dimen/sp16"
-                    />
+                    android:textSize="@dimen/sp16" />
             </LinearLayout>
 
             <android.support.v7.widget.RecyclerView
                 android:id="@+id/rv_data_other"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"/>
+                android:layout_height="wrap_content" />
         </LinearLayout>
 
     </android.support.v4.widget.NestedScrollView>

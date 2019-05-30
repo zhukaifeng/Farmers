@@ -183,8 +183,14 @@
     <string name="charge_fee">物业费</string>
     <string name="charge_health">卫生费</string>
     <string name="charge_lift">电梯费</string>
-    <string name="charge_other">电梯费</string>
+    <string name="charge_other">其他</string>
     <string name="charge_electric_not_pay">电费·未交</string>
     <string name="charge_other_not_pay">其他·罚款·未交</string>
+    <string name="charge_remind_pay">未缴费提醒</string>
+    <string name="charge_pay_now">立即支付</string>
+    <string name="charge_not_pay">未交</string>
+    <string name="charge_pay">已交</string>
+    <string name="life_payment_record">商户缴费记录</string>
+    <string name="pay_now">支付</string>
 
 </resources>
