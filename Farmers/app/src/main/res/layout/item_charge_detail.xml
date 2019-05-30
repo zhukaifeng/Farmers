@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical">
+
+    <LinearLayout
+        android:id="@+id/linear_item"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/write"
+        android:orientation="vertical">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/dp59"
+            android:orientation="horizontal">
+
+            <TextView
+                android:id="@+id/tv_pay_type"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:text="镇江江南"
+                android:textSize="@dimen/sp13"
+                android:textColor="@color/txt_black_51" />
+
+            <TextView
+                android:id="@+id/tv_padding_pay"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:text="028"
+                android:textSize="@dimen/sp13"
+
+                android:textColor="@color/txt_black_51"
+                />
+
+            <TextView
+                android:id="@+id/tv_has_pay"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:text="张浩"
+                android:textSize="@dimen/sp13"
+                android:textColor="@color/txt_black_51"
+                />
+
+            <TextView
+                android:id="@+id/tv_date"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:text="500元"
+                android:textColor="@color/color_00d39d"
+                android:textSize="@dimen/sp13"
+                />
+
+        </LinearLayout>
+
+        
+    </LinearLayout>
+</LinearLayout>

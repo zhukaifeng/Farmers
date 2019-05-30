@@ -66,7 +66,7 @@ public class HomeActivity extends BaseActivity {
 	private void initView() {
 
 		pageType = getIntent().getIntExtra("type", 1);
-		Log.d("zkf","type:" + pageType);
+		Log.d("zkf", "type:" + pageType);
 		changeViewStatus(pageType);
 	}
 
@@ -85,8 +85,11 @@ public class HomeActivity extends BaseActivity {
 				} else if (pageType == 2) {
 					intent.putExtra("type", 2);
 
-				} else {
+				} else if (pageType == 3) {
 					intent.putExtra("type", 3);
+
+				} else {
+					intent.putExtra("type", 4);
 
 				}
 				startActivity(intent);
@@ -98,8 +101,12 @@ public class HomeActivity extends BaseActivity {
 					intent2.putExtra("type", 1);
 				} else if (pageType == 2) {
 					intent2.putExtra("type", 2);
-				} else {
+				} else if (pageType == 3) {
 					intent2.putExtra("type", 3);
+
+				} else {
+					intent2.putExtra("type", 4);
+
 				}
 				startActivity(intent2);
 				break;
@@ -112,8 +119,11 @@ public class HomeActivity extends BaseActivity {
 				} else if (pageType == 2) {
 					intent3.putExtra("type", 2);
 
-				} else {
+				} else if (pageType == 3) {
 					intent3.putExtra("type", 3);
+
+				} else {
+					intent3.putExtra("type", 4);
 
 				}
 				startActivity(intent3);
@@ -129,10 +139,13 @@ public class HomeActivity extends BaseActivity {
 					intent4 = new Intent(this, MenuHomeActivity.class);
 					intent4.putExtra("type", 2);
 
-				} else {
+				} else if (pageType == 3){
 					intent4 = new Intent(this, MarketEvaluateActivity.class);
 					intent4.putExtra("type", 3);
 
+				}else {
+					intent4 = new Intent(this, MarketEvaluateActivity.class);
+					intent4.putExtra("type", 4);
 				}
 				startActivity(intent4);
 				break;

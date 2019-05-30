@@ -21,83 +21,86 @@ import butterknife.OnClick;
 
 public class LoginFragment extends BaseFragment {
 
-    @BindView(R.id.ll_login_forget)
-    LinearLayout llLoginForget;
-    @BindView(R.id.et_login_username)
-    EditText etLoginUsername;
-    @BindView(R.id.et_login_password)
-    EditText etLoginPassword;
-    @BindView(R.id.btn_login)
-    Button btnLogin;
+	@BindView(R.id.ll_login_forget)
+	LinearLayout llLoginForget;
+	@BindView(R.id.et_login_username)
+	EditText etLoginUsername;
+	@BindView(R.id.et_login_password)
+	EditText etLoginPassword;
+	@BindView(R.id.btn_login)
+	Button btnLogin;
 
-    @Override
-    protected int setLayout() {
-        return R.layout.fragment_login;
-    }
+	@Override
+	protected int setLayout() {
+		return R.layout.fragment_login;
+	}
 
-    @Override
-    protected void initView() {
-
-
-    }
-
-    @Override
-    protected void initData() {
-
-    }
-
-    @OnClick({R.id.ll_login_forget, R.id.btn_login})
-    void onClick(View view) {
-        switch (view.getId()) {
-            case R.id.ll_login_forget:
-                toClass(getActivity(), ForgetPwdActivity.class);
-
-                //toClass(getActivity(), MarketEvaluateActivity.class);
-                break;
-            case R.id.btn_login:
-                Intent intent = new Intent(getActivity(), HomeActivity.class);
-
-                if (TextUtils.isEmpty(etLoginUsername.getText().toString())) {
-                    intent.putExtra("type", 3);
-                } else {
-                    if (Integer.parseInt(etLoginUsername.getText().toString()) == 1) {
-                        intent.putExtra("type", 1);
-                    } else if (Integer.parseInt(etLoginUsername.getText().toString()) == 2) {
-                        intent.putExtra("type", 2);
-                    } else if (Integer.parseInt(etLoginUsername.getText().toString()) == 3) {
-                        intent.putExtra("type", 3);
-                    }
-                }
+	@Override
+	protected void initView() {
 
 
-                startActivity(intent);
-                break;
-        }
-    }
+	}
+
+	@Override
+	protected void initData() {
+
+	}
+
+	@OnClick({R.id.ll_login_forget, R.id.btn_login})
+	void onClick(View view) {
+		switch (view.getId()) {
+			case R.id.ll_login_forget:
+				toClass(getActivity(), ForgetPwdActivity.class);
+
+				//toClass(getActivity(), MarketEvaluateActivity.class);
+				break;
+			case R.id.btn_login:
+				Intent intent = new Intent(getActivity(), HomeActivity.class);
+
+				if (TextUtils.isEmpty(etLoginUsername.getText().toString())) {
+					intent.putExtra("type", 4);
+				} else {
+					if (Integer.parseInt(etLoginUsername.getText().toString()) == 1) {
+						intent.putExtra("type", 1);
+					} else if (Integer.parseInt(etLoginUsername.getText().toString()) == 2) {
+						intent.putExtra("type", 2);
+					} else if (Integer.parseInt(etLoginUsername.getText().toString()) == 3) {
+						intent.putExtra("type", 3);
+					} else if (Integer.parseInt(etLoginUsername.getText().toString()) == 4) {
+						intent.putExtra("type", 4);
+					}
+
+				}
 
 
-    private void showBillOfSalesDetailDialog() {
-        BillOfSalesDetailDialog.Builder builder = new BillOfSalesDetailDialog.Builder(getActivity());
-        builder.setPositiveButton(new DialogClickListener() {
-            @Override
-            public void onClick(Dialog dialog, String msg) {
+				startActivity(intent);
+				break;
+		}
+	}
 
-            }
 
-            @Override
-            public void onClick(Dialog dialog) {
-                dialog.dismiss();
-            }
-        });
+	private void showBillOfSalesDetailDialog() {
+		BillOfSalesDetailDialog.Builder builder = new BillOfSalesDetailDialog.Builder(getActivity());
+		builder.setPositiveButton(new DialogClickListener() {
+			@Override
+			public void onClick(Dialog dialog, String msg) {
 
-        builder.setNegativeButton(new DialogInterface.OnClickListener() {
-            @Override
-            public void onClick(DialogInterface dialogInterface, int i) {
-                dialogInterface.dismiss();
-            }
-        });
-        builder.create().show();
-    }
+			}
+
+			@Override
+			public void onClick(Dialog dialog) {
+				dialog.dismiss();
+			}
+		});
+
+		builder.setNegativeButton(new DialogInterface.OnClickListener() {
+			@Override
+			public void onClick(DialogInterface dialogInterface, int i) {
+				dialogInterface.dismiss();
+			}
+		});
+		builder.create().show();
+	}
 
 
 }

@@ -192,5 +192,9 @@
     <string name="charge_pay">已交</string>
     <string name="life_payment_record">商户缴费记录</string>
     <string name="pay_now">支付</string>
+    <string name="pay_should">应交费</string>
+    <string name="pay_not">未交费</string>
+    <string name="check_detail">查看详情</string>
+    <string name="charge_details">收费管理详情</string>
 
 </resources>
