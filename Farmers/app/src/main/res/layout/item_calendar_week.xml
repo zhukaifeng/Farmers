@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+
+
+    <LinearLayout
+        android:id="@+id/linear_bg"
+        android:layout_width="@dimen/dp44"
+        android:layout_height="@dimen/dp46"
+        android:layout_marginLeft="@dimen/dp20"
+        android:orientation="vertical"
+        >
+
+        <TextView
+            android:id="@+id/tv_date"
+            android:layout_width="@dimen/dp44"
+            android:layout_height="@dimen/dp20"
+            android:layout_centerHorizontal="true"
+            android:gravity="center"
+            android:textColor="@color/calendar_txt"
+            />
+        <TextView
+            android:id="@+id/tv_week"
+            android:layout_width="@dimen/dp44"
+            android:layout_height="@dimen/dp20"
+            android:layout_marginTop="@dimen/dp6"
+            android:layout_centerHorizontal="true"
+            android:gravity="center"
+            android:textColor="@color/calendar_txt"
+            />
+    </LinearLayout>
+
+
+</RelativeLayout>

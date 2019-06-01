@@ -359,6 +359,7 @@
                 <LinearLayout
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:layout_marginRight="@dimen/dp15"
                     android:orientation="horizontal">
 
                     <android.support.v7.widget.AppCompatRadioButton
@@ -369,6 +370,7 @@
                         android:button="@null"
                         android:checked="true"
                         android:paddingLeft="@dimen/dp13"
+                        android:gravity="center"
                         android:paddingRight="@dimen/dp13"
                         android:text="本年"
                         android:textColor="@color/color_check_select_top_txt"/>
@@ -376,12 +378,13 @@
                     <android.support.v7.widget.AppCompatRadioButton
                         android:id="@+id/rb_already_evaluated"
                         android:layout_width="@dimen/dp60"
-                        android:layout_height="@dimen/dp20"
+                        android:layout_height="match_parent"
+                        android:layout_marginLeft="@dimen/dp12"
                         android:background="@drawable/bg_check_select_top_amount"
                         android:button="@null"
                         android:paddingLeft="@dimen/dp10"
+                        android:gravity="center"
                         android:paddingRight="@dimen/dp10"
-                        android:layout_marginLeft="@dimen/dp12"
                         android:text="本月"
                         android:textColor="@color/color_check_select_top_txt"/>
 
