@@ -7,7 +7,7 @@
 
     <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="@dimen/dp240">
 
         <RelativeLayout
             android:id="@+id/rl_title"
@@ -166,8 +166,9 @@
             android:id="@+id/relative_type"
             android:layout_width="match_parent"
             android:layout_height="@dimen/dp60"
-            android:layout_below="@+id/rl_title"
+            android:layout_alignParentBottom="true"
             android:background="@drawable/bg_evaluate_bottom"
+            android:layout_marginBottom="@dimen/dp5"
             android:orientation="vertical">
 
             <android.support.v7.widget.RecyclerView

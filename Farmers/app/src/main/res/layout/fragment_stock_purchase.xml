@@ -79,7 +79,9 @@
                 <ImageView
                     android:layout_width="@dimen/dp30"
                     android:layout_height="@dimen/dp31"
-                    android:layout_centerInParent="true" />
+                    android:layout_centerInParent="true"
+                    android:background="@drawable/bg_calendar_icon"
+                    />
 
                 <LinearLayout
                     android:id="@+id/linear_date"
@@ -131,7 +133,7 @@
                 android:id="@+id/tv_sale_goods_list"
                 android:layout_width="wrap_content"
                 android:layout_height="@dimen/dp60"
-                android:layout_centerInParent="true"
+                android:layout_centerHorizontal="true"
                 android:drawableRight="@drawable/bg_arrow_black_up"
                 android:drawablePadding="@dimen/dp8"
                 android:gravity="center"
@@ -166,6 +168,7 @@
             android:layout_width="match_parent"
             android:layout_height="@dimen/dp60"
             android:layout_below="@+id/rl_good_list"
+            android:background="@color/bg_gray_e9"
             android:orientation="horizontal">
 
             <TextView

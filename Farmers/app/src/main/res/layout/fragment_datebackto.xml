@@ -96,6 +96,7 @@
         android:id="@+id/linear_datebackto"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:visibility="visible"
         android:orientation="vertical">
 
         <LinearLayout
@@ -407,6 +408,7 @@
             android:layout_width="match_parent"
             android:layout_height="@dimen/dp59"
             android:background="@color/bg_gray_e9"
+            android:layout_marginTop="@dimen/dp5"
             android:orientation="horizontal">
 
             <TextView
@@ -415,17 +417,16 @@
                 android:layout_weight="1"
                 android:gravity="center"
                 android:text="60斤"
-                android:textColor="@color/color_00d39d"
-                android:textStyle="bold" />
+                android:textColor="@color/txt_black_51"
+               />
 
             <TextView
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
                 android:gravity="center"
-                android:textColor="@color/color_00d39d"
                 android:text="30元"
-                android:textStyle="bold"
+                android:textColor="@color/txt_black_51"
 
                 />
 
@@ -433,10 +434,9 @@
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
-                android:textColor="@color/color_00d39d"
                 android:gravity="center"
                 android:text="3000元"
-                android:textStyle="bold"
+                android:textColor="@color/txt_black_51"
 
                 />
 
@@ -444,10 +444,9 @@
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
-                android:textColor="@color/color_00d39d"
                 android:gravity="center"
                 android:text="@string/see"
-                android:textStyle="bold"
+                android:textColor="@color/color_00d39d"
 
                 />
 
@@ -455,9 +454,8 @@
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
-                android:textColor="@color/color_00d39d"
                 android:text="@string/detected"
-                android:textStyle="bold"
+                android:textColor="@color/txt_black_51"
                 android:gravity="center"
                 />
 

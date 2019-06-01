@@ -15,6 +15,7 @@
         >
 
         <RelativeLayout
+            android:id="@+id/rl_back"
             android:layout_width="wrap_content"
             android:layout_height="@dimen/dp33"
             android:layout_marginLeft="@dimen/dp20"
@@ -43,7 +44,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_centerInParent="true"
-                android:text="@string/txt_market_score_detail"
+                android:text="@string/txt_new_market_score"
                 android:textColor="@color/write"
                 android:textSize="@dimen/sp15"
                 />
@@ -63,18 +64,31 @@
                 android:id="@+id/iv_location"
                 android:layout_width="@dimen/dp21"
                 android:layout_height="@dimen/dp25"
-                android:background="@drawable/bg_location"
                 android:layout_centerVertical="true"
                 android:layout_marginLeft="@dimen/dp41"
+                android:background="@drawable/bg_location"
                 />
+
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_centerVertical="true"
                 android:layout_marginLeft="@dimen/dp9"
                 android:layout_toRightOf="@+id/iv_location"
-                android:text="华北农贸市场"
+                android:text="华北农贸市场1号摊位"
                 android:textColor="@color/write"
+                android:textSize="@dimen/sp16"
+                />
+
+
+            <ImageView
+                android:layout_width="@dimen/dp8"
+                android:layout_height="@dimen/dp15"
+                android:layout_alignParentRight="true"
+                android:layout_centerVertical="true"
+                android:layout_marginRight="@dimen/dp45"
+                android:background="@drawable/bg_arrow_to"
+                android:text="138xxxxxxxx"
                 android:textSize="@dimen/sp16"
                 />
 
@@ -90,56 +104,61 @@
         android:layout_below="@+id/rl_top"
         android:scrollbars="none"
         >
+
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical"
             >
+
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/dp48"
                 android:orientation="horizontal"
                 >
+
                 <TextView
-                    android:layout_width="wrap_content"
+                    android:layout_width="0dp"
                     android:layout_height="match_parent"
+                    android:layout_weight="1.5"
+                    android:gravity="center"
                     android:text="@string/evaluate_type"
-                    android:gravity="center_vertical"
-                    android:textSize="@dimen/sp18"
                     android:textColor="@color/black"
+                    android:textSize="@dimen/sp18"
                     android:textStyle="bold"
-                    android:layout_marginLeft="@dimen/dp38"
                     />
 
                 <TextView
-                    android:layout_width="wrap_content"
+                    android:layout_width="0dp"
                     android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:gravity="center"
                     android:text="@string/total_score"
-                    android:gravity="center_vertical"
-                    android:layout_marginLeft="@dimen/dp48"
                     android:textColor="@color/black"
-                    android:textStyle="bold"
                     android:textSize="@dimen/sp18"
+                    android:textStyle="bold"
                     />
+
                 <TextView
-                    android:layout_width="wrap_content"
+                    android:layout_width="0dp"
                     android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:gravity="center"
                     android:text="@string/pic"
                     android:textColor="@color/black"
-                    android:gravity="center_vertical"
-                    android:textStyle="bold"
-                    android:layout_marginLeft="@dimen/dp48"
                     android:textSize="@dimen/sp18"
+                    android:textStyle="bold"
                     />
+
                 <TextView
-                    android:layout_width="wrap_content"
+                    android:layout_width="0dp"
                     android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:gravity="center"
                     android:text="@string/score"
-                    android:gravity="center_vertical"
                     android:textColor="@color/black"
+                    android:textSize="@dimen/sp18"
                     android:textStyle="bold"
-                    android:textSize="@dimen/sp18"
-                    android:layout_marginLeft="@dimen/dp48"
                     />
 
             </LinearLayout>
@@ -147,282 +166,379 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/dp48"
-                android:orientation="horizontal"
                 android:background="@color/write"
+                android:orientation="horizontal"
                 >
+
                 <TextView
-                    android:layout_width="wrap_content"
+                    android:layout_width="0dp"
                     android:layout_height="match_parent"
+                    android:layout_weight="1.5"
+                    android:gravity="center"
                     android:text="@string/safe_quality"
-                    android:gravity="center_vertical"
-                    android:textSize="@dimen/sp16"
                     android:textColor="@color/txt_black_51"
-                    android:layout_marginLeft="@dimen/dp38"
+                    android:textSize="@dimen/sp16"
                     />
 
                 <TextView
-                    android:layout_width="wrap_content"
+                    android:layout_width="0dp"
                     android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:gravity="center"
                     android:text="5分"
-                    android:gravity="center_vertical"
-                    android:layout_marginLeft="@dimen/dp60"
                     android:textColor="@color/txt_black_51"
                     android:textSize="@dimen/sp18"
                     />
-                <ImageView
-                    android:layout_width="@dimen/dp23"
-                    android:layout_height="@dimen/dp23"
-                    android:text="@string/pic"
-                    android:layout_gravity="center_vertical"
-                    android:textColor="@color/txt_black_51"
-                    android:gravity="center_vertical"
-                    android:background="@drawable/bg_pic_has"
-                    android:layout_marginLeft="@dimen/dp48"
-                    android:textSize="@dimen/sp18"
-                    />
-                <TextView
-                    android:layout_width="wrap_content"
+
+                <RelativeLayout
+                    android:layout_width="0dp"
                     android:layout_height="match_parent"
+                    android:layout_weight="1">
+
+                    <ImageView
+                        android:layout_width="@dimen/dp47"
+                        android:layout_height="@dimen/dp29"
+                        android:layout_centerInParent="true"
+                        android:layout_gravity="center_vertical"
+                        android:background="@drawable/bg_market_camera"
+                        android:text="@string/pic"
+                        android:textColor="@color/txt_black_51"
+                        android:textSize="@dimen/sp18"
+                        />
+                </RelativeLayout>
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:gravity="center"
                     android:text="3分"
-                    android:gravity="center_vertical"
                     android:textColor="@color/txt_black_51"
                     android:textSize="@dimen/sp18"
-                    android:layout_marginLeft="@dimen/dp45"
                     />
 
             </LinearLayout>
+
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/dp48"
                 android:orientation="horizontal"
                 >
+
                 <TextView
-                    android:layout_width="wrap_content"
+                    android:layout_width="0dp"
                     android:layout_height="match_parent"
+                    android:layout_weight="1.5"
+                    android:gravity="center"
                     android:text="@string/service"
-                    android:gravity="center_vertical"
-                    android:textSize="@dimen/sp16"
                     android:textColor="@color/txt_black_51"
-                    android:layout_marginLeft="@dimen/dp38"
+                    android:textSize="@dimen/sp16"
                     />
 
                 <TextView
-                    android:layout_width="wrap_content"
+                    android:layout_width="0dp"
                     android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:gravity="center"
                     android:text="5分"
-                    android:gravity="center_vertical"
-                    android:layout_marginLeft="@dimen/dp60"
                     android:textColor="@color/txt_black_51"
                     android:textSize="@dimen/sp18"
                     />
-                <ImageView
-                    android:layout_width="@dimen/dp23"
-                    android:layout_height="@dimen/dp23"
-                    android:text="@string/pic"
-                    android:layout_gravity="center_vertical"
-                    android:textColor="@color/txt_black_51"
-                    android:gravity="center_vertical"
-                    android:background="@drawable/bg_pic_has"
-                    android:layout_marginLeft="@dimen/dp48"
-                    android:textSize="@dimen/sp18"
-                    />
-                <TextView
-                    android:layout_width="wrap_content"
+
+                <RelativeLayout
+                    android:layout_width="0dp"
                     android:layout_height="match_parent"
+                    android:layout_weight="1">
+
+                    <ImageView
+                        android:layout_width="@dimen/dp47"
+                        android:layout_height="@dimen/dp29"
+                        android:layout_centerInParent="true"
+                        android:layout_gravity="center_vertical"
+                        android:background="@drawable/bg_market_camera"
+                        android:text="@string/pic"
+                        android:textColor="@color/txt_black_51"
+                        android:textSize="@dimen/sp18"
+                        />
+                </RelativeLayout>
+
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:gravity="center"
                     android:text="3分"
-                    android:gravity="center_vertical"
                     android:textColor="@color/txt_black_51"
                     android:textSize="@dimen/sp18"
-                    android:layout_marginLeft="@dimen/dp45"
                     />
 
             </LinearLayout>
+
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/dp48"
-                android:orientation="horizontal"
                 android:background="@color/write"
+                android:orientation="horizontal"
                 >
+
                 <TextView
-                    android:layout_width="wrap_content"
+                    android:layout_width="0dp"
                     android:layout_height="match_parent"
+                    android:layout_weight="1.5"
+                    android:gravity="center"
                     android:text="@string/scale"
-                    android:gravity="center_vertical"
-                    android:textSize="@dimen/sp16"
                     android:textColor="@color/txt_black_51"
-                    android:layout_marginLeft="@dimen/dp38"
+                    android:textSize="@dimen/sp16"
                     />
 
                 <TextView
-                    android:layout_width="wrap_content"
+                    android:layout_width="0dp"
                     android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:gravity="center"
                     android:text="5分"
-                    android:gravity="center_vertical"
-                    android:layout_marginLeft="@dimen/dp60"
                     android:textColor="@color/txt_black_51"
                     android:textSize="@dimen/sp18"
                     />
-                <ImageView
-                    android:layout_width="@dimen/dp23"
-                    android:layout_height="@dimen/dp23"
-                    android:text="@string/pic"
-                    android:layout_gravity="center_vertical"
-                    android:textColor="@color/txt_black_51"
-                    android:gravity="center_vertical"
-                    android:background="@drawable/bg_pic_has"
-                    android:layout_marginLeft="@dimen/dp48"
-                    android:textSize="@dimen/sp18"
-                    />
-                <TextView
-                    android:layout_width="wrap_content"
+
+                <RelativeLayout
+                    android:layout_width="0dp"
                     android:layout_height="match_parent"
+                    android:layout_weight="1">
+
+                    <ImageView
+                        android:layout_width="@dimen/dp47"
+                        android:layout_height="@dimen/dp29"
+                        android:layout_centerInParent="true"
+                        android:layout_gravity="center_vertical"
+                        android:background="@drawable/bg_market_camera"
+                        android:text="@string/pic"
+                        android:textColor="@color/txt_black_51"
+                        android:textSize="@dimen/sp18"
+                        />
+                </RelativeLayout>
+
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:gravity="center"
                     android:text="3分"
-                    android:gravity="center_vertical"
                     android:textColor="@color/txt_black_51"
                     android:textSize="@dimen/sp18"
-                    android:layout_marginLeft="@dimen/dp45"
                     />
 
             </LinearLayout>
+
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/dp48"
                 android:orientation="horizontal"
                 >
+
                 <TextView
-                    android:layout_width="wrap_content"
+                    android:layout_width="0dp"
                     android:layout_height="match_parent"
-                    android:text="@string/discount"
-                    android:gravity="center_vertical"
-                    android:textSize="@dimen/sp16"
+                    android:layout_weight="1.5"
+                    android:gravity="center"
+                    android:text="让         利"
                     android:textColor="@color/txt_black_51"
-                    android:layout_marginLeft="@dimen/dp38"
+                    android:textSize="@dimen/sp16"
                     />
 
                 <TextView
-                    android:layout_width="wrap_content"
+                    android:layout_width="0dp"
                     android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:gravity="center"
                     android:text="5分"
-                    android:gravity="center_vertical"
-                    android:layout_marginLeft="@dimen/dp60"
                     android:textColor="@color/txt_black_51"
                     android:textSize="@dimen/sp18"
                     />
-                <ImageView
-                    android:layout_width="@dimen/dp23"
-                    android:layout_height="@dimen/dp23"
-                    android:text="@string/pic"
-                    android:layout_gravity="center_vertical"
-                    android:textColor="@color/txt_black_51"
-                    android:gravity="center_vertical"
-                    android:background="@drawable/bg_pic_has"
-                    android:layout_marginLeft="@dimen/dp48"
-                    android:textSize="@dimen/sp18"
-                    />
-                <TextView
-                    android:layout_width="wrap_content"
+
+                <RelativeLayout
+                    android:layout_width="0dp"
                     android:layout_height="match_parent"
+                    android:layout_weight="1">
+
+                    <ImageView
+                        android:layout_width="@dimen/dp47"
+                        android:layout_height="@dimen/dp29"
+                        android:layout_centerInParent="true"
+                        android:layout_gravity="center_vertical"
+                        android:background="@drawable/bg_market_camera"
+                        android:text="@string/pic"
+                        android:textColor="@color/txt_black_51"
+                        android:textSize="@dimen/sp18"
+                        />
+                </RelativeLayout>
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:gravity="center"
                     android:text="3分"
-                    android:gravity="center_vertical"
                     android:textColor="@color/txt_black_51"
                     android:textSize="@dimen/sp18"
-                    android:layout_marginLeft="@dimen/dp45"
                     />
 
             </LinearLayout>
+
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/dp48"
-                android:orientation="horizontal"
                 android:background="@color/write"
+                android:orientation="horizontal"
                 >
+
                 <TextView
-                    android:layout_width="wrap_content"
+                    android:layout_width="0dp"
                     android:layout_height="match_parent"
+                    android:layout_weight="1.5"
+                    android:gravity="center"
                     android:text="@string/clean"
-                    android:gravity="center_vertical"
-                    android:textSize="@dimen/sp16"
                     android:textColor="@color/txt_black_51"
-                    android:layout_marginLeft="@dimen/dp38"
+                    android:textSize="@dimen/sp16"
                     />
 
                 <TextView
-                    android:layout_width="wrap_content"
+                    android:layout_width="0dp"
                     android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:gravity="center"
                     android:text="5分"
-                    android:gravity="center_vertical"
-                    android:layout_marginLeft="@dimen/dp60"
                     android:textColor="@color/txt_black_51"
                     android:textSize="@dimen/sp18"
                     />
-                <ImageView
-                    android:layout_width="@dimen/dp23"
-                    android:layout_height="@dimen/dp23"
-                    android:text="@string/pic"
-                    android:layout_gravity="center_vertical"
-                    android:textColor="@color/txt_black_51"
-                    android:gravity="center_vertical"
-                    android:background="@drawable/bg_pic_has"
-                    android:layout_marginLeft="@dimen/dp48"
-                    android:textSize="@dimen/sp18"
-                    />
-                <TextView
-                    android:layout_width="wrap_content"
+
+                <RelativeLayout
+                    android:layout_width="0dp"
                     android:layout_height="match_parent"
+                    android:layout_weight="1">
+
+                    <ImageView
+                        android:layout_width="@dimen/dp47"
+                        android:layout_height="@dimen/dp29"
+                        android:layout_centerInParent="true"
+                        android:layout_gravity="center_vertical"
+                        android:background="@drawable/bg_market_camera"
+                        android:text="@string/pic"
+                        android:textColor="@color/txt_black_51"
+                        android:textSize="@dimen/sp18"
+                        />
+                </RelativeLayout>
+
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:gravity="center"
                     android:text="3分"
-                    android:gravity="center_vertical"
                     android:textColor="@color/txt_black_51"
                     android:textSize="@dimen/sp18"
-                    android:layout_marginLeft="@dimen/dp45"
                     />
 
             </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/dp48"
+                android:orientation="horizontal"
+                >
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1.5"
+                    android:gravity="center"
+                    android:text="备          注"
+                    android:textColor="@color/txt_black_51"
+                    android:textSize="@dimen/sp16"
+                    />
+
+
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:gravity="center_vertical"
+                    android:textColor="@color/txt_black_51"
+                    android:textSize="@dimen/sp16"
+                    />
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:gravity="center_vertical"
+                    android:textColor="@color/txt_black_51"
+                    android:textSize="@dimen/sp16"
+                    />
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:gravity="center_vertical"
+                    android:textColor="@color/txt_black_51"
+                    android:textSize="@dimen/sp16"
+                    />
+
+            </LinearLayout>
+
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/dp59"
-                android:orientation="horizontal"
                 android:background="@color/color_00d39d"
+                android:orientation="horizontal"
                 >
+
                 <TextView
-                    android:layout_width="wrap_content"
+                    android:layout_width="0dp"
                     android:layout_height="match_parent"
-                    android:text="@string/amount"
-                    android:gravity="center_vertical"
-                    android:textSize="@dimen/sp16"
+                    android:layout_weight="1.5"
+                    android:gravity="center"
+                    android:text="合          计"
                     android:textColor="@color/write"
-                    android:layout_marginLeft="@dimen/dp38"
+                    android:textSize="@dimen/sp16"
                     />
 
                 <TextView
-                    android:layout_width="wrap_content"
+                    android:layout_width="0dp"
                     android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:gravity="center"
                     android:text="5分"
-                    android:gravity="center_vertical"
-                    android:layout_marginLeft="@dimen/dp60"
                     android:textColor="@color/write"
                     android:textSize="@dimen/sp18"
                     />
                 <TextView
-                    android:layout_width="wrap_content"
+                    android:layout_width="0dp"
                     android:layout_height="match_parent"
+                    android:layout_weight="1"
                     android:gravity="center_vertical"
-                    android:layout_marginLeft="@dimen/dp60"
-                    android:textColor="@color/write"
-                    android:textSize="@dimen/sp18"
+                    android:textColor="@color/txt_black_51"
+                    android:textSize="@dimen/sp16"
                     />
                 <TextView
-                    android:layout_width="wrap_content"
+                    android:layout_width="0dp"
                     android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:gravity="center"
                     android:text="3分"
-                    android:gravity="center_vertical"
                     android:textColor="@color/write"
                     android:textSize="@dimen/sp18"
-                    android:layout_marginLeft="@dimen/dp45"
                     />
 
             </LinearLayout>
         </LinearLayout>
     </ScrollView>
+
 
 
 </RelativeLayout>

@@ -147,19 +147,34 @@
                 android:layout_weight="1"
                 android:gravity="center"
                 android:text="@string/takesample_num"
-                android:textSize="@dimen/sp16"
+                android:textSize="@dimen/sp15"
                 android:textStyle="bold"/>
 
-            <TextView
+            <RelativeLayout
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
-                android:layout_weight="1"
-                android:gravity="center"
-                android:text="@string/takesample_type"
-                android:textSize="@dimen/sp16"
-                android:textStyle="bold"
+                android:layout_weight="1">
 
-                />
+                <TextView
+                    android:id="@+id/tv_type"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerInParent="true"
+                    android:text="@string/takesample_type"
+                    android:textSize="@dimen/sp15"
+                    android:textStyle="bold"
+
+                    />
+
+                <ImageView
+                    android:id="@+id/iv_select_arrow"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentBottom="true"
+                    android:layout_centerHorizontal="true"
+                    android:background="@drawable/bg_arrow_up_tri"
+                    />
+            </RelativeLayout>
 
             <TextView
                 android:layout_width="0dp"
@@ -167,7 +182,7 @@
                 android:layout_weight="1"
                 android:gravity="center"
                 android:text="@string/takesample_count"
-                android:textSize="@dimen/sp16"
+                android:textSize="@dimen/sp15"
                 android:textStyle="bold"
 
                 />
@@ -178,7 +193,7 @@
                 android:layout_weight="1"
                 android:gravity="center"
                 android:text="@string/takesample_time"
-                android:textSize="@dimen/sp16"
+                android:textSize="@dimen/sp15"
                 android:textStyle="bold"
 
                 />
@@ -193,6 +208,19 @@
 
         </LinearLayout>
 
+        <RelativeLayout
+            android:id="@+id/rl_type"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/dp50"
+            android:background="@drawable/bg_rectange"
+            >
+
+            <android.support.v7.widget.RecyclerView
+                android:id="@+id/rv_type"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"/>
+
+        </RelativeLayout>
 
         <android.support.v7.widget.RecyclerView
             android:id="@+id/rv_data"

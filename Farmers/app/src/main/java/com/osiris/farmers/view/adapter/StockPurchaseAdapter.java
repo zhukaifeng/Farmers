@@ -8,7 +8,6 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.osiris.farmers.R;
-import com.osiris.farmers.model.ChargeDetail;
 import com.osiris.farmers.model.StockPurchase;
 
 import java.util.ArrayList;
@@ -101,9 +100,9 @@ public class StockPurchaseAdapter extends RecyclerView.Adapter<RecyclerView.View
 
         public void bindData(StockPurchase data){
             if (getLayoutPosition()%2 == 1){
-                linear_item.setBackgroundColor(itemView.getResources().getColor(R.color.write));
-            }else {
                 linear_item.setBackgroundColor(itemView.getResources().getColor(R.color.bg_gray_e9));
+            }else {
+                linear_item.setBackgroundColor(itemView.getResources().getColor(R.color.write));
             }
             tv_product_name.setText(data.getProductName());
             tv_product_count.setText(data.getProductCount());

@@ -60,7 +60,7 @@ public class MarketEvaluateActivity extends BaseActivity {
     }
 
 
-    @OnClick({R.id.linear_evaulate})
+    @OnClick({R.id.linear_evaulate,R.id.rl_right,R.id.rl_back})
     void onClick(View v){
         switch (v.getId()){
             case R.id.linear_evaulate:
@@ -73,6 +73,14 @@ public class MarketEvaluateActivity extends BaseActivity {
                     linear_calendar.setVisibility(View.VISIBLE);
                     iv_select.setBackgroundResource(R.drawable.bg_arrow_up);
                 }
+                break;
+            case R.id.rl_right:
+                Intent intent = new Intent(this,NewMarketScoreActivity.class);
+                startActivity(intent);
+
+                break;
+            case R.id.rl_back:
+                finish();
                 break;
         }
     }

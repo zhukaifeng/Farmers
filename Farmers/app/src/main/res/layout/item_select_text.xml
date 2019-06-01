@@ -7,18 +7,20 @@
 
     <RelativeLayout
         android:id="@+id/rl_bg"
-        android:layout_width="@dimen/dp78"
-        android:layout_height="@dimen/dp22"
+        android:layout_width="wrap_content"
+        android:layout_height="@dimen/dp19"
         android:layout_centerVertical="true"
-        android:layout_marginLeft="@dimen/dp20"
+        android:layout_marginLeft="@dimen/dp10"
         >
 
         <TextView
             android:id="@+id/tv_date"
-            android:layout_width="@dimen/dp78"
-            android:layout_height="@dimen/dp20"
+            android:layout_width="wrap_content"
+            android:layout_height="@dimen/dp19"
             android:layout_centerInParent="true"
             android:gravity="center"
+            android:layout_marginLeft="@dimen/dp5"
+            android:layout_marginRight="@dimen/dp5"
             android:textSize="@dimen/sp13"
             android:textColor="@color/calendar_txt"
             />

@@ -9,9 +9,11 @@ import android.widget.RelativeLayout;
 
 import com.osiris.farmers.R;
 import com.osiris.farmers.base.BaseFragment;
+import com.osiris.farmers.model.DateModel;
 import com.osiris.farmers.model.TakeSampleList;
 import com.osiris.farmers.view.adapter.MyItemClickListener;
 import com.osiris.farmers.view.adapter.TakeSampleListAdapter;
+import com.osiris.farmers.view.adapter.TypeStockAdapter;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -33,6 +35,16 @@ public class TakeSampleListFragment extends BaseFragment {
     @BindView(R.id.rl_back)
     RelativeLayout rl_back;
 
+    @BindView(R.id.rl_type)
+    RelativeLayout rl_type;
+    @BindView(R.id.rv_type)
+    RecyclerView rv_type;
+    @BindView(R.id.iv_select_arrow)
+    ImageView iv_select_arrow;
+
+    private List<DateModel> typeList = new ArrayList<>();
+    private TypeStockAdapter typeAdapter = new TypeStockAdapter(typeList);
+
 
     private List<TakeSampleList> dataList = new ArrayList<>();
     private TakeSampleListAdapter dataAdapter = new TakeSampleListAdapter(dataList);
@@ -44,6 +56,30 @@ public class TakeSampleListFragment extends BaseFragment {
 
     @Override
     protected void initView() {
+
+        typeList.add(new DateModel("商品类型", true));
+        typeList.add(new DateModel("商品类型", false));
+        typeList.add(new DateModel("商品类型", false));
+        typeList.add(new DateModel("商品类型", false));
+        typeList.add(new DateModel("商品类型", false));
+
+        rv_type.setLayoutManager(new LinearLayoutManager(getActivity(), LinearLayoutManager.HORIZONTAL, false));
+        rv_type.setAdapter(typeAdapter);
+        typeAdapter.notifyDataSetChanged();
+        typeAdapter.setOnItemClick(new MyItemClickListener() {
+            @Override
+            public void onItemClick(View view, int position) {
+                for (DateModel dateModel : typeList) {
+                    dateModel.setClicked(false);
+                }
+                typeList.get(position).setClicked(true);
+                typeAdapter.notifyDataSetChanged();
+
+
+            }
+        });
+
+
         dataList.add(new TakeSampleList(0123456, "牛肉", "10斤", "2019.03.20"));
         dataList.add(new TakeSampleList(0123456, "牛肉", "10斤", "2019.03.20"));
         dataList.add(new TakeSampleList(0123456, "牛肉", "10斤", "2019.03.20"));
@@ -66,7 +102,7 @@ public class TakeSampleListFragment extends BaseFragment {
 
     }
 
-    @OnClick({R.id.iv_function,R.id.rl_back})
+    @OnClick({R.id.iv_function,R.id.rl_back,R.id.tv_type})
     void onClick(View v){
         switch (v.getId()){
             case R.id.iv_function:
@@ -86,6 +122,16 @@ public class TakeSampleListFragment extends BaseFragment {
                     takeSampleList.setDelete(false);
                 }
                 dataAdapter.notifyDataSetChanged();
+                break;
+            case R.id.tv_type:
+                if (rl_type.getVisibility()== View.VISIBLE){
+                    rl_type.setVisibility(View.GONE);
+                    iv_select_arrow.setVisibility(View.GONE);
+                }else {
+                    rl_type.setVisibility(View.VISIBLE);
+                    iv_select_arrow.setVisibility(View.VISIBLE);
+                }
+
                 break;
             default:
                 break;

@@ -8,11 +8,11 @@ import android.widget.RelativeLayout;
 
 import com.osiris.farmers.R;
 import com.osiris.farmers.base.BaseFragment;
-import com.osiris.farmers.model.PayNow;
+import com.osiris.farmers.model.DateModel;
 import com.osiris.farmers.model.StockPurchase;
 import com.osiris.farmers.view.adapter.MyItemClickListener;
-import com.osiris.farmers.view.adapter.PayNowAdapter;
 import com.osiris.farmers.view.adapter.StockPurchaseAdapter;
+import com.osiris.farmers.view.adapter.TypeAdapter;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -31,8 +31,13 @@ public class StockPurchaseFragment extends BaseFragment {
 
     @BindView(R.id.rv_data)
     RecyclerView rv_data;
+    @BindView(R.id.rv_type)
+    RecyclerView rv_type;
     private List<StockPurchase> dataList = new ArrayList<>();
     private StockPurchaseAdapter dataAdapter = new StockPurchaseAdapter(dataList);
+    private List<DateModel> typeList = new ArrayList<>();
+    private TypeAdapter typeAdapter = new TypeAdapter(typeList);
+
 
     @Override
     protected int setLayout() {
@@ -50,6 +55,30 @@ public class StockPurchaseFragment extends BaseFragment {
         dataList.add(new StockPurchase("紫包菜","蔬菜","30斤","60元","华北市场","2019.03.20"));
         dataList.add(new StockPurchase("紫包菜","蔬菜","30斤","60元","华北市场","2019.03.20"));
         dataList.add(new StockPurchase("紫包菜","蔬菜","30斤","60元","华北市场","2019.03.20"));
+
+
+        typeList.add(new DateModel("蔬菜", true));
+        typeList.add(new DateModel("水果", false));
+        typeList.add(new DateModel("肉类", false));
+        typeList.add(new DateModel("海鲜", false));
+
+
+        rv_type.setLayoutManager(new LinearLayoutManager(getActivity(), LinearLayoutManager.HORIZONTAL, false));
+        rv_type.setAdapter(typeAdapter);
+        typeAdapter.notifyDataSetChanged();
+        typeAdapter.setOnItemClick(new MyItemClickListener() {
+            @Override
+            public void onItemClick(View view, int position) {
+                for (DateModel dateModel : typeList) {
+                    dateModel.setClicked(false);
+                }
+                typeList.get(position).setClicked(true);
+                typeAdapter.notifyDataSetChanged();
+
+
+            }
+        });
+
 
         rv_data.setLayoutManager(new LinearLayoutManager(getActivity(), LinearLayoutManager.VERTICAL, false));
         rv_data.setAdapter(dataAdapter);

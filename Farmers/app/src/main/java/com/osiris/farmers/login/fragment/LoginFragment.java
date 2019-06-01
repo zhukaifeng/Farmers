@@ -58,7 +58,7 @@ public class LoginFragment extends BaseFragment {
 				Intent intent = new Intent(getActivity(), HomeActivity.class);
 
 				if (TextUtils.isEmpty(etLoginUsername.getText().toString())) {
-					intent.putExtra("type", 4);
+					intent.putExtra("type", 1);
 				} else {
 					if (Integer.parseInt(etLoginUsername.getText().toString()) == 1) {
 						intent.putExtra("type", 1);

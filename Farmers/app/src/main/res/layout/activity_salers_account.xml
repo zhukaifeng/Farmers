@@ -8,9 +8,13 @@
         android:id="@+id/rl_top"
         android:layout_width="match_parent"
         android:layout_height="@dimen/dp302"
-        android:background="@drawable/bg_sales_account"
         >
 
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/dp181"
+            android:background="@drawable/bg_sales_account"
+            />
         <RelativeLayout
             android:layout_width="wrap_content"
             android:layout_height="@dimen/dp33"
@@ -107,7 +111,7 @@
             android:layout_width="match_parent"
             android:layout_height="@dimen/dp122"
             android:layout_alignParentBottom="true"
-
+            android:layout_marginBottom="@dimen/dp5"
             android:background="@drawable/bg_account_bottom"
             android:orientation="vertical"
             >

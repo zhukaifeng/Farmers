@@ -7,15 +7,16 @@
     <RelativeLayout
         android:id="@+id/rl_title"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content">
+        android:layout_height="@dimen/dp240">
 
         <RelativeLayout
             android:id="@+id/rl_top"
             android:layout_width="match_parent"
             android:layout_height="@dimen/dp181"
-            android:background="@drawable/bg_sales_account">
+            android:background="@drawable/bg_evaluate">
 
             <RelativeLayout
+                android:id="@+id/rl_back"
                 android:layout_width="wrap_content"
                 android:layout_height="@dimen/dp33"
                 android:layout_marginLeft="@dimen/dp20"
@@ -158,8 +159,8 @@
             android:id="@+id/linear_calendar"
             android:layout_width="match_parent"
             android:layout_height="@dimen/dp60"
-            android:layout_below="@+id/rl_top"
-            android:background="@drawable/bg_account_bottom"
+            android:layout_alignParentBottom="true"
+            android:layout_marginBottom="@dimen/dp5"
             android:orientation="vertical">
 
             <LinearLayout
