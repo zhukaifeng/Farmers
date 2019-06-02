@@ -4,5 +4,6 @@
     <item type="id" name="id_tab_tv"></item>
     <item name="tag_punish_name" type="id"/>
     <item name="tag_punish_button" type="id"/>
+    <item name="tag_operator_inquiry" type="id"/>
 
 </resources>

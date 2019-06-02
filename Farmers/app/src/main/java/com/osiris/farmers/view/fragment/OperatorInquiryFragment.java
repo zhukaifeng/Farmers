@@ -16,6 +16,7 @@ import java.util.List;
 
 import butterknife.BindView;
 import butterknife.OnClick;
+import me.jessyan.autosize.utils.LogUtils;
 
 public class OperatorInquiryFragment extends BaseFragment {
 
@@ -23,7 +24,6 @@ public class OperatorInquiryFragment extends BaseFragment {
 	RecyclerView rv_data;
 	private List<OperatorInquery> dataList = new ArrayList<>();
 	private OperatorInquiryAdapter dataAdapter = new OperatorInquiryAdapter(dataList);
-
 
 
 	@Override
@@ -40,6 +40,27 @@ public class OperatorInquiryFragment extends BaseFragment {
 		rv_data.setLayoutManager(new LinearLayoutManager(this.getActivity(), LinearLayoutManager.VERTICAL, false));
 		rv_data.setAdapter(dataAdapter);
 		dataAdapter.notifyDataSetChanged();
+		dataAdapter.setOnButtonClickListener(new View.OnClickListener() {
+			@Override
+			public void onClick(View v) {
+				LogUtils.d("zkf click");
+				Object positionTag = v.getTag(R.id.tag_operator_inquiry);
+				if (positionTag == null) {
+					return;
+				}
+				if (!(positionTag instanceof Integer)) {
+					return;
+				}
+				int position = Integer.parseInt(String.valueOf(positionTag));
+				LogUtils.d("zkf click  position:" + position);
+				if (dataList.get(position).isClicked()) {
+					dataList.get(position).setClicked(false);
+				} else {
+					dataList.get(position).setClicked(true);
+				}
+				dataAdapter.notifyDataSetChanged();
+			}
+		});
 	}
 
 	@Override
@@ -48,8 +69,8 @@ public class OperatorInquiryFragment extends BaseFragment {
 	}
 
 	@OnClick({R.id.rl_right})
-	void onClick(View v){
-		switch (v.getId()){
+	void onClick(View v) {
+		switch (v.getId()) {
 			case R.id.rl_right:
 				Intent intent = new Intent(getActivity(), OperatorInputActivity.class);
 				startActivity(intent);

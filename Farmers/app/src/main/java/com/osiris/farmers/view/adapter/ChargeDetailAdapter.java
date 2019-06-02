@@ -22,8 +22,6 @@ public class ChargeDetailAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
     private MyItemClickListener myItemClickListener;
 
     private List<ChargeDetail> dataList = new ArrayList<>();
-    private View.OnClickListener onButtonClickListener;
-    private View.OnClickListener onNameClickListener;
 
 
     public ChargeDetailAdapter(List<ChargeDetail> dataList) {
@@ -54,13 +52,6 @@ public class ChargeDetailAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
         return dataList.size();
     }
 
-    public void setOnNameClickListener(View.OnClickListener onNameClickListener) {
-        this.onNameClickListener = onNameClickListener;
-    }
-
-    public void setOnButtonClickListener(View.OnClickListener onPhotoClickListener) {
-        this.onButtonClickListener = onButtonClickListener;
-    }
 
     class ChargeDetailHolder extends RecyclerView.ViewHolder implements View.OnClickListener{
 

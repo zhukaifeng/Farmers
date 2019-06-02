@@ -62,38 +62,72 @@
                 android:layout_weight="1"
                 >
 
-                <TextView
-                    android:id="@+id/tv_connect"
-                    android:layout_width="wrap_content"
-                    android:layout_height="match_parent"
+                <RelativeLayout
+                    android:layout_width="@dimen/dp70"
+                    android:layout_height="wrap_content"
                     android:layout_centerHorizontal="true"
-                    android:layout_marginTop="@dimen/dp15"
-                    android:drawableRight="@drawable/bg_arrow_down_tri"
-                    android:gravity="center"
-                    android:drawablePadding="@dimen/dp3"
-                    android:text="@string/connect"
-                    android:textColor="@color/txt_black_51"
-                    android:textSize="@dimen/sp15"
-                    />
+                    >
+
+                    <TextView
+                        android:id="@+id/tv_connect"
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:layout_marginTop="@dimen/dp15"
+                        android:drawableRight="@drawable/bg_arrow_down_tri"
+                        android:drawablePadding="@dimen/dp3"
+                        android:gravity="center"
+                        android:layout_centerHorizontal="true"
+                        android:text="@string/connect"
+                        android:textColor="@color/txt_black_51"
+                        android:textSize="@dimen/sp15"
+                        />
+
+                    <ImageView
+                        android:id="@+id/iv_location"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentBottom="true"
+                        android:layout_alignParentRight="true"
+                        android:visibility="visible"
+                        android:background="@drawable/bg_arrow_up_tri"
+                        android:layout_marginRight="@dimen/dp10"
+                        />
+                </RelativeLayout>
 
             </RelativeLayout>
         </LinearLayout>
 
 
-        <TextView
-            android:id="@+id/tv_name"
+        <LinearLayout
+            android:id="@+id/linear_info"
             android:layout_width="match_parent"
             android:layout_height="@dimen/dp63"
-            android:layout_marginLeft="@dimen/dp46"
+            android:background="@drawable/bg_rectange"
+            android:orientation="vertical"
             android:visibility="gone"
-            android:layout_marginTop="@dimen/dp10"
-            android:background="@drawable/bg_down_arrow_opera"
-            android:text="张浩                   3210XXXXXXXXXXXXXX
-扬州市广陵区江南路219号    01234567891"
-            android:textColor="@color/write"
-            android:textSize="@dimen/sp15"
-            />
+            >
 
+            <TextView
+                android:id="@+id/tv_name"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/dp11"
+                android:paddingLeft="@dimen/dp45"
+                android:text="张浩                   3210XXXXXXXXXXXXXX"
+                android:textColor="@color/write"
+                android:textSize="@dimen/sp15"
+                />
+
+            <TextView
+                android:id="@+id/tv_location"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:paddingLeft="@dimen/dp45"
+                android:text="扬州市广陵区江南路219号    01234567891"
+                android:textColor="@color/write"
+                android:textSize="@dimen/sp15"
+                />
+        </LinearLayout>
 
     </LinearLayout>
 

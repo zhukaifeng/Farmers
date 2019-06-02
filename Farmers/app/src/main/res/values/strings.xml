@@ -200,29 +200,4 @@
     <string name="goods_detail">商品详情</string>
 
 
-    <string-array name="calendar_week">
-        <item>Su</item>
-        <item>Mo</item>
-        <item>Tu</item>
-        <item>We</item>
-        <item>Th</item>
-        <item>Fr</item>
-        <item>Sa</item>
-    </string-array>
-    <string-array name="calendar_month">
-        <item>January</item>
-        <item>February</item>
-        <item>March</item>
-        <item>April</item>
-        <item>May</item>
-        <item>June</item>
-        <item>July</item>
-        <item>August</item>
-        <item>September</item>
-        <item>October</item>
-        <item>November</item>
-        <item>December</item>
-    </string-array>
-
-
 </resources>

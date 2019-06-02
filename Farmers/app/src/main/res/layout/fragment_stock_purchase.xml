@@ -34,7 +34,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_centerInParent="true"
-                        android:text="@string/organization_datebackto"
+                        android:text="@string/sale_goods_list"
                         android:textColor="@color/write"
                         android:textSize="@dimen/sp15"/>
 
@@ -179,114 +179,127 @@
             </LinearLayout>
         </RelativeLayout>
 
-        <RelativeLayout
-            android:id="@+id/rl_good_list"
+        <android.support.v4.widget.NestedScrollView
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_below="@+id/rl_top">
-
-            <TextView
-                android:id="@+id/tv_sale_goods_list"
-                android:layout_width="wrap_content"
-                android:layout_height="@dimen/dp60"
-                android:layout_centerHorizontal="true"
-                android:drawableRight="@drawable/bg_arrow_black_up"
-                android:drawablePadding="@dimen/dp8"
-                android:gravity="center"
-                android:text="@string/sale_goods_list"
-                android:textColor="@color/txt_black_51"
-                android:textSize="@dimen/sp20"
-                android:textStyle="bold"/>
-
-            <View
-                android:id="@+id/view_line"
-                android:layout_width="match_parent"
-                android:layout_height="@dimen/dp1"
-                android:layout_below="@+id/tv_sale_goods_list"
-                android:background="#E1E2EA"/>
+            android:layout_height="match_parent"
+            android:layout_below="@+id/rl_top"
+            android:scrollbars="none"
+            >
 
             <RelativeLayout
-                android:layout_width="match_parent"
-                android:layout_height="@dimen/dp60"
-                android:layout_below="@+id/view_line">
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content">
+
+                <RelativeLayout
+                    android:id="@+id/rl_good_list"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    >
+
+                    <TextView
+                        android:id="@+id/tv_sale_goods_list"
+                        android:layout_width="wrap_content"
+                        android:layout_height="@dimen/dp60"
+                        android:layout_centerHorizontal="true"
+                        android:drawableRight="@drawable/bg_arrow_black_up"
+                        android:drawablePadding="@dimen/dp8"
+                        android:gravity="center"
+                        android:text="@string/type"
+                        android:textColor="@color/txt_black_51"
+                        android:textSize="@dimen/sp20"
+                        android:textStyle="bold"/>
+
+                    <View
+                        android:id="@+id/view_line"
+                        android:layout_width="match_parent"
+                        android:layout_height="@dimen/dp1"
+                        android:layout_below="@+id/tv_sale_goods_list"
+                        android:background="#E1E2EA"/>
+
+                    <RelativeLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="@dimen/dp60"
+                        android:layout_below="@+id/view_line">
+
+                        <android.support.v7.widget.RecyclerView
+                            android:id="@+id/rv_type"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"/>
+                    </RelativeLayout>
+
+                </RelativeLayout>
+
+
+                <LinearLayout
+                    android:id="@+id/linear_title"
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/dp60"
+                    android:layout_below="@+id/rl_good_list"
+                    android:background="@color/bg_gray_e9"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1.5"
+                        android:gravity="center"
+                        android:text="@string/product_name"
+                        android:textSize="@dimen/sp16"
+                        android:textStyle="bold"/>
+
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1"
+                        android:gravity="center"
+                        android:text="@string/type"
+                        android:textSize="@dimen/sp16"
+                        android:textStyle="bold"/>
+
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1"
+                        android:gravity="center"
+                        android:text="@string/count"
+                        android:textSize="@dimen/sp16"
+                        android:textStyle="bold"/>
+
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1"
+                        android:gravity="center"
+                        android:text="@string/price"
+                        android:textSize="@dimen/sp16"
+                        android:textStyle="bold"/>
+
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1.5"
+                        android:gravity="center"
+                        android:text="@string/supplier"
+                        android:textSize="@dimen/sp16"
+                        android:textStyle="bold"/>
+
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_weight="2"
+                        android:gravity="center"
+                        android:text="@string/date"
+                        android:textSize="@dimen/sp16"
+                        android:textStyle="bold"/>
+                </LinearLayout>
 
                 <android.support.v7.widget.RecyclerView
-                    android:id="@+id/rv_type"
+                    android:id="@+id/rv_data"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"/>
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/linear_title"/>
             </RelativeLayout>
-
-        </RelativeLayout>
-
-
-        <LinearLayout
-            android:id="@+id/linear_title"
-            android:layout_width="match_parent"
-            android:layout_height="@dimen/dp60"
-            android:layout_below="@+id/rl_good_list"
-            android:background="@color/bg_gray_e9"
-            android:orientation="horizontal">
-
-            <TextView
-                android:layout_width="0dp"
-                android:layout_height="match_parent"
-                android:layout_weight="1.5"
-                android:gravity="center"
-                android:text="@string/product_name"
-                android:textSize="@dimen/sp16"
-                android:textStyle="bold"/>
-
-            <TextView
-                android:layout_width="0dp"
-                android:layout_height="match_parent"
-                android:layout_weight="1"
-                android:gravity="center"
-                android:text="@string/type"
-                android:textSize="@dimen/sp16"
-                android:textStyle="bold"/>
-
-            <TextView
-                android:layout_width="0dp"
-                android:layout_height="match_parent"
-                android:layout_weight="1"
-                android:gravity="center"
-                android:text="@string/count"
-                android:textSize="@dimen/sp16"
-                android:textStyle="bold"/>
-
-            <TextView
-                android:layout_width="0dp"
-                android:layout_height="match_parent"
-                android:layout_weight="1"
-                android:gravity="center"
-                android:text="@string/price"
-                android:textSize="@dimen/sp16"
-                android:textStyle="bold"/>
-
-            <TextView
-                android:layout_width="0dp"
-                android:layout_height="match_parent"
-                android:layout_weight="1.5"
-                android:gravity="center"
-                android:text="@string/supplier"
-                android:textSize="@dimen/sp16"
-                android:textStyle="bold"/>
-
-            <TextView
-                android:layout_width="0dp"
-                android:layout_height="match_parent"
-                android:layout_weight="2"
-                android:gravity="center"
-                android:text="@string/date"
-                android:textSize="@dimen/sp16"
-                android:textStyle="bold"/>
-        </LinearLayout>
-
-        <android.support.v7.widget.RecyclerView
-            android:id="@+id/rv_data"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_below="@+id/linear_title"/>
+        </android.support.v4.widget.NestedScrollView>
 
         <LinearLayout
             android:layout_width="match_parent"

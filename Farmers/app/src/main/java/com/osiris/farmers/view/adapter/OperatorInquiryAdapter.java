@@ -1,9 +1,11 @@
 package com.osiris.farmers.view.adapter;
 
+import android.graphics.drawable.Drawable;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
@@ -22,6 +24,11 @@ public class OperatorInquiryAdapter extends RecyclerView.Adapter<RecyclerView.Vi
     private MyItemClickListener myItemClickListener;
 
     private List<OperatorInquery> dataList = new ArrayList<>();
+    private View.OnClickListener onButtonClickListener;
+
+    public void setOnButtonClickListener(View.OnClickListener onButtonClickListener) {
+        this.onButtonClickListener = onButtonClickListener;
+    }
 
 
     public OperatorInquiryAdapter(List<OperatorInquery> dataList) {
@@ -62,6 +69,10 @@ public class OperatorInquiryAdapter extends RecyclerView.Adapter<RecyclerView.Vi
         TextView tv_connect;
         @BindView(R.id.linear_item)
         LinearLayout linear_item;
+        @BindView(R.id.linear_info)
+        LinearLayout linear_info;
+        @BindView(R.id.iv_location)
+        ImageView iv_location;
 
 
 
@@ -91,6 +102,24 @@ public class OperatorInquiryAdapter extends RecyclerView.Adapter<RecyclerView.Vi
             tv_company_name.setText(data.getCompanyName());
             tv_connect.setText(data.getConnect());
             tv_stall_num.setText(String.valueOf(data.getStallName()));
+
+            if (data.isClicked()){
+                linear_info.setVisibility(View.VISIBLE);
+                iv_location.setVisibility(View.VISIBLE);
+                Drawable drawable= itemView.getResources().getDrawable(R.drawable.bg_arrow_up_tri);
+                drawable.setBounds(0, 0, drawable.getMinimumWidth(), drawable.getMinimumHeight());
+                tv_connect.setCompoundDrawables(null,null,drawable,null);
+            }else {
+                linear_info.setVisibility(View.GONE);
+                iv_location.setVisibility(View.GONE);
+                Drawable drawable= itemView.getResources().getDrawable(R.drawable.bg_arrow_down_tri);
+                drawable.setBounds(0, 0, drawable.getMinimumWidth(), drawable.getMinimumHeight());
+                tv_connect.setCompoundDrawables(null,null,drawable,null);
+            }
+            if (onButtonClickListener != null) {
+                tv_connect.setOnClickListener(onButtonClickListener);
+                tv_connect.setTag(R.id.tag_operator_inquiry, getLayoutPosition());
+            }
 
         }
     }

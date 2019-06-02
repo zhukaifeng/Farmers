@@ -15,7 +15,7 @@ import com.osiris.farmers.utils.DateUtil;
 import com.osiris.farmers.view.adapter.DateAdapter;
 import com.osiris.farmers.view.adapter.MyItemClickListener;
 import com.osiris.farmers.view.adapter.StockPurchaseAdapter;
-import com.osiris.farmers.view.adapter.TypeAdapter;
+import com.osiris.farmers.view.adapter.TypePurchaseAdapter;
 import com.osiris.farmers.view.adapter.WeekAdapter;
 
 import java.util.ArrayList;
@@ -49,7 +49,7 @@ public class StockPurchaseFragment extends BaseFragment {
 	private List<StockPurchase> dataList = new ArrayList<>();
 	private StockPurchaseAdapter dataAdapter = new StockPurchaseAdapter(dataList);
 	private List<DateModel> typeList = new ArrayList<>();
-	private TypeAdapter typeAdapter = new TypeAdapter(typeList);
+	private TypePurchaseAdapter typeAdapter = new TypePurchaseAdapter(typeList);
 
 	private List<DateModel> monthList = new ArrayList<>();
 	private DateAdapter monthAdapter = new DateAdapter(monthList);
@@ -87,7 +87,7 @@ public class StockPurchaseFragment extends BaseFragment {
 		}
 		currentMonth = 1;
 		LogUtils.d("zkf date count:" + DateUtil.getMonthLastDay(currentYear, currentMonth));
-		for (int i = 1; i < DateUtil.getMonthLastDay(currentYear, currentMonth); i++) {
+		for (int i = 1; i < DateUtil.getMonthLastDay(currentYear, currentMonth) + 1; i++) {
 			if (i == currentWeek) {
 				weekList.add(new WeekModel(String.valueOf(i), DateUtil.getWeek(currentYear + "-" + currentMonth + "-" + i), true));
 			} else {
@@ -109,9 +109,8 @@ public class StockPurchaseFragment extends BaseFragment {
 				monthAdapter.notifyDataSetChanged();
 				currentMonth = Integer.parseInt(monthList.get(position).getDate().replace("月", ""));
 
-				LogUtils.d("zkf date count:" + DateUtil.getMonthLastDay(currentYear, currentMonth));
 				weekList.clear();
-				for (int i = 1; i < DateUtil.getMonthLastDay(currentYear, currentMonth); i++) {
+				for (int i = 1; i < DateUtil.getMonthLastDay(currentYear, currentMonth) + 1; i++) {
 					if (i == currentWeek) {
 						weekList.add(new WeekModel(String.valueOf(i), DateUtil.getWeek(currentYear + "-" + currentMonth + "-" + i), true));
 					} else {
@@ -136,7 +135,7 @@ public class StockPurchaseFragment extends BaseFragment {
 				currentYear = Integer.parseInt(yearList.get(position).getDate());
 				LogUtils.d("zkf date count:" + DateUtil.getMonthLastDay(currentYear, currentMonth));
 				weekList.clear();
-				for (int i = 1; i < DateUtil.getMonthLastDay(currentYear, currentMonth); i++) {
+				for (int i = 1; i < DateUtil.getMonthLastDay(currentYear, currentMonth) + 1; i++) {
 					if (i == currentWeek) {
 						weekList.add(new WeekModel(String.valueOf(i), DateUtil.getWeek(currentYear + "-" + currentMonth + "-" + i), true));
 					} else {

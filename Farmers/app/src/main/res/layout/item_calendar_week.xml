@@ -7,28 +7,27 @@
 
     <LinearLayout
         android:id="@+id/linear_bg"
-        android:layout_width="@dimen/dp44"
-        android:layout_height="@dimen/dp46"
+        android:layout_width="@dimen/dp23"
+        android:layout_height="@dimen/dp33"
         android:layout_marginLeft="@dimen/dp20"
         android:orientation="vertical"
         >
 
         <TextView
             android:id="@+id/tv_date"
-            android:layout_width="@dimen/dp44"
-            android:layout_height="@dimen/dp20"
-            android:layout_centerHorizontal="true"
+            android:layout_width="@dimen/dp23"
+            android:layout_height="wrap_content"
+            android:textSize="@dimen/sp12"
             android:gravity="center"
-            android:textColor="@color/calendar_txt"
+            android:textColor="#15314C"
             />
         <TextView
             android:id="@+id/tv_week"
-            android:layout_width="@dimen/dp44"
-            android:layout_height="@dimen/dp20"
-            android:layout_marginTop="@dimen/dp6"
-            android:layout_centerHorizontal="true"
+            android:layout_width="@dimen/dp23"
+            android:layout_height="wrap_content"
+            android:textSize="@dimen/sp12"
             android:gravity="center"
-            android:textColor="@color/calendar_txt"
+            android:textColor="#9915314C"
             />
     </LinearLayout>
 

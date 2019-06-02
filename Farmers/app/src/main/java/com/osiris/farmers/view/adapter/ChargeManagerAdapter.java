@@ -21,8 +21,6 @@ public class ChargeManagerAdapter extends RecyclerView.Adapter<RecyclerView.View
     private MyItemClickListener myItemClickListener;
 
     private List<ChargeManager> dataList = new ArrayList<>();
-    private View.OnClickListener onButtonClickListener;
-    private View.OnClickListener onNameClickListener;
 
 
     public ChargeManagerAdapter(List<ChargeManager> dataList) {
@@ -53,13 +51,6 @@ public class ChargeManagerAdapter extends RecyclerView.Adapter<RecyclerView.View
         return dataList.size();
     }
 
-    public void setOnNameClickListener(View.OnClickListener onNameClickListener) {
-        this.onNameClickListener = onNameClickListener;
-    }
-
-    public void setOnButtonClickListener(View.OnClickListener onPhotoClickListener) {
-        this.onButtonClickListener = onButtonClickListener;
-    }
 
     class ChargeManagerHolder extends RecyclerView.ViewHolder implements View.OnClickListener{
 

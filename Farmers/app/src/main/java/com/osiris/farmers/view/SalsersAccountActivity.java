@@ -107,12 +107,15 @@ public class SalsersAccountActivity extends BaseActivity {
 	}
 
 
-	@OnClick({R.id.tv_remeber})
+	@OnClick({R.id.tv_remeber,R.id.rl_back})
 	void onClick(View v){
 		switch (v.getId()){
 			case R.id.tv_remeber:
 				Intent intent = new Intent(this, SalesAccountActivity.class);
 				startActivity(intent);
+				break;
+			case R.id.rl_back:
+				finish();
 				break;
 		}
 	}

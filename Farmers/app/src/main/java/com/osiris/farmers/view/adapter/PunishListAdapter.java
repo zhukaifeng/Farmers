@@ -60,7 +60,7 @@ public class PunishListAdapter extends RecyclerView.Adapter<RecyclerView.ViewHol
         this.onNameClickListener = onNameClickListener;
     }
 
-    public void setOnButtonClickListener(View.OnClickListener onPhotoClickListener) {
+    public void setOnButtonClickListener(View.OnClickListener onButtonClickListener) {
         this.onButtonClickListener = onButtonClickListener;
     }
 

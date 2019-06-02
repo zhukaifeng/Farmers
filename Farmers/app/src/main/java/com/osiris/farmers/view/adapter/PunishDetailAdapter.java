@@ -22,8 +22,6 @@ public class PunishDetailAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
     private MyItemClickListener myItemClickListener;
 
     private List<PunishDetail> dataList = new ArrayList<>();
-    private View.OnClickListener onButtonClickListener;
-    private View.OnClickListener onNameClickListener;
 
 
     public PunishDetailAdapter(List<PunishDetail> dataList) {
@@ -54,13 +52,6 @@ public class PunishDetailAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
         return dataList.size();
     }
 
-    public void setOnNameClickListener(View.OnClickListener onNameClickListener) {
-        this.onNameClickListener = onNameClickListener;
-    }
-
-    public void setOnButtonClickListener(View.OnClickListener onPhotoClickListener) {
-        this.onButtonClickListener = onButtonClickListener;
-    }
 
     class PunishDetailHolder extends RecyclerView.ViewHolder implements View.OnClickListener{
 
