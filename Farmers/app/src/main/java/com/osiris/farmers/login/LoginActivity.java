@@ -51,6 +51,8 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener 
     public void onClick(View view) {
         switch (view.getId()) {
             case R.id.tv_login:
+            //	Login();
+
                 changeView(true);
                 break;
 
@@ -60,7 +62,8 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener 
         }
     }
 
-    private void changeView(boolean isLogin) {
+
+	private void changeView(boolean isLogin) {
         FragmentTransaction transaction = mFragmentManager.beginTransaction();
         if (isLogin) {
             tvLogin.setBackgroundResource(R.drawable.bg_login_tv_write);

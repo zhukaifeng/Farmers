@@ -5,8 +5,7 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     android:paddingLeft="15dp"
-    android:paddingRight="15dp"
-    tools:context=".view.HomeActivity">
+    android:paddingRight="15dp">
 
     <ScrollView
         android:layout_width="match_parent"
@@ -26,14 +25,25 @@
                 android:layout_marginTop="15dp"
                 android:background="@drawable/bg_home_title"
                 android:gravity="center"
-                android:textSize="15dp">
+               >
 
-                <TextView
+                <Spinner
+                    android:id="@+id/spinner_market"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:gravity="center_horizontal"
+                    android:background="@color/transparent"
+                    android:dropDownVerticalOffset="34dp"
+
+                />
+
+             <TextView
                     android:id="@+id/tv_home_name"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="市场"
                     android:textColor="@color/color_333333"
+                    android:visibility="gone"
                     android:textSize="14dp" />
 
                 <ImageView

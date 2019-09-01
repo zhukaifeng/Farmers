@@ -2,6 +2,7 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     package="com.osiris.farmers">
+    <uses-permission android:name="android.permission.INTERNET"/>
 
     <application
         android:allowBackup="true"
@@ -39,8 +40,10 @@
         <activity android:name=".view.SalsersAccountActivity"/>
         <activity android:name=".view.MarketEvaluateActivity"/>
         <activity android:name=".view.ScoringDetailActivity"/>
+        <activity android:name=".view.ChooseStallNoActivity"/>
 
-            <!-- <intent-filter> -->
+
+        <!-- <intent-filter> -->
             <!-- <action android:name="android.intent.action.MAIN" /> -->
 
 

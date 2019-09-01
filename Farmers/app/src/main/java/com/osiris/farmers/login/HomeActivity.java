@@ -1,19 +1,38 @@
 package com.osiris.farmers.login;
 
 import android.content.Intent;
+import android.text.TextUtils;
 import android.util.Log;
 import android.view.View;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.Spinner;
 import android.widget.TextView;
 
 import com.osiris.farmers.R;
 import com.osiris.farmers.base.BaseActivity;
+import com.osiris.farmers.model.Market;
+import com.osiris.farmers.network.ApiParams;
+import com.osiris.farmers.network.ApiRequestTag;
+import com.osiris.farmers.network.GlobalParams;
+import com.osiris.farmers.network.NetRequest;
+import com.osiris.farmers.network.NetRequestResultListener;
+import com.osiris.farmers.utils.JsonUtils;
 import com.osiris.farmers.view.MarketEvaluateActivity;
 import com.osiris.farmers.view.SalsersAccountActivity;
 
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+
 import butterknife.BindView;
 import butterknife.OnClick;
+import me.jessyan.autosize.utils.LogUtils;
+
+import static com.osiris.farmers.network.GlobalParams.currentMarketId;
 
 public class HomeActivity extends BaseActivity {
 
@@ -45,8 +64,15 @@ public class HomeActivity extends BaseActivity {
 	ImageView ivHome4;
 	@BindView(R.id.tv_home4)
 	TextView tvHome4;
+	@BindView(R.id.spinner_market)
+	Spinner spinner_market;
 
+
+	private ArrayAdapter marketAdapter;
 	private int pageType;
+	private List<Market.MarketBean> marketList = new ArrayList<>();
+	private List<String> marketNameList = new ArrayList<>();
+	private int marketId = 0;
 
 	@Override
 	public int getLayoutResId() {
@@ -68,7 +94,28 @@ public class HomeActivity extends BaseActivity {
 		pageType = getIntent().getIntExtra("type", 1);
 		Log.d("zkf", "type:" + pageType);
 		changeViewStatus(pageType);
+		getMarketData();
+		marketAdapter = new ArrayAdapter<String>(this,android.R.layout.simple_spinner_item,marketNameList);
+		marketAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+		spinner_market.setAdapter(marketAdapter);
+		spinner_market.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+			@Override
+			public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+				marketId = marketList.get(position).getId();
+				currentMarketId = marketId;
+				LogUtils.d("zkf marketId:" + marketId);
+			}
+
+			@Override
+			public void onNothingSelected(AdapterView<?> parent) {
+
+			}
+		});
+
+
 	}
+
+
 
 	@OnClick({R.id.ll_home_name, R.id.ll_home_1, R.id.ll_home_2, R.id.ll_home_3, R.id.ll_home_4})
 	void click(View view) {
@@ -92,6 +139,7 @@ public class HomeActivity extends BaseActivity {
 					intent.putExtra("type", 4);
 
 				}
+				intent.putExtra("market_id",marketId);
 				startActivity(intent);
 				break;
 
@@ -108,6 +156,7 @@ public class HomeActivity extends BaseActivity {
 					intent2.putExtra("type", 4);
 
 				}
+				intent2.putExtra("market_id",marketId);
 				startActivity(intent2);
 				break;
 
@@ -126,6 +175,7 @@ public class HomeActivity extends BaseActivity {
 					intent3.putExtra("type", 4);
 
 				}
+				intent3.putExtra("market_id",marketId);
 				startActivity(intent3);
 				break;
 
@@ -147,6 +197,7 @@ public class HomeActivity extends BaseActivity {
 					intent4 = new Intent(this, MarketEvaluateActivity.class);
 					intent4.putExtra("type", 4);
 				}
+				intent4.putExtra("market_id",marketId);
 				startActivity(intent4);
 				break;
 			default:
@@ -191,4 +242,62 @@ public class HomeActivity extends BaseActivity {
 				break;
 		}
 	}
+
+
+
+
+
+	private void getMarketData() {
+
+
+		String url = ApiParams.API_HOST + "/app/xzmarket.action";
+		Map<String, String> paramMap = new HashMap<>();
+		paramMap.put("id", String.valueOf(GlobalParams.id));
+
+
+
+		NetRequest.request(url, ApiRequestTag.DATA, paramMap, new NetRequestResultListener() {
+			@Override
+			public void requestSuccess(int tag, String successResult) {
+				LogUtils.d("zkf  market data:" + successResult);
+				String temp = successResult.substring(1, successResult.length() - 1);
+				if (!TextUtils.isEmpty(successResult)) {
+					Market market = JsonUtils.fromJson(temp, Market.class);
+					if (marketList.size()>0){
+						marketList.clear();
+					}
+					marketList.addAll(market.getMarket());
+					if (marketNameList.size()>0){
+						marketNameList.clear();
+					}
+					for (Market.MarketBean marketBean:marketList){
+						marketNameList.add(marketBean.getMarketnm());
+					}
+					marketAdapter.notifyDataSetChanged();
+					marketId = marketList.get(0).getId();
+					currentMarketId = marketId;
+				}
+
+
+
+			}
+
+			@Override
+			public void requestFailure(int tag, int code, String msg) {
+
+			}
+		});
+
+
+	}
+
+
+
+
+
+
+
+
+
+
 }

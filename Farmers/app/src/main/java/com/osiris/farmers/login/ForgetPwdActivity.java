@@ -2,7 +2,6 @@ package com.osiris.farmers.login;
 
 import android.annotation.SuppressLint;
 import android.os.Handler;
-import android.text.TextUtils;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -10,7 +9,16 @@ import android.widget.TextView;
 
 import com.osiris.farmers.R;
 import com.osiris.farmers.base.BaseActivity;
+import com.osiris.farmers.network.ApiParams;
+import com.osiris.farmers.network.ApiRequestTag;
+import com.osiris.farmers.network.NetRequest;
+import com.osiris.farmers.network.NetRequestResultListener;
 import com.osiris.farmers.utils.T;
+
+import java.util.HashMap;
+import java.util.Map;
+
+import me.jessyan.autosize.utils.LogUtils;
 
 public class ForgetPwdActivity extends BaseActivity implements View.OnClickListener {
 
@@ -62,10 +70,31 @@ public class ForgetPwdActivity extends BaseActivity implements View.OnClickListe
 
     public void getCode() {
         String phone = etForgetPhone.getText().toString().trim();
-        if (TextUtils.isEmpty(phone) || !phone.startsWith("1") || phone.length() != 11) {
+        /*if (TextUtils.isEmpty(phone) || !phone.startsWith("1") || phone.length() != 11) {
             T.showShort(mActivity, "请输入正确的手机号！");
             return;
-        }
+        }*/
+        String url = ApiParams.API_HOST + "/gedCode.action";
+
+	    Map<String, String> paramMap = new HashMap<>();
+	    LogUtils.d("zkf phone:" + phone);
+	    paramMap.put("phone", phone);
+	    NetRequest.request(url, ApiRequestTag.DATA, paramMap, new NetRequestResultListener() {
+
+		    @Override
+		    public void requestSuccess(int tag, String successResult) {
+			    LogUtils.d("zkf  successResult:" + successResult);
+
+		    }
+
+		    @Override
+		    public void requestFailure(int tag, int code, String msg) {
+
+		    }
+	    });
+
+
+
         T.showShort(mActivity, "验证码发送成功！");
 
         tvForgetSend.setEnabled(false);
