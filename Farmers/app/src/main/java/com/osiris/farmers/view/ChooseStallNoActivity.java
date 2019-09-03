@@ -1,6 +1,5 @@
 package com.osiris.farmers.view;
 
-import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -9,6 +8,7 @@ import android.view.View;
 
 import com.osiris.farmers.R;
 import com.osiris.farmers.base.BaseActivity;
+import com.osiris.farmers.event.BoothgEvent;
 import com.osiris.farmers.model.ChooseStallData;
 import com.osiris.farmers.network.ApiParams;
 import com.osiris.farmers.network.ApiRequestTag;
@@ -52,10 +52,8 @@ public class ChooseStallNoActivity extends BaseActivity {
 		typeAdapter.setOnItemClick(new MyItemClickListener() {
 			@Override
 			public void onItemClick(View view, int position) {
-				Intent intent = new Intent();
+				postEvent(new BoothgEvent(stallList.get(position).getId(),stallList.get(position).getTwhmc(),stallList.get(position).getMarketid()));
 				//把返回数据存入Intent
-				intent.putExtra("position", position);
-				setResult(RESULT_OK,intent);
 				finish();
 
 			}
@@ -99,4 +97,8 @@ public class ChooseStallNoActivity extends BaseActivity {
 		// TODO: add setContentView(...) invocation
 		ButterKnife.bind(this);
 	}
+
+
+
+
 }

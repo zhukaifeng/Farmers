@@ -109,7 +109,6 @@
                 android:layout_centerVertical="true"
                 android:layout_marginRight="@dimen/dp40"
                 android:layout_toLeftOf="@+id/iv_arrow_to"
-                android:text="摊位号12"
                 android:textColor="@color/write"
                 android:textSize="@dimen/sp16"
                 />

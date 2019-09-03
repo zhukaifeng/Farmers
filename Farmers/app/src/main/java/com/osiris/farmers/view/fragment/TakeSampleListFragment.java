@@ -1,7 +1,9 @@
 package com.osiris.farmers.view.fragment;
 
+import android.app.Dialog;
 import android.content.ComponentName;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.ServiceConnection;
 import android.graphics.drawable.BitmapDrawable;
@@ -23,9 +25,12 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.osiris.farmers.R;
+import com.osiris.farmers.base.ApiContants;
 import com.osiris.farmers.base.BaseFragment;
+import com.osiris.farmers.event.BoothgEvent;
 import com.osiris.farmers.model.ChooseStallData;
 import com.osiris.farmers.model.GoodsType;
+import com.osiris.farmers.model.SampleNameData;
 import com.osiris.farmers.model.TakeSampleList;
 import com.osiris.farmers.network.ApiParams;
 import com.osiris.farmers.network.ApiRequestTag;
@@ -37,7 +42,12 @@ import com.osiris.farmers.view.ChooseStallNoActivity;
 import com.osiris.farmers.view.adapter.MyItemClickListener;
 import com.osiris.farmers.view.adapter.TakeSampleListAdapter;
 import com.osiris.farmers.view.adapter.TypeGoodsAdapter;
+import com.osiris.farmers.view.dialog.BillOflandingDialog;
+import com.osiris.farmers.view.dialog.DialogClickListener;
 import com.smartdevice.aidl.IZKCService;
+
+import org.greenrobot.eventbus.Subscribe;
+import org.greenrobot.eventbus.ThreadMode;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -83,6 +93,9 @@ public class TakeSampleListFragment extends BaseFragment {
 	private List<ChooseStallData.BoothglBean> stallList = new ArrayList<>();
 	private List<String> stallNameList = new ArrayList<>();
 
+	private List<SampleNameData.CommodityBean> commodityList= new ArrayList<>();
+
+
 	//线程运行标志 the running flag of thread
 	private boolean runFlag = true;
 	//打印机检测标志 the detect flag of printer
@@ -91,6 +104,10 @@ public class TakeSampleListFragment extends BaseFragment {
 	private float PINTER_LINK_TIMEOUT_MAX = 30 * 1000L;
 	//标签打印标记 the flag of tag print
 	private boolean autoOutputPaper = false;
+
+
+	private ChooseStallData.BoothglBean boothglBean = new ChooseStallData.BoothglBean();
+
 
 	@Override
 	protected int setLayout() {
@@ -137,6 +154,7 @@ public class TakeSampleListFragment extends BaseFragment {
 		getGoodsType();
 		getStallNo();
 		bindService();
+		getStallName();
 	}
 
 	private void getGoodsType() {
@@ -170,15 +188,14 @@ public class TakeSampleListFragment extends BaseFragment {
 	@Override
 	public void startActivityForResult(Intent intent, int requestCode) {
 		super.startActivityForResult(intent, requestCode);
-		LogUtils.d("zkf position:" );
+		LogUtils.d("zkf position:");
 		switch (requestCode) {
-				case REQUEST_A:
-					int position = intent.getExtras().getInt("position",0);
-					LogUtils.d("zkf position:" + position);
-					tv_shop_num.setText(stallNameList.get(position));
-					break;
-			}
-
+			case REQUEST_A:
+				int position = intent.getExtras().getInt("position", 0);
+				LogUtils.d("zkf position:" + position);
+				tv_shop_num.setText(stallNameList.get(position));
+				break;
+		}
 
 
 	}
@@ -192,13 +209,15 @@ public class TakeSampleListFragment extends BaseFragment {
 	void onClick(View v) {
 		switch (v.getId()) {
 			case R.id.iv_function:
-				linear_add.setVisibility(View.VISIBLE);
-				iv_function.setBackgroundResource(R.drawable.bg_qr);
-				rl_back.setVisibility(View.VISIBLE);
-				for (TakeSampleList takeSampleList : dataList) {
-					takeSampleList.setDelete(true);
-				}
-				dataAdapter.notifyDataSetChanged();
+//				linear_add.setVisibility(View.VISIBLE);
+//				iv_function.setBackgroundResource(R.drawable.bg_qr);
+//				rl_back.setVisibility(View.VISIBLE);
+//				for (TakeSampleList takeSampleList : dataList) {
+//					takeSampleList.setDelete(true);
+//				}
+//				dataAdapter.notifyDataSetChanged();
+				showBillOfLandingDetailDialog();
+
 				break;
 			case R.id.rl_back:
 				linear_add.setVisibility(View.GONE);
@@ -208,6 +227,7 @@ public class TakeSampleListFragment extends BaseFragment {
 					takeSampleList.setDelete(false);
 				}
 				dataAdapter.notifyDataSetChanged();
+
 				break;
 			case R.id.tv_type:
 				if (rl_type.getVisibility() == View.VISIBLE) {
@@ -222,9 +242,9 @@ public class TakeSampleListFragment extends BaseFragment {
 			case R.id.tv_shop_num:
 
 				Intent i = new Intent(getActivity(), ChooseStallNoActivity.class);
-				getActivity().startActivityForResult(i,REQUEST_A);
+				getActivity().startActivityForResult(i, REQUEST_A);
 
-			//	startActivityForResult(i, REQUEST_A);
+				//	startActivityForResult(i, REQUEST_A);
 
 
 				/*String text = "---------------" +
@@ -290,6 +310,11 @@ public class TakeSampleListFragment extends BaseFragment {
 					for (ChooseStallData.BoothglBean boothglBean : stallList) {
 						stallNameList.add(boothglBean.getTwhmc());
 					}
+					boothglBean = stallList.get(0);
+					if (stallNameList.size() > 0) {
+						tv_shop_num.setText(stallNameList.get(0));
+					}
+					getCheckProject();
 
 				}
 
@@ -375,5 +400,108 @@ public class TakeSampleListFragment extends BaseFragment {
 			}
 		}
 	}*/
+
+
+	private void showBillOfLandingDetailDialog() {
+		BillOflandingDialog.Builder builder = new BillOflandingDialog.Builder(getActivity());
+		builder.setPositiveButton(new DialogClickListener() {
+			@Override
+			public void onClick(Dialog dialog, String msg) {
+
+			}
+
+			@Override
+			public void onClick(Dialog dialog) {
+				dialog.dismiss();
+			}
+		});
+
+		builder.setDataBillList(commodityList);
+
+		builder.setNegativeButton(new DialogInterface.OnClickListener() {
+			@Override
+			public void onClick(DialogInterface dialogInterface, int i) {
+				dialogInterface.dismiss();
+			}
+		});
+		builder.create().show();
+	}
+
+	@Subscribe(threadMode = ThreadMode.MAIN)
+	public void onGetMessage(BoothgEvent boothglBean) {
+		this.boothglBean.setId(boothglBean.getId());
+		this.boothglBean.setMarketid(boothglBean.getMarketid());
+		this.boothglBean.setTwhmc(boothglBean.getTwhmc());
+
+		tv_shop_num.setText(boothglBean.getTwhmc());
+		getCheckProject();
+
+
+	}
+
+
+
+	private void getStallName() {
+
+		String url = ApiParams.API_HOST + "/app/xzCommodity.action";
+		Map<String, String> paramMap = new HashMap<>();
+		paramMap.put("id", String.valueOf(GlobalParams.currentMarketId));
+
+		NetRequest.request(url, ApiRequestTag.DATA, paramMap, new NetRequestResultListener() {
+			@Override
+			public void requestSuccess(int tag, String successResult) {
+				String temp = successResult.substring(1, successResult.length() - 1);
+				if (!TextUtils.isEmpty(successResult)) {
+					LogUtils.d("zkf  successResult:" + successResult);
+					SampleNameData tempData = JsonUtils.fromJson(temp, SampleNameData.class);
+					commodityList.addAll(tempData.getCommodity());
+
+				}
+
+
+			}
+
+			@Override
+			public void requestFailure(int tag, int code, String msg) {
+
+			}
+		});
+	}
+
+
+
+	private void getCheckProject(){
+
+		String url = ApiContants.HOST + "/app/xzjcxm.action";
+		Map<String, String> paramMap = new HashMap<>();
+		paramMap.put("id", String.valueOf(boothglBean.getId()));
+
+		NetRequest.request(url, ApiRequestTag.DATA, paramMap, new NetRequestResultListener() {
+			@Override
+			public void requestSuccess(int tag, String successResult) {
+				String temp = successResult.substring(1, successResult.length() - 1);
+				if (!TextUtils.isEmpty(successResult)) {
+					LogUtils.d("zkf 222 successResult:" + successResult);
+//					SampleNameData tempData = JsonUtils.fromJson(temp, SampleNameData.class);
+//					commodityList.addAll(tempData.getCommodity());
+
+
+				}
+
+
+			}
+
+			@Override
+			public void requestFailure(int tag, int code, String msg) {
+
+			}
+		});
+
+	}
+
+
+
+
+
 
 }

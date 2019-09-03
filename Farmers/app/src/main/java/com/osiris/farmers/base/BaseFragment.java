@@ -9,6 +9,11 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.osiris.farmers.event.DefaultEvent;
+
+import org.greenrobot.eventbus.EventBus;
+import org.greenrobot.eventbus.Subscribe;
+
 import butterknife.ButterKnife;
 
 public abstract class BaseFragment extends Fragment  {
@@ -33,10 +38,18 @@ public abstract class BaseFragment extends Fragment  {
             contentView = inflater.inflate(setLayout(), container, false);
             ButterKnife.bind(this, contentView);
             initView();
+	        EventBus.getDefault().register(this);
         }
         return contentView;
     }
+	protected void postEvent(Object obj) {
+		EventBus.getDefault().post(obj);
+	}
 
+	@Subscribe
+	public void defaultEventHandler(DefaultEvent event) {
+		// not handle
+	}
     /**
      * 绑定布局
      *
@@ -113,4 +126,12 @@ public abstract class BaseFragment extends Fragment  {
         intent.putExtras(bundle);
         getActivity().startActivityForResult(intent, requestCode);
     }
+
+
+	@Override
+	public void onDestroy() {
+		super.onDestroy();
+		EventBus.getDefault().unregister(this);
+
+	}
 }

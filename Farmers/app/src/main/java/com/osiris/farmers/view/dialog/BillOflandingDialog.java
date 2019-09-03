@@ -3,6 +3,8 @@ package com.osiris.farmers.view.dialog;
 
 import android.app.Dialog;
 import android.content.Context;
+import android.support.v7.widget.GridLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup.LayoutParams;
@@ -10,6 +12,14 @@ import android.widget.ImageView;
 import android.widget.RadioGroup;
 
 import com.osiris.farmers.R;
+import com.osiris.farmers.model.SampleNameData;
+import com.osiris.farmers.view.adapter.BillOflandSelectAdapter;
+import com.osiris.farmers.view.adapter.MyItemClickListener;
+
+import java.util.ArrayList;
+import java.util.List;
+
+import me.jessyan.autosize.utils.LogUtils;
 
 /**
  * Created by zhukaifeng on 2018/04/08.
@@ -30,9 +40,11 @@ public class BillOflandingDialog extends Dialog {
         private Context context;
         private String desc;
         private String title;
+	    private List<SampleNameData.CommodityBean> dataList = new ArrayList<>();
 
-        private OnClickListener negativeButtonClickListener;
+	    private OnClickListener negativeButtonClickListener;
         private DialogClickListener submitButtonClickListener;
+        private BillOflandSelectAdapter billOflandSelectAdapter;
 
         public Builder(Context context) {
             this.context = context;
@@ -50,6 +62,11 @@ public class BillOflandingDialog extends Dialog {
             this.title = title;
             return this;
         }
+
+	    public Builder setDataBillList(List<SampleNameData.CommodityBean> dataList) {
+		    this.dataList = dataList;
+		    return this;
+	    }
 
 
         public Builder setContent(String desc) {
@@ -111,6 +128,30 @@ public class BillOflandingDialog extends Dialog {
                 }
             });
 
+	        RecyclerView rv_data = layout.findViewById(R.id.rv_data);
+	        billOflandSelectAdapter = new BillOflandSelectAdapter(dataList);
+	        GridLayoutManager gridLayoutManager = new GridLayoutManager(context, 3);
+	        rv_data.setLayoutManager(gridLayoutManager);
+	        rv_data.setAdapter(billOflandSelectAdapter);
+	        billOflandSelectAdapter.notifyDataSetChanged();
+	        billOflandSelectAdapter.setOnItemClick(new MyItemClickListener() {
+		        @Override
+		        public void onItemClick(View view, int position) {
+		        	LogUtils.d("zkf click :" + position);
+//			        for (SampleNameData.CommodityBean commodityBean:dataList){
+//			        	for (int i=0;i<dataList.size();i++){
+//			        		if (i==position){
+//						        LogUtils.d("zkf iii");
+//			        			commodityBean.setSelect(true);
+//					        }else {
+//						        LogUtils.d("zkf 222");
+//						        commodityBean.setSelect(false);
+//					        }
+//				        }
+//				        billOflandSelectAdapter.notifyDataSetChanged();
+//			        }
+		        }
+	        });
 
             dialog.setContentView(layout);
             dialog.setCanceledOnTouchOutside(true);
