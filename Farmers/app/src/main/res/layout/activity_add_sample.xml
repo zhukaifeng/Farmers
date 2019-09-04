@@ -9,8 +9,8 @@
 
 
     <android.support.v4.widget.NestedScrollView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="@dimen/dp349"
+        android:layout_height="@dimen/dp535"
         android:scrollbars="none"
         >
 
@@ -71,10 +71,12 @@
                 <ImageView
                     android:layout_width="@dimen/dp46"
                     android:layout_height="@dimen/dp25"
+                    android:visibility="gone"
                     android:layout_gravity="center_vertical"
                     android:background="@drawable/bg_icon_market"/>
 
                 <TextView
+                    android:id="@+id/tv_type_name"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center_vertical"
@@ -90,16 +92,36 @@
             <android.support.v7.widget.RecyclerView
                 android:id="@+id/rv_data"
                 android:layout_width="match_parent"
-                android:layout_height="@dimen/dp100"
+                android:layout_height="@dimen/dp90"
                 android:layout_marginLeft="@dimen/dp21"
                 android:layout_marginTop="@dimen/dp20"
                 android:layout_marginRight="@dimen/dp21"
                 />
 
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/dp21"
+                android:layout_marginTop="@dimen/dp16"
+                android:orientation="horizontal">
+
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
+                    android:text="检测项目"
+                    android:textSize="@dimen/sp16"
+                    android:textStyle="bold"
+
+                    />
+
+            </LinearLayout>
+
             <android.support.v7.widget.RecyclerView
                 android:id="@+id/rv_project"
                 android:layout_width="match_parent"
-                android:layout_height="@dimen/dp100"
+                android:layout_height="@dimen/dp90"
                 android:layout_marginLeft="@dimen/dp21"
                 android:layout_marginTop="@dimen/dp20"
                 android:layout_marginRight="@dimen/dp21"
@@ -142,6 +164,7 @@
                     android:layout_marginLeft="@dimen/dp34"
                     android:layout_toRightOf="@+id/tv_count"
                     android:layout_centerVertical="true"
+                    android:textColor="@color/black"
                     />
                 <TextView
                     android:layout_width="wrap_content"
@@ -197,6 +220,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="@dimen/dp34"
                     android:layout_toRightOf="@+id/tv_price"
+                    android:textColor="@color/black"
                     android:layout_centerVertical="true"
                     />
                 <TextView

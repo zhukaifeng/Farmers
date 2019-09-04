@@ -9,9 +9,9 @@ import android.text.TextUtils;
 import android.util.Base64;
 import android.util.Log;
 import android.view.View;
-import android.view.Window;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.TextView;
 
 import com.luck.picture.lib.PictureSelector;
 import com.luck.picture.lib.config.PictureConfig;
@@ -20,14 +20,11 @@ import com.luck.picture.lib.entity.LocalMedia;
 import com.osiris.farmers.R;
 import com.osiris.farmers.base.ApiContants;
 import com.osiris.farmers.base.BaseActivity;
-import com.osiris.farmers.login.MainActivity;
 import com.osiris.farmers.model.CheckProject;
-import com.osiris.farmers.model.ChooseStallData;
 import com.osiris.farmers.model.SampleNameData;
 import com.osiris.farmers.model.TypeSampleTitle;
 import com.osiris.farmers.network.ApiParams;
 import com.osiris.farmers.network.ApiRequestTag;
-import com.osiris.farmers.network.GlobalParams;
 import com.osiris.farmers.network.NetRequest;
 import com.osiris.farmers.network.NetRequestResultListener;
 import com.osiris.farmers.utils.JsonUtils;
@@ -69,6 +66,8 @@ public class AddSampleActivity extends BaseActivity {
     RecyclerView recyclerView;
     @BindView(R.id.rv_project)
     RecyclerView rv_project;
+    @BindView(R.id.tv_type_name)
+	TextView tv_type_name;
 
     private Handler mHandler = new Handler();
 
@@ -143,25 +142,13 @@ public class AddSampleActivity extends BaseActivity {
         typeSelectAdapter.setOnItemClick(new MyItemClickListener() {
             @Override
             public void onItemClick(View view, int position) {
-
+	            tv_type_name.setText(commodityNameList.get(position).getName());
             }
         });
-
-        billOflandProjectSelectAdapter = new BillOflandProjectSelectAdapter(checkProjectList);
-        GridLayoutManager gridLayoutManager1 = new GridLayoutManager(this, 3);
-        rv_project.setLayoutManager(gridLayoutManager1);
-        rv_project.setAdapter(billOflandProjectSelectAdapter);
-        billOflandProjectSelectAdapter.notifyDataSetChanged();
-        billOflandProjectSelectAdapter.setOnItemClick(new MyItemClickListener() {
-            @Override
-            public void onItemClick(View view, int position) {
-                LogUtils.d("zkf click :" + position);
+	    tv_type_name.setText(commodityNameList.get(0).getName());
 
 
-            }
-        });
-
-        billOflandSelectAdapter = new BillOflandSelectAdapter(showDataList);
+	    billOflandSelectAdapter = new BillOflandSelectAdapter(showDataList);
         GridLayoutManager gridLayoutManager = new GridLayoutManager(this, 3);
         rv_data.setLayoutManager(gridLayoutManager);
         rv_data.setAdapter(billOflandSelectAdapter);
@@ -171,7 +158,7 @@ public class AddSampleActivity extends BaseActivity {
             public void onItemClick(View view, int position) {
                 LogUtils.d("zkf click :" + position);
                 for (SampleNameData.CommodityBean commodityBean : showDataList) {
-                    for (int i = 0; i < dataList.size(); i++) {
+                    for (int i = 0; i < dataList.size(); i++) { a
                         if (i == position) {
                             commodityBean.setSelect(true);
                         } else {
@@ -192,6 +179,25 @@ public class AddSampleActivity extends BaseActivity {
         adapter.setList(selectList);
         adapter.setSelectMax(2);
         recyclerView.setAdapter(adapter);
+
+
+
+	    billOflandProjectSelectAdapter = new BillOflandProjectSelectAdapter(checkProjectList);
+	    GridLayoutManager gridLayoutManager1 = new GridLayoutManager(this, 3);
+	    rv_project.setLayoutManager(gridLayoutManager1);
+	    rv_project.setAdapter(billOflandProjectSelectAdapter);
+	    billOflandProjectSelectAdapter.notifyDataSetChanged();
+	    billOflandProjectSelectAdapter.setOnItemClick(new MyItemClickListener() {
+		    @Override
+		    public void onItemClick(View view, int position) {
+			    LogUtils.d("zkf click :" + position);
+
+
+		    }
+	    });
+	    getCheckProject(showDataList.get(0).getId());
+
+
 
     }
 
@@ -236,6 +242,7 @@ public class AddSampleActivity extends BaseActivity {
                 if (!TextUtils.isEmpty(successResult)) {
                     CheckProject tempData = JsonUtils.fromJson(temp, CheckProject.class);
                     checkProjectList.addAll(tempData.getJcxm());
+	                billOflandProjectSelectAdapter.notifyDataSetChanged();
 
                 }
 
