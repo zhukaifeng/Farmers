@@ -1,0 +1,241 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:gravity="center"
+    android:background="@color/transparent"
+    android:orientation="vertical">
+
+
+    <android.support.v4.widget.NestedScrollView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:scrollbars="none"
+        >
+
+        <LinearLayout
+            android:layout_width="@dimen/dp349"
+            android:layout_height="@dimen/dp535"
+            android:background="@drawable/bg_white_all_radio"
+            android:orientation="vertical">
+
+
+           <android.support.v7.widget.RecyclerView
+               android:id="@+id/rv_type"
+               android:layout_width="match_parent"
+               android:layout_height="@dimen/dp40"
+               android:layout_marginLeft="@dimen/dp21"
+               android:layout_marginRight="@dimen/dp21"/>
+
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/dp45"
+                android:layout_marginLeft="@dimen/dp10"
+                android:layout_marginTop="@dimen/dp10"
+                android:layout_marginRight="@dimen/dp16"
+                android:focusable="true"
+                android:focusableInTouchMode="true"
+                android:background="@drawable/bg_search_dialog">
+
+
+                <EditText
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:background="@null"
+                    android:hint="@string/write_context"
+                    android:paddingLeft="@dimen/dp15"
+                    android:textColorHint="@color/txt_black_153"
+                    android:textSize="@dimen/sp14"/>
+
+
+                <ImageView
+                    android:layout_width="@dimen/dp13"
+                    android:layout_height="@dimen/dp12"
+                    android:layout_alignParentRight="true"
+                    android:layout_centerVertical="true"
+                    android:layout_marginRight="@dimen/dp16"
+                    android:background="@drawable/bg_search"/>
+
+
+            </RelativeLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/dp21"
+                android:layout_marginTop="@dimen/dp16"
+                android:orientation="horizontal">
+
+                <ImageView
+                    android:layout_width="@dimen/dp46"
+                    android:layout_height="@dimen/dp25"
+                    android:layout_gravity="center_vertical"
+                    android:background="@drawable/bg_icon_market"/>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
+                    android:layout_marginLeft="@dimen/dp10"
+                    android:text="@string/vegetable"
+                    android:textSize="@dimen/sp16"
+                    android:textStyle="bold"
+
+                    />
+
+            </LinearLayout>
+
+            <android.support.v7.widget.RecyclerView
+                android:id="@+id/rv_data"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/dp100"
+                android:layout_marginLeft="@dimen/dp21"
+                android:layout_marginTop="@dimen/dp20"
+                android:layout_marginRight="@dimen/dp21"
+                />
+
+            <android.support.v7.widget.RecyclerView
+                android:id="@+id/rv_project"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/dp100"
+                android:layout_marginLeft="@dimen/dp21"
+                android:layout_marginTop="@dimen/dp20"
+                android:layout_marginRight="@dimen/dp21"
+                />
+            <android.support.v7.widget.RecyclerView
+                android:id="@+id/recycler"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginRight="@dimen/dp21"
+                android:layout_marginLeft="@dimen/dp21"
+                android:layout_marginTop="@dimen/dp20"
+                android:overScrollMode="never" />
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/dp52"
+                android:layout_marginLeft="@dimen/dp21"
+                android:layout_marginTop="@dimen/dp20"
+                android:layout_marginRight="@dimen/dp21"
+                android:focusable="true"
+                android:focusableInTouchMode="true"
+                android:background="#ECECEC"
+                >
+
+                <TextView
+                    android:id="@+id/tv_count"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:layout_marginLeft="@dimen/dp12"
+                    android:text="@string/count"
+                    android:textColor="@color/txt_black_51"
+                    android:textSize="@dimen/sp15"
+                    />
+
+                <EditText
+                    android:id="@+id/edt_count"
+                    android:layout_width="@dimen/dp60"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="@dimen/dp34"
+                    android:layout_toRightOf="@+id/tv_count"
+                    android:layout_centerVertical="true"
+                    />
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_toRightOf="@+id/edt_count"
+                    android:layout_centerVertical="true"
+                    android:text="斤"
+                    android:textColor="@color/txt_black_51"
+                    android:textSize="@dimen/sp15"
+                    android:textStyle="bold"
+                    />
+
+                <TextView
+                    android:id="@+id/tv_count_ok"
+                    android:layout_width="@dimen/dp86"
+                    android:layout_height="@dimen/dp33"
+                    android:layout_alignParentRight="true"
+                    android:layout_centerVertical="true"
+                    android:layout_marginRight="@dimen/dp10"
+                    android:background="@drawable/bg_button_green_radio"
+                    android:gravity="center"
+                    android:text="@string/ok"
+                    android:textColor="@color/write"
+                    android:textSize="@dimen/sp15"
+                    android:textStyle="bold"
+                    />
+
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/dp52"
+                android:layout_marginLeft="@dimen/dp21"
+                android:layout_marginTop="@dimen/dp10"
+                android:layout_marginRight="@dimen/dp21"
+                android:layout_marginBottom="@dimen/dp15"
+                android:background="#ECECEC"
+                >
+
+                <TextView
+                    android:id="@+id/tv_price"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:layout_marginLeft="@dimen/dp12"
+                    android:text="@string/price"
+                    android:textColor="@color/txt_black_51"
+                    android:textSize="@dimen/sp15"
+                    />
+                <EditText
+                    android:id="@+id/edt_price"
+                    android:layout_width="@dimen/dp60"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="@dimen/dp34"
+                    android:layout_toRightOf="@+id/tv_price"
+                    android:layout_centerVertical="true"
+                    />
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_toRightOf="@+id/edt_price"
+                    android:text="元"
+                    android:layout_centerVertical="true"
+                    android:textColor="@color/txt_black_51"
+                    android:textSize="@dimen/sp15"
+                    android:textStyle="bold"
+                    />
+
+                <TextView
+                    android:layout_width="@dimen/dp86"
+                    android:layout_height="@dimen/dp33"
+                    android:layout_alignParentRight="true"
+                    android:layout_centerVertical="true"
+                    android:layout_marginRight="@dimen/dp10"
+                    android:background="@drawable/bg_button_green_radio"
+                    android:gravity="center"
+                    android:text="@string/ok"
+                    android:textColor="@color/write"
+                    android:textSize="@dimen/sp15"
+                    android:textStyle="bold"
+                    />
+
+            </RelativeLayout>
+
+
+        </LinearLayout>
+    </android.support.v4.widget.NestedScrollView>
+
+
+    <ImageView
+        android:id="@+id/iv_close"
+        android:layout_width="@dimen/dp35"
+        android:layout_height="@dimen/dp35"
+        android:layout_marginTop="@dimen/dp20"
+        android:background="@drawable/bg_close"/>
+
+</LinearLayout>

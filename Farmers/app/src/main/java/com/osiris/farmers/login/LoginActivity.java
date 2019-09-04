@@ -1,15 +1,22 @@
 package com.osiris.farmers.login;
 
+import android.Manifest;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
 import android.view.View;
 import android.widget.FrameLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
+import com.luck.picture.lib.permissions.RxPermissions;
+import com.luck.picture.lib.tools.PictureFileUtils;
 import com.osiris.farmers.R;
 import com.osiris.farmers.base.BaseActivity;
 import com.osiris.farmers.login.fragment.LoginFragment;
 import com.osiris.farmers.login.fragment.RegisterFragment;
+
+import io.reactivex.Observer;
+import io.reactivex.disposables.Disposable;
 
 public class LoginActivity extends BaseActivity implements View.OnClickListener {
 
@@ -40,7 +47,32 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener 
         tvRegister = (TextView) findViewById(R.id.tv_register);
         flLogin = (FrameLayout) findViewById(R.id.fl_login);
         changeView(true);
+        RxPermissions permissions = new RxPermissions(this);
+        permissions.request(Manifest.permission.WRITE_EXTERNAL_STORAGE).subscribe(new Observer<Boolean>() {
+            @Override
+            public void onSubscribe(Disposable d) {
+            }
+
+            @Override
+            public void onNext(Boolean aBoolean) {
+                if (aBoolean) {
+                    PictureFileUtils.deleteCacheDirFile(LoginActivity.this);
+                } else {
+                    Toast.makeText(LoginActivity.this,
+                            getString(R.string.picture_jurisdiction), Toast.LENGTH_SHORT).show();
+                }
+            }
+
+            @Override
+            public void onError(Throwable e) {
+            }
+
+            @Override
+            public void onComplete() {
+            }
+        });
     }
+
 
     private void initListener() {
         tvLogin.setOnClickListener(this);

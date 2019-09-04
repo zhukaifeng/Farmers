@@ -8,6 +8,7 @@ import android.content.Intent;
 import android.content.ServiceConnection;
 import android.graphics.drawable.BitmapDrawable;
 import android.os.IBinder;
+import android.os.Parcelable;
 import android.os.RemoteException;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -38,6 +39,7 @@ import com.osiris.farmers.network.GlobalParams;
 import com.osiris.farmers.network.NetRequest;
 import com.osiris.farmers.network.NetRequestResultListener;
 import com.osiris.farmers.utils.JsonUtils;
+import com.osiris.farmers.view.AddSampleActivity;
 import com.osiris.farmers.view.ChooseStallNoActivity;
 import com.osiris.farmers.view.adapter.MyItemClickListener;
 import com.osiris.farmers.view.adapter.TakeSampleListAdapter;
@@ -216,7 +218,10 @@ public class TakeSampleListFragment extends BaseFragment {
 //					takeSampleList.setDelete(true);
 //				}
 //				dataAdapter.notifyDataSetChanged();
-				showBillOfLandingDetailDialog();
+				Intent intent = new Intent(getActivity(), AddSampleActivity.class);
+				intent.putParcelableArrayListExtra("data_list", (ArrayList<? extends Parcelable>) commodityList);
+				startActivity(intent);
+			//	showBillOfLandingDetailDialog();
 
 				break;
 			case R.id.rl_back:

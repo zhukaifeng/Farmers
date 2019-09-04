@@ -34,7 +34,7 @@ public class NetRequest {
                 .execute(new StringCallback() {
                     @Override
                     public void onError(Call call, Exception e, int id) {
-	                    LogUtils.d("zkf 1:" +e.getMessage());
+	                    LogUtils.d("zkf 1:" +e.getMessage() );
                         listener.requestFailure(tag, -2, "");
                     }
 

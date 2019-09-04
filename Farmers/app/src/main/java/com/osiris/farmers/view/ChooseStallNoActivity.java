@@ -5,6 +5,7 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.text.TextUtils;
 import android.view.View;
+import android.view.Window;
 
 import com.osiris.farmers.R;
 import com.osiris.farmers.base.BaseActivity;

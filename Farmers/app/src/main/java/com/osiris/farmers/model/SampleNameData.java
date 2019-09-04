@@ -1,8 +1,11 @@
 package com.osiris.farmers.model;
 
+import android.os.Parcel;
+import android.os.Parcelable;
+
 import java.util.List;
 
-public class SampleNameData {
+public class SampleNameData implements Parcelable{
 
 
 	/**
@@ -16,6 +19,25 @@ public class SampleNameData {
 	private String count;
 	private String msg;
 	private List<CommodityBean> commodity;
+
+	protected SampleNameData(Parcel in) {
+		code = in.readString();
+		count = in.readString();
+		msg = in.readString();
+		commodity = in.createTypedArrayList(CommodityBean.CREATOR);
+	}
+
+	public static final Creator<SampleNameData> CREATOR = new Creator<SampleNameData>() {
+		@Override
+		public SampleNameData createFromParcel(Parcel in) {
+			return new SampleNameData(in);
+		}
+
+		@Override
+		public SampleNameData[] newArray(int size) {
+			return new SampleNameData[size];
+		}
+	};
 
 	public String getCode() {
 		return code;
@@ -49,7 +71,20 @@ public class SampleNameData {
 		this.commodity = commodity;
 	}
 
-	public static class CommodityBean {
+	@Override
+	public int describeContents() {
+		return 0;
+	}
+
+	@Override
+	public void writeToParcel(Parcel dest, int flags) {
+		dest.writeString(code);
+		dest.writeString(count);
+		dest.writeString(msg);
+		dest.writeTypedList(commodity);
+	}
+
+	public static class CommodityBean implements Parcelable {
 		/**
 		 * beifen : 蔬菜及蔬菜制品
 		 * commobz :
@@ -74,6 +109,52 @@ public class SampleNameData {
 		private String mcrk;
 		private String remark;
 		private boolean select;
+
+		protected CommodityBean(Parcel in) {
+			beifen = in.readString();
+			commobz = in.readString();
+			commodibz = in.readString();
+			commoditynm = in.readString();
+			comtype = in.readInt();
+			id = in.readInt();
+			mark = in.readString();
+			mbrk = in.readString();
+			mcrk = in.readString();
+			remark = in.readString();
+			select = in.readByte() != 0;
+		}
+
+		@Override
+		public void writeToParcel(Parcel dest, int flags) {
+			dest.writeString(beifen);
+			dest.writeString(commobz);
+			dest.writeString(commodibz);
+			dest.writeString(commoditynm);
+			dest.writeInt(comtype);
+			dest.writeInt(id);
+			dest.writeString(mark);
+			dest.writeString(mbrk);
+			dest.writeString(mcrk);
+			dest.writeString(remark);
+			dest.writeByte((byte) (select ? 1 : 0));
+		}
+
+		@Override
+		public int describeContents() {
+			return 0;
+		}
+
+		public static final Creator<CommodityBean> CREATOR = new Creator<CommodityBean>() {
+			@Override
+			public CommodityBean createFromParcel(Parcel in) {
+				return new CommodityBean(in);
+			}
+
+			@Override
+			public CommodityBean[] newArray(int size) {
+				return new CommodityBean[size];
+			}
+		};
 
 		public boolean isSelect() {
 			return select;

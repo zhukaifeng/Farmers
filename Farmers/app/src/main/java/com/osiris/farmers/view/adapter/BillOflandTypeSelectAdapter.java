@@ -5,10 +5,10 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.TextView;
 
 import com.osiris.farmers.R;
 import com.osiris.farmers.model.SampleNameData;
+import com.osiris.farmers.model.TypeSampleTitle;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -16,19 +16,19 @@ import java.util.List;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
-public class BillOflandSelectAdapter  extends RecyclerView.Adapter<RecyclerView.ViewHolder>{
+public class BillOflandTypeSelectAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>{
 
 
 	private MyItemClickListener myItemClickListener;
 
-	private List<SampleNameData.CommodityBean> dataList = new ArrayList<>();
+	private List<TypeSampleTitle> dataList = new ArrayList<>();
 
 
-	public BillOflandSelectAdapter(List<SampleNameData.CommodityBean> dataList) {
+	public BillOflandTypeSelectAdapter(List<TypeSampleTitle> dataList) {
 		this.dataList = dataList;
 	}
 
-	public void setDataList(List<SampleNameData.CommodityBean> dataList) {
+	public void setDataList(List<TypeSampleTitle> dataList) {
 		this.dataList = dataList;
 	}
 
@@ -79,14 +79,14 @@ public class BillOflandSelectAdapter  extends RecyclerView.Adapter<RecyclerView.
 			}
 		}
 
-		public void bindData(SampleNameData.CommodityBean data){
+		public void bindData(TypeSampleTitle data){
 			if (data.isSelect()){
 				rb_check.setChecked(true);
 
 			}else {
 				rb_check.setChecked(false);
 			}
-			rb_check.setText(data.getCommoditynm());
+			rb_check.setText(data.getName());
 
 		}
 	}

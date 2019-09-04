@@ -20,6 +20,8 @@
     <color name="red">#E43F3E</color>
     <color name="background_gray">#E9E9E9</color>
     <color name="calendar_txt">#15314C</color>
+    <color name="translucent_background">#90000000</color>
+    <color name="color_f6">#f6f6f6</color>
 
 
 </resources>
