@@ -12,12 +12,11 @@
         android:layout_margin="@dimen/dp5"
         >
 
-    <android.support.v7.widget.AppCompatRadioButton
+    <TextView
         android:id="@+id/rb_check"
         android:layout_width="@dimen/dp80"
         android:layout_height="@dimen/dp35"
         android:background="@drawable/bg_check_select_top_amount"
-        android:checked="true"
         android:singleLine="true"
         android:ellipsize="end"
         android:textColor="@color/black"

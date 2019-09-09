@@ -26,7 +26,6 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.osiris.farmers.R;
-import com.osiris.farmers.base.ApiContants;
 import com.osiris.farmers.base.BaseFragment;
 import com.osiris.farmers.event.BoothgEvent;
 import com.osiris.farmers.model.ChooseStallData;
@@ -220,6 +219,8 @@ public class TakeSampleListFragment extends BaseFragment {
 //				dataAdapter.notifyDataSetChanged();
 				Intent intent = new Intent(getActivity(), AddSampleActivity.class);
 				intent.putParcelableArrayListExtra("data_list", (ArrayList<? extends Parcelable>) commodityList);
+				intent.putExtra("boothglid",boothglBean.getId());
+				LogUtils.d("zkf boothglid222222:"+ boothglBean.getId());
 				startActivity(intent);
 			//	showBillOfLandingDetailDialog();
 
@@ -477,7 +478,7 @@ public class TakeSampleListFragment extends BaseFragment {
 
 	private void getCheckProject(){
 
-		String url = ApiContants.HOST + "/app/xzjcxm.action";
+		String url = ApiParams.API_HOST + "/app/xzjcxm.action";
 		Map<String, String> paramMap = new HashMap<>();
 		paramMap.put("id", String.valueOf(boothglBean.getId()));
 

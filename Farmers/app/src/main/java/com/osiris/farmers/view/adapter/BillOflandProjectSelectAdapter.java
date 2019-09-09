@@ -1,14 +1,16 @@
 package com.osiris.farmers.view.adapter;
 
-import android.support.v7.widget.AppCompatRadioButton;
+import android.annotation.SuppressLint;
+import android.graphics.Color;
+import android.graphics.drawable.GradientDrawable;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TextView;
 
 import com.osiris.farmers.R;
 import com.osiris.farmers.model.CheckProject;
-import com.osiris.farmers.model.TypeSampleTitle;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -58,7 +60,7 @@ public class BillOflandProjectSelectAdapter extends RecyclerView.Adapter<Recycle
 
 
 		@BindView(R.id.rb_check)
-		AppCompatRadioButton rb_check;
+		TextView rb_check;
 
 
 
@@ -79,12 +81,18 @@ public class BillOflandProjectSelectAdapter extends RecyclerView.Adapter<Recycle
 			}
 		}
 
+		@SuppressLint("ResourceAsColor")
 		public void bindData(CheckProject.JcxmBean data){
 			if (data.isSelect()){
-				rb_check.setChecked(true);
-
+				rb_check.setBackgroundResource(R.drawable.bg_tv_select);
+				GradientDrawable gd = (GradientDrawable) rb_check.getBackground();
+				gd.setColor(itemView.getResources().getColor(R.color.color_00d39d));
+				rb_check.setTextColor(itemView.getResources().getColor(R.color.write));
 			}else {
-				rb_check.setChecked(false);
+				rb_check.setBackgroundResource(R.drawable.bg_tv_unselect);
+				rb_check.setTextColor(itemView.getResources().getColor(R.color.black));
+				GradientDrawable gd = (GradientDrawable) rb_check.getBackground();
+				gd.setColor(Color.parseColor("#ECECEC"));
 			}
 			rb_check.setText(data.getJcmc());
 

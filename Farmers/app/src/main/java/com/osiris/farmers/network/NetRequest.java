@@ -28,6 +28,7 @@ public class NetRequest {
                 .post()
                 .url(url)
                 .params(paramMap)
+
                 .addHeader("Content-Type", "application/json")
 
                 .build()
@@ -286,6 +287,56 @@ public class NetRequest {
                     }
                 });
     }
+
+
+	public static void requestBase64(String url, final int tag, Map<String, String> paramMap, final NetRequestResultListener listener) {
+
+
+//
+//        Map<String, String> map = new HashMap<>();
+////        map.put("Accept", "*/*");
+//        map.put("Content-Type","application/json");
+
+		OkHttpUtils
+				.post()
+				.url(url)
+				.params(paramMap)
+
+				.addHeader("Content-Type", "application/x-www-form-urlencoded")
+
+				.build()
+				.execute(new StringCallback() {
+					@Override
+					public void onError(Call call, Exception e, int id) {
+						LogUtils.d("zkf 1:" +e.getMessage() );
+						listener.requestFailure(tag, -2, "");
+					}
+
+					@Override
+					public void onResponse(String response, int id) {
+						LogUtils.d("zkf 2  response：" + response);
+						if (TextUtils.isEmpty(response)) {
+							listener.requestFailure(tag, -2, "");
+							return;
+						}else {
+							listener.requestSuccess(tag, response);
+
+						}
+
+//                        BaseBean baseBean = JsonUtils.deserialize(response, BaseBean.class);
+//                        if (baseBean.getError() == 200) {
+//                            if (baseBean.getInfo() == null) {
+//                                listener.requestSuccess(tag, "");
+//                            } else {
+//                                listener.requestSuccess(tag, baseBean.getInfo());
+//                            }
+//
+//                        } else {
+//                            listener.requestFailure(tag, baseBean.getError(), baseBean.getMsg());
+//                        }
+					}
+				});
+	}
 
 
 }
