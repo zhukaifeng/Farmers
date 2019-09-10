@@ -37,4 +37,8 @@ dependencies {
     implementation 'joda-time:joda-time:2.9.4'
     implementation 'com.github.LuckSiege.PictureSelector:picture_library:v2.2.3'
     implementation 'org.greenrobot:eventbus:3.0.0'
-    annotationProcessor 'com.jakewharton:butterknife-compiler:8.8.1'}
+    implementation 'com.google.zxing:core:3.3.0'
+    implementation 'cn.bingoogolapple:bga-qrcodecore:1.1.7@aar'
+    implementation 'cn.bingoogolapple:bga-zxing:1.1.7@aar'
+    annotationProcessor 'com.jakewharton:butterknife-compiler:8.8.1'
+}

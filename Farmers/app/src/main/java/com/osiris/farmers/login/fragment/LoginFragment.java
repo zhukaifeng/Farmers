@@ -8,6 +8,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.LinearLayout;
+import android.widget.Toast;
 
 import com.osiris.farmers.R;
 import com.osiris.farmers.base.BaseFragment;
@@ -120,20 +121,20 @@ public class LoginFragment extends BaseFragment {
 
 		String url = ApiParams.API_HOST + "/inloginApp.action";
 
-//		if (TextUtils.isEmpty(etLoginUsername.getText().toString())) {
-//			Toast.makeText(getActivity(), "请输入账号", Toast.LENGTH_SHORT).show();
-//			return;
-//		}
-//		if (TextUtils.isEmpty(etLoginPassword.getText().toString())) {
-//			Toast.makeText(getActivity(), "请输入登录密码", Toast.LENGTH_SHORT).show();
-//			return;
-//		}
+		if (TextUtils.isEmpty(etLoginUsername.getText().toString())) {
+			Toast.makeText(getActivity(), "请输入账号", Toast.LENGTH_SHORT).show();
+			return;
+		}
+		if (TextUtils.isEmpty(etLoginPassword.getText().toString())) {
+			Toast.makeText(getActivity(), "请输入登录密码", Toast.LENGTH_SHORT).show();
+			return;
+		}
 		Map<String, String> paramMap = new HashMap<>();
-//		paramMap.put("username", etLoginUsername.getText().toString());
-//		paramMap.put("password", etLoginPassword.getText().toString());
+		paramMap.put("username", etLoginUsername.getText().toString());
+		paramMap.put("password", etLoginPassword.getText().toString());
 
-		paramMap.put("username", "34");
-		paramMap.put("password", "a123456");
+//		paramMap.put("username", "34");
+//		paramMap.put("password", "a123456");
 
 		NetRequest.request(url, ApiRequestTag.LOGIN, paramMap, new NetRequestResultListener() {
 			@Override

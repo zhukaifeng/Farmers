@@ -1,6 +1,7 @@
 package com.osiris.farmers.view.adapter;
 
 import android.support.v7.widget.RecyclerView;
+import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -9,7 +10,7 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.osiris.farmers.R;
-import com.osiris.farmers.model.TakeSampleList;
+import com.osiris.farmers.model.SampleListData;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -22,10 +23,10 @@ public class TakeSampleListAdapter extends RecyclerView.Adapter<RecyclerView.Vie
 
     private MyItemClickListener myItemClickListener;
 
-    private List<TakeSampleList> dataList = new ArrayList<>();
+    private List<SampleListData.CangysjglsBean> dataList = new ArrayList<>();
 
 
-    public TakeSampleListAdapter(List<TakeSampleList> dataList) {
+    public TakeSampleListAdapter(List<SampleListData.CangysjglsBean> dataList) {
         this.dataList = dataList;
     }
 
@@ -85,23 +86,39 @@ public class TakeSampleListAdapter extends RecyclerView.Adapter<RecyclerView.Vie
             }
         }
 
-        public void bindData(TakeSampleList data){
+        public void bindData(SampleListData.CangysjglsBean data){
             if (getLayoutPosition()%2 == 1){
                 linear_item.setBackgroundColor(itemView.getResources().getColor(R.color.bg_gray_e9));
             }else {
                 linear_item.setBackgroundColor(itemView.getResources().getColor(R.color.write));
             }
-            tv_num.setText(String.valueOf(data.getSampleId()));
-            tv_count.setText(data.getSampleCount());
-            tv_type.setText(data.getSampleType());
-            tv_time.setText(data.getSampleTime());
-            if (data.isDelete()){
-                tv_print.setVisibility(View.GONE);
-                iv_print.setBackgroundResource(R.drawable.bg_delete);
+            tv_num.setText(String.valueOf(data.getId()));
+            if (!TextUtils.isEmpty(data.getCysum())){
+	            tv_count.setText(data.getCysum());
             }else {
-                tv_print.setVisibility(View.VISIBLE);
-                iv_print.setBackgroundResource(R.drawable.bg_print_gray);
+	            tv_count.setText("");
             }
+	        if (!TextUtils.isEmpty(data.getYpbh())){
+		        tv_type.setText(data.getYpbh());
+	        }else {
+		        tv_type.setText("");
+	        }
+	        if (!TextUtils.isEmpty(data.getLlrq())){
+		        tv_time.setText(data.getLlrq().substring(0,10));
+	        }else {
+		        tv_time.setText("");
+	        }
+
+
+            tv_print.setVisibility(View.GONE);
+	        iv_print.setVisibility(View.GONE);
+//            if (data.isDelete()){
+//                tv_print.setVisibility(View.GONE);
+//                iv_print.setBackgroundResource(R.drawable.bg_delete);
+//            }else {
+//                tv_print.setVisibility(View.VISIBLE);
+//                iv_print.setBackgroundResource(R.drawable.bg_print_gray);
+//            }
         }
     }
 

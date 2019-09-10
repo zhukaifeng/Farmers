@@ -15,11 +15,28 @@
         >
 
         <LinearLayout
+            android:id="@+id/linear_content"
             android:layout_width="@dimen/dp349"
             android:layout_height="@dimen/dp535"
             android:background="@drawable/bg_white_all_radio"
             android:orientation="vertical">
 
+            <RelativeLayout
+                android:id="@+id/relative_content"
+                android:layout_width="@dimen/dp349"
+                android:layout_height="@dimen/dp535"
+                android:background="@drawable/bg_white_all_radio"
+                android:visibility="gone"
+                >
+
+                <ImageView
+                    android:id="@+id/iv_bmp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerInParent="true"
+                    />
+
+            </RelativeLayout>
 
            <android.support.v7.widget.RecyclerView
                android:id="@+id/rv_type"
@@ -64,6 +81,7 @@
             </RelativeLayout>
 
             <LinearLayout
+                android:id="@+id/linear_name"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="@dimen/dp21"
@@ -101,6 +119,7 @@
                 />
 
             <LinearLayout
+                android:id="@+id/linear_project"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="@dimen/dp21"
@@ -138,6 +157,7 @@
                 android:overScrollMode="never" />
 
             <RelativeLayout
+                android:id="@+id/relative_count"
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/dp52"
                 android:layout_marginLeft="@dimen/dp21"
@@ -197,6 +217,7 @@
             </RelativeLayout>
 
             <RelativeLayout
+                android:id="@+id/relative_price"
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/dp52"
                 android:layout_marginLeft="@dimen/dp21"
@@ -255,6 +276,9 @@
 
 
         </LinearLayout>
+
+
+
     </android.support.v4.widget.NestedScrollView>
 
 

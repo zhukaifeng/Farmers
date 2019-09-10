@@ -30,6 +30,7 @@ import com.osiris.farmers.base.BaseFragment;
 import com.osiris.farmers.event.BoothgEvent;
 import com.osiris.farmers.model.ChooseStallData;
 import com.osiris.farmers.model.GoodsType;
+import com.osiris.farmers.model.SampleListData;
 import com.osiris.farmers.model.SampleNameData;
 import com.osiris.farmers.model.TakeSampleList;
 import com.osiris.farmers.network.ApiParams;
@@ -88,7 +89,6 @@ public class TakeSampleListFragment extends BaseFragment {
 
 
 	private List<TakeSampleList> dataList = new ArrayList<>();
-	private TakeSampleListAdapter dataAdapter = new TakeSampleListAdapter(dataList);
 	private PopupWindow popupWindow;
 
 	private List<ChooseStallData.BoothglBean> stallList = new ArrayList<>();
@@ -96,6 +96,8 @@ public class TakeSampleListFragment extends BaseFragment {
 
 	private List<SampleNameData.CommodityBean> commodityList= new ArrayList<>();
 
+	private List<SampleListData.CangysjglsBean> cangysjglsList = new ArrayList<>();
+	private TakeSampleListAdapter dataAdapter = new TakeSampleListAdapter(cangysjglsList);
 
 	//线程运行标志 the running flag of thread
 	private boolean runFlag = true;
@@ -135,10 +137,10 @@ public class TakeSampleListFragment extends BaseFragment {
 		});
 
 
-		dataList.add(new TakeSampleList(0123456, "牛肉", "10斤", "2019.03.20"));
-		dataList.add(new TakeSampleList(0123456, "牛肉", "10斤", "2019.03.20"));
-		dataList.add(new TakeSampleList(0123456, "牛肉", "10斤", "2019.03.20"));
-		dataList.add(new TakeSampleList(0123456, "牛肉", "10斤", "2019.03.20"));
+//		dataList.add(new TakeSampleList(0123456, "牛肉", "10斤", "2019.03.20"));
+//		dataList.add(new TakeSampleList(0123456, "牛肉", "10斤", "2019.03.20"));
+//		dataList.add(new TakeSampleList(0123456, "牛肉", "10斤", "2019.03.20"));
+//		dataList.add(new TakeSampleList(0123456, "牛肉", "10斤", "2019.03.20"));
 
 		rv_data.setLayoutManager(new LinearLayoutManager(this.getActivity(), LinearLayoutManager.VERTICAL, false));
 		rv_data.setAdapter(dataAdapter);
@@ -150,7 +152,7 @@ public class TakeSampleListFragment extends BaseFragment {
 
 			}
 		});
-
+		getData();
 
 		getGoodsType();
 		getStallNo();
@@ -277,6 +279,35 @@ public class TakeSampleListFragment extends BaseFragment {
 	}
 
 
+	private void getData(){
+		String url = ApiParams.API_HOST + "/app/showAllCysjxz.action";
+		Map<String, String> paramMap = new HashMap<>();
+
+
+		NetRequest.request(url, ApiRequestTag.DATA, paramMap, new NetRequestResultListener() {
+
+			@Override
+			public void requestSuccess(int tag, String successResult) {
+				//String temp = successResult.substring(1, successResult.length() - 1);
+				if (!TextUtils.isEmpty(successResult)){
+					SampleListData tempData = JsonUtils.fromJson(successResult, SampleListData.class);
+					cangysjglsList.addAll(tempData.getCangysjgls());
+					LogUtils.d("zkf cangysjglsList:" + cangysjglsList.size());
+					dataAdapter.notifyDataSetChanged();
+				}
+
+			}
+
+			@Override
+			public void requestFailure(int tag, int code, String msg) {
+
+			}
+		});
+
+	}
+
+
+
 	private void showPopwindow() {
 		contentView = LayoutInflater.from(getActivity()).inflate(
 				R.layout.layout_choose_stall, null);
@@ -316,11 +347,14 @@ public class TakeSampleListFragment extends BaseFragment {
 					for (ChooseStallData.BoothglBean boothglBean : stallList) {
 						stallNameList.add(boothglBean.getTwhmc());
 					}
-					boothglBean = stallList.get(0);
-					if (stallNameList.size() > 0) {
-						tv_shop_num.setText(stallNameList.get(0));
+					if (null != stallList && stallList.size()>0){
+						boothglBean = stallList.get(0);
+						if (stallNameList.size() > 0) {
+							tv_shop_num.setText(stallNameList.get(0));
+						}
+						getCheckProject();
 					}
-					getCheckProject();
+
 
 				}
 

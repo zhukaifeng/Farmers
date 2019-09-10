@@ -1,6 +1,7 @@
 package com.osiris.farmers.view;
 
 import android.content.Intent;
+import android.graphics.Bitmap;
 import android.os.Handler;
 import android.os.Message;
 import android.support.v7.widget.GridLayoutManager;
@@ -12,6 +13,8 @@ import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -30,6 +33,7 @@ import com.osiris.farmers.network.GlobalParams;
 import com.osiris.farmers.network.NetRequest;
 import com.osiris.farmers.network.NetRequestResultListener;
 import com.osiris.farmers.utils.JsonUtils;
+import com.osiris.farmers.utils.ZXingUtils;
 import com.osiris.farmers.view.adapter.BillOflandProjectSelectAdapter;
 import com.osiris.farmers.view.adapter.BillOflandSelectAdapter;
 import com.osiris.farmers.view.adapter.BillOflandTypeSelectAdapter;
@@ -70,6 +74,20 @@ public class AddSampleActivity extends BaseActivity {
 	RecyclerView rv_project;
 	@BindView(R.id.tv_type_name)
 	TextView tv_type_name;
+	@BindView(R.id.linear_content)
+	LinearLayout linear_content;
+	@BindView(R.id.relative_content)
+	RelativeLayout relative_content;
+	@BindView(R.id.iv_bmp)
+	ImageView iv_bmp;
+	@BindView(R.id.linear_name)
+	LinearLayout linear_name;
+	@BindView(R.id.linear_project)
+	LinearLayout linear_project;
+	@BindView(R.id.relative_count)
+	RelativeLayout relative_count;
+	@BindView(R.id.relative_price)
+	RelativeLayout relative_price;
 
 	private Handler mHandler = new Handler();
 	private List<String> picUploadList = new ArrayList<>();
@@ -426,7 +444,12 @@ public class AddSampleActivity extends BaseActivity {
 		Map<String, String> paramMap = new HashMap<>();
 		paramMap.put("marketid", String.valueOf(GlobalParams.currentMarketId));
 		LogUtils.d("zkf marketid:" + GlobalParams.currentMarketId);
-		paramMap.put("boothglid", String.valueOf(boothglid));
+		if (boothglid>0){
+			paramMap.put("boothglid", String.valueOf(boothglid));
+		}else {
+			Toast.makeText(this, "请选择摊位号", Toast.LENGTH_SHORT).show();
+			return;
+		}
 		LogUtils.d("zkf boothglid:" + boothglid);
 		paramMap.put("descriptionid", String.valueOf(descriptionid));
 		LogUtils.d("zkf descriptionid:" + descriptionid);
@@ -480,9 +503,25 @@ public class AddSampleActivity extends BaseActivity {
 				//String temp = successResult.substring(1, successResult.length() - 1);
 
 				LogUtils.d("zkf temp:" + successResult);
-				if (successResult.equals("1")){
+				if (!successResult.equals("0")){
 					Toast.makeText(AddSampleActivity.this,"采集成功",Toast.LENGTH_SHORT).show();
-					finish();
+					picUploadList.clear();
+					Bitmap bitmap = ZXingUtils.createQRImage(successResult, 400,  400);
+					rv_type.setVisibility(View.GONE);
+					rv_project.setVisibility(View.GONE);
+					recyclerView.setVisibility(View.GONE);
+					linear_name.setVisibility(View.GONE);
+					linear_project.setVisibility(View.GONE);
+					rv_data.setVisibility(View.GONE);
+					relative_count.setVisibility(View.GONE);
+					relative_price.setVisibility(View.GONE);
+
+					relative_content.setVisibility(View.VISIBLE);
+					iv_bmp.setImageBitmap(bitmap);
+
+					//finish();
+				}else {
+					Toast.makeText(AddSampleActivity.this,"采集失败，请重新尝试",Toast.LENGTH_SHORT).show();
 				}
 
 			}
@@ -495,5 +534,40 @@ public class AddSampleActivity extends BaseActivity {
 
 
 	}
+
+
+
+	private void getCaiysj(String path) {
+
+		String url = ApiParams.API_HOST + "getCaiysj";//database
+
+		Map<String, String> paramMap = new HashMap<>();
+		paramMap.put("database", "data:image/png;base64," + "data:image/png;base64" + imageToBase64(path));
+		NetRequest.requestBase64(url, ApiRequestTag.DATA, paramMap, new NetRequestResultListener() {
+			@Override
+			public void requestSuccess(int tag, String successResult) {
+				//String temp = successResult.substring(1, successResult.length() - 1);
+
+				LogUtils.d("zkf temp:" + successResult);
+				if (successResult.contains("png")) {
+					LogUtils.d("zkf upload success");
+					picUploadList.add(successResult);
+					if (picUploadList.size() == selectList.size()) {
+						mHadler.sendEmptyMessage(MSG_UPLOAD_COMPLETE);
+					}
+				}
+
+			}
+
+			@Override
+			public void requestFailure(int tag, int code, String msg) {
+
+			}
+		});
+
+
+	}
+
+
 
 }
