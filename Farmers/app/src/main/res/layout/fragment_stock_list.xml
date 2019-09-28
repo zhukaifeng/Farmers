@@ -70,8 +70,8 @@
             android:layout_width="match_parent"
             android:layout_height="@dimen/dp71"
             android:layout_alignParentBottom="true"
-            android:visibility="gone"
-            android:background="@drawable/bg_rectange">
+            android:background="@drawable/bg_rectange"
+            android:visibility="gone">
 
             <LinearLayout
                 android:layout_width="wrap_content"
@@ -81,16 +81,14 @@
 
                 <ImageView
                     android:layout_width="@dimen/dp27"
-                    android:layout_height="@dimen/dp27"
-                    />
+                    android:layout_height="@dimen/dp27" />
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="@string/add_other_supplier"
-                    android:textSize="@dimen/sp20"
                     android:textColor="@color/write"
-                    />
+                    android:textSize="@dimen/sp20" />
             </LinearLayout>
         </RelativeLayout>
 
@@ -128,8 +126,7 @@
                 android:layout_centerVertical="true"
                 android:layout_marginLeft="@dimen/dp10"
                 android:layout_toRightOf="@+id/tv_supplier"
-                android:background="@drawable/bg_pic_add"
-           />
+                android:background="@drawable/bg_pic_add" />
 
             <TextView
                 android:id="@+id/tv_booth_num"
@@ -139,7 +136,6 @@
                 android:layout_centerVertical="true"
                 android:layout_marginLeft="@dimen/dp8"
                 android:layout_marginRight="@dimen/dp15"
-                android:drawableRight="@drawable/bg_arrow_down"
                 android:drawablePadding="@dimen/dp8"
                 android:text="@string/supplier"
                 android:textColor="@color/write"
@@ -449,162 +445,279 @@
         android:id="@+id/rl_input_info"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:visibility="gone"
         android:orientation="vertical">
 
-        <RelativeLayout
-            android:id="@+id/rl_phone"
-            android:layout_width="@dimen/dp292"
-            android:layout_height="@dimen/dp45"
-            android:layout_below="@+id/rl_top"
-            android:layout_centerHorizontal="true"
-            android:layout_marginTop="@dimen/dp12"
-            android:background="@drawable/bg_black_line_round">
+        <android.support.v4.widget.NestedScrollView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
 
-            <EditText
+            <RelativeLayout
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:background="@null"
-                android:hint="@string/supplier_name"
-                android:minLines="1"
-                android:paddingLeft="@dimen/dp27"
-                android:paddingRight="@dimen/dp40"
-                android:textColorHint="@color/txt_black_51_06"
-                android:textSize="@dimen/sp14" />
+                android:layout_height="wrap_content">
+
+                <RelativeLayout
+                    android:id="@+id/rl_phone"
+                    android:layout_width="@dimen/dp292"
+                    android:layout_height="@dimen/dp45"
+                    android:layout_below="@+id/rl_top"
+                    android:layout_centerHorizontal="true"
+                    android:layout_marginTop="@dimen/dp12"
+                    android:background="@drawable/bg_black_line_round">
+
+                    <EditText
+                        android:id="@+id/edit_name"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:background="@null"
+                        android:hint="@string/supplier_name"
+                        android:minLines="1"
+                        android:paddingLeft="@dimen/dp27"
+                        android:paddingRight="@dimen/dp40"
+                        android:textColorHint="@color/txt_black_51_06"
+                        android:textSize="@dimen/sp14" />
 
 
-            <ImageView
-                android:layout_width="@dimen/dp17"
-                android:layout_height="@dimen/dp17"
-                android:layout_alignParentRight="true"
-                android:layout_centerVertical="true"
-                android:layout_marginRight="@dimen/dp23"
-                android:background="@drawable/bg_supplier_name" />
+                    <ImageView
+                        android:layout_width="@dimen/dp17"
+                        android:layout_height="@dimen/dp17"
+                        android:layout_alignParentRight="true"
+                        android:layout_centerVertical="true"
+                        android:layout_marginRight="@dimen/dp23"
+                        android:background="@drawable/bg_supplier_name"
+                        android:visibility="gone" />
 
 
-        </RelativeLayout>
+                </RelativeLayout>
 
-        <RelativeLayout
-            android:id="@+id/rl_type"
-            android:layout_width="@dimen/dp292"
-            android:layout_height="@dimen/dp45"
-            android:layout_below="@+id/rl_phone"
-            android:layout_centerHorizontal="true"
-            android:layout_marginTop="@dimen/dp12"
-            android:background="@drawable/bg_black_line_round">
+                <RelativeLayout
+                    android:id="@+id/rl_type"
+                    android:layout_width="@dimen/dp292"
+                    android:layout_height="@dimen/dp45"
+                    android:layout_below="@+id/rl_phone"
+                    android:layout_centerHorizontal="true"
+                    android:layout_marginTop="@dimen/dp12"
+                    android:background="@drawable/bg_black_line_round">
 
-            <EditText
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:background="@null"
-                android:hint="@string/card_num"
-                android:minLines="1"
-                android:paddingLeft="@dimen/dp27"
-                android:paddingRight="@dimen/dp40"
-                android:textColorHint="@color/txt_black_51_06"
-                android:textSize="@dimen/sp14" />
-
-
-            <ImageView
-                android:layout_width="@dimen/dp22"
-                android:layout_height="@dimen/dp22"
-                android:layout_alignParentRight="true"
-                android:layout_centerVertical="true"
-                android:layout_marginRight="@dimen/dp23"
-                android:background="@drawable/bg_card_num" />
+                    <EditText
+                        android:id="@+id/edit_num"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:background="@null"
+                        android:hint="编号"
+                        android:minLines="1"
+                        android:paddingLeft="@dimen/dp27"
+                        android:paddingRight="@dimen/dp40"
+                        android:textColorHint="@color/txt_black_51_06"
+                        android:textSize="@dimen/sp14" />
 
 
-        </RelativeLayout>
-
-        <RelativeLayout
-            android:id="@+id/rl_credit_degree"
-            android:layout_width="@dimen/dp292"
-            android:layout_height="@dimen/dp45"
-            android:layout_below="@+id/rl_type"
-            android:layout_centerHorizontal="true"
-            android:layout_marginTop="@dimen/dp12"
-            android:background="@drawable/bg_black_line_round">
-
-            <EditText
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:background="@null"
-                android:hint="@string/contract_info"
-                android:minLines="1"
-                android:paddingLeft="@dimen/dp27"
-                android:paddingRight="@dimen/dp40"
-                android:textColorHint="@color/txt_black_51_06"
-                android:textSize="@dimen/sp14" />
+                    <ImageView
+                        android:layout_width="@dimen/dp22"
+                        android:layout_height="@dimen/dp22"
+                        android:layout_alignParentRight="true"
+                        android:layout_centerVertical="true"
+                        android:layout_marginRight="@dimen/dp23"
+                        android:background="@drawable/bg_card_num"
+                        android:visibility="gone" />
 
 
-            <ImageView
-                android:layout_width="@dimen/dp13"
-                android:layout_height="@dimen/dp20"
-                android:layout_alignParentRight="true"
-                android:layout_centerVertical="true"
-                android:layout_marginRight="@dimen/dp23"
-                android:background="@drawable/bg_contract_info" />
+                </RelativeLayout>
 
-        </RelativeLayout>
+                <RelativeLayout
+                    android:id="@+id/rl_credit_degree"
+                    android:layout_width="@dimen/dp292"
+                    android:layout_height="@dimen/dp45"
+                    android:layout_below="@+id/rl_type"
+                    android:layout_centerHorizontal="true"
+                    android:layout_marginTop="@dimen/dp12"
+                    android:background="@drawable/bg_black_line_round">
 
-        <RelativeLayout
-            android:id="@+id/rl_check_status"
-            android:layout_width="@dimen/dp292"
-            android:layout_height="@dimen/dp45"
-            android:layout_below="@+id/rl_credit_degree"
-            android:layout_centerHorizontal="true"
-            android:layout_marginTop="@dimen/dp12"
-            android:background="@drawable/bg_black_line_round">
-
-            <EditText
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:background="@null"
-                android:hint="@string/check_status"
-                android:minLines="1"
-                android:paddingLeft="@dimen/dp27"
-                android:paddingRight="@dimen/dp40"
-                android:textColorHint="@color/txt_black_51"
-                android:textSize="@dimen/sp14" />
+                    <EditText
+                        android:id="@+id/edit_type"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:background="@null"
+                        android:hint="分类"
+                        android:minLines="1"
+                        android:paddingLeft="@dimen/dp27"
+                        android:paddingRight="@dimen/dp40"
+                        android:textColorHint="@color/txt_black_51_06"
+                        android:textSize="@dimen/sp14" />
 
 
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_alignParentRight="true"
-                android:layout_centerVertical="true"
-                android:layout_marginRight="@dimen/dp23"
-                android:text="未检测"
-                android:textColorHint="@color/txt_black_51" />
+                    <ImageView
+                        android:layout_width="@dimen/dp13"
+                        android:layout_height="@dimen/dp20"
+                        android:layout_alignParentRight="true"
+                        android:layout_centerVertical="true"
+                        android:layout_marginRight="@dimen/dp23"
+                        android:background="@drawable/bg_contract_info"
+                        android:visibility="gone" />
 
-        </RelativeLayout>
+                </RelativeLayout>
+
+                <RelativeLayout
+                    android:id="@+id/rl_check_status"
+                    android:layout_width="@dimen/dp292"
+                    android:layout_height="@dimen/dp45"
+                    android:layout_below="@+id/rl_credit_degree"
+                    android:layout_centerHorizontal="true"
+                    android:layout_marginTop="@dimen/dp12"
+                    android:background="@drawable/bg_black_line_round">
+
+                    <EditText
+                        android:id="@+id/edit_connect"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:background="@null"
+                        android:hint="联系人"
+                        android:minLines="1"
+                        android:paddingLeft="@dimen/dp27"
+                        android:paddingRight="@dimen/dp40"
+                        android:textColorHint="@color/txt_black_51_06"
+                        android:textSize="@dimen/sp14" />
 
 
-        <TextView
-            android:id="@+id/tv_confirm"
-            android:layout_width="@dimen/dp292"
-            android:layout_height="@dimen/dp45"
-            android:layout_below="@+id/rl_check_status"
-            android:layout_centerHorizontal="true"
-            android:layout_marginTop="@dimen/dp12"
-            android:background="@drawable/bg_green_round"
-            android:gravity="center"
-            android:text="@string/confirm"
-            android:textColor="@color/write"
-            android:textSize="@dimen/sp16" />
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentRight="true"
+                        android:layout_centerVertical="true"
+                        android:layout_marginRight="@dimen/dp23"
+                        android:text="未检测"
+                        android:textColorHint="@color/txt_black_51"
+                        android:visibility="gone" />
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_below="@+id/tv_confirm"
-            android:layout_centerHorizontal="true"
-            android:layout_marginTop="@dimen/dp10"
-            android:gravity="center"
-            android:text="@string/remark_store_list"
-            android:textColor="@color/txt_black_153"
-            android:textSize="@dimen/sp14"
+                </RelativeLayout>
 
-            />
+                <RelativeLayout
+                    android:id="@+id/rl_credit_adress"
+                    android:layout_width="@dimen/dp292"
+                    android:layout_height="@dimen/dp45"
+                    android:layout_below="@+id/rl_check_status"
+                    android:layout_centerHorizontal="true"
+                    android:layout_marginTop="@dimen/dp12"
+                    android:background="@drawable/bg_black_line_round">
+
+                    <EditText
+                        android:id="@+id/edit_adress"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:background="@null"
+                        android:hint="地址"
+                        android:minLines="1"
+                        android:paddingLeft="@dimen/dp27"
+                        android:paddingRight="@dimen/dp40"
+                        android:textColorHint="@color/txt_black_51_06"
+                        android:textSize="@dimen/sp14" />
+
+
+                    <ImageView
+                        android:layout_width="@dimen/dp13"
+                        android:layout_height="@dimen/dp20"
+                        android:layout_alignParentRight="true"
+                        android:layout_centerVertical="true"
+                        android:layout_marginRight="@dimen/dp23"
+                        android:background="@drawable/bg_contract_info"
+                        android:visibility="gone" />
+
+                </RelativeLayout>
+
+                <RelativeLayout
+                    android:id="@+id/rl_credit_phone"
+                    android:layout_width="@dimen/dp292"
+                    android:layout_height="@dimen/dp45"
+                    android:layout_below="@+id/rl_credit_adress"
+                    android:layout_centerHorizontal="true"
+                    android:layout_marginTop="@dimen/dp12"
+                    android:background="@drawable/bg_black_line_round">
+
+                    <EditText
+                        android:id="@+id/edit_phone"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:background="@null"
+                        android:hint="电话"
+                        android:minLines="1"
+                        android:paddingLeft="@dimen/dp27"
+                        android:paddingRight="@dimen/dp40"
+                        android:textColorHint="@color/txt_black_51_06"
+                        android:textSize="@dimen/sp14" />
+
+
+                    <ImageView
+                        android:layout_width="@dimen/dp13"
+                        android:layout_height="@dimen/dp20"
+                        android:layout_alignParentRight="true"
+                        android:layout_centerVertical="true"
+                        android:layout_marginRight="@dimen/dp23"
+                        android:background="@drawable/bg_contract_info"
+                        android:visibility="gone" />
+
+                </RelativeLayout>
+
+                <RelativeLayout
+                    android:id="@+id/rl_credit_card"
+                    android:layout_width="@dimen/dp292"
+                    android:layout_height="@dimen/dp45"
+                    android:layout_below="@+id/rl_credit_phone"
+                    android:layout_centerHorizontal="true"
+                    android:layout_marginTop="@dimen/dp12"
+                    android:background="@drawable/bg_black_line_round">
+
+                    <EditText
+                        android:id="@+id/edit_card"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:background="@null"
+                        android:hint="营业执照"
+                        android:minLines="1"
+                        android:paddingLeft="@dimen/dp27"
+                        android:paddingRight="@dimen/dp40"
+                        android:textColorHint="@color/txt_black_51_06"
+                        android:textSize="@dimen/sp14" />
+
+
+                    <ImageView
+                        android:layout_width="@dimen/dp13"
+                        android:layout_height="@dimen/dp20"
+                        android:layout_alignParentRight="true"
+                        android:layout_centerVertical="true"
+                        android:layout_marginRight="@dimen/dp23"
+                        android:background="@drawable/bg_contract_info"
+                        android:visibility="gone" />
+
+                </RelativeLayout>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/tv_confirm"
+                    android:layout_centerHorizontal="true"
+                    android:layout_marginTop="@dimen/dp10"
+                    android:gravity="center"
+                    android:text="@string/remark_store_list"
+                    android:textColor="@color/txt_black_153"
+                    android:textSize="@dimen/sp14"
+                    android:visibility="gone"
+
+                    />
+
+                <TextView
+                    android:id="@+id/tv_confirm"
+                    android:layout_width="@dimen/dp292"
+                    android:layout_height="@dimen/dp45"
+                    android:layout_below="@+id/rl_credit_card"
+                    android:layout_centerHorizontal="true"
+                    android:layout_marginTop="@dimen/dp12"
+                    android:background="@drawable/bg_green_round"
+                    android:gravity="center"
+                    android:text="@string/confirm"
+                    android:textColor="@color/write"
+                    android:textSize="@dimen/sp16" />
+            </RelativeLayout>
+        </android.support.v4.widget.NestedScrollView>
+
     </RelativeLayout>
 
 
