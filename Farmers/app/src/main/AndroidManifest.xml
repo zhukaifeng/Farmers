@@ -55,7 +55,9 @@
         <activity android:name=".view.AddSampleActivity"
             android:theme="@style/translucent"
             />
-
+        <activity android:name=".view.AddJinhuoListActivity"
+            android:theme="@style/translucent"
+            />
 
         <!-- <intent-filter> -->
             <!-- <action android:name="android.intent.action.MAIN" /> -->

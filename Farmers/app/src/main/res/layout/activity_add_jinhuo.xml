@@ -36,30 +36,8 @@
                     android:layout_centerInParent="true"
                     />
 
-
-                <TextView
-                    android:id="@+id/tv_print"
-                    android:layout_width="@dimen/dp126"
-                    android:layout_height="@dimen/dp33"
-                    android:layout_below="@+id/iv_bmp"
-                    android:layout_marginTop="@dimen/dp10"
-                    android:background="@drawable/bg_button_green_radio"
-                    android:layout_centerHorizontal="true"
-                    android:gravity="center"
-                    android:text="打印"
-                    android:textColor="@color/write"
-                    android:textSize="@dimen/sp15"
-                    android:textStyle="bold"
-                    />
             </RelativeLayout>
 
-           <android.support.v7.widget.RecyclerView
-               android:id="@+id/rv_type"
-               android:layout_width="match_parent"
-               android:layout_height="@dimen/dp40"
-               android:layout_marginTop="@dimen/dp15"
-               android:layout_marginLeft="@dimen/dp21"
-               android:layout_marginRight="@dimen/dp21"/>
 
 
             <RelativeLayout
@@ -110,17 +88,6 @@
                     android:layout_gravity="center_vertical"
                     android:background="@drawable/bg_icon_market"/>
 
-                <TextView
-                    android:id="@+id/tv_type_name"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center_vertical"
-                    android:layout_marginLeft="@dimen/dp10"
-                    android:text="@string/vegetable"
-                    android:textSize="@dimen/sp16"
-                    android:textStyle="bold"
-
-                    />
 
             </LinearLayout>
 
@@ -133,43 +100,8 @@
                 android:layout_marginRight="@dimen/dp21"
                 />
 
-            <LinearLayout
-                android:id="@+id/linear_project"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="@dimen/dp21"
-                android:layout_marginTop="@dimen/dp16"
-                android:orientation="horizontal">
 
 
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center_vertical"
-                    android:text="检测项目"
-                    android:textSize="@dimen/sp16"
-                    android:textStyle="bold"
-
-                    />
-
-            </LinearLayout>
-
-            <android.support.v7.widget.RecyclerView
-                android:id="@+id/rv_project"
-                android:layout_width="match_parent"
-                android:layout_height="@dimen/dp90"
-                android:layout_marginLeft="@dimen/dp21"
-                android:layout_marginTop="@dimen/dp20"
-                android:layout_marginRight="@dimen/dp21"
-                />
-            <android.support.v7.widget.RecyclerView
-                android:id="@+id/recycler"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginRight="@dimen/dp21"
-                android:layout_marginLeft="@dimen/dp21"
-                android:layout_marginTop="@dimen/dp20"
-                android:overScrollMode="never" />
 
             <RelativeLayout
                 android:id="@+id/relative_count"
@@ -283,6 +215,125 @@
                     android:background="@drawable/bg_button_green_radio"
                     android:gravity="center"
                     android:text="@string/ok"
+                    android:textColor="@color/write"
+                    android:textSize="@dimen/sp15"
+                    android:textStyle="bold"/>
+
+            </RelativeLayout>
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/dp52"
+                android:layout_marginLeft="@dimen/dp21"
+                android:layout_marginRight="@dimen/dp21"
+                android:focusable="true"
+                android:focusableInTouchMode="true"
+                android:background="#ECECEC"
+                >
+
+                <TextView
+                    android:id="@+id/tv_date"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:layout_marginLeft="@dimen/dp12"
+                    android:text="生产日期"
+                    android:textColor="@color/txt_black_51"
+                    android:textSize="@dimen/sp15"
+                    />
+
+                <EditText
+                    android:id="@+id/edt_date"
+                    android:layout_width="@dimen/dp220"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="@dimen/dp5"
+                    android:layout_toRightOf="@+id/tv_date"
+                    android:hint="(日期格式YYYY-MM-DD)"
+                    android:layout_centerVertical="true"
+                    android:textColor="@color/black"
+                    />
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_toRightOf="@+id/edt_date"
+                    android:layout_centerVertical="true"
+                    android:layout_marginLeft="@dimen/dp10"
+                    android:text="(日期格式YYYY-MM-DD)"
+                    android:visibility="gone"
+                    android:textColor="@color/txt_black_51"
+                    android:textSize="@dimen/sp12"
+                    android:textStyle="bold"
+                    />
+
+                <TextView
+                    android:id="@+id/tv_date_ok"
+                    android:layout_width="@dimen/dp86"
+                    android:layout_height="@dimen/dp33"
+                    android:layout_alignParentRight="true"
+                    android:layout_centerVertical="true"
+                    android:layout_marginRight="@dimen/dp10"
+                    android:background="@drawable/bg_button_green_radio"
+                    android:gravity="center"
+                    android:text="@string/ok"
+                    android:visibility="gone"
+                    android:textColor="@color/write"
+                    android:textSize="@dimen/sp15"
+                    android:textStyle="bold"
+                    />
+
+            </RelativeLayout>
+            <RelativeLayout
+                android:id="@+id/relative_no"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/dp52"
+                android:layout_marginLeft="@dimen/dp21"
+                android:layout_marginTop="@dimen/dp10"
+                android:layout_marginRight="@dimen/dp21"
+                android:layout_marginBottom="@dimen/dp15"
+                android:background="#ECECEC"
+                >
+
+                <TextView
+                    android:id="@+id/tv_no"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:layout_marginLeft="@dimen/dp12"
+                    android:text="批号"
+                    android:textColor="@color/txt_black_51"
+                    android:textSize="@dimen/sp15"
+                    />
+                <EditText
+                    android:id="@+id/edt_no"
+                    android:layout_width="@dimen/dp60"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="@dimen/dp34"
+                    android:layout_toRightOf="@+id/tv_no"
+                    android:textColor="@color/black"
+                    android:layout_centerVertical="true"
+                    />
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_toRightOf="@+id/edt_no"
+                    android:text=""
+                    android:layout_centerVertical="true"
+                    android:textColor="@color/txt_black_51"
+                    android:textSize="@dimen/sp15"
+                    android:textStyle="bold"
+                    />
+
+                <TextView
+                    android:id="@+id/tv_no_ok"
+                    android:layout_width="@dimen/dp86"
+                    android:layout_height="@dimen/dp33"
+                    android:layout_alignParentTop="true"
+                    android:layout_alignParentRight="true"
+                    android:layout_marginTop="9dp"
+                    android:layout_marginRight="@dimen/dp10"
+                    android:background="@drawable/bg_button_green_radio"
+                    android:gravity="center"
+                    android:text="@string/ok"
+                    android:visibility="gone"
                     android:textColor="@color/write"
                     android:textSize="@dimen/sp15"
                     android:textStyle="bold"/>

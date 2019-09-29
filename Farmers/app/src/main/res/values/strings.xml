@@ -147,7 +147,7 @@
     <string name="check_status">检测状态</string>
     <string name="remark_store_list">注：点击右上角扫描营业执照二维码可快速录入</string>
     <string name="add_other_supplier">其他采购商信息录入</string>
-    <string name="add_new_supplier">新增采购商</string>
+    <string name="add_new_supplier">新增供应商商</string>
     <string name="shipping_stock">出货库存</string>
     <string name="left_count">剩余数量</string>
     <string name="operator_inquiry">经营户查询</string>

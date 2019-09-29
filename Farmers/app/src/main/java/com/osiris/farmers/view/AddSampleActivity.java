@@ -1,9 +1,14 @@
 package com.osiris.farmers.view;
 
+import android.content.ComponentName;
+import android.content.Context;
 import android.content.Intent;
+import android.content.ServiceConnection;
 import android.graphics.Bitmap;
 import android.os.Handler;
+import android.os.IBinder;
 import android.os.Message;
+import android.os.RemoteException;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -40,6 +45,7 @@ import com.osiris.farmers.view.adapter.BillOflandTypeSelectAdapter;
 import com.osiris.farmers.view.adapter.GridImageAdapter;
 import com.osiris.farmers.view.adapter.MyItemClickListener;
 import com.osiris.farmers.view.widget.FullyGridLayoutManager;
+import com.smartdevice.aidl.IZKCService;
 
 import java.io.FileInputStream;
 import java.io.IOException;
@@ -92,10 +98,42 @@ public class AddSampleActivity extends BaseActivity {
 	private Handler mHandler = new Handler();
 	private List<String> picUploadList = new ArrayList<>();
 
-	@OnClick({R.id.iv_close, R.id.tv_count_ok,R.id.tv_price_ok})
+	//线程运行标志 the running flag of thread
+	private boolean runFlag = true;
+	//打印机检测标志 the detect flag of printer
+	private boolean detectFlag = false;
+	//打印机连接超时时间 link timeout of printer
+	private float PINTER_LINK_TIMEOUT_MAX = 30 * 1000L;
+	//标签打印标记 the flag of tag print
+	private boolean autoOutputPaper = false;
+
+
+	@OnClick({R.id.iv_close, R.id.tv_count_ok,R.id.tv_price_ok,R.id.tv_print})
 	void onClick(View v) {
 		switch (v.getId()) {
+			case R.id.tv_print:
+				String text = printType + ":" + printName
+						+"\n" + "检测项目:" + printJcmName
+						+"\n" + "数量:" + printCount
+						+"\n" + "价格:" +printPrince
+						+"\n";
+				try {
+					mIzkcService.printGBKText(text);
+				} catch (RemoteException e) {
+					Log.e("", "远程服务未连接...");
+					e.printStackTrace();
+				}
+				printPic();
+				String text2 = "\n";
+				try {
+					mIzkcService.printGBKText(text2);
+				} catch (RemoteException e) {
+					Log.e("", "远程服务未连接...");
+					e.printStackTrace();
+				}
+				break;
 			case R.id.iv_close:
+
 				finish();
 				break;
 			case R.id.tv_count_ok:
@@ -125,6 +163,32 @@ public class AddSampleActivity extends BaseActivity {
 		}
 	}
 
+	private void printPic() {
+		Bitmap mBitmap = ZXingUtils.createQRImage("333", 400,  400);
+		try {
+			if (mBitmap != null) {
+				/*switch (imageType) {
+					case 0:
+						mIzkcService.printBitmap(mBitmap);
+						break;
+					case 1:
+						mIzkcService.printImageGray(mBitmap);
+						break;
+					case 2:
+						mIzkcService.printRasterImage(mBitmap);
+						break;
+				}*/
+				mIzkcService.printBitmap(mBitmap);
+
+//				if (autoOutputPaper) {
+//					mIzkcService.generateSpace();
+//				}
+			}
+		} catch (RemoteException e) {
+			Log.e("", "远程服务未连接...");
+			e.printStackTrace();
+		}
+	}
 
 	private static final int MSG_UPLOAD_COMPLETE = 1022;
 	private Handler mHadler = new Handler() {
@@ -155,6 +219,13 @@ public class AddSampleActivity extends BaseActivity {
 	private String descriptionid;
 	private int jcxmid = -1;
 	private int commodityid = -1;
+
+	private String printType = "";
+	private String printName = "";
+	private String printJcmName="";
+	private String printCount = "";
+	private String printPrince = "";
+
 
 	@Override
 	public int getLayoutResId() {
@@ -223,6 +294,7 @@ public class AddSampleActivity extends BaseActivity {
 				billOflandSelectAdapter.notifyDataSetChanged();
 
 				descriptionid = commodityNameList.get(position).getName();
+				printName = descriptionid;
 
 			}
 		});
@@ -246,6 +318,8 @@ public class AddSampleActivity extends BaseActivity {
 				}
 				commodityid = showDataList.get(position).getId();
 				billOflandSelectAdapter.notifyDataSetChanged();
+
+				printType = showDataList.get(position).getCommoditynm();
 
 				getCheckProject(showDataList.get(position).getId());
 
@@ -278,11 +352,12 @@ public class AddSampleActivity extends BaseActivity {
 				billOflandProjectSelectAdapter.notifyDataSetChanged();
 
 				jcxmid = checkProjectList.get(position).getId();
+				printJcmName = checkProjectList.get(position).getJcmc();
 
 			}
 		});
 		getCheckProject(showDataList.get(0).getId());
-
+		bindService();
 
 	}
 
@@ -482,7 +557,7 @@ public class AddSampleActivity extends BaseActivity {
 		if (!TextUtils.isEmpty(edt_count.getText().toString())) {
 			paramMap.put("cysum", edt_count.getText().toString());
 			LogUtils.d("zkf cysum:" + edt_count.getText().toString());
-
+			printCount = edt_count.getText().toString();
 		} else {
 			Toast.makeText(this, "请输入数量", Toast.LENGTH_SHORT).show();
 			return;
@@ -491,7 +566,7 @@ public class AddSampleActivity extends BaseActivity {
 		if (!TextUtils.isEmpty(edt_price.getText().toString())) {
 			paramMap.put("money", edt_price.getText().toString());
 			LogUtils.d("zkf money:" + edt_price.getText().toString());
-
+			printPrince = edt_price.getText().toString();
 		} else {
 			Toast.makeText(this, "请输入价格", Toast.LENGTH_SHORT).show();
 			return;
@@ -566,6 +641,40 @@ public class AddSampleActivity extends BaseActivity {
 		});
 
 
+	}
+
+	public static IZKCService mIzkcService;
+	private ServiceConnection mServiceConn = new ServiceConnection() {
+		@Override
+		public void onServiceDisconnected(ComponentName name) {
+
+		}
+
+		@Override
+		public void onServiceConnected(ComponentName name, IBinder service) {
+			mIzkcService = IZKCService.Stub.asInterface(service);
+			if (mIzkcService != null) {
+				try {
+					//获取产品型号 get product model
+					DEVICE_MODEL = mIzkcService.getDeviceModel();
+					//设置当前模块 set current function module
+					mIzkcService.setModuleFlag(module_flag);
+				} catch (RemoteException e) {
+					e.printStackTrace();
+				}
+			}
+		}
+	};
+	public static int DEVICE_MODEL = 0;
+	public static int module_flag = 0;
+
+	public void bindService() {
+		//com.zkc.aidl.all为远程服务的名称，不可更改
+		//com.smartdevice.aidl为远程服务声明所在的包名，不可更改，
+		// 对应的项目所导入的AIDL文件也应该在该包名下
+		Intent intent = new Intent("com.zkc.aidl.all");
+		intent.setPackage("com.smartdevice.aidl");
+		bindService(intent, mServiceConn, Context.BIND_AUTO_CREATE);
 	}
 
 

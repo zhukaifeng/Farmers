@@ -133,7 +133,7 @@ public class LoginFragment extends BaseFragment {
 //		paramMap.put("username", etLoginUsername.getText().toString());
 //		paramMap.put("password", etLoginPassword.getText().toString());
 
-		paramMap.put("username", "8888");
+		paramMap.put("username", "34");
 		paramMap.put("password", "a123456");
 
 		NetRequest.request(url, ApiRequestTag.LOGIN, paramMap, new NetRequestResultListener() {

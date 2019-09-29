@@ -3,8 +3,10 @@ package com.osiris.farmers.goods.fragment;
 import android.app.Dialog;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.os.Parcelable;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.text.TextUtils;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.RelativeLayout;
@@ -14,6 +16,8 @@ import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
 import com.osiris.farmers.R;
 import com.osiris.farmers.base.BaseFragment;
+import com.osiris.farmers.event.BoothgEvent;
+import com.osiris.farmers.model.SampleNameData;
 import com.osiris.farmers.model.StockListData;
 import com.osiris.farmers.model.StoreSupplier;
 import com.osiris.farmers.network.ApiParams;
@@ -22,11 +26,16 @@ import com.osiris.farmers.network.GlobalParams;
 import com.osiris.farmers.network.NetRequest;
 import com.osiris.farmers.network.NetRequestResultListener;
 import com.osiris.farmers.utils.JsonUtils;
+import com.osiris.farmers.view.AddJinhuoListActivity;
+import com.osiris.farmers.view.AddSampleActivity;
 import com.osiris.farmers.view.ChooseStoreSuoolierActivity;
 import com.osiris.farmers.view.adapter.MyItemClickListener;
 import com.osiris.farmers.view.adapter.StockListAdapter;
 import com.osiris.farmers.view.dialog.BillOflandingDialog;
 import com.osiris.farmers.view.dialog.DialogClickListener;
+
+import org.greenrobot.eventbus.Subscribe;
+import org.greenrobot.eventbus.ThreadMode;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -76,6 +85,7 @@ public class StockListFragment extends BaseFragment {
     private List<StockListData> dataList = new ArrayList<>();
     private StockListAdapter dataAdapter = new StockListAdapter(dataList);
     private List<StoreSupplier.CustomerBean> customer = new ArrayList<>();
+    private List<SampleNameData.CommodityBean> commodityList = new ArrayList<>();
 
     @Override
     protected int setLayout() {
@@ -99,6 +109,7 @@ public class StockListFragment extends BaseFragment {
             }
         });
         getStoreList();
+        getStallName();
     }
 
     @Override
@@ -117,7 +128,11 @@ public class StockListFragment extends BaseFragment {
                 postStoreInfor();
                 break;
             case R.id.rl_add:
-                showBillOfLandingDetailDialog();
+                Intent intent1 = new Intent(getActivity(), AddJinhuoListActivity.class);
+                intent1.putParcelableArrayListExtra("data_list", (ArrayList<? extends Parcelable>) commodityList);
+                intent1.putExtra("jinhuo",customerBean.getUserid());
+                startActivity(intent1);
+                // showBillOfLandingDetailDialog();
                 break;
             case R.id.tv_add:
                 rl_back.setVisibility(View.VISIBLE);
@@ -228,5 +243,40 @@ public class StockListFragment extends BaseFragment {
 
     }
 
+    private void getStallName() {
+
+        String url = ApiParams.API_HOST + "/app/xzCommodity.action";
+        Map<String, String> paramMap = new HashMap<>();
+        paramMap.put("id", String.valueOf(GlobalParams.currentMarketId));
+
+        NetRequest.request(url, ApiRequestTag.DATA, paramMap, new NetRequestResultListener() {
+            @Override
+            public void requestSuccess(int tag, String successResult) {
+                String temp = successResult.substring(1, successResult.length() - 1);
+                if (!TextUtils.isEmpty(successResult)) {
+                    LogUtils.d("zkf  successResult:" + successResult);
+                    SampleNameData tempData = JsonUtils.fromJson(temp, SampleNameData.class);
+                    commodityList.addAll(tempData.getCommodity());
+
+                }
+
+
+            }
+
+            @Override
+            public void requestFailure(int tag, int code, String msg) {
+
+            }
+        });
+    }
+
+    @Subscribe(threadMode = ThreadMode.MAIN)
+    public void onGetMessage(StoreSupplier.CustomerBean customerBean) {
+        this.customerBean = customerBean;
+
+        tv_booth_num.setText(customerBean.getUserid());
+
+
+    }
 
 }

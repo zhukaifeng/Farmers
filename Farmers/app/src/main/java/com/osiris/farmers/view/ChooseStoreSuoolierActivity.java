@@ -5,6 +5,7 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.text.TextUtils;
 import android.view.View;
+import android.widget.TextView;
 
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
@@ -28,6 +29,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import butterknife.BindBitmap;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import me.jessyan.autosize.utils.LogUtils;
@@ -37,6 +39,8 @@ public class ChooseStoreSuoolierActivity extends BaseActivity {
 
 	@BindView(R.id.rv_data)
 	RecyclerView rvData;
+	@BindView(R.id.tv_title)
+	TextView tv_title;
 
 
 	private List<StoreSupplier.CustomerBean> customer = new ArrayList<>();
@@ -50,6 +54,7 @@ public class ChooseStoreSuoolierActivity extends BaseActivity {
 
 	@Override
 	public void init() {
+		tv_title.setText("选择供应商");
 
 		getStoreList();
 		rvData.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false));
@@ -59,6 +64,7 @@ public class ChooseStoreSuoolierActivity extends BaseActivity {
 			public void onItemClick(View view, int position) {
 				//postEvent(new BoothgEvent(stallList.get(position).getId(),stallList.get(position).getTwhmc(),stallList.get(position).getMarketid()));
 				//把返回数据存入Intent
+				postEvent(customer.get(position));
 				finish();
 
 			}
