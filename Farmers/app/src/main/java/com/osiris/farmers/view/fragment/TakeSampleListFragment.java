@@ -222,6 +222,9 @@ public class TakeSampleListFragment extends BaseFragment {
 				Intent intent = new Intent(getActivity(), AddSampleActivity.class);
 				intent.putParcelableArrayListExtra("data_list", (ArrayList<? extends Parcelable>) commodityList);
 				intent.putExtra("boothglid",boothglBean.getId());
+				if (!TextUtils.isEmpty(tv_shop_num.getText().toString())){
+					intent.putExtra("stall_name",tv_shop_num.getText().toString());
+				}
 				LogUtils.d("zkf boothglid222222:"+ boothglBean.getId());
 				startActivity(intent);
 			//	showBillOfLandingDetailDialog();

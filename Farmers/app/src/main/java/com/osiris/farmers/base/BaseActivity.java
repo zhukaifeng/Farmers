@@ -1,8 +1,10 @@
 package com.osiris.farmers.base;
 
 import android.app.Activity;
+import android.app.Dialog;
 import android.app.Instrumentation;
 import android.content.Intent;
+import android.graphics.PorterDuff;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
@@ -11,10 +13,13 @@ import android.support.v4.app.FragmentActivity;
 import android.util.DisplayMetrics;
 import android.view.Display;
 import android.view.KeyEvent;
+import android.view.LayoutInflater;
 import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
+import android.widget.ProgressBar;
 
+import com.osiris.farmers.R;
 import com.osiris.farmers.event.DefaultEvent;
 import com.osiris.farmers.utils.MyActivityUtils;
 
@@ -160,4 +165,42 @@ public abstract class BaseActivity extends FragmentActivity {
         msg.what = mWhat;
         mHandler.sendMessage(msg);
     }
+    private volatile int loadDialogShowCount = 0;
+
+    protected Dialog loadDialog;
+
+
+    protected synchronized void showLoadDialog() {
+        if (loadDialog == null) {
+            loadDialog = new Dialog(this, R.style.loadingDialog);
+            View progressContentView = LayoutInflater.from(this).inflate(R.layout
+                    .layout_loading_dialog, null);
+            ProgressBar pb = (ProgressBar) progressContentView.findViewById(R.id.pb);
+            pb.getIndeterminateDrawable().setColorFilter(getResources().getColor(R.color
+                    .base_color), PorterDuff.Mode.SRC_ATOP);
+            loadDialog.setContentView(progressContentView);
+            loadDialog.setCancelable(true);
+            loadDialog.setCanceledOnTouchOutside(false);
+        }
+        if (!loadDialog.isShowing()) {
+            loadDialog.show();
+        }
+        loadDialogShowCount++;
+    }
+    protected void cancelLoadDialog() {
+        cancelLoadDialog(false);
+    }
+
+    protected synchronized void cancelLoadDialog(boolean force) {
+        if (force) {
+            loadDialogShowCount = 0;
+        }
+        loadDialogShowCount--;
+        if (loadDialog != null && loadDialogShowCount <= 0) {
+            loadDialog.cancel();
+        }
+    }
+
+
+
 }

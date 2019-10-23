@@ -130,11 +130,11 @@ public class LoginFragment extends BaseFragment {
 //			return;
 //		}
 		Map<String, String> paramMap = new HashMap<>();
-//		paramMap.put("username", etLoginUsername.getText().toString());
-//		paramMap.put("password", etLoginPassword.getText().toString());
+		paramMap.put("username", etLoginUsername.getText().toString());
+		paramMap.put("password", etLoginPassword.getText().toString());
 
-		paramMap.put("username", "34");
-		paramMap.put("password", "a123456");
+//		paramMap.put("username", "34");
+//		paramMap.put("password", "a123456");
 
 		NetRequest.request(url, ApiRequestTag.LOGIN, paramMap, new NetRequestResultListener() {
 			@Override
@@ -152,10 +152,10 @@ public class LoginFragment extends BaseFragment {
 							intent.putExtra("type", 1);
 
 						} else if (GlobalParams.authority.equals("监管部门")) {
-							intent.putExtra("type", 2);
+							intent.putExtra("type", 3);
 
 						} else if (GlobalParams.authority.equals("检测机构")) {
-							intent.putExtra("type", 3);
+							intent.putExtra("type", 2);
 
 						} else if (GlobalParams.authority.equals("市场管理")) {
 							intent.putExtra("type", 4);

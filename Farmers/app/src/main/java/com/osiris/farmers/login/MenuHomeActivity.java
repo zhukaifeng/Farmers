@@ -34,6 +34,7 @@ public class MenuHomeActivity extends BaseActivity {
 	private final String tag_stock_goods = "stock_goods";
 	private final String tag_stock_pay = "stock_pay";
 	private int menuType;
+	private int currentPage=0;
 
 	@Override
 	public int getLayoutResId() {
@@ -48,6 +49,7 @@ public class MenuHomeActivity extends BaseActivity {
 	private void initView() {
 
 		menuType = getIntent().getIntExtra("type", 1);
+		currentPage = getIntent().getIntExtra("select",0);
 		tabhostMainMenu.setup(this, getSupportFragmentManager(), R.id.frame_home_content);
 		tabhostMainMenu.getTabWidget().setShowDividers(LinearLayout.SHOW_DIVIDER_NONE);
 		tabhostMainMenu.getTabWidget().setDividerDrawable(null);
@@ -188,6 +190,7 @@ public class MenuHomeActivity extends BaseActivity {
 				break;
 
 		}
+		tabhostMainMenu.setCurrentTab(currentPage);
 
 
 	}

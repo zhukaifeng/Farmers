@@ -33,6 +33,7 @@ import butterknife.OnClick;
 import me.jessyan.autosize.utils.LogUtils;
 
 import static com.osiris.farmers.network.GlobalParams.currentMarketId;
+import static com.osiris.farmers.network.GlobalParams.currentMarkrtName;
 
 public class HomeActivity extends BaseActivity {
 
@@ -73,6 +74,7 @@ public class HomeActivity extends BaseActivity {
 	private List<Market.MarketBean> marketList = new ArrayList<>();
 	private List<String> marketNameList = new ArrayList<>();
 	private int marketId = 0;
+	private String marketName;
 
 	@Override
 	public int getLayoutResId() {
@@ -102,6 +104,7 @@ public class HomeActivity extends BaseActivity {
 			@Override
 			public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
 				marketId = marketList.get(position).getId();
+				currentMarkrtName = marketList.get(position).getMarketnm();
 				currentMarketId = marketId;
 				LogUtils.d("zkf marketId:" + marketId);
 			}
@@ -140,6 +143,7 @@ public class HomeActivity extends BaseActivity {
 
 				}
 				intent.putExtra("market_id",marketId);
+				intent.putExtra("select",0);
 				startActivity(intent);
 				break;
 
@@ -157,6 +161,7 @@ public class HomeActivity extends BaseActivity {
 
 				}
 				intent2.putExtra("market_id",marketId);
+				intent2.putExtra("select",1);
 				startActivity(intent2);
 				break;
 
@@ -176,6 +181,7 @@ public class HomeActivity extends BaseActivity {
 
 				}
 				intent3.putExtra("market_id",marketId);
+				intent3.putExtra("select",2);
 				startActivity(intent3);
 				break;
 
@@ -198,6 +204,7 @@ public class HomeActivity extends BaseActivity {
 					intent4.putExtra("type", 4);
 				}
 				intent4.putExtra("market_id",marketId);
+				intent4.putExtra("select",3);
 				startActivity(intent4);
 				break;
 			default:

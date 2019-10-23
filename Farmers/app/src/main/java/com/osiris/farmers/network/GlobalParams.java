@@ -6,6 +6,7 @@ public class GlobalParams {
 	public static String username;
 	public static int id;
 	public static int currentMarketId;
+	public static String currentMarkrtName;
 
 
 }
