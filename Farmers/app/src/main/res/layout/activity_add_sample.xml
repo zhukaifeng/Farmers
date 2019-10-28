@@ -221,6 +221,7 @@
                     android:layout_alignParentRight="true"
                     android:layout_centerVertical="true"
                     android:layout_marginRight="@dimen/dp10"
+                    android:visibility="gone"
                     android:background="@drawable/bg_button_green_radio"
                     android:gravity="center"
                     android:text="@string/ok"
@@ -283,12 +284,28 @@
                     android:background="@drawable/bg_button_green_radio"
                     android:gravity="center"
                     android:text="@string/ok"
+                    android:visibility="gone"
                     android:textColor="@color/write"
                     android:textSize="@dimen/sp15"
                     android:textStyle="bold"/>
 
             </RelativeLayout>
-
+            <TextView
+                android:id="@+id/tv_ok"
+                android:layout_width="@dimen/dp126"
+                android:layout_height="@dimen/dp33"
+                android:layout_alignParentRight="true"
+                android:layout_centerVertical="true"
+                android:layout_marginRight="@dimen/dp10"
+                android:layout_marginBottom="@dimen/dp15"
+                android:background="@drawable/bg_button_green_radio"
+                android:gravity="center"
+                android:layout_gravity="center_horizontal"
+                android:text="@string/ok"
+                android:textColor="@color/write"
+                android:textSize="@dimen/sp15"
+                android:textStyle="bold"
+                />
 
         </LinearLayout>
 

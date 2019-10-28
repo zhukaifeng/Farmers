@@ -109,8 +109,9 @@ public class AddSampleActivity extends BaseActivity {
     private boolean autoOutputPaper = false;
     private String marketName;
     private String stallName;
+    private String printId;
 
-    @OnClick({R.id.iv_close, R.id.tv_count_ok, R.id.tv_price_ok, R.id.tv_print})
+    @OnClick({R.id.iv_close, R.id.tv_count_ok, R.id.tv_price_ok, R.id.tv_print,R.id.tv_ok})
     void onClick(View v) {
         switch (v.getId()) {
             case R.id.tv_print:
@@ -120,10 +121,13 @@ public class AddSampleActivity extends BaseActivity {
                             + "\n" + "摊位号:" + stallName
                             + "\n";
                 }
-                String text = printType + ":" + printName
+//                String text = printType + ":" + printName
+//                        + "\n" + "检测项目:" + printJcmName
+//                        + "\n" + "数量:" + printCount + "斤"
+//                        + "\n" + "价格:" + printPrince + "元"
+//                        + "\n";
+                String text = "样品编码:" + printId
                         + "\n" + "检测项目:" + printJcmName
-                        + "\n" + "数量:" + printCount + "斤"
-                        + "\n" + "价格:" + printPrince + "元"
                         + "\n";
                 try {
                     if (!TextUtils.isEmpty(title)) {
@@ -175,11 +179,22 @@ public class AddSampleActivity extends BaseActivity {
 
 
                 break;
+            case R.id.tv_ok:
+                for (final LocalMedia localMedia : selectList) {
+                    showLoadDialog();
+                    mHandler.post(new Runnable() {
+                        @Override
+                        public void run() {
+                            uploadPic(localMedia.getCompressPath());
+                        }
+                    });
+                }
+                break;
         }
     }
 
     private void printPic() {
-        Bitmap mBitmap = ZXingUtils.createQRImage("333", 400, 400);
+        Bitmap mBitmap = ZXingUtils.createQRImage(printId, 400, 400);
         try {
             if (mBitmap != null) {
 				/*switch (imageType) {
@@ -365,13 +380,13 @@ public class AddSampleActivity extends BaseActivity {
         billOflandProjectSelectAdapter.setOnItemClick(new MyItemClickListener() {
             @Override
             public void onItemClick(View view, int position) {
-                for (int i = 0; i < checkProjectList.size(); i++) {
-                    if (i == position) {
-                        checkProjectList.get(i).setSelect(true);
-                    } else {
-                        checkProjectList.get(i).setSelect(false);
-                    }
+
+                if (!checkProjectList.get(position).isSelect()) {
+                    checkProjectList.get(position).setSelect(true);
+                } else {
+                    checkProjectList.get(position).setSelect(false);
                 }
+
                 billOflandProjectSelectAdapter.notifyDataSetChanged();
 
                 jcxmid = checkProjectList.get(position).getId();
@@ -605,6 +620,7 @@ public class AddSampleActivity extends BaseActivity {
                     Toast.makeText(AddSampleActivity.this, "采集成功", Toast.LENGTH_SHORT).show();
                     cancelLoadDialog();
                     picUploadList.clear();
+                    printId = successResult;
                     Bitmap bitmap = ZXingUtils.createQRImage(successResult, 400, 400);
                     rv_type.setVisibility(View.GONE);
                     rv_project.setVisibility(View.GONE);

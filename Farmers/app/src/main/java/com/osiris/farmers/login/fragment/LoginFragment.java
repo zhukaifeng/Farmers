@@ -130,11 +130,11 @@ public class LoginFragment extends BaseFragment {
 //			return;
 //		}
 		Map<String, String> paramMap = new HashMap<>();
-		paramMap.put("username", etLoginUsername.getText().toString());
-		paramMap.put("password", etLoginPassword.getText().toString());
+//		paramMap.put("username", etLoginUsername.getText().toString());
+//		paramMap.put("password", etLoginPassword.getText().toString());
 
-//		paramMap.put("username", "34");
-//		paramMap.put("password", "a123456");
+		paramMap.put("username", "jc1");
+		paramMap.put("password", "a123456");
 
 		NetRequest.request(url, ApiRequestTag.LOGIN, paramMap, new NetRequestResultListener() {
 			@Override

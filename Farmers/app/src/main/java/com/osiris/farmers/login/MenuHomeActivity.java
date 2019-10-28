@@ -14,6 +14,7 @@ import com.osiris.farmers.view.TabItem;
 import com.osiris.farmers.view.fragment.ChargeManagerFragment;
 import com.osiris.farmers.view.fragment.DatebacktoFragment;
 import com.osiris.farmers.view.fragment.LifePayFragment;
+import com.osiris.farmers.view.fragment.MarketEvaulateFragment;
 import com.osiris.farmers.view.fragment.MyFragment;
 import com.osiris.farmers.view.fragment.OperatorInquiryFragment;
 import com.osiris.farmers.view.fragment.PersonalLifePayFragment;
@@ -101,7 +102,7 @@ public class MenuHomeActivity extends BaseActivity {
 
 				tabhostMainMenu.addTab(tabhostMainMenu.newTabSpec(tag_stock_pay).setIndicator(new
 								TabItem(this, R.drawable.tab_mine, R.string.mine, 0)),
-						MyFragment.class, null);
+						MarketEvaulateFragment.class, null);
 
 				tabhostMainMenu.setOnTabChangedListener(new TabHost.OnTabChangeListener() {
 					@Override
