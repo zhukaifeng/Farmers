@@ -145,7 +145,7 @@
                 android:layout_height="match_parent"
                 android:layout_weight="1"
                 android:gravity="center"
-                android:text="@string/takesample_num"
+                android:text="编号"
                 android:textSize="@dimen/sp15"
                 android:textStyle="bold"/>
 
@@ -159,7 +159,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_centerInParent="true"
-                    android:text="@string/takesample_type"
+                    android:text="商品名称"
                     android:textSize="@dimen/sp15"
                     android:textStyle="bold"
 
@@ -181,7 +181,7 @@
                 android:layout_height="match_parent"
                 android:layout_weight="1"
                 android:gravity="center"
-                android:text="@string/takesample_count"
+                android:text="市场"
                 android:textSize="@dimen/sp15"
                 android:textStyle="bold"
 
@@ -192,7 +192,7 @@
                 android:layout_height="match_parent"
                 android:layout_weight="1"
                 android:gravity="center"
-                android:text="@string/takesample_time"
+                android:text="摊位号"
                 android:textSize="@dimen/sp15"
                 android:textStyle="bold"
 
@@ -202,9 +202,12 @@
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
+                android:gravity="center"
+                android:text="时间"
+                android:textSize="@dimen/sp15"
+                android:textStyle="bold"
 
                 />
-
 
         </LinearLayout>
 

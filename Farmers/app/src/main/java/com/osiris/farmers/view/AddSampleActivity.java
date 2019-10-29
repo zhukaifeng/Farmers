@@ -274,10 +274,6 @@ public class AddSampleActivity extends BaseActivity {
         boothglid = getIntent().getIntExtra("boothglid", 0);
         stallName = getIntent().getStringExtra("stall_name");
         marketName = GlobalParams.currentMarkrtName;
-        LogUtils.d("zkf boothglid:" + boothglid);
-
-        LogUtils.d("zkf marketName:" + marketName);
-        LogUtils.d("zkf stallName:" + stallName);
 
         showDataList.addAll(dataList);
 
@@ -564,10 +560,12 @@ public class AddSampleActivity extends BaseActivity {
             return;
         }
         LogUtils.d("zkf boothglid:" + boothglid);
-        paramMap.put("descriptionid", String.valueOf(descriptionid));
-        LogUtils.d("zkf descriptionid:" + descriptionid);
-        paramMap.put("commodityid", String.valueOf(commodityid));
-        LogUtils.d("zkf commodityid:" + commodityid);
+        if (!TextUtils.isEmpty(String.valueOf(descriptionid))){
+            paramMap.put("descriptionid", String.valueOf(descriptionid));
+        }
+        if (commodityid>0){
+            paramMap.put("commodityid", String.valueOf(commodityid));
+        }
 
         if (jcxmid > 0) {
             paramMap.put("jcxmid", String.valueOf(jcxmid));

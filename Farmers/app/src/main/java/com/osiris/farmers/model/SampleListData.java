@@ -1,5 +1,8 @@
 package com.osiris.farmers.model;
 
+import android.os.Parcel;
+import android.os.Parcelable;
+
 import java.util.List;
 
 public class SampleListData {
@@ -49,7 +52,7 @@ public class SampleListData {
 		this.cangysjgls = cangysjgls;
 	}
 
-	public static class CangysjglsBean {
+	public static class CangysjglsBean implements Parcelable {
 		/**
 		 * id : 1
 		 * ypmc : 874
@@ -91,6 +94,40 @@ public class SampleListData {
 		private String mbrk;
 		private String mcrk;
 		private String remark;
+
+		protected CangysjglsBean(Parcel in) {
+			id = in.readInt();
+			ypmc = in.readString();
+			bcdwmc = in.readString();
+			twh = in.readString();
+			cysum = in.readString();
+			comname = in.readString();
+			sczhutfl = in.readString();
+			yplb = in.readString();
+			user = in.readString();
+			phone = in.readString();
+			ypbh = in.readString();
+			yyzz = in.readString();
+			cyfei = in.readString();
+			tsremark = in.readString();
+			llrq = in.readString();
+			mark = in.readString();
+			mbrk = in.readString();
+			mcrk = in.readString();
+			remark = in.readString();
+		}
+
+		public static final Creator<CangysjglsBean> CREATOR = new Creator<CangysjglsBean>() {
+			@Override
+			public CangysjglsBean createFromParcel(Parcel in) {
+				return new CangysjglsBean(in);
+			}
+
+			@Override
+			public CangysjglsBean[] newArray(int size) {
+				return new CangysjglsBean[size];
+			}
+		};
 
 		public int getId() {
 			return id;
@@ -242,6 +279,34 @@ public class SampleListData {
 
 		public void setRemark(String remark) {
 			this.remark = remark;
+		}
+
+		@Override
+		public int describeContents() {
+			return 0;
+		}
+
+		@Override
+		public void writeToParcel(Parcel dest, int flags) {
+			dest.writeInt(id);
+			dest.writeString(ypmc);
+			dest.writeString(bcdwmc);
+			dest.writeString(twh);
+			dest.writeString(cysum);
+			dest.writeString(comname);
+			dest.writeString(sczhutfl);
+			dest.writeString(yplb);
+			dest.writeString(user);
+			dest.writeString(phone);
+			dest.writeString(ypbh);
+			dest.writeString(yyzz);
+			dest.writeString(cyfei);
+			dest.writeString(tsremark);
+			dest.writeString(llrq);
+			dest.writeString(mark);
+			dest.writeString(mbrk);
+			dest.writeString(mcrk);
+			dest.writeString(remark);
 		}
 	}
 }

@@ -53,6 +53,7 @@
         <activity android:name=".view.ScoringDetailActivity"/>
         <activity android:name=".view.ChooseStallNoActivity"/>
         <activity android:name=".view.ChooseStoreSuoolierActivity"/>
+        <activity android:name=".view.PrintDetailActivity"/>
         <activity android:name=".view.AddSampleActivity"
             android:theme="@style/translucent"
             />

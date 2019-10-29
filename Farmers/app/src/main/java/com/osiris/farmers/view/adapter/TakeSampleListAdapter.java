@@ -66,8 +66,6 @@ public class TakeSampleListAdapter extends RecyclerView.Adapter<RecyclerView.Vie
         LinearLayout linear_item;
         @BindView(R.id.tv_print)
         TextView tv_print;
-        @BindView(R.id.iv_print)
-        ImageView iv_print;
 
 
         private MyItemClickListener myItemClickListener;
@@ -93,25 +91,34 @@ public class TakeSampleListAdapter extends RecyclerView.Adapter<RecyclerView.Vie
                 linear_item.setBackgroundColor(itemView.getResources().getColor(R.color.write));
             }
             tv_num.setText(String.valueOf(data.getId()));
-            if (!TextUtils.isEmpty(data.getCysum())){
-	            tv_count.setText(data.getCysum());
+            //市场名称
+            if (!TextUtils.isEmpty(data.getComname())){
+	            tv_count.setText(data.getComname());
             }else {
 	            tv_count.setText("");
             }
+
 	        if (!TextUtils.isEmpty(data.getYpbh())){
 		        tv_type.setText(data.getYpbh());
 	        }else {
 		        tv_type.setText("");
 	        }
+
+	        //摊位号
+            if (!TextUtils.isEmpty(data.getSczhutfl())){
+                tv_print.setText(data.getSczhutfl());
+            }else {
+                tv_print.setText("");
+            }
+
+	        //时间
 	        if (!TextUtils.isEmpty(data.getLlrq())){
-		        tv_time.setText(data.getLlrq().substring(0,10));
+                tv_print.setText(data.getLlrq().substring(0,10));
 	        }else {
-		        tv_time.setText("");
+                tv_print.setText("");
 	        }
 
 
-            tv_print.setVisibility(View.GONE);
-	        iv_print.setVisibility(View.GONE);
 //            if (data.isDelete()){
 //                tv_print.setVisibility(View.GONE);
 //                iv_print.setBackgroundResource(R.drawable.bg_delete);

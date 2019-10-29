@@ -41,6 +41,7 @@ import com.osiris.farmers.network.NetRequestResultListener;
 import com.osiris.farmers.utils.JsonUtils;
 import com.osiris.farmers.view.AddSampleActivity;
 import com.osiris.farmers.view.ChooseStallNoActivity;
+import com.osiris.farmers.view.PrintDetailActivity;
 import com.osiris.farmers.view.adapter.MyItemClickListener;
 import com.osiris.farmers.view.adapter.TakeSampleListAdapter;
 import com.osiris.farmers.view.adapter.TypeGoodsAdapter;
@@ -148,7 +149,9 @@ public class TakeSampleListFragment extends BaseFragment {
 		dataAdapter.setOnItemClick(new MyItemClickListener() {
 			@Override
 			public void onItemClick(View view, int position) {
-
+				Intent intent = new Intent(getActivity(), PrintDetailActivity.class);
+				intent.putExtra("data",cangysjglsList.get(position));
+				startActivity(intent);
 
 			}
 		});
