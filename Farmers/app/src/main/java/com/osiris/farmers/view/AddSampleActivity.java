@@ -541,13 +541,6 @@ public class AddSampleActivity extends BaseActivity {
 
     private void uploadTakeSample() {
 
-
-        //	boothglid;//boothglid
-        //descriptionid
-        //jcxmid
-        //userid
-        //GlobalParams.id;
-
         String url = ApiParams.API_HOST + "/app/cysjxz.action";///app/cysjxz.action
         //String url = ApiParams.API_HOST + "/app/cysjxz.action";
         Map<String, String> paramMap = new HashMap<>();
@@ -567,24 +560,28 @@ public class AddSampleActivity extends BaseActivity {
             paramMap.put("commodityid", String.valueOf(commodityid));
         }
 
-        if (jcxmid > 0) {
-            paramMap.put("jcxmid", String.valueOf(jcxmid));
-            LogUtils.d("zkf jcxmid:" + jcxmid);
-
-        } else {
-            Toast.makeText(this, "请选择检测项目", Toast.LENGTH_SHORT).show();
-            return;
+        StringBuffer stringBuffer1 = new StringBuffer();
+        for (CheckProject.JcxmBean jcxmBean:checkProjectList){
+            if (jcxmBean.isSelect()){
+                if (TextUtils.isEmpty(stringBuffer1.toString())){
+                    stringBuffer1.append(jcxmBean.getId());
+                }else {
+                    stringBuffer1.append(",").append(jcxmBean.getId());
+                }
+            }
         }
+        if (!TextUtils.isEmpty(stringBuffer1.toString())){
+            paramMap.put("jcxmid", stringBuffer1.toString());
+        }
+
         paramMap.put("userid", String.valueOf(GlobalParams.id));
         LogUtils.d("zkf userid:" + String.valueOf(GlobalParams.id));
-        if (picUploadList.size() == 2) {
+        if (picUploadList.size() == 1) {
             StringBuffer stringBuffer = new StringBuffer();
             stringBuffer.append(picUploadList.get(0) + ",").append(picUploadList.get(1));
             paramMap.put("duotu", stringBuffer.toString());
             LogUtils.d("zkf duotu:" + stringBuffer.toString());
-//			paramMap.put("tupian2", picUploadList.get(1));
-//			LogUtils.d("zkf tupian1:" + picUploadList.get(0));
-//			LogUtils.d("zkf tupian2:" + picUploadList.get(1));
+
 
         } else {
             Toast.makeText(this, "请上传2张图片", Toast.LENGTH_SHORT).show();
