@@ -304,7 +304,7 @@ public class PreferencesUtils {
     public static List<String> getStrListValue(Context context, String key) {
         List<String> strList = new ArrayList<String>();
         int size = getIntValue(context, key + "size", 0);
-        //Log.d("sp", "" + size);
+        //LogU.d("sp", "" + size);
         for (int i = 0; i < size; i++) {
             strList.add(getStringValue(context, key + i, null));
         }

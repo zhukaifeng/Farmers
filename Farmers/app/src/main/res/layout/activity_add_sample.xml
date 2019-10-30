@@ -8,7 +8,9 @@
     android:orientation="vertical">
 
 
+
     <android.support.v4.widget.NestedScrollView
+        android:id="@+id/scrollview"
         android:layout_width="@dimen/dp349"
         android:layout_height="@dimen/dp535"
         android:scrollbars="none"
@@ -21,37 +23,6 @@
             android:background="@drawable/bg_white_all_radio"
             android:orientation="vertical">
 
-            <RelativeLayout
-                android:id="@+id/relative_content"
-                android:layout_width="@dimen/dp349"
-                android:layout_height="@dimen/dp535"
-                android:background="@drawable/bg_white_all_radio"
-                android:visibility="gone"
-                >
-
-                <ImageView
-                    android:id="@+id/iv_bmp"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_centerInParent="true"
-                    />
-
-
-                <TextView
-                    android:id="@+id/tv_print"
-                    android:layout_width="@dimen/dp126"
-                    android:layout_height="@dimen/dp33"
-                    android:layout_below="@+id/iv_bmp"
-                    android:layout_marginTop="@dimen/dp10"
-                    android:background="@drawable/bg_button_green_radio"
-                    android:layout_centerHorizontal="true"
-                    android:gravity="center"
-                    android:text="打印"
-                    android:textColor="@color/write"
-                    android:textSize="@dimen/sp15"
-                    android:textStyle="bold"
-                    />
-            </RelativeLayout>
 
            <android.support.v7.widget.RecyclerView
                android:id="@+id/rv_type"
@@ -313,6 +284,80 @@
 
     </android.support.v4.widget.NestedScrollView>
 
+    <LinearLayout
+        android:id="@+id/relative_content"
+        android:layout_width="@dimen/dp349"
+        android:layout_height="@dimen/dp535"
+        android:orientation="vertical"
+        android:background="@drawable/bg_white_all_radio"
+        android:visibility="gone"
+        >
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/dp10"
+            android:layout_marginTop="@dimen/dp10"
+            android:text="请在框中签名"
+
+            />
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/dp150"
+            android:layout_marginLeft="@dimen/dp10"
+            android:layout_marginRight="@dimen/dp10"
+            android:layout_marginTop="@dimen/dp10"
+            android:background="@drawable/red_line">
+
+            <com.osiris.farmers.view.widget.SignView
+                android:id="@+id/sign_view"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="#FFFFFF" />/>
+
+        </RelativeLayout>
+        <TextView
+            android:id="@+id/tv_upload_sign"
+            android:layout_width="@dimen/dp126"
+            android:layout_height="@dimen/dp33"
+            android:layout_below="@+id/iv_bmp"
+            android:layout_marginTop="@dimen/dp10"
+            android:layout_gravity="center_horizontal"
+            android:background="@drawable/bg_button_green_radio"
+            android:layout_centerHorizontal="true"
+            android:gravity="center"
+            android:text="上传签名"
+            android:textColor="@color/write"
+            android:textSize="@dimen/sp15"
+            android:textStyle="bold"
+            />
+
+        <ImageView
+            android:id="@+id/iv_bmp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:layout_gravity="center_horizontal"
+            />
+
+
+        <TextView
+            android:id="@+id/tv_print"
+            android:layout_width="@dimen/dp126"
+            android:layout_height="@dimen/dp33"
+            android:layout_below="@+id/iv_bmp"
+            android:layout_marginTop="@dimen/dp10"
+            android:layout_gravity="center_horizontal"
+            android:background="@drawable/bg_button_green_radio"
+            android:layout_centerHorizontal="true"
+            android:gravity="center"
+            android:text="打印"
+            android:textColor="@color/write"
+            android:textSize="@dimen/sp15"
+            android:textStyle="bold"
+            />
+    </LinearLayout>
 
     <ImageView
         android:id="@+id/iv_close"

@@ -226,10 +226,18 @@
 
         </RelativeLayout>
 
+        <cn.bingoogolapple.refreshlayout.BGARefreshLayout
+            android:id="@+id/rl_modulename_refresh"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
         <android.support.v7.widget.RecyclerView
             android:id="@+id/rv_data"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"/>
+            android:layout_height="0dp"
+            android:layout_weight="1"/>
+        </cn.bingoogolapple.refreshlayout.BGARefreshLayout>
+
     </LinearLayout>
 
     <LinearLayout

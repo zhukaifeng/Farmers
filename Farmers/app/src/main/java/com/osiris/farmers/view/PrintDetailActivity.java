@@ -15,6 +15,7 @@ import android.os.RemoteException;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.text.TextUtils;
+import android.util.Base64;
 import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
@@ -29,13 +30,22 @@ import com.luck.picture.lib.entity.LocalMedia;
 import com.osiris.farmers.R;
 import com.osiris.farmers.base.BaseActivity;
 import com.osiris.farmers.model.SampleListData;
+import com.osiris.farmers.network.ApiParams;
+import com.osiris.farmers.network.ApiRequestTag;
+import com.osiris.farmers.network.NetRequest;
+import com.osiris.farmers.network.NetRequestResultListener;
 import com.osiris.farmers.utils.ZXingUtils;
 import com.osiris.farmers.view.adapter.GridImageAdapter;
 import com.osiris.farmers.view.widget.FullyGridLayoutManager;
 import com.smartdevice.aidl.IZKCService;
 
+import java.io.FileInputStream;
+import java.io.IOException;
+import java.io.InputStream;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -112,7 +122,7 @@ public class PrintDetailActivity extends BaseActivity {
         ButterKnife.bind(this);
     }
 
-    @OnClick({R.id.rl_back, R.id.tv_price_ok,R.id.rl_upload})
+    @OnClick({R.id.rl_back, R.id.tv_price_ok,R.id.rl_upload,R.id.tv_upload_pic})
     public void onViewClicked(View v) {
         switch (v.getId()) {
             case R.id.rl_back:
@@ -129,14 +139,14 @@ public class PrintDetailActivity extends BaseActivity {
 //                        mIzkcService.printGBKText(text);
 //
 //                } catch (RemoteException e) {
-//                    Log.e("", "远程服务未连接...");
+//                    LogU.e("", "远程服务未连接...");
 //                    e.printStackTrace();
 //                }
 //                String text2 = "\n";
 //                try {
 //                    mIzkcService.printGBKText(text2);
 //                } catch (RemoteException e) {
-//                    Log.e("", "远程服务未连接...");
+//                    LogU.e("", "远程服务未连接...");
 //                    e.printStackTrace();
 //                }
                 break;
@@ -144,6 +154,13 @@ public class PrintDetailActivity extends BaseActivity {
                 if (selectList.size()==0){
                     Toast.makeText(this,"请拍照",Toast.LENGTH_SHORT).show();
                 }
+                break;
+            case R.id.tv_upload_pic:
+                if (selectList.size()==0){
+                    Toast.makeText(PrintDetailActivity.this,"请拍照",Toast.LENGTH_SHORT).show();
+                    return;
+                }
+                uploadTwoPic(selectList.get(0).getCompressPath());
                 break;
             default:
 
@@ -285,5 +302,64 @@ public class PrintDetailActivity extends BaseActivity {
         v.setDrawingCacheBackgroundColor(color);
         return bitmap;
     }
+
+    private void uploadTwoPic(String path) {
+        String url = ApiParams.API_HOST + "/app/uploadTwoPic.action";//database
+
+        Map<String, String> paramMap = new HashMap<>();
+        paramMap.put("pic", "data:image/png;base64," + imageToBase64(path));
+        System.out.println("data:image/png;base64," + imageToBase64(path));
+        LogUtils.d("zkf imageToBase64(path):" + imageToBase64(path));
+
+        paramMap.put("id", String.valueOf(data.getId()));
+        NetRequest.requestBase64(url, ApiRequestTag.DATA, paramMap, new NetRequestResultListener() {
+            @Override
+            public void requestSuccess(int tag, String successResult) {
+                //String temp = successResult.substring(1, successResult.length() - 1);
+
+                LogUtils.d("zkf temp:" + successResult);
+                cancelLoadDialog();
+
+            }
+
+            @Override
+            public void requestFailure(int tag, int code, String msg) {
+                cancelLoadDialog();
+            }
+        });
+
+
+    }
+
+    public static String imageToBase64(String path) {
+        if (TextUtils.isEmpty(path)) {
+            return null;
+        }
+        InputStream is = null;
+        byte[] data = null;
+        String result = null;
+        try {
+            is = new FileInputStream(path);
+            //创建一个字符流大小的数组。
+            data = new byte[is.available()];
+            //写入数组
+            is.read(data);
+            //用默认的编码格式进行编码
+            result = Base64.encodeToString(data, Base64.NO_WRAP);
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            if (null != is) {
+                try {
+                    is.close();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            }
+
+        }
+        return result;
+    }
+
 
 }

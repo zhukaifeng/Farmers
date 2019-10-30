@@ -5,10 +5,12 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.ServiceConnection;
 import android.graphics.Bitmap;
+import android.os.Environment;
 import android.os.Handler;
 import android.os.IBinder;
 import android.os.Message;
 import android.os.RemoteException;
+import android.support.v4.widget.NestedScrollView;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -39,6 +41,7 @@ import com.osiris.farmers.network.NetRequest;
 import com.osiris.farmers.network.NetRequestResultListener;
 import com.osiris.farmers.utils.FileUtils;
 import com.osiris.farmers.utils.JsonUtils;
+import com.osiris.farmers.utils.LogU;
 import com.osiris.farmers.utils.ZXingUtils;
 import com.osiris.farmers.view.adapter.BillOflandProjectSelectAdapter;
 import com.osiris.farmers.view.adapter.BillOflandSelectAdapter;
@@ -46,6 +49,7 @@ import com.osiris.farmers.view.adapter.BillOflandTypeSelectAdapter;
 import com.osiris.farmers.view.adapter.GridImageAdapter;
 import com.osiris.farmers.view.adapter.MyItemClickListener;
 import com.osiris.farmers.view.widget.FullyGridLayoutManager;
+import com.osiris.farmers.view.widget.SignView;
 import com.smartdevice.aidl.IZKCService;
 
 import java.io.FileInputStream;
@@ -84,7 +88,7 @@ public class AddSampleActivity extends BaseActivity {
     @BindView(R.id.linear_content)
     LinearLayout linear_content;
     @BindView(R.id.relative_content)
-    RelativeLayout relative_content;
+    LinearLayout relative_content;
     @BindView(R.id.iv_bmp)
     ImageView iv_bmp;
     @BindView(R.id.linear_name)
@@ -95,6 +99,12 @@ public class AddSampleActivity extends BaseActivity {
     RelativeLayout relative_count;
     @BindView(R.id.relative_price)
     RelativeLayout relative_price;
+    @BindView(R.id.tv_ok)
+    TextView tv_ok;
+    @BindView(R.id.sign_view)
+    SignView sign_view;
+    @BindView(R.id.scrollview)
+    NestedScrollView scrollview;
 
     private Handler mHandler = new Handler();
     private List<String> picUploadList = new ArrayList<>();
@@ -111,7 +121,7 @@ public class AddSampleActivity extends BaseActivity {
     private String stallName;
     private String printId;
 
-    @OnClick({R.id.iv_close, R.id.tv_count_ok, R.id.tv_price_ok, R.id.tv_print,R.id.tv_ok})
+    @OnClick({R.id.iv_close, R.id.tv_count_ok, R.id.tv_price_ok, R.id.tv_print, R.id.tv_ok, R.id.tv_upload_sign})
     void onClick(View v) {
         switch (v.getId()) {
             case R.id.tv_print:
@@ -180,6 +190,10 @@ public class AddSampleActivity extends BaseActivity {
 
                 break;
             case R.id.tv_ok:
+                if (selectList.size()==0){
+                    Toast.makeText(AddSampleActivity.this,"请拍照",Toast.LENGTH_SHORT).show();
+                    return;
+                }
                 for (final LocalMedia localMedia : selectList) {
                     showLoadDialog();
                     mHandler.post(new Runnable() {
@@ -189,6 +203,27 @@ public class AddSampleActivity extends BaseActivity {
                         }
                     });
                 }
+                break;
+            case R.id.tv_upload_sign:
+                //zkffffff
+                if (sign_view.getTouched()) {
+                    try {
+                        sign_view.save(Environment.getExternalStorageDirectory().getPath() + "/qm.png", false, 10);
+                        setResult(100);
+                        showLoadDialog();
+                        mHadler.postDelayed(new Runnable() {
+                            @Override
+                            public void run() {
+                                uploadTwoPic(Environment.getExternalStorageDirectory().getPath() + "/qm.png");
+                            }
+                        },2000);
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    }
+                } else {
+                    Toast.makeText(AddSampleActivity.this, "您没有签名~", Toast.LENGTH_SHORT).show();
+                }
+
                 break;
         }
     }
@@ -553,58 +588,53 @@ public class AddSampleActivity extends BaseActivity {
             return;
         }
         LogUtils.d("zkf boothglid:" + boothglid);
-        if (!TextUtils.isEmpty(String.valueOf(descriptionid))){
+        if (!TextUtils.isEmpty(String.valueOf(descriptionid))) {
             paramMap.put("descriptionid", String.valueOf(descriptionid));
         }
-        if (commodityid>0){
+        if (commodityid > 0) {
             paramMap.put("commodityid", String.valueOf(commodityid));
         }
 
         StringBuffer stringBuffer1 = new StringBuffer();
-        for (CheckProject.JcxmBean jcxmBean:checkProjectList){
-            if (jcxmBean.isSelect()){
-                if (TextUtils.isEmpty(stringBuffer1.toString())){
+        for (CheckProject.JcxmBean jcxmBean : checkProjectList) {
+            if (jcxmBean.isSelect()) {
+                if (TextUtils.isEmpty(stringBuffer1.toString())) {
                     stringBuffer1.append(jcxmBean.getId());
-                }else {
+                } else {
                     stringBuffer1.append(",").append(jcxmBean.getId());
                 }
             }
         }
-        if (!TextUtils.isEmpty(stringBuffer1.toString())){
+        if (!TextUtils.isEmpty(stringBuffer1.toString())) {
             paramMap.put("jcxmid", stringBuffer1.toString());
         }
+
+        LogUtils.d("zkf jcxmid:" + stringBuffer1.toString());
+
 
         paramMap.put("userid", String.valueOf(GlobalParams.id));
         LogUtils.d("zkf userid:" + String.valueOf(GlobalParams.id));
         if (picUploadList.size() == 1) {
             StringBuffer stringBuffer = new StringBuffer();
-            stringBuffer.append(picUploadList.get(0) + ",").append(picUploadList.get(1));
+            stringBuffer.append(picUploadList.get(0));
             paramMap.put("duotu", stringBuffer.toString());
             LogUtils.d("zkf duotu:" + stringBuffer.toString());
 
-
         } else {
-            Toast.makeText(this, "请上传2张图片", Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, "请上传1张图片", Toast.LENGTH_SHORT).show();
             return;
         }
         if (!TextUtils.isEmpty(edt_count.getText().toString())) {
             paramMap.put("cysum", edt_count.getText().toString());
             LogUtils.d("zkf cysum:" + edt_count.getText().toString());
             printCount = edt_count.getText().toString();
-        } else {
-            Toast.makeText(this, "请输入数量", Toast.LENGTH_SHORT).show();
-            return;
         }
 
         if (!TextUtils.isEmpty(edt_price.getText().toString())) {
             paramMap.put("money", edt_price.getText().toString());
             LogUtils.d("zkf money:" + edt_price.getText().toString());
             printPrince = edt_price.getText().toString();
-        } else {
-            Toast.makeText(this, "请输入价格", Toast.LENGTH_SHORT).show();
-            return;
         }
-
         NetRequest.request(url, ApiRequestTag.DATA, paramMap, new NetRequestResultListener() {
             @Override
             public void requestSuccess(int tag, String successResult) {
@@ -616,18 +646,11 @@ public class AddSampleActivity extends BaseActivity {
                     cancelLoadDialog();
                     picUploadList.clear();
                     printId = successResult;
-                    Bitmap bitmap = ZXingUtils.createQRImage(successResult, 400, 400);
-                    rv_type.setVisibility(View.GONE);
-                    rv_project.setVisibility(View.GONE);
-                    recyclerView.setVisibility(View.GONE);
-                    linear_name.setVisibility(View.GONE);
-                    linear_project.setVisibility(View.GONE);
-                    rv_data.setVisibility(View.GONE);
-                    relative_count.setVisibility(View.GONE);
-                    relative_price.setVisibility(View.GONE);
+                    Bitmap bitmap = ZXingUtils.createQRImage(successResult, 300, 300);
+
+                    scrollview.setVisibility(View.GONE);
                     relative_content.setVisibility(View.VISIBLE);
                     iv_bmp.setImageBitmap(bitmap);
-
                     //finish();
                 } else {
                     Toast.makeText(AddSampleActivity.this, "采集失败，请重新尝试", Toast.LENGTH_SHORT).show();
@@ -708,6 +731,34 @@ public class AddSampleActivity extends BaseActivity {
         Intent intent = new Intent("com.zkc.aidl.all");
         intent.setPackage("com.smartdevice.aidl");
         bindService(intent, mServiceConn, Context.BIND_AUTO_CREATE);
+    }
+
+    private void uploadTwoPic(String path) {
+        String url = ApiParams.API_HOST + "/app/uploadTwoPic.action";//database
+
+        Map<String, String> paramMap = new HashMap<>();
+        paramMap.put("pic", "data:image/png;base64," + imageToBase64(path));
+        System.out.println("data:image/png;base64," + imageToBase64(path));
+        LogUtils.d("zkf imageToBase64(path):" + imageToBase64(path));
+
+        paramMap.put("id", printId);
+        NetRequest.requestBase64(url, ApiRequestTag.DATA, paramMap, new NetRequestResultListener() {
+            @Override
+            public void requestSuccess(int tag, String successResult) {
+                //String temp = successResult.substring(1, successResult.length() - 1);
+
+                LogUtils.d("zkf temp:" + successResult);
+                cancelLoadDialog();
+
+            }
+
+            @Override
+            public void requestFailure(int tag, int code, String msg) {
+                cancelLoadDialog();
+            }
+        });
+
+
     }
 
 

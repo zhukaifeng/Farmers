@@ -59,9 +59,10 @@ import java.util.Map;
 
 import butterknife.BindView;
 import butterknife.OnClick;
+import cn.bingoogolapple.refreshlayout.BGARefreshLayout;
 import me.jessyan.autosize.utils.LogUtils;
 
-public class TakeSampleListFragment extends BaseFragment {
+public class TakeSampleListFragment extends BaseFragment implements BGARefreshLayout.BGARefreshLayoutDelegate{
 
 
 	@BindView(R.id.rv_data)
@@ -83,6 +84,8 @@ public class TakeSampleListFragment extends BaseFragment {
 	ImageView iv_select_arrow;
 	@BindView(R.id.tv_shop_num)
 	TextView tv_shop_num;
+	@BindView(R.id.rl_modulename_refresh)
+	BGARefreshLayout rl_modulename_refresh;
 
 	private List<GoodsType.DescriptionBean> typeList = new ArrayList<>();
 	private TypeGoodsAdapter typeAdapter = new TypeGoodsAdapter(typeList);
@@ -155,6 +158,8 @@ public class TakeSampleListFragment extends BaseFragment {
 
 			}
 		});
+
+
 		getData();
 
 		getGoodsType();
@@ -274,7 +279,7 @@ public class TakeSampleListFragment extends BaseFragment {
 				//	mIzkcService.generateSpace();
 
 				} catch (RemoteException e) {
-					Log.e("", "远程服务未连接...");
+					LogU.e("", "远程服务未连接...");
 					e.printStackTrace();
 				}
 				showPopwindow();*/
@@ -546,8 +551,13 @@ public class TakeSampleListFragment extends BaseFragment {
 	}
 
 
+	@Override
+	public void onBGARefreshLayoutBeginRefreshing(BGARefreshLayout refreshLayout) {
 
+	}
 
-
-
+	@Override
+	public boolean onBGARefreshLayoutBeginLoadingMore(BGARefreshLayout refreshLayout) {
+		return false;
+	}
 }
