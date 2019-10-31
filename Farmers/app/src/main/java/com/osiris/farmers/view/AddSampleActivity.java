@@ -55,7 +55,9 @@ import com.smartdevice.aidl.IZKCService;
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStream;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
@@ -120,37 +122,63 @@ public class AddSampleActivity extends BaseActivity {
     private String marketName;
     private String stallName;
     private String printId;
+    private String goodName;
 
     @OnClick({R.id.iv_close, R.id.tv_count_ok, R.id.tv_price_ok, R.id.tv_print, R.id.tv_ok, R.id.tv_upload_sign})
     void onClick(View v) {
         switch (v.getId()) {
             case R.id.tv_print:
                 String title = "";
-                if (!TextUtils.isEmpty(marketName) && !TextUtils.isEmpty(stallName)) {
-                    title = marketName
-                            + "\n" + "摊位号:" + stallName
-                            + "\n";
-                }
+
 //                String text = printType + ":" + printName
 //                        + "\n" + "检测项目:" + printJcmName
 //                        + "\n" + "数量:" + printCount + "斤"
 //                        + "\n" + "价格:" + printPrince + "元"
 //                        + "\n";
                 String text = "样品编码:" + printId
-                        + "\n" + "检测项目:" + printJcmName
                         + "\n";
+                if (!TextUtils.isEmpty(marketName) && !TextUtils.isEmpty(stallName)) {
+                    title = text + marketName + " 摊位号:" + stallName
+                            + "\n";
+                }
+                if (!TextUtils.isEmpty(goodName)) {
+                    title = title + "样品名称:" + goodName
+                            + "\n";
+                }
+                StringBuffer stringBuffer = new StringBuffer();
+                for (CheckProject.JcxmBean jcxmBean : checkProjectList) {
+                    if (jcxmBean.isSelect()) {
+                        stringBuffer.append(jcxmBean.getJcmc()).append("\n");
+                    }
+                }
+                if (!TextUtils.isEmpty(stringBuffer.toString())) {
+                    title = title + "检测项目:" + stringBuffer.toString();
+                } else {
+                    title = title + "检测项目:自选"
+                            + "\n";
+                }
+
+                SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+                Date curDate = new Date(System.currentTimeMillis());
+                String time = formatter.format(curDate);
+                title = title + "时间:" + time
+                        + "\n"+"检测员:" + GlobalParams.username;
+
+
+
+                //"检测项目:" + printJcmName
+                //                        + "\n";
+
                 try {
                     if (!TextUtils.isEmpty(title)) {
-                        mIzkcService.printGBKText(title + text);
-                    } else {
-                        mIzkcService.printGBKText(text);
+                        mIzkcService.printGBKText(title);
                     }
                 } catch (RemoteException e) {
                     Log.e("", "远程服务未连接...");
                     e.printStackTrace();
                 }
                 printPic();
-                String text2 = "\n";
+                String text2 = "\n" + "\n"+ "\n";
                 try {
                     mIzkcService.printGBKText(text2);
                 } catch (RemoteException e) {
@@ -190,8 +218,8 @@ public class AddSampleActivity extends BaseActivity {
 
                 break;
             case R.id.tv_ok:
-                if (selectList.size()==0){
-                    Toast.makeText(AddSampleActivity.this,"请拍照",Toast.LENGTH_SHORT).show();
+                if (selectList.size() == 0) {
+                    Toast.makeText(AddSampleActivity.this, "请拍照", Toast.LENGTH_SHORT).show();
                     return;
                 }
                 for (final LocalMedia localMedia : selectList) {
@@ -214,9 +242,9 @@ public class AddSampleActivity extends BaseActivity {
                         mHadler.postDelayed(new Runnable() {
                             @Override
                             public void run() {
-                                uploadTwoPic(Environment.getExternalStorageDirectory().getPath() + "/qm.png");
+                                uploadTwoBeforePic(Environment.getExternalStorageDirectory().getPath() + "/qm.png");
                             }
-                        },2000);
+                        }, 2000);
                     } catch (IOException e) {
                         e.printStackTrace();
                     }
@@ -229,7 +257,7 @@ public class AddSampleActivity extends BaseActivity {
     }
 
     private void printPic() {
-        Bitmap mBitmap = ZXingUtils.createQRImage(printId, 400, 400);
+        Bitmap mBitmap = ZXingUtils.createQRImage(printId, 200, 200);
         try {
             if (mBitmap != null) {
 				/*switch (imageType) {
@@ -386,6 +414,7 @@ public class AddSampleActivity extends BaseActivity {
                     }
                 }
                 commodityid = showDataList.get(position).getId();
+                goodName = showDataList.get(position).getCommoditynm();
                 billOflandSelectAdapter.notifyDataSetChanged();
 
                 printType = showDataList.get(position).getCommoditynm();
@@ -434,25 +463,7 @@ public class AddSampleActivity extends BaseActivity {
         @Override
         public void onAddPicClick() {
             PictureSelector.create(AddSampleActivity.this)
-                    .openGallery(PictureMimeType.ofImage())
-                    .theme(R.style.picture_default_style)
-                    .maxSelectNum(100)
-                    .minSelectNum(1)
-                    .imageSpanCount(4)
-                    .selectionMode(PictureConfig.MULTIPLE)
-                    .previewImage(true)
-                    .previewVideo(true)
-                    .enablePreviewAudio(false)
-                    .isCamera(true)
-                    .isZoomAnim(true)
-                    .enableCrop(false)
-                    .compress(true)
-                    .synOrAsy(true)
-                    .glideOverride(160, 160)
-                    .isGif(true)
-                    .openClickSound(false)
-                    .selectionMedia(selectList)
-                    .minimumCompressSize(100)
+                    .openCamera(PictureMimeType.ofImage()).compress(true)
                     .forResult(PictureConfig.CHOOSE_REQUEST);
         }
 
@@ -733,14 +744,40 @@ public class AddSampleActivity extends BaseActivity {
         bindService(intent, mServiceConn, Context.BIND_AUTO_CREATE);
     }
 
+
+    private void uploadTwoBeforePic(String path) {
+
+        String url = ApiParams.API_HOST + "/app/picUpload.action";//database
+
+        Map<String, String> paramMap = new HashMap<>();
+        paramMap.put("database", "data:image/png;base64," + imageToBase64(path));
+        NetRequest.requestBase64(url, ApiRequestTag.DATA, paramMap, new NetRequestResultListener() {
+            @Override
+            public void requestSuccess(int tag, String successResult) {
+                //String temp = successResult.substring(1, successResult.length() - 1);
+
+                LogUtils.d("zkf temp:" + successResult);
+                if (successResult.contains("png")) {
+                    uploadTwoPic(successResult);
+                }
+
+            }
+
+            @Override
+            public void requestFailure(int tag, int code, String msg) {
+
+            }
+        });
+
+
+    }
+
+
     private void uploadTwoPic(String path) {
         String url = ApiParams.API_HOST + "/app/uploadTwoPic.action";//database
 
         Map<String, String> paramMap = new HashMap<>();
-        paramMap.put("pic", "data:image/png;base64," + imageToBase64(path));
-        System.out.println("data:image/png;base64," + imageToBase64(path));
-        LogUtils.d("zkf imageToBase64(path):" + imageToBase64(path));
-
+        paramMap.put("pic", path);
         paramMap.put("id", printId);
         NetRequest.requestBase64(url, ApiRequestTag.DATA, paramMap, new NetRequestResultListener() {
             @Override
@@ -748,6 +785,7 @@ public class AddSampleActivity extends BaseActivity {
                 //String temp = successResult.substring(1, successResult.length() - 1);
 
                 LogUtils.d("zkf temp:" + successResult);
+                Toast.makeText(AddSampleActivity.this,"签名上传成功",Toast.LENGTH_SHORT).show();
                 cancelLoadDialog();
 
             }

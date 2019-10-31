@@ -10,6 +10,7 @@ import android.graphics.drawable.BitmapDrawable;
 import android.os.IBinder;
 import android.os.Parcelable;
 import android.os.RemoteException;
+import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.text.TextUtils;
@@ -62,164 +63,176 @@ import butterknife.OnClick;
 import cn.bingoogolapple.refreshlayout.BGARefreshLayout;
 import me.jessyan.autosize.utils.LogUtils;
 
-public class TakeSampleListFragment extends BaseFragment implements BGARefreshLayout.BGARefreshLayoutDelegate{
+public class TakeSampleListFragment extends BaseFragment {
 
 
-	@BindView(R.id.rv_data)
-	RecyclerView rv_data;
-	@BindView(R.id.linear_list)
-	LinearLayout linear_list;
-	@BindView(R.id.linear_add)
-	LinearLayout linear_add;
-	@BindView(R.id.iv_function)
-	ImageView iv_function;
-	@BindView(R.id.rl_back)
-	RelativeLayout rl_back;
+    @BindView(R.id.rv_data)
+    RecyclerView rv_data;
+    @BindView(R.id.linear_list)
+    LinearLayout linear_list;
+    @BindView(R.id.linear_add)
+    LinearLayout linear_add;
+    @BindView(R.id.iv_function)
+    ImageView iv_function;
+    @BindView(R.id.rl_back)
+    RelativeLayout rl_back;
 
-	@BindView(R.id.rl_type)
-	RelativeLayout rl_type;
-	@BindView(R.id.rv_type)
-	RecyclerView rv_type;
-	@BindView(R.id.iv_select_arrow)
-	ImageView iv_select_arrow;
-	@BindView(R.id.tv_shop_num)
-	TextView tv_shop_num;
-	@BindView(R.id.rl_modulename_refresh)
-	BGARefreshLayout rl_modulename_refresh;
-
-	private List<GoodsType.DescriptionBean> typeList = new ArrayList<>();
-	private TypeGoodsAdapter typeAdapter = new TypeGoodsAdapter(typeList);
-	public static final int REQUEST_A = 1;
+    @BindView(R.id.rl_type)
+    RelativeLayout rl_type;
+    @BindView(R.id.rv_type)
+    RecyclerView rv_type;
+    @BindView(R.id.iv_select_arrow)
+    ImageView iv_select_arrow;
+    @BindView(R.id.tv_shop_num)
+    TextView tv_shop_num;
+    @BindView(R.id.refreshLayout)
+    SwipeRefreshLayout refreshLayout;
 
 
-	private List<TakeSampleList> dataList = new ArrayList<>();
-	private PopupWindow popupWindow;
-
-	private List<ChooseStallData.BoothglBean> stallList = new ArrayList<>();
-	private List<String> stallNameList = new ArrayList<>();
-
-	private List<SampleNameData.CommodityBean> commodityList= new ArrayList<>();
-
-	private List<SampleListData.CangysjglsBean> cangysjglsList = new ArrayList<>();
-	private TakeSampleListAdapter dataAdapter = new TakeSampleListAdapter(cangysjglsList);
-
-	//线程运行标志 the running flag of thread
-	private boolean runFlag = true;
-	//打印机检测标志 the detect flag of printer
-	private boolean detectFlag = false;
-	//打印机连接超时时间 link timeout of printer
-	private float PINTER_LINK_TIMEOUT_MAX = 30 * 1000L;
-	//标签打印标记 the flag of tag print
-	private boolean autoOutputPaper = false;
+    private List<GoodsType.DescriptionBean> typeList = new ArrayList<>();
+    private TypeGoodsAdapter typeAdapter = new TypeGoodsAdapter(typeList);
+    public static final int REQUEST_A = 1;
 
 
-	private ChooseStallData.BoothglBean boothglBean = new ChooseStallData.BoothglBean();
+    private List<TakeSampleList> dataList = new ArrayList<>();
+    private PopupWindow popupWindow;
+
+    private List<ChooseStallData.BoothglBean> stallList = new ArrayList<>();
+    private List<String> stallNameList = new ArrayList<>();
+
+    private List<SampleNameData.CommodityBean> commodityList = new ArrayList<>();
+
+    private List<SampleListData.CangysjglsBean> cangysjglsList = new ArrayList<>();
+    private TakeSampleListAdapter dataAdapter = new TakeSampleListAdapter(cangysjglsList);
+
+    //线程运行标志 the running flag of thread
+    private boolean runFlag = true;
+    //打印机检测标志 the detect flag of printer
+    private boolean detectFlag = false;
+    //打印机连接超时时间 link timeout of printer
+    private float PINTER_LINK_TIMEOUT_MAX = 30 * 1000L;
+    //标签打印标记 the flag of tag print
+    private boolean autoOutputPaper = false;
+
+    private int pageNum = 1;
+    private int pageCount = 8;
+
+    private ChooseStallData.BoothglBean boothglBean = new ChooseStallData.BoothglBean();
 
 
-	@Override
-	protected int setLayout() {
-		return R.layout.fragment_sample;
-	}
+    @Override
+    protected int setLayout() {
+        return R.layout.fragment_sample;
+    }
 
-	@Override
-	protected void initView() {
-
-
-		rv_type.setLayoutManager(new LinearLayoutManager(getActivity(), LinearLayoutManager.HORIZONTAL, false));
-		rv_type.setAdapter(typeAdapter);
-		typeAdapter.setOnItemClick(new MyItemClickListener() {
-			@Override
-			public void onItemClick(View view, int position) {
-				for (GoodsType.DescriptionBean dateModel : typeList) {
-					dateModel.setClicked(false);
-				}
-				typeList.get(position).setClicked(true);
-				typeAdapter.notifyDataSetChanged();
+    @Override
+    protected void initView() {
 
 
-			}
-		});
+        rv_type.setLayoutManager(new LinearLayoutManager(getActivity(), LinearLayoutManager.HORIZONTAL, false));
+        rv_type.setAdapter(typeAdapter);
+        typeAdapter.setOnItemClick(new MyItemClickListener() {
+            @Override
+            public void onItemClick(View view, int position) {
+                for (GoodsType.DescriptionBean dateModel : typeList) {
+                    dateModel.setClicked(false);
+                }
+                typeList.get(position).setClicked(true);
+                typeAdapter.notifyDataSetChanged();
 
 
+            }
+        });
+        refreshLayout.setColorSchemeResources(android.R.color.holo_blue_light, android.R.color.holo_red_light,
+                android.R.color.holo_orange_light, android.R.color.holo_green_light);
+        refreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
+            @Override
+            public void onRefresh() {
+                refreshLayout.setRefreshing(true);
+                pageNum = 1;
+                getData();
+
+            }
+        });
 //		dataList.add(new TakeSampleList(0123456, "牛肉", "10斤", "2019.03.20"));
 //		dataList.add(new TakeSampleList(0123456, "牛肉", "10斤", "2019.03.20"));
 //		dataList.add(new TakeSampleList(0123456, "牛肉", "10斤", "2019.03.20"));
 //		dataList.add(new TakeSampleList(0123456, "牛肉", "10斤", "2019.03.20"));
 
-		rv_data.setLayoutManager(new LinearLayoutManager(this.getActivity(), LinearLayoutManager.VERTICAL, false));
-		rv_data.setAdapter(dataAdapter);
-		dataAdapter.notifyDataSetChanged();
-		dataAdapter.setOnItemClick(new MyItemClickListener() {
-			@Override
-			public void onItemClick(View view, int position) {
-				Intent intent = new Intent(getActivity(), PrintDetailActivity.class);
-				intent.putExtra("data",cangysjglsList.get(position));
-				startActivity(intent);
+        rv_data.setLayoutManager(new LinearLayoutManager(this.getActivity(), LinearLayoutManager.VERTICAL, false));
+        rv_data.setAdapter(dataAdapter);
+        dataAdapter.notifyDataSetChanged();
+        dataAdapter.setOnItemClick(new MyItemClickListener() {
+            @Override
+            public void onItemClick(View view, int position) {
+                Intent intent = new Intent(getActivity(), PrintDetailActivity.class);
+                intent.putExtra("data", cangysjglsList.get(position));
+                startActivity(intent);
 
-			}
-		});
-
-
-		getData();
-
-		getGoodsType();
-		getStallNo();
-		bindService();
-		getStallName();
-	}
-
-	private void getGoodsType() {
-
-		String url = ApiParams.API_HOST + "/app/xzDescription.action";
-		Map<String, String> paramMap = new HashMap<>();
-
-		NetRequest.request(url, ApiRequestTag.DATA, paramMap, new NetRequestResultListener() {
-			@Override
-			public void requestSuccess(int tag, String successResult) {
-				String temp = successResult.substring(1, successResult.length() - 1);
-				if (!TextUtils.isEmpty(successResult)) {
-					GoodsType tempData = JsonUtils.fromJson(temp, GoodsType.class);
-					if (typeList.size() > 0) typeList.clear();
-					typeList.addAll(tempData.getDescription());
-					typeAdapter.notifyDataSetChanged();
-
-				}
+            }
+        });
 
 
-			}
+        getData();
 
-			@Override
-			public void requestFailure(int tag, int code, String msg) {
+        getGoodsType();
+        getStallNo();
+        bindService();
+        getStallName();
+    }
 
-			}
-		});
-	}
+    private void getGoodsType() {
+
+        String url = ApiParams.API_HOST + "/app/xzDescription.action";
+        Map<String, String> paramMap = new HashMap<>();
+
+        NetRequest.request(url, ApiRequestTag.DATA, paramMap, new NetRequestResultListener() {
+            @Override
+            public void requestSuccess(int tag, String successResult) {
+                String temp = successResult.substring(1, successResult.length() - 1);
+                if (!TextUtils.isEmpty(successResult)) {
+                    GoodsType tempData = JsonUtils.fromJson(temp, GoodsType.class);
+                    if (typeList.size() > 0) typeList.clear();
+                    typeList.addAll(tempData.getDescription());
+                    typeAdapter.notifyDataSetChanged();
+
+                }
 
 
-	@Override
-	public void startActivityForResult(Intent intent, int requestCode) {
-		super.startActivityForResult(intent, requestCode);
-		LogUtils.d("zkf position:");
-		switch (requestCode) {
-			case REQUEST_A:
-				int position = intent.getExtras().getInt("position", 0);
-				LogUtils.d("zkf position:" + position);
-				tv_shop_num.setText(stallNameList.get(position));
-				break;
-		}
+            }
+
+            @Override
+            public void requestFailure(int tag, int code, String msg) {
+
+            }
+        });
+    }
 
 
-	}
+    @Override
+    public void startActivityForResult(Intent intent, int requestCode) {
+        super.startActivityForResult(intent, requestCode);
+        LogUtils.d("zkf position:");
+        switch (requestCode) {
+            case REQUEST_A:
+                int position = intent.getExtras().getInt("position", 0);
+                LogUtils.d("zkf position:" + position);
+                tv_shop_num.setText(stallNameList.get(position));
+                break;
+        }
 
-	@Override
-	protected void initData() {
 
-	}
+    }
 
-	@OnClick({R.id.iv_function, R.id.rl_back, R.id.tv_type, R.id.tv_shop_num})
-	void onClick(View v) {
-		switch (v.getId()) {
-			case R.id.iv_function:
+    @Override
+    protected void initData() {
+
+    }
+
+    @OnClick({R.id.iv_function, R.id.rl_back, R.id.tv_type, R.id.tv_shop_num})
+    void onClick(View v) {
+        switch (v.getId()) {
+            case R.id.iv_function:
 //				linear_add.setVisibility(View.VISIBLE);
 //				iv_function.setBackgroundResource(R.drawable.bg_qr);
 //				rl_back.setVisibility(View.VISIBLE);
@@ -227,43 +240,43 @@ public class TakeSampleListFragment extends BaseFragment implements BGARefreshLa
 //					takeSampleList.setDelete(true);
 //				}
 //				dataAdapter.notifyDataSetChanged();
-				Intent intent = new Intent(getActivity(), AddSampleActivity.class);
-				intent.putParcelableArrayListExtra("data_list", (ArrayList<? extends Parcelable>) commodityList);
-				intent.putExtra("boothglid",boothglBean.getId());
-				if (!TextUtils.isEmpty(tv_shop_num.getText().toString())){
-					intent.putExtra("stall_name",tv_shop_num.getText().toString());
-				}
-				LogUtils.d("zkf boothglid222222:"+ boothglBean.getId());
-				startActivity(intent);
-			//	showBillOfLandingDetailDialog();
+                Intent intent = new Intent(getActivity(), AddSampleActivity.class);
+                intent.putParcelableArrayListExtra("data_list", (ArrayList<? extends Parcelable>) commodityList);
+                intent.putExtra("boothglid", boothglBean.getId());
+                if (!TextUtils.isEmpty(tv_shop_num.getText().toString())) {
+                    intent.putExtra("stall_name", tv_shop_num.getText().toString());
+                }
+                LogUtils.d("zkf boothglid222222:" + boothglBean.getId());
+                startActivity(intent);
+                //	showBillOfLandingDetailDialog();
 
-				break;
-			case R.id.rl_back:
-				linear_add.setVisibility(View.GONE);
-				iv_function.setBackgroundResource(R.drawable.bg_add);
-				rl_back.setVisibility(View.GONE);
-				for (TakeSampleList takeSampleList : dataList) {
-					takeSampleList.setDelete(false);
-				}
-				dataAdapter.notifyDataSetChanged();
+                break;
+            case R.id.rl_back:
+                linear_add.setVisibility(View.GONE);
+                iv_function.setBackgroundResource(R.drawable.bg_add);
+                rl_back.setVisibility(View.GONE);
+                for (TakeSampleList takeSampleList : dataList) {
+                    takeSampleList.setDelete(false);
+                }
+                dataAdapter.notifyDataSetChanged();
 
-				break;
-			case R.id.tv_type:
-				if (rl_type.getVisibility() == View.VISIBLE) {
-					rl_type.setVisibility(View.GONE);
-					iv_select_arrow.setVisibility(View.GONE);
-				} else {
-					rl_type.setVisibility(View.VISIBLE);
-					iv_select_arrow.setVisibility(View.VISIBLE);
-				}
+                break;
+            case R.id.tv_type:
+                if (rl_type.getVisibility() == View.VISIBLE) {
+                    rl_type.setVisibility(View.GONE);
+                    iv_select_arrow.setVisibility(View.GONE);
+                } else {
+                    rl_type.setVisibility(View.VISIBLE);
+                    iv_select_arrow.setVisibility(View.VISIBLE);
+                }
 
-				break;
-			case R.id.tv_shop_num:
+                break;
+            case R.id.tv_shop_num:
 
-				Intent i = new Intent(getActivity(), ChooseStallNoActivity.class);
-				getActivity().startActivityForResult(i, REQUEST_A);
+                Intent i = new Intent(getActivity(), ChooseStallNoActivity.class);
+                getActivity().startActivityForResult(i, REQUEST_A);
 
-				//	startActivityForResult(i, REQUEST_A);
+                //	startActivityForResult(i, REQUEST_A);
 
 
 				/*String text = "---------------" +
@@ -283,135 +296,141 @@ public class TakeSampleListFragment extends BaseFragment implements BGARefreshLa
 					e.printStackTrace();
 				}
 				showPopwindow();*/
-				break;
-			default:
-				break;
-		}
-	}
+                break;
+            default:
+                break;
+        }
+    }
 
 
-	private void getData(){
-		String url = ApiParams.API_HOST + "/app/showAllCysjxz.action";
-		Map<String, String> paramMap = new HashMap<>();
+    private void getData() {
+        String url = ApiParams.API_HOST + "/app/showAllCysjxz.action";
+        Map<String, String> paramMap = new HashMap<>();
+        paramMap.put("pageNo",String.valueOf(pageNum));
+        paramMap.put("pageSize",String.valueOf(pageCount));
+        paramMap.put("id",String.valueOf(GlobalParams.id));
 
 
-		NetRequest.request(url, ApiRequestTag.DATA, paramMap, new NetRequestResultListener() {
+        NetRequest.request(url, ApiRequestTag.DATA, paramMap, new NetRequestResultListener() {
 
-			@Override
-			public void requestSuccess(int tag, String successResult) {
-				//String temp = successResult.substring(1, successResult.length() - 1);
-				if (!TextUtils.isEmpty(successResult)){
-					SampleListData tempData = JsonUtils.fromJson(successResult, SampleListData.class);
-					cangysjglsList.addAll(tempData.getCangysjgls());
-					LogUtils.d("zkf cangysjglsList:" + cangysjglsList.size());
-					dataAdapter.notifyDataSetChanged();
-				}
+            @Override
+            public void requestSuccess(int tag, String successResult) {
+                //String temp = successResult.substring(1, successResult.length() - 1);
+                if (!TextUtils.isEmpty(successResult)) {
+                    SampleListData tempData = JsonUtils.fromJson(successResult, SampleListData.class);
+                    if (pageNum == 1){
+                        cangysjglsList.clear();
+                    }
+                    cangysjglsList.addAll(tempData.getCangysjgls());
+                    LogUtils.d("zkf cangysjglsList:" + cangysjglsList.size());
+                    dataAdapter.notifyDataSetChanged();
+                    refreshLayout.setRefreshing(false);
+                }
 
-			}
+            }
 
-			@Override
-			public void requestFailure(int tag, int code, String msg) {
+            @Override
+            public void requestFailure(int tag, int code, String msg) {
 
-			}
-		});
+            }
+        });
 
-	}
-
-
-
-	private void showPopwindow() {
-		contentView = LayoutInflater.from(getActivity()).inflate(
-				R.layout.layout_choose_stall, null);
-
-		ListView list_data = contentView.findViewById(R.id.list_data);
-		ArrayAdapter<String> arrayAdapter = new ArrayAdapter<>(getActivity(), android.R.layout.simple_list_item_1,
-				android.R.id.text1, stallNameList);
-		list_data.setAdapter(arrayAdapter);
-		arrayAdapter.notifyDataSetChanged();
-		popupWindow = new PopupWindow(contentView,
-				ViewGroup.LayoutParams.MATCH_PARENT,
-				ViewGroup.LayoutParams.WRAP_CONTENT);
-		popupWindow.setFocusable(true);// 取得焦点
-		popupWindow.setBackgroundDrawable(new BitmapDrawable());
-		popupWindow.setOutsideTouchable(true);
-		popupWindow.setTouchable(true);
-		popupWindow.setAnimationStyle(R.style.mypopwindow_anim_style);
-		popupWindow.showAtLocation(contentView, Gravity.BOTTOM, 0, 0);
-
-	}
+    }
 
 
-	private void getStallNo() {
+    private void showPopwindow() {
+        contentView = LayoutInflater.from(getActivity()).inflate(
+                R.layout.layout_choose_stall, null);
 
-		String url = ApiParams.API_HOST + "/app/xzboothgl.action";
-		Map<String, String> paramMap = new HashMap<>();
-		paramMap.put("id", String.valueOf(GlobalParams.currentMarketId));
+        ListView list_data = contentView.findViewById(R.id.list_data);
+        ArrayAdapter<String> arrayAdapter = new ArrayAdapter<>(getActivity(), android.R.layout.simple_list_item_1,
+                android.R.id.text1, stallNameList);
+        list_data.setAdapter(arrayAdapter);
+        arrayAdapter.notifyDataSetChanged();
+        popupWindow = new PopupWindow(contentView,
+                ViewGroup.LayoutParams.MATCH_PARENT,
+                ViewGroup.LayoutParams.WRAP_CONTENT);
+        popupWindow.setFocusable(true);// 取得焦点
+        popupWindow.setBackgroundDrawable(new BitmapDrawable());
+        popupWindow.setOutsideTouchable(true);
+        popupWindow.setTouchable(true);
+        popupWindow.setAnimationStyle(R.style.mypopwindow_anim_style);
+        popupWindow.showAtLocation(contentView, Gravity.BOTTOM, 0, 0);
 
-		NetRequest.request(url, ApiRequestTag.DATA, paramMap, new NetRequestResultListener() {
-			@Override
-			public void requestSuccess(int tag, String successResult) {
-				String temp = successResult.substring(1, successResult.length() - 1);
-				if (!TextUtils.isEmpty(successResult)) {
-					ChooseStallData tempData = JsonUtils.fromJson(temp, ChooseStallData.class);
-					if (stallList.size() > 0) stallList.clear();
-					stallList.addAll(tempData.getBoothgl());
-					for (ChooseStallData.BoothglBean boothglBean : stallList) {
-						stallNameList.add(boothglBean.getTwhmc());
-					}
-					if (null != stallList && stallList.size()>0){
-						boothglBean = stallList.get(0);
-						if (stallNameList.size() > 0) {
-							tv_shop_num.setText(stallNameList.get(0));
-						}
-						getCheckProject();
-					}
+    }
 
 
-				}
+    private void getStallNo() {
+
+        String url = ApiParams.API_HOST + "/app/xzboothgl.action";
+        Map<String, String> paramMap = new HashMap<>();
+        paramMap.put("id", String.valueOf(GlobalParams.currentMarketId));
+
+        NetRequest.request(url, ApiRequestTag.DATA, paramMap, new NetRequestResultListener() {
+            @Override
+            public void requestSuccess(int tag, String successResult) {
+                String temp = successResult.substring(1, successResult.length() - 1);
+                if (!TextUtils.isEmpty(successResult)) {
+                    ChooseStallData tempData = JsonUtils.fromJson(temp, ChooseStallData.class);
+                    if (stallList.size() > 0) stallList.clear();
+                    stallList.addAll(tempData.getBoothgl());
+                    for (ChooseStallData.BoothglBean boothglBean : stallList) {
+                        stallNameList.add(boothglBean.getTwhmc());
+                    }
+                    if (null != stallList && stallList.size() > 0) {
+                        boothglBean = stallList.get(0);
+                        if (stallNameList.size() > 0) {
+                            tv_shop_num.setText(stallNameList.get(0));
+                        }
+                        getCheckProject();
+                    }
 
 
-			}
+                }
 
-			@Override
-			public void requestFailure(int tag, int code, String msg) {
 
-			}
-		});
-	}
+            }
 
-	public static IZKCService mIzkcService;
-	private ServiceConnection mServiceConn = new ServiceConnection() {
-		@Override
-		public void onServiceDisconnected(ComponentName name) {
+            @Override
+            public void requestFailure(int tag, int code, String msg) {
 
-		}
+            }
+        });
+    }
 
-		@Override
-		public void onServiceConnected(ComponentName name, IBinder service) {
-			mIzkcService = IZKCService.Stub.asInterface(service);
-			if (mIzkcService != null) {
-				try {
-					//获取产品型号 get product model
-					DEVICE_MODEL = mIzkcService.getDeviceModel();
-					//设置当前模块 set current function module
-					mIzkcService.setModuleFlag(module_flag);
-				} catch (RemoteException e) {
-					e.printStackTrace();
-				}
-			}
-		}
-	};
-	public static int DEVICE_MODEL = 0;
-	public static int module_flag = 0;
+    public static IZKCService mIzkcService;
+    private ServiceConnection mServiceConn = new ServiceConnection() {
+        @Override
+        public void onServiceDisconnected(ComponentName name) {
 
-	public void bindService() {
-		//com.zkc.aidl.all为远程服务的名称，不可更改
-		//com.smartdevice.aidl为远程服务声明所在的包名，不可更改，
-		// 对应的项目所导入的AIDL文件也应该在该包名下
-		Intent intent = new Intent("com.zkc.aidl.all");
-		intent.setPackage("com.smartdevice.aidl");
-		getActivity().bindService(intent, mServiceConn, Context.BIND_AUTO_CREATE);
-	}
+        }
+
+        @Override
+        public void onServiceConnected(ComponentName name, IBinder service) {
+            mIzkcService = IZKCService.Stub.asInterface(service);
+            if (mIzkcService != null) {
+                try {
+                    //获取产品型号 get product model
+                    DEVICE_MODEL = mIzkcService.getDeviceModel();
+                    //设置当前模块 set current function module
+                    mIzkcService.setModuleFlag(module_flag);
+                } catch (RemoteException e) {
+                    e.printStackTrace();
+                }
+            }
+        }
+    };
+    public static int DEVICE_MODEL = 0;
+    public static int module_flag = 0;
+
+    public void bindService() {
+        //com.zkc.aidl.all为远程服务的名称，不可更改
+        //com.smartdevice.aidl为远程服务声明所在的包名，不可更改，
+        // 对应的项目所导入的AIDL文件也应该在该包名下
+        Intent intent = new Intent("com.zkc.aidl.all");
+        intent.setPackage("com.smartdevice.aidl");
+        getActivity().bindService(intent, mServiceConn, Context.BIND_AUTO_CREATE);
+    }
 
 	/*class DetectPrinterThread extends Thread {
 		@Override
@@ -453,111 +472,100 @@ public class TakeSampleListFragment extends BaseFragment implements BGARefreshLa
 	}*/
 
 
-	private void showBillOfLandingDetailDialog() {
-		BillOflandingDialog.Builder builder = new BillOflandingDialog.Builder(getActivity());
-		builder.setPositiveButton(new DialogClickListener() {
-			@Override
-			public void onClick(Dialog dialog, String msg) {
+    private void showBillOfLandingDetailDialog() {
+        BillOflandingDialog.Builder builder = new BillOflandingDialog.Builder(getActivity());
+        builder.setPositiveButton(new DialogClickListener() {
+            @Override
+            public void onClick(Dialog dialog, String msg) {
 
-			}
+            }
 
-			@Override
-			public void onClick(Dialog dialog) {
-				dialog.dismiss();
-			}
-		});
+            @Override
+            public void onClick(Dialog dialog) {
+                dialog.dismiss();
+            }
+        });
 
-		builder.setDataBillList(commodityList);
+        builder.setDataBillList(commodityList);
 
-		builder.setNegativeButton(new DialogInterface.OnClickListener() {
-			@Override
-			public void onClick(DialogInterface dialogInterface, int i) {
-				dialogInterface.dismiss();
-			}
-		});
-		builder.create().show();
-	}
+        builder.setNegativeButton(new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialogInterface, int i) {
+                dialogInterface.dismiss();
+            }
+        });
+        builder.create().show();
+    }
 
-	@Subscribe(threadMode = ThreadMode.MAIN)
-	public void onGetMessage(BoothgEvent boothglBean) {
-		this.boothglBean.setId(boothglBean.getId());
-		this.boothglBean.setMarketid(boothglBean.getMarketid());
-		this.boothglBean.setTwhmc(boothglBean.getTwhmc());
+    @Subscribe(threadMode = ThreadMode.MAIN)
+    public void onGetMessage(BoothgEvent boothglBean) {
+        this.boothglBean.setId(boothglBean.getId());
+        this.boothglBean.setMarketid(boothglBean.getMarketid());
+        this.boothglBean.setTwhmc(boothglBean.getTwhmc());
 
-		tv_shop_num.setText(boothglBean.getTwhmc());
-		getCheckProject();
-
-
-	}
+        tv_shop_num.setText(boothglBean.getTwhmc());
+        getCheckProject();
 
 
-
-	private void getStallName() {
-
-		String url = ApiParams.API_HOST + "/app/xzCommodity.action";
-		Map<String, String> paramMap = new HashMap<>();
-		paramMap.put("id", String.valueOf(GlobalParams.currentMarketId));
-
-		NetRequest.request(url, ApiRequestTag.DATA, paramMap, new NetRequestResultListener() {
-			@Override
-			public void requestSuccess(int tag, String successResult) {
-				String temp = successResult.substring(1, successResult.length() - 1);
-				if (!TextUtils.isEmpty(successResult)) {
-					LogUtils.d("zkf  successResult:" + successResult);
-					SampleNameData tempData = JsonUtils.fromJson(temp, SampleNameData.class);
-					commodityList.addAll(tempData.getCommodity());
-
-				}
+    }
 
 
-			}
+    private void getStallName() {
 
-			@Override
-			public void requestFailure(int tag, int code, String msg) {
+        String url = ApiParams.API_HOST + "/app/xzCommodity.action";
+        Map<String, String> paramMap = new HashMap<>();
+        paramMap.put("id", String.valueOf(GlobalParams.currentMarketId));
 
-			}
-		});
-	}
+        NetRequest.request(url, ApiRequestTag.DATA, paramMap, new NetRequestResultListener() {
+            @Override
+            public void requestSuccess(int tag, String successResult) {
+                String temp = successResult.substring(1, successResult.length() - 1);
+                if (!TextUtils.isEmpty(successResult)) {
+                    LogUtils.d("zkf  successResult:" + successResult);
+                    SampleNameData tempData = JsonUtils.fromJson(temp, SampleNameData.class);
+                    commodityList.addAll(tempData.getCommodity());
+
+                }
 
 
+            }
 
-	private void getCheckProject(){
+            @Override
+            public void requestFailure(int tag, int code, String msg) {
 
-		String url = ApiParams.API_HOST + "/app/xzjcxm.action";
-		Map<String, String> paramMap = new HashMap<>();
-		paramMap.put("id", String.valueOf(boothglBean.getId()));
+            }
+        });
+    }
 
-		NetRequest.request(url, ApiRequestTag.DATA, paramMap, new NetRequestResultListener() {
-			@Override
-			public void requestSuccess(int tag, String successResult) {
-				String temp = successResult.substring(1, successResult.length() - 1);
-				if (!TextUtils.isEmpty(successResult)) {
-					LogUtils.d("zkf 222 successResult:" + successResult);
+
+    private void getCheckProject() {
+
+        String url = ApiParams.API_HOST + "/app/xzjcxm.action";
+        Map<String, String> paramMap = new HashMap<>();
+        paramMap.put("id", String.valueOf(boothglBean.getId()));
+
+        NetRequest.request(url, ApiRequestTag.DATA, paramMap, new NetRequestResultListener() {
+            @Override
+            public void requestSuccess(int tag, String successResult) {
+                String temp = successResult.substring(1, successResult.length() - 1);
+                if (!TextUtils.isEmpty(successResult)) {
+                    LogUtils.d("zkf 222 successResult:" + successResult);
 //					SampleNameData tempData = JsonUtils.fromJson(temp, SampleNameData.class);
 //					commodityList.addAll(tempData.getCommodity());
 
 
-				}
+                }
 
 
-			}
+            }
 
-			@Override
-			public void requestFailure(int tag, int code, String msg) {
+            @Override
+            public void requestFailure(int tag, int code, String msg) {
 
-			}
-		});
+            }
+        });
 
-	}
+    }
 
 
-	@Override
-	public void onBGARefreshLayoutBeginRefreshing(BGARefreshLayout refreshLayout) {
-
-	}
-
-	@Override
-	public boolean onBGARefreshLayoutBeginLoadingMore(BGARefreshLayout refreshLayout) {
-		return false;
-	}
 }

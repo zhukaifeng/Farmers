@@ -29,9 +29,11 @@ import com.luck.picture.lib.config.PictureMimeType;
 import com.luck.picture.lib.entity.LocalMedia;
 import com.osiris.farmers.R;
 import com.osiris.farmers.base.BaseActivity;
+import com.osiris.farmers.model.CheckProject;
 import com.osiris.farmers.model.SampleListData;
 import com.osiris.farmers.network.ApiParams;
 import com.osiris.farmers.network.ApiRequestTag;
+import com.osiris.farmers.network.GlobalParams;
 import com.osiris.farmers.network.NetRequest;
 import com.osiris.farmers.network.NetRequestResultListener;
 import com.osiris.farmers.utils.ZXingUtils;
@@ -42,7 +44,9 @@ import com.smartdevice.aidl.IZKCService;
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStream;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -104,13 +108,13 @@ public class PrintDetailActivity extends BaseActivity {
             ivCode.setImageBitmap(bitmap);
 
         }
-        FullyGridLayoutManager manager = new FullyGridLayoutManager(this, 3, GridLayoutManager.VERTICAL, false);
+        FullyGridLayoutManager manager = new FullyGridLayoutManager(this, 1, GridLayoutManager.VERTICAL, false);
         recyclerView.setLayoutManager(manager);
         adapter = new GridImageAdapter(this, onAddPicClickListener);
         adapter.setList(selectList);
         adapter.setSelectMax(1);
         recyclerView.setAdapter(adapter);
-     //   bindService();
+       bindService();
 
 
     }
@@ -129,26 +133,56 @@ public class PrintDetailActivity extends BaseActivity {
 
                 break;
             case R.id.tv_price_ok:
-                mHandler.sendEmptyMessage(102);
+                String title = "";
 
-//                String text = "样品编码:" + "1"
-//                        + "\n" + "检测项目:" + "2"
-//                        + "\n";
-//                try {
-//
-//                        mIzkcService.printGBKText(text);
-//
-//                } catch (RemoteException e) {
-//                    LogU.e("", "远程服务未连接...");
-//                    e.printStackTrace();
+                String text = "样品编码:" + data.getId()
+                        + "\n";
+                if (!TextUtils.isEmpty(data.getComname()) && !TextUtils.isEmpty(data.getSczhutfl())) {
+                    title = text + data.getComname() + " 摊位号:" + data.getSczhutfl()
+                            + "\n";
+                }
+                if (!TextUtils.isEmpty(data.getYpbh())) {
+                    title = title + "样品名称:" + data.getYpbh()
+                            + "\n";
+                }
+                StringBuffer stringBuffer = new StringBuffer();
+//                for (CheckProject.JcxmBean jcxmBean : checkProjectList) {
+//                    if (jcxmBean.isSelect()) {
+//                        stringBuffer.append(jcxmBean.getJcmc()).append("\n");
+//                    }
 //                }
-//                String text2 = "\n";
-//                try {
-//                    mIzkcService.printGBKText(text2);
-//                } catch (RemoteException e) {
-//                    LogU.e("", "远程服务未连接...");
-//                    e.printStackTrace();
-//                }
+                if (!TextUtils.isEmpty(stringBuffer.toString())) {
+                    title = title + "检测项目:" + stringBuffer.toString();
+                } else {
+                    title = title + "检测项目:自选"
+                            + "\n";
+                }
+
+
+                title = title + "时间:" + data.getLlrq()
+                        + "\n"+"检测员:" + GlobalParams.username;
+
+
+
+                //"检测项目:" + printJcmName
+                //                        + "\n";
+
+                try {
+                    if (!TextUtils.isEmpty(title)) {
+                        mIzkcService.printGBKText(title);
+                    }
+                } catch (RemoteException e) {
+                    Log.e("", "远程服务未连接...");
+                    e.printStackTrace();
+                }
+                printPic();
+                String text2 = "\n" + "\n"+ "\n";
+                try {
+                    mIzkcService.printGBKText(text2);
+                } catch (RemoteException e) {
+                    Log.e("", "远程服务未连接...");
+                    e.printStackTrace();
+                }
                 break;
             case R.id.rl_upload:
                 if (selectList.size()==0){
@@ -160,7 +194,8 @@ public class PrintDetailActivity extends BaseActivity {
                     Toast.makeText(PrintDetailActivity.this,"请拍照",Toast.LENGTH_SHORT).show();
                     return;
                 }
-                uploadTwoPic(selectList.get(0).getCompressPath());
+                showLoadDialog();
+                uploadTwoBeforePic(selectList.get(0).getCompressPath());
                 break;
             default:
 
@@ -168,31 +203,13 @@ public class PrintDetailActivity extends BaseActivity {
         }
     }
 
-    private Handler mHandler = new Handler(){
-        @Override
-        public void handleMessage(Message msg) {
-            super.handleMessage(msg);
-            switch (msg.what){
-                case 102:
-                    new Thread(){
-                        @Override
-                        public void run() {
-                          //  printPic(createViewBitmap(rl_print));
-                            ivCode.setImageBitmap(createViewBitmap(rl_print));
 
-                        }
-                    }.start();
-
-                    break;
-            }
-        }
-    };
 
     private GridImageAdapter.onAddPicClickListener onAddPicClickListener = new GridImageAdapter.onAddPicClickListener() {
         @Override
         public void onAddPicClick() {
             PictureSelector.create(PrintDetailActivity.this)
-                    .openCamera(PictureMimeType.ofImage())
+                    .openCamera(PictureMimeType.ofImage()).compress(true)
                     .forResult(PictureConfig.CHOOSE_REQUEST);
         }
 
@@ -256,7 +273,9 @@ public class PrintDetailActivity extends BaseActivity {
         bindService(intent, mServiceConn, Context.BIND_AUTO_CREATE);
     }
 
-    private void printPic(Bitmap mBitmap) {
+    private void printPic() {
+        Bitmap mBitmap = ZXingUtils.createQRImage(String.valueOf(data.getId()), 200, 200);
+
         if (mBitmap != null) {
             /*switch (imageType) {
                 case 0:
@@ -271,7 +290,11 @@ public class PrintDetailActivity extends BaseActivity {
             }*/
             LogUtils.d("zkf sss1111ssss");
             ivCode.setImageBitmap(mBitmap);
-         //   mIzkcService.printBitmap(mBitmap);
+            try {
+                mIzkcService.printBitmap(mBitmap);
+            } catch (RemoteException e) {
+                e.printStackTrace();
+            }
 
 //				if (autoOutputPaper) {
 //					mIzkcService.generateSpace();
@@ -303,33 +326,6 @@ public class PrintDetailActivity extends BaseActivity {
         return bitmap;
     }
 
-    private void uploadTwoPic(String path) {
-        String url = ApiParams.API_HOST + "/app/uploadTwoPic.action";//database
-
-        Map<String, String> paramMap = new HashMap<>();
-        paramMap.put("pic", "data:image/png;base64," + imageToBase64(path));
-        System.out.println("data:image/png;base64," + imageToBase64(path));
-        LogUtils.d("zkf imageToBase64(path):" + imageToBase64(path));
-
-        paramMap.put("id", String.valueOf(data.getId()));
-        NetRequest.requestBase64(url, ApiRequestTag.DATA, paramMap, new NetRequestResultListener() {
-            @Override
-            public void requestSuccess(int tag, String successResult) {
-                //String temp = successResult.substring(1, successResult.length() - 1);
-
-                LogUtils.d("zkf temp:" + successResult);
-                cancelLoadDialog();
-
-            }
-
-            @Override
-            public void requestFailure(int tag, int code, String msg) {
-                cancelLoadDialog();
-            }
-        });
-
-
-    }
 
     public static String imageToBase64(String path) {
         if (TextUtils.isEmpty(path)) {
@@ -361,5 +357,57 @@ public class PrintDetailActivity extends BaseActivity {
         return result;
     }
 
+    private void uploadTwoBeforePic(String path) {
+
+        String url = ApiParams.API_HOST + "/app/picUpload.action";//database
+
+        Map<String, String> paramMap = new HashMap<>();
+        paramMap.put("database", "data:image/png;base64," + imageToBase64(path));
+        NetRequest.requestBase64(url, ApiRequestTag.DATA, paramMap, new NetRequestResultListener() {
+            @Override
+            public void requestSuccess(int tag, String successResult) {
+                //String temp = successResult.substring(1, successResult.length() - 1);
+
+                LogUtils.d("zkf temp:" + successResult);
+                if (successResult.contains("png")) {
+                    uploadTwoPic(successResult);
+                }
+
+            }
+
+            @Override
+            public void requestFailure(int tag, int code, String msg) {
+
+            }
+        });
+
+
+    }
+
+
+    private void uploadTwoPic(String path) {
+        String url = ApiParams.API_HOST + "/app/uploadTwoPic.action";//database
+
+        Map<String, String> paramMap = new HashMap<>();
+        paramMap.put("pic", path);
+        paramMap.put("id", String.valueOf(data.getId()));
+        NetRequest.requestBase64(url, ApiRequestTag.DATA, paramMap, new NetRequestResultListener() {
+            @Override
+            public void requestSuccess(int tag, String successResult) {
+                //String temp = successResult.substring(1, successResult.length() - 1);
+                LogUtils.d("zkf temp:" + successResult);
+                Toast.makeText(PrintDetailActivity.this,"照片上传成功",Toast.LENGTH_SHORT).show();
+                cancelLoadDialog();
+
+            }
+
+            @Override
+            public void requestFailure(int tag, int code, String msg) {
+                cancelLoadDialog();
+            }
+        });
+
+
+    }
 
 }
