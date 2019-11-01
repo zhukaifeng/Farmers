@@ -1,14 +1,18 @@
 package com.osiris.farmers.base;
 
+import android.app.Dialog;
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.PorterDuff;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ProgressBar;
 
+import com.osiris.farmers.R;
 import com.osiris.farmers.event.DefaultEvent;
 
 import org.greenrobot.eventbus.EventBus;
@@ -134,4 +138,41 @@ public abstract class BaseFragment extends Fragment  {
 		EventBus.getDefault().unregister(this);
 
 	}
+
+    private volatile int loadDialogShowCount = 0;
+
+    protected Dialog loadDialog;
+
+
+    protected synchronized void showLoadDialog() {
+        if (loadDialog == null) {
+            loadDialog = new Dialog(getActivity(), R.style.loadingDialog);
+            View progressContentView = LayoutInflater.from(getActivity()).inflate(R.layout
+                    .layout_loading_dialog, null);
+            ProgressBar pb = (ProgressBar) progressContentView.findViewById(R.id.pb);
+            pb.getIndeterminateDrawable().setColorFilter(getResources().getColor(R.color
+                    .base_color), PorterDuff.Mode.SRC_ATOP);
+            loadDialog.setContentView(progressContentView);
+            loadDialog.setCancelable(true);
+            loadDialog.setCanceledOnTouchOutside(false);
+        }
+        if (!loadDialog.isShowing()) {
+            loadDialog.show();
+        }
+        loadDialogShowCount++;
+    }
+    protected void cancelLoadDialog() {
+        cancelLoadDialog(false);
+    }
+
+    protected synchronized void cancelLoadDialog(boolean force) {
+        if (force) {
+            loadDialogShowCount = 0;
+        }
+        loadDialogShowCount--;
+        if (loadDialog != null && loadDialogShowCount <= 0) {
+            loadDialog.cancel();
+        }
+    }
+
 }

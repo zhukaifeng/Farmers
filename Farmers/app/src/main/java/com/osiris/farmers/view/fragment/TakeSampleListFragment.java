@@ -116,6 +116,7 @@ public class TakeSampleListFragment extends BaseFragment {
 
     private int pageNum = 1;
     private int pageCount = 8;
+    private int countGetData = 0;
 
     private ChooseStallData.BoothglBean boothglBean = new ChooseStallData.BoothglBean();
 
@@ -149,6 +150,7 @@ public class TakeSampleListFragment extends BaseFragment {
             @Override
             public void onRefresh() {
                 refreshLayout.setRefreshing(true);
+                previousTotal = 0;
                 pageNum = 1;
                 getData();
 
@@ -171,7 +173,14 @@ public class TakeSampleListFragment extends BaseFragment {
 
             }
         });
-
+        final LinearLayoutManager manager = (LinearLayoutManager) rv_data
+                .getLayoutManager();
+        rv_data.addOnScrollListener(new EndLessOnScrollListener(manager) {
+            @Override
+            public void onLoadMore(int currentPage) {
+                loadMoreData();
+            }
+        });
 
         getData();
 
@@ -309,6 +318,9 @@ public class TakeSampleListFragment extends BaseFragment {
         paramMap.put("pageNo",String.valueOf(pageNum));
         paramMap.put("pageSize",String.valueOf(pageCount));
         paramMap.put("id",String.valueOf(GlobalParams.id));
+        if (pageNum>1){
+            showLoadDialog();
+        }
 
 
         NetRequest.request(url, ApiRequestTag.DATA, paramMap, new NetRequestResultListener() {
@@ -318,6 +330,7 @@ public class TakeSampleListFragment extends BaseFragment {
                 //String temp = successResult.substring(1, successResult.length() - 1);
                 if (!TextUtils.isEmpty(successResult)) {
                     SampleListData tempData = JsonUtils.fromJson(successResult, SampleListData.class);
+                    countGetData = tempData.getCangysjgls().size();
                     if (pageNum == 1){
                         cangysjglsList.clear();
                     }
@@ -325,13 +338,15 @@ public class TakeSampleListFragment extends BaseFragment {
                     LogUtils.d("zkf cangysjglsList:" + cangysjglsList.size());
                     dataAdapter.notifyDataSetChanged();
                     refreshLayout.setRefreshing(false);
+                    cancelLoadDialog();
                 }
 
             }
 
             @Override
             public void requestFailure(int tag, int code, String msg) {
-
+                refreshLayout.setRefreshing(false);
+                cancelLoadDialog();
             }
         });
 
@@ -565,6 +580,65 @@ public class TakeSampleListFragment extends BaseFragment {
             }
         });
 
+    }
+
+    //主要用来存储上一个totalItemCount
+    private int previousTotal = 0;
+
+
+    public abstract class EndLessOnScrollListener extends RecyclerView.OnScrollListener {
+
+        //声明一个LinearLayoutManager
+        private LinearLayoutManager mLinearLayoutManager;
+
+        //当前页，从0开始    private int currentPage = 0;
+        //已经加载出来的Item的数量
+        private int totalItemCount;
+
+        //在屏幕上可见的item数量
+        private int visibleItemCount;
+
+        //在屏幕可见的Item中的第一个
+        private int firstVisibleItem;
+
+        //是否正在上拉数据
+        private boolean loading = true;
+
+        public EndLessOnScrollListener(LinearLayoutManager linearLayoutManager) {
+            this.mLinearLayoutManager = linearLayoutManager;
+        }
+
+        @Override
+        public void onScrolled(RecyclerView recyclerView, int dx, int dy) {
+            super.onScrolled(recyclerView, dx, dy);
+
+            visibleItemCount = recyclerView.getChildCount();
+            totalItemCount = mLinearLayoutManager.getItemCount();
+            firstVisibleItem = mLinearLayoutManager.findFirstVisibleItemPosition();
+            if (loading) {
+                if (totalItemCount > previousTotal) {
+                    loading = false;
+                    previousTotal = totalItemCount;
+                }
+            }
+
+            if (!loading && totalItemCount - visibleItemCount <= firstVisibleItem) {
+                // pageCount ++;
+                onLoadMore(pageCount);
+                loading = true;
+            }
+        }
+
+        /**
+         * 提供一个抽闲方法，在Activity中监听到这个EndLessOnScrollListener
+         * 并且实现这个方法
+         */
+        public abstract void onLoadMore(int currentPage);
+    }
+
+    private void loadMoreData() {
+        pageNum++;
+        getData();
     }
 
 
