@@ -5,7 +5,8 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.text.TextUtils;
 import android.view.View;
-import android.view.Window;
+import android.widget.EditText;
+import android.widget.TextView;
 
 import com.osiris.farmers.R;
 import com.osiris.farmers.base.BaseActivity;
@@ -27,13 +28,31 @@ import java.util.Map;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import butterknife.OnClick;
+import me.jessyan.autosize.utils.LogUtils;
 
 public class ChooseStallNoActivity extends BaseActivity {
 
 
 	@BindView(R.id.rv_data)
 	RecyclerView rvData;
+	@BindView(R.id.et_search)
+	EditText et_search;
+	@BindView(R.id.tv_nodata)
+	TextView tv_nodata;
 
+	@OnClick({R.id.bt_search,R.id.rl_back})
+	void onClick(View view){
+		switch (view.getId()){
+			case R.id.bt_search:
+				searchStallNo(et_search.getText().toString());
+				break;
+			case R.id.rl_back:
+				finish();
+				break;
+		}
+
+	}
 
 	private List<ChooseStallData.BoothglBean> stallList = new ArrayList<>();
 	private StallNoAdapter typeAdapter = new StallNoAdapter(stallList);
@@ -101,5 +120,41 @@ public class ChooseStallNoActivity extends BaseActivity {
 
 
 
+	private void searchStallNo(String str) {
+
+		String url = ApiParams.API_HOST + "/app/mohussTwh.action";
+		Map<String, String> paramMap = new HashMap<>();
+		paramMap.put("marketid", String.valueOf(GlobalParams.currentMarketId));
+		paramMap.put("twhnm",str);
+
+		NetRequest.request(url, ApiRequestTag.DATA, paramMap, new NetRequestResultListener() {
+			@Override
+			public void requestSuccess(int tag, String successResult) {
+				LogUtils.d("zkf"+"ssssssssssss:" +successResult);
+				String temp = successResult.substring(1, successResult.length() - 1);
+				if (!TextUtils.isEmpty(temp)) {
+					rvData.setVisibility(View.VISIBLE);
+					tv_nodata.setVisibility(View.GONE);
+					ChooseStallData.BoothglBean tempData = JsonUtils.fromJson(temp, ChooseStallData.BoothglBean.class);
+					if (stallList.size() > 0) stallList.clear();
+					stallList.add(tempData);
+					typeAdapter.notifyDataSetChanged();
+
+				}else {
+					rvData.setVisibility(View.GONE);
+					tv_nodata.setVisibility(View.VISIBLE);
+					if (stallList.size() > 0) stallList.clear();
+					typeAdapter.notifyDataSetChanged();
+
+				}
+
+			}
+
+			@Override
+			public void requestFailure(int tag, int code, String msg) {
+
+			}
+		});
+	}
 
 }

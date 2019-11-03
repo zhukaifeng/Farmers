@@ -114,7 +114,7 @@ public class PrintDetailActivity extends BaseActivity {
         adapter.setList(selectList);
         adapter.setSelectMax(1);
         recyclerView.setAdapter(adapter);
-       bindService();
+        bindService();
 
 
     }
@@ -126,7 +126,7 @@ public class PrintDetailActivity extends BaseActivity {
         ButterKnife.bind(this);
     }
 
-    @OnClick({R.id.rl_back, R.id.tv_price_ok,R.id.rl_upload,R.id.tv_upload_pic})
+    @OnClick({R.id.rl_back, R.id.tv_price_ok, R.id.rl_upload, R.id.tv_upload_pic})
     public void onViewClicked(View v) {
         switch (v.getId()) {
             case R.id.rl_back:
@@ -145,23 +145,42 @@ public class PrintDetailActivity extends BaseActivity {
                     title = title + "样品名称:" + data.getYpbh()
                             + "\n";
                 }
-                StringBuffer stringBuffer = new StringBuffer();
-//                for (CheckProject.JcxmBean jcxmBean : checkProjectList) {
-//                    if (jcxmBean.isSelect()) {
-//                        stringBuffer.append(jcxmBean.getJcmc()).append("\n");
-//                    }
-//                }
-                if (!TextUtils.isEmpty(stringBuffer.toString())) {
-                    title = title + "检测项目:" + stringBuffer.toString();
+
+
+                if (!TextUtils.isEmpty(data.getMbrk())) {
+
+                    if (data.getMbrk().contains(",")) {
+                        title = title + "检测项目:" + data.getMbrk().replace(",", "\n")
+                                + "\n";
+
+                    }else {
+                        title = title + "检测项目:" + data.getMbrk()
+                                + "\n";
+                    }
+
+
                 } else {
                     title = title + "检测项目:自选"
                             + "\n";
                 }
 
 
-                title = title + "时间:" + data.getLlrq()
-                        + "\n"+"检测员:" + GlobalParams.username;
+                StringBuffer stringBuffer = new StringBuffer();
+//                for (CheckProject.JcxmBean jcxmBean : checkProjectList) {
+//                    if (jcxmBean.isSelect()) {
+//                        stringBuffer.append(jcxmBean.getJcmc()).append("\n");
+//                    }
+//                }
+//                if (!TextUtils.isEmpty(stringBuffer.toString())) {
+//                    title = title + "检测项目:" + stringBuffer.toString();
+//                } else {
+//                    title = title + "检测项目:自选"
+//                            + "\n";
+//                }
 
+
+                title = title + "时间:" + data.getLlrq()
+                        + "\n" + "检测员:" + GlobalParams.username;
 
 
                 //"检测项目:" + printJcmName
@@ -176,7 +195,7 @@ public class PrintDetailActivity extends BaseActivity {
                     e.printStackTrace();
                 }
                 printPic();
-                String text2 = "\n" + "\n"+ "\n";
+                String text2 = "\n" + "\n" + "\n";
                 try {
                     mIzkcService.printGBKText(text2);
                 } catch (RemoteException e) {
@@ -185,13 +204,13 @@ public class PrintDetailActivity extends BaseActivity {
                 }
                 break;
             case R.id.rl_upload:
-                if (selectList.size()==0){
-                    Toast.makeText(this,"请拍照",Toast.LENGTH_SHORT).show();
+                if (selectList.size() == 0) {
+                    Toast.makeText(this, "请拍照", Toast.LENGTH_SHORT).show();
                 }
                 break;
             case R.id.tv_upload_pic:
-                if (selectList.size()==0){
-                    Toast.makeText(PrintDetailActivity.this,"请拍照",Toast.LENGTH_SHORT).show();
+                if (selectList.size() == 0) {
+                    Toast.makeText(PrintDetailActivity.this, "请拍照", Toast.LENGTH_SHORT).show();
                     return;
                 }
                 showLoadDialog();
@@ -202,7 +221,6 @@ public class PrintDetailActivity extends BaseActivity {
                 break;
         }
     }
-
 
 
     private GridImageAdapter.onAddPicClickListener onAddPicClickListener = new GridImageAdapter.onAddPicClickListener() {
@@ -299,7 +317,7 @@ public class PrintDetailActivity extends BaseActivity {
 //				if (autoOutputPaper) {
 //					mIzkcService.generateSpace();
 //				}
-        }else {
+        } else {
             LogUtils.d("zkf sssssss");
         }
     }
@@ -396,7 +414,7 @@ public class PrintDetailActivity extends BaseActivity {
             public void requestSuccess(int tag, String successResult) {
                 //String temp = successResult.substring(1, successResult.length() - 1);
                 LogUtils.d("zkf temp:" + successResult);
-                Toast.makeText(PrintDetailActivity.this,"照片上传成功",Toast.LENGTH_SHORT).show();
+                Toast.makeText(PrintDetailActivity.this, "照片上传成功", Toast.LENGTH_SHORT).show();
                 cancelLoadDialog();
 
             }

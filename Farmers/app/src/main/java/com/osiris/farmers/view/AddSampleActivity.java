@@ -41,7 +41,6 @@ import com.osiris.farmers.network.NetRequest;
 import com.osiris.farmers.network.NetRequestResultListener;
 import com.osiris.farmers.utils.FileUtils;
 import com.osiris.farmers.utils.JsonUtils;
-import com.osiris.farmers.utils.LogU;
 import com.osiris.farmers.utils.ZXingUtils;
 import com.osiris.farmers.view.adapter.BillOflandProjectSelectAdapter;
 import com.osiris.farmers.view.adapter.BillOflandSelectAdapter;
