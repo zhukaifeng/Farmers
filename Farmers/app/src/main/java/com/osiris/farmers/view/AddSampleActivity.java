@@ -25,6 +25,8 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.google.gson.JsonArray;
+import com.google.gson.JsonParser;
 import com.luck.picture.lib.PictureSelector;
 import com.luck.picture.lib.config.PictureConfig;
 import com.luck.picture.lib.config.PictureMimeType;
@@ -33,6 +35,7 @@ import com.osiris.farmers.R;
 import com.osiris.farmers.base.BaseActivity;
 import com.osiris.farmers.model.CheckProject;
 import com.osiris.farmers.model.SampleNameData;
+import com.osiris.farmers.model.SerachGoodData;
 import com.osiris.farmers.model.TypeSampleTitle;
 import com.osiris.farmers.network.ApiParams;
 import com.osiris.farmers.network.ApiRequestTag;
@@ -54,8 +57,10 @@ import com.smartdevice.aidl.IZKCService;
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStream;
+import java.lang.reflect.Array;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.HashSet;
@@ -78,14 +83,12 @@ public class AddSampleActivity extends BaseActivity {
     EditText edt_price;
     @BindView(R.id.edt_count)
     EditText edt_count;
-    @BindView(R.id.rv_type)
-    RecyclerView rv_type;
+//    @BindView(R.id.rv_type)
+//    RecyclerView rv_type;
     @BindView(R.id.recycler)
     RecyclerView recyclerView;
     @BindView(R.id.rv_project)
     RecyclerView rv_project;
-    @BindView(R.id.tv_type_name)
-    TextView tv_type_name;
     @BindView(R.id.linear_content)
     LinearLayout linear_content;
     @BindView(R.id.relative_content)
@@ -106,6 +109,10 @@ public class AddSampleActivity extends BaseActivity {
     SignView sign_view;
     @BindView(R.id.scrollview)
     NestedScrollView scrollview;
+    @BindView(R.id.edt_content)
+    EditText edt_content;
+    @BindView(R.id.iv_search)
+    ImageView iv_search;
 
     private Handler mHandler = new Handler();
     private List<String> picUploadList = new ArrayList<>();
@@ -123,7 +130,7 @@ public class AddSampleActivity extends BaseActivity {
     private String printId;
     private String goodName;
 
-    @OnClick({R.id.iv_close, R.id.tv_count_ok, R.id.tv_price_ok, R.id.tv_print, R.id.tv_ok, R.id.tv_upload_sign})
+    @OnClick({R.id.iv_close, R.id.tv_count_ok, R.id.tv_price_ok, R.id.tv_print, R.id.tv_ok, R.id.tv_upload_sign,R.id.iv_search})
     void onClick(View v) {
         switch (v.getId()) {
             case R.id.tv_print:
@@ -252,7 +259,50 @@ public class AddSampleActivity extends BaseActivity {
                 }
 
                 break;
+            case R.id.iv_search:
+
+                searchData(edt_content.getText().toString().trim());
+
+                break;
         }
+    }
+
+    private void searchData(String str) {
+
+        String url = ApiParams.API_HOST +"/app/getCommodityByNm.action";
+        Map<String, String> paramMap = new HashMap<>();
+        if (!TextUtils.isEmpty(str)){
+            paramMap.put("commoditynm",str);
+        }
+
+        NetRequest.request(url, ApiRequestTag.DATA, paramMap, new NetRequestResultListener() {
+            @Override
+            public void requestSuccess(int tag, String successResult) {
+                LogUtils.d("zkf successResult:" + successResult);
+                JsonParser parser = new JsonParser();
+                JsonArray array = parser.parse(successResult).getAsJsonArray();
+                SerachGoodData[] datas = JsonUtils.fromJson(array,SerachGoodData[].class);
+                List<SerachGoodData> tempList = new ArrayList<>();
+                tempList.addAll(Arrays.asList(datas));
+                if (tempList.size()>0){
+                    if (showDataList.size()>0)showDataList.clear();
+                    showDataList.addAll(tempList);
+                    showDataList.get(0).setSelect(true);
+                    billOflandSelectAdapter.notifyDataSetChanged();
+                    getCheckProject(showDataList.get(0).getId());
+
+                }
+
+
+
+            }
+
+            @Override
+            public void requestFailure(int tag, int code, String msg) {
+
+            }
+        });
+
     }
 
     private void printPic() {
@@ -300,12 +350,12 @@ public class AddSampleActivity extends BaseActivity {
     private BillOflandProjectSelectAdapter billOflandProjectSelectAdapter;
     private BillOflandSelectAdapter billOflandSelectAdapter;
     private List<SampleNameData.CommodityBean> dataList = new ArrayList<>();
-    private BillOflandTypeSelectAdapter typeSelectAdapter;
+   // private BillOflandTypeSelectAdapter typeSelectAdapter;
     private GridImageAdapter adapter;
     private List<LocalMedia> selectList = new ArrayList<>();
 
     private List<CheckProject.JcxmBean> checkProjectList = new ArrayList<>();
-    private List<SampleNameData.CommodityBean> showDataList = new ArrayList<>();
+    private List<SerachGoodData> showDataList = new ArrayList<>();
     private List<TypeSampleTitle> commodityNameList = new ArrayList<>();
 
     private int boothglid = -1;
@@ -332,12 +382,12 @@ public class AddSampleActivity extends BaseActivity {
     public void init() {
 
 
-        dataList = getIntent().getParcelableArrayListExtra("data_list");
+     //   dataList = getIntent().getParcelableArrayListExtra("data_list");
         boothglid = getIntent().getIntExtra("boothglid", 0);
         stallName = getIntent().getStringExtra("stall_name");
         marketName = GlobalParams.currentMarkrtName;
 
-        showDataList.addAll(dataList);
+     //   showDataList.addAll(dataList);
 
         for (SampleNameData.CommodityBean commodityBean : dataList) {
             commodityNameList.add(new TypeSampleTitle(commodityBean.getBeifen(), false));
@@ -346,55 +396,55 @@ public class AddSampleActivity extends BaseActivity {
         commodityNameList.clear();
         commodityNameList.addAll(ts);
 
-        if (showDataList.size() > 0) {
-            showDataList.clear();
-        }
-        for (SampleNameData.CommodityBean commodityBean : dataList) {
-            if (commodityBean.getBeifen().equals(commodityNameList.get(0).getName())) {
-                showDataList.add(commodityBean);
-            }
-        }
+        searchData("");
 
-        typeSelectAdapter = new BillOflandTypeSelectAdapter(commodityNameList);
-        LinearLayoutManager linearLayoutManager = new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false);
-        rv_type.setLayoutManager(linearLayoutManager);
-        rv_type.setAdapter(typeSelectAdapter);
-        typeSelectAdapter.notifyDataSetChanged();
-        typeSelectAdapter.setOnItemClick(new MyItemClickListener() {
-            @Override
-            public void onItemClick(View view, int position) {
+//        if (showDataList.size() > 0) {
+//            showDataList.clear();
+//        }
+//        for (SampleNameData.CommodityBean commodityBean : dataList) {
+//            if (commodityBean.getBeifen().equals(commodityNameList.get(0).getName())) {
+//                showDataList.add(commodityBean);
+//            }
+//        }
 
-                LogUtils.d("zkf position:" + position);
-                List<TypeSampleTitle> tempList = new ArrayList<>();
-                tempList.addAll(commodityNameList);
-                for (int i = 0; i < commodityNameList.size(); i++) {
-                    if (i == position) {
-                        LogUtils.d("zkf i :" + i);
-                        commodityNameList.get(i).setSelect(true);
-                    } else {
-                        LogUtils.d("zkf ii :" + i);
-                        commodityNameList.get(i).setSelect(false);
-                    }
-                }
-                typeSelectAdapter.notifyDataSetChanged();
-
-                tv_type_name.setText(commodityNameList.get(position).getName());
-                if (showDataList.size() > 0) {
-                    showDataList.clear();
-                }
-                for (SampleNameData.CommodityBean commodityBean : dataList) {
-                    if (commodityBean.getBeifen().equals(commodityNameList.get(position).getName())) {
-                        showDataList.add(commodityBean);
-                    }
-                }
-                billOflandSelectAdapter.notifyDataSetChanged();
-
-                descriptionid = commodityNameList.get(position).getName();
-                printName = descriptionid;
-
-            }
-        });
-        tv_type_name.setText(commodityNameList.get(0).getName());
+//        typeSelectAdapter = new BillOflandTypeSelectAdapter(commodityNameList);
+//        LinearLayoutManager linearLayoutManager = new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false);
+////        rv_type.setLayoutManager(linearLayoutManager);
+////        rv_type.setAdapter(typeSelectAdapter);
+//        typeSelectAdapter.notifyDataSetChanged();
+//        typeSelectAdapter.setOnItemClick(new MyItemClickListener() {
+//            @Override
+//            public void onItemClick(View view, int position) {
+//
+//                LogUtils.d("zkf position:" + position);
+//                List<TypeSampleTitle> tempList = new ArrayList<>();
+//                tempList.addAll(commodityNameList);
+//                for (int i = 0; i < commodityNameList.size(); i++) {
+//                    if (i == position) {
+//                        LogUtils.d("zkf i :" + i);
+//                        commodityNameList.get(i).setSelect(true);
+//                    } else {
+//                        LogUtils.d("zkf ii :" + i);
+//                        commodityNameList.get(i).setSelect(false);
+//                    }
+//                }
+//                typeSelectAdapter.notifyDataSetChanged();
+//
+//                if (showDataList.size() > 0) {
+//                    showDataList.clear();
+//                }
+//                for (SampleNameData.CommodityBean commodityBean : dataList) {
+//                    if (commodityBean.getBeifen().equals(commodityNameList.get(position).getName())) {
+//                        showDataList.add(commodityBean);
+//                    }
+//                }
+//                billOflandSelectAdapter.notifyDataSetChanged();
+//
+//                descriptionid = commodityNameList.get(position).getName();
+//                printName = descriptionid;
+//
+//            }
+//        });
 
 
         billOflandSelectAdapter = new BillOflandSelectAdapter(showDataList);
@@ -453,7 +503,6 @@ public class AddSampleActivity extends BaseActivity {
 
             }
         });
-        getCheckProject(showDataList.get(0).getId());
         bindService();
 
     }

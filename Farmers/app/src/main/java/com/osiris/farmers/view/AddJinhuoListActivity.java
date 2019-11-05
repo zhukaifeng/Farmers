@@ -14,6 +14,7 @@ import com.osiris.farmers.network.GlobalParams;
 import com.osiris.farmers.network.NetRequest;
 import com.osiris.farmers.network.NetRequestResultListener;
 import com.osiris.farmers.view.adapter.BillOflandSelectAdapter;
+import com.osiris.farmers.view.adapter.JinhuoAdapter;
 import com.osiris.farmers.view.adapter.MyItemClickListener;
 
 import java.util.ArrayList;
@@ -38,7 +39,7 @@ public class AddJinhuoListActivity extends BaseActivity {
     @BindView(R.id.edt_no)
     EditText edt_no;
 
-    private BillOflandSelectAdapter billOflandSelectAdapter;
+    private JinhuoAdapter billOflandSelectAdapter;
     private List<SampleNameData.CommodityBean> dataList = new ArrayList<>();
     private List<SampleNameData.CommodityBean> showDataList = new ArrayList<>();
     private int commodityid = -1;
@@ -55,7 +56,7 @@ public class AddJinhuoListActivity extends BaseActivity {
         dataList = getIntent().getParcelableArrayListExtra("data_list");
         gongyingshang = getIntent().getStringExtra("jinhuo");
         showDataList.addAll(dataList);
-        billOflandSelectAdapter = new BillOflandSelectAdapter(showDataList);
+        billOflandSelectAdapter = new JinhuoAdapter(showDataList);
         GridLayoutManager gridLayoutManager = new GridLayoutManager(this, 3);
         rv_data.setLayoutManager(gridLayoutManager);
         rv_data.setAdapter(billOflandSelectAdapter);

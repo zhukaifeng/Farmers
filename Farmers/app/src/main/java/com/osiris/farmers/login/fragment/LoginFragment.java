@@ -3,6 +3,7 @@ package com.osiris.farmers.login.fragment;
 import android.app.Dialog;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.text.TextUtils;
 import android.view.View;
 import android.widget.Button;
@@ -31,6 +32,8 @@ import butterknife.BindView;
 import butterknife.OnClick;
 import me.jessyan.autosize.utils.LogUtils;
 
+import static android.content.Context.MODE_PRIVATE;
+
 public class LoginFragment extends BaseFragment {
 
 	@BindView(R.id.ll_login_forget)
@@ -41,6 +44,10 @@ public class LoginFragment extends BaseFragment {
 	EditText etLoginPassword;
 	@BindView(R.id.btn_login)
 	Button btnLogin;
+	private SharedPreferences preferences;
+	private SharedPreferences.Editor editor;
+	private String USER_ACCOUNT = "account";
+	private String USER_PWD = "password";
 
 	@Override
 	protected int setLayout() {
@@ -49,8 +56,17 @@ public class LoginFragment extends BaseFragment {
 
 	@Override
 	protected void initView() {
-
-
+		preferences = getActivity().getPreferences(MODE_PRIVATE);
+		editor = preferences.edit();
+		String account = preferences.getString(USER_ACCOUNT, "");
+		String pwd = preferences.getString(USER_PWD, "");
+		LogUtils.d("zkf account:" + account + "   pwd:" + pwd);
+		if (!TextUtils.isEmpty(account)) {
+			etLoginUsername.setText(account);
+		}
+		if (!TextUtils.isEmpty(pwd)) {
+			etLoginPassword.setText(pwd);
+		}
 	}
 
 	@Override
@@ -130,11 +146,11 @@ public class LoginFragment extends BaseFragment {
 //			return;
 //		}
 		Map<String, String> paramMap = new HashMap<>();
-//		paramMap.put("username", etLoginUsername.getText().toString());
-//		paramMap.put("password", etLoginPassword.getText().toString());
+		paramMap.put("username", etLoginUsername.getText().toString());
+		paramMap.put("password", etLoginPassword.getText().toString());
 
-		paramMap.put("username", "jc1");
-		paramMap.put("password", "a123456");
+//		paramMap.put("username", "jc1");
+//		paramMap.put("password", "a123456");
 
 		NetRequest.request(url, ApiRequestTag.LOGIN, paramMap, new NetRequestResultListener() {
 			@Override
@@ -161,6 +177,9 @@ public class LoginFragment extends BaseFragment {
 							intent.putExtra("type", 4);
 
 						}
+						editor.putString(USER_ACCOUNT, etLoginUsername.getText().toString());
+						editor.putString(USER_PWD, etLoginPassword.getText().toString());
+						editor.commit();
 						startActivity(intent);
 					}
 				}

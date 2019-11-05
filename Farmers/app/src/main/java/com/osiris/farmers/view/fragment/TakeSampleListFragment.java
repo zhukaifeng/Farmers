@@ -29,8 +29,10 @@ import android.widget.TextView;
 import com.osiris.farmers.R;
 import com.osiris.farmers.base.BaseFragment;
 import com.osiris.farmers.event.BoothgEvent;
+import com.osiris.farmers.event.MarketEvent;
 import com.osiris.farmers.model.ChooseStallData;
 import com.osiris.farmers.model.GoodsType;
+import com.osiris.farmers.model.Market;
 import com.osiris.farmers.model.SampleListData;
 import com.osiris.farmers.model.SampleNameData;
 import com.osiris.farmers.model.TakeSampleList;
@@ -41,6 +43,7 @@ import com.osiris.farmers.network.NetRequest;
 import com.osiris.farmers.network.NetRequestResultListener;
 import com.osiris.farmers.utils.JsonUtils;
 import com.osiris.farmers.view.AddSampleActivity;
+import com.osiris.farmers.view.ChooseMarketActivity;
 import com.osiris.farmers.view.ChooseStallNoActivity;
 import com.osiris.farmers.view.PrintDetailActivity;
 import com.osiris.farmers.view.adapter.MyItemClickListener;
@@ -58,6 +61,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import butterknife.BindBitmap;
 import butterknife.BindView;
 import butterknife.OnClick;
 import cn.bingoogolapple.refreshlayout.BGARefreshLayout;
@@ -87,6 +91,8 @@ public class TakeSampleListFragment extends BaseFragment {
     TextView tv_shop_num;
     @BindView(R.id.refreshLayout)
     SwipeRefreshLayout refreshLayout;
+    @BindView(R.id.tv_market_name)
+    TextView tv_market_name;
 
 
     private List<GoodsType.DescriptionBean> typeList = new ArrayList<>();
@@ -129,7 +135,7 @@ public class TakeSampleListFragment extends BaseFragment {
     @Override
     protected void initView() {
 
-
+        tv_market_name.setText(GlobalParams.currentMarkrtName);
         rv_type.setLayoutManager(new LinearLayoutManager(getActivity(), LinearLayoutManager.HORIZONTAL, false));
         rv_type.setAdapter(typeAdapter);
         typeAdapter.setOnItemClick(new MyItemClickListener() {
@@ -238,7 +244,7 @@ public class TakeSampleListFragment extends BaseFragment {
 
     }
 
-    @OnClick({R.id.iv_function, R.id.rl_back, R.id.tv_type, R.id.tv_shop_num})
+    @OnClick({R.id.iv_function, R.id.rl_back, R.id.tv_type, R.id.tv_shop_num,R.id.tv_market_name})
     void onClick(View v) {
         switch (v.getId()) {
             case R.id.iv_function:
@@ -305,6 +311,10 @@ public class TakeSampleListFragment extends BaseFragment {
 					e.printStackTrace();
 				}
 				showPopwindow();*/
+                break;
+            case R.id.tv_market_name:
+                Intent intent1 = new Intent(getActivity(), ChooseMarketActivity.class);
+                startActivity(intent1);
                 break;
             default:
                 break;
@@ -389,6 +399,7 @@ public class TakeSampleListFragment extends BaseFragment {
                     ChooseStallData tempData = JsonUtils.fromJson(temp, ChooseStallData.class);
                     if (stallList.size() > 0) stallList.clear();
                     stallList.addAll(tempData.getBoothgl());
+                    if (stallNameList.size()>0)stallNameList.clear();
                     for (ChooseStallData.BoothglBean boothglBean : stallList) {
                         stallNameList.add(boothglBean.getTwhmc());
                     }
@@ -525,6 +536,18 @@ public class TakeSampleListFragment extends BaseFragment {
     }
 
 
+    @Subscribe(threadMode = ThreadMode.MAIN)
+    public void onGetMarketData(MarketEvent marketEvent) {
+        LogUtils.d("zkf receive 222222");
+        GlobalParams.currentMarketId = marketEvent.getMarketId();
+        tv_market_name.setText(marketEvent.getMarketName());
+        GlobalParams.currentMarkrtName = marketEvent.getMarketName();
+        getStallName();
+        getStallNo();
+
+    }
+
+
     private void getStallName() {
 
         String url = ApiParams.API_HOST + "/app/xzCommodity.action";
@@ -538,6 +561,9 @@ public class TakeSampleListFragment extends BaseFragment {
                 if (!TextUtils.isEmpty(successResult)) {
                     LogUtils.d("zkf  successResult:" + successResult);
                     SampleNameData tempData = JsonUtils.fromJson(temp, SampleNameData.class);
+                    if (commodityList.size()>0){
+                        commodityList.clear();
+                    }
                     commodityList.addAll(tempData.getCommodity());
 
                 }

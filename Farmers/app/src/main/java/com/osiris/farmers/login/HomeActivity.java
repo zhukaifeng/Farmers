@@ -13,6 +13,7 @@ import android.widget.TextView;
 
 import com.osiris.farmers.R;
 import com.osiris.farmers.base.BaseActivity;
+import com.osiris.farmers.event.MarketEvent;
 import com.osiris.farmers.model.Market;
 import com.osiris.farmers.network.ApiParams;
 import com.osiris.farmers.network.ApiRequestTag;
@@ -22,6 +23,9 @@ import com.osiris.farmers.network.NetRequestResultListener;
 import com.osiris.farmers.utils.JsonUtils;
 import com.osiris.farmers.view.MarketEvaluateActivity;
 import com.osiris.farmers.view.SalsersAccountActivity;
+
+import org.greenrobot.eventbus.Subscribe;
+import org.greenrobot.eventbus.ThreadMode;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -39,8 +43,7 @@ public class HomeActivity extends BaseActivity {
 
 	@BindView(R.id.ll_home_name)
 	LinearLayout llHomeName;
-	@BindView(R.id.tv_home_name)
-	TextView tvHomeName;
+
 	@BindView(R.id.ll_home_1)
 	LinearLayout llHome1;
 	@BindView(R.id.iv_home_1)
@@ -85,6 +88,18 @@ public class HomeActivity extends BaseActivity {
 	public void init() {
 		initData();
 		initView();
+	}
+
+	@Override
+	protected void onResume() {
+		super.onResume();
+		if (marketList.size()>0){
+			for (int i =0;i<marketList.size();i++)
+				if (marketList.get(i).getId() == currentMarketId){
+					spinner_market.setSelection(i);
+				}
+
+		}
 	}
 
 	private void initData() {
@@ -196,11 +211,11 @@ public class HomeActivity extends BaseActivity {
 					intent4.putExtra("type", 2);
 
 				} else if (pageType == 3){
-					intent4 = new Intent(this, MarketEvaluateActivity.class);
+					intent4 = new Intent(this, MenuHomeActivity.class);
 					intent4.putExtra("type", 3);
 
 				}else {
-					intent4 = new Intent(this, MarketEvaluateActivity.class);
+					intent4 = new Intent(this, MenuHomeActivity.class);
 					intent4.putExtra("type", 4);
 				}
 				intent4.putExtra("market_id",marketId);

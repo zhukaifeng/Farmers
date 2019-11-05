@@ -129,7 +129,7 @@ public class BillOflandingDialog extends Dialog {
             });
 
 	        RecyclerView rv_data = layout.findViewById(R.id.rv_data);
-	        billOflandSelectAdapter = new BillOflandSelectAdapter(dataList);
+	      //  billOflandSelectAdapter = new BillOflandSelectAdapter(dataList);
 	        GridLayoutManager gridLayoutManager = new GridLayoutManager(context, 3);
 	        rv_data.setLayoutManager(gridLayoutManager);
 	        rv_data.setAdapter(billOflandSelectAdapter);

@@ -11,6 +11,7 @@ import android.widget.TextView;
 
 import com.osiris.farmers.R;
 import com.osiris.farmers.model.SampleNameData;
+import com.osiris.farmers.model.SerachGoodData;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -23,14 +24,14 @@ public class BillOflandSelectAdapter  extends RecyclerView.Adapter<RecyclerView.
 
 	private MyItemClickListener myItemClickListener;
 
-	private List<SampleNameData.CommodityBean> dataList = new ArrayList<>();
+	private List<SerachGoodData> dataList = new ArrayList<>();
 
 
-	public BillOflandSelectAdapter(List<SampleNameData.CommodityBean> dataList) {
+	public BillOflandSelectAdapter(List<SerachGoodData> dataList) {
 		this.dataList = dataList;
 	}
 
-	public void setDataList(List<SampleNameData.CommodityBean> dataList) {
+	public void setDataList(List<SerachGoodData> dataList) {
 		this.dataList = dataList;
 	}
 
@@ -82,7 +83,7 @@ public class BillOflandSelectAdapter  extends RecyclerView.Adapter<RecyclerView.
 		}
 
 		@SuppressLint("ResourceAsColor")
-		public void bindData(SampleNameData.CommodityBean data){
+		public void bindData(SerachGoodData data){
 			if (data.isSelect()){
 				rb_check.setBackgroundResource(R.drawable.bg_tv_select);
 				GradientDrawable gd = (GradientDrawable) rb_check.getBackground();

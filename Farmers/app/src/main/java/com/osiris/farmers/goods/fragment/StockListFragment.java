@@ -31,7 +31,6 @@ import com.osiris.farmers.view.AddSampleActivity;
 import com.osiris.farmers.view.ChooseStoreSuoolierActivity;
 import com.osiris.farmers.view.adapter.MyItemClickListener;
 import com.osiris.farmers.view.adapter.StockListAdapter;
-import com.osiris.farmers.view.dialog.BillOflandingDialog;
 import com.osiris.farmers.view.dialog.DialogClickListener;
 
 import org.greenrobot.eventbus.Subscribe;
@@ -132,7 +131,6 @@ public class StockListFragment extends BaseFragment {
                 intent1.putParcelableArrayListExtra("data_list", (ArrayList<? extends Parcelable>) commodityList);
                 intent1.putExtra("jinhuo",customerBean.getUserid());
                 startActivity(intent1);
-                // showBillOfLandingDetailDialog();
                 break;
             case R.id.tv_add:
                 rl_back.setVisibility(View.VISIBLE);
@@ -155,28 +153,6 @@ public class StockListFragment extends BaseFragment {
         }
     }
 
-    private void showBillOfLandingDetailDialog() {
-        BillOflandingDialog.Builder builder = new BillOflandingDialog.Builder(getActivity());
-        builder.setPositiveButton(new DialogClickListener() {
-            @Override
-            public void onClick(Dialog dialog, String msg) {
-
-            }
-
-            @Override
-            public void onClick(Dialog dialog) {
-                dialog.dismiss();
-            }
-        });
-
-        builder.setNegativeButton(new DialogInterface.OnClickListener() {
-            @Override
-            public void onClick(DialogInterface dialogInterface, int i) {
-                dialogInterface.dismiss();
-            }
-        });
-        builder.create().show();
-    }
 
 
     private void getStoreList() {

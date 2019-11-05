@@ -81,15 +81,14 @@
                 />
 
             <TextView
+                android:id="@+id/tv_market_name"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_centerVertical="true"
                 android:layout_marginLeft="@dimen/dp10"
                 android:layout_toRightOf="@+id/iv_location"
-                android:text="百花农贸市场"
                 android:textColor="@color/write"
-                android:textSize="@dimen/sp16"
-                />
+                android:textSize="@dimen/sp16" />
 
 
             <ImageView

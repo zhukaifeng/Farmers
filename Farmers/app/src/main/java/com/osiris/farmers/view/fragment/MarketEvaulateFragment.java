@@ -108,6 +108,7 @@ public class MarketEvaulateFragment extends BaseFragment {
 
         Map<String, String> paramMap = new HashMap<>();
         paramMap.put("id", String.valueOf(GlobalParams.id));
+
         paramMap.put("pageNo",String.valueOf(1));
         paramMap.put("marketnm","");
 
@@ -119,7 +120,7 @@ public class MarketEvaulateFragment extends BaseFragment {
 
             @Override
             public void requestFailure(int tag, int code, String msg) {
-
+                LogUtils.d("zkf code:" +code +" msg:" +msg);
             }
         });
 

@@ -69,6 +69,7 @@
             <!-- </intent-filter> -->
         <activity android:name=".login.MenuHomeActivity"/>
         <activity android:name=".login.SalesAccountActivity"/>
+        <activity android:name=".view.ChooseMarketActivity"/>
 
 
     </application>
