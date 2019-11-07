@@ -7,7 +7,7 @@
     <RelativeLayout
         android:id="@+id/rl_title"
         android:layout_width="wrap_content"
-        android:layout_height="@dimen/dp240">
+        android:layout_height="wrap_content">
 
         <RelativeLayout
             android:id="@+id/rl_top"
@@ -86,6 +86,7 @@
                     <RelativeLayout
                         android:layout_width="0dp"
                         android:layout_height="match_parent"
+                        android:visibility="gone"
                         android:layout_weight="1">
 
                         <LinearLayout
@@ -120,6 +121,7 @@
                         android:layout_height="match_parent"
                         android:layout_marginTop="@dimen/dp5"
                         android:layout_marginBottom="@dimen/dp5"
+                        android:visibility="gone"
                         android:background="#EFF1F5"/>
 
                     <RelativeLayout
@@ -138,13 +140,21 @@
                             android:textColorHint="@color/write"
                             android:textSize="@dimen/sp14"/>
 
-                        <ImageView
-                            android:layout_width="@dimen/dp17"
-                            android:layout_height="@dimen/dp17"
+                        <RelativeLayout
+                            android:layout_width="@dimen/dp50"
+                            android:layout_height="match_parent"
                             android:layout_alignParentRight="true"
                             android:layout_centerVertical="true"
-                            android:layout_marginRight="@dimen/dp15"
-                            android:background="@drawable/bg_search"/>
+                            >
+                            <ImageView
+                                android:id="@+id/iv_search"
+                                android:layout_width="@dimen/dp13"
+                                android:layout_height="@dimen/dp15"
+                                android:layout_centerInParent="true"
+                                android:layout_marginRight="@dimen/dp16"
+                                android:background="@drawable/bg_search"/>
+                        </RelativeLayout>
+
                     </RelativeLayout>
 
 
@@ -161,6 +171,7 @@
             android:layout_height="@dimen/dp60"
             android:layout_alignParentBottom="true"
             android:layout_marginBottom="@dimen/dp5"
+            android:visibility="gone"
             android:orientation="vertical">
 
             <LinearLayout
@@ -229,6 +240,7 @@
         android:id="@+id/line"
         android:layout_width="match_parent"
         android:layout_height="@dimen/dp5"
+        android:visibility="gone"
         android:layout_below="@+id/rl_title"
         android:background="@color/write"/>
 
@@ -236,7 +248,7 @@
         android:id="@+id/linear_item"
         android:layout_width="match_parent"
         android:layout_height="@dimen/dp60"
-        android:layout_below="@+id/line"
+        android:layout_below="@+id/rl_title"
         android:background="@color/background_gray"
         android:orientation="horizontal"
         android:paddingLeft="@dimen/dp10"

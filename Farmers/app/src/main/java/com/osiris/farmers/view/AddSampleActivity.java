@@ -467,7 +467,6 @@ public class AddSampleActivity extends BaseActivity {
                 billOflandSelectAdapter.notifyDataSetChanged();
 
                 printType = showDataList.get(position).getCommoditynm();
-
                 getCheckProject(showDataList.get(position).getId());
 
             }

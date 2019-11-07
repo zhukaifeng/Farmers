@@ -7,14 +7,18 @@ import android.view.View;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 
+import com.google.gson.JsonObject;
+import com.google.gson.JsonParser;
 import com.osiris.farmers.R;
 import com.osiris.farmers.base.BaseFragment;
+import com.osiris.farmers.model.EvaluateList;
 import com.osiris.farmers.model.MarketEvaluate;
 import com.osiris.farmers.network.ApiParams;
 import com.osiris.farmers.network.ApiRequestTag;
 import com.osiris.farmers.network.GlobalParams;
 import com.osiris.farmers.network.NetRequest;
 import com.osiris.farmers.network.NetRequestResultListener;
+import com.osiris.farmers.utils.JsonUtils;
 import com.osiris.farmers.view.MarketEvaluateActivity;
 import com.osiris.farmers.view.NewMarketScoreActivity;
 import com.osiris.farmers.view.ScoringDetailActivity;
@@ -22,6 +26,7 @@ import com.osiris.farmers.view.adapter.MarketEvaluateAdapter;
 import com.osiris.farmers.view.adapter.MyItemClickListener;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -39,7 +44,7 @@ public class MarketEvaulateFragment extends BaseFragment {
     @BindView(R.id.iv_select)
     ImageView iv_select;
 
-    private List<MarketEvaluate> dataList = new ArrayList<>();
+    private List<EvaluateList.ZhugpingjiasBean> dataList = new ArrayList<>();
     private MarketEvaluateAdapter dataAdapter = new MarketEvaluateAdapter(dataList);
     private boolean selectVisible = true;
 
@@ -50,13 +55,8 @@ public class MarketEvaulateFragment extends BaseFragment {
 
     @Override
     protected void initView() {
-        dataList.add(new MarketEvaluate("百花市场", "泰州市市场监管局", "90分", "2019.03.20"));
-        dataList.add(new MarketEvaluate("百花市场", "泰州市市场监管局", "90分", "2019.03.20"));
-        dataList.add(new MarketEvaluate("百花市场", "泰州市市场监管局", "90分", "2019.03.20"));
-        dataList.add(new MarketEvaluate("百花市场", "泰州市市场监管局", "90分", "2019.03.20"));
-        dataList.add(new MarketEvaluate("百花市场", "泰州市市场监管局", "90分", "2019.03.20"));
-        dataList.add(new MarketEvaluate("百花市场", "泰州市市场监管局", "90分", "2019.03.20"));
-        dataList.add(new MarketEvaluate("百花市场", "泰州市市场监管局", "90分", "2019.03.20"));
+
+
 
         rv_data.setLayoutManager(new LinearLayoutManager(getActivity(), LinearLayoutManager.VERTICAL, false));
         rv_data.setAdapter(dataAdapter);
@@ -65,6 +65,7 @@ public class MarketEvaulateFragment extends BaseFragment {
             @Override
             public void onItemClick(View view, int position) {
                 Intent intent = new Intent(getActivity(), ScoringDetailActivity.class);
+                intent.putExtra("data",dataList.get(position));
                 startActivity(intent);
             }
         });
@@ -116,6 +117,22 @@ public class MarketEvaulateFragment extends BaseFragment {
             @Override
             public void requestSuccess(int tag, String successResult) {
                 LogUtils.d("zkf successResult:" + successResult);
+                JsonParser parser = new JsonParser();
+                JsonObject json = parser.parse(successResult).getAsJsonObject();
+                if (json.has("zhugpingjias")){
+
+                    EvaluateList.ZhugpingjiasBean[] datas = JsonUtils.fromJson(json.get("zhugpingjias").getAsJsonArray(),
+                            EvaluateList.ZhugpingjiasBean[].class);
+
+                    dataList.addAll(Arrays.asList(datas));
+
+                    dataAdapter.notifyDataSetChanged();
+
+                }
+
+
+
+
             }
 
             @Override
@@ -128,6 +145,8 @@ public class MarketEvaulateFragment extends BaseFragment {
 
 
     }
+
+
 
 
 

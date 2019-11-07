@@ -57,22 +57,7 @@
                 android:text="2019.03.20"
                 android:textColor="@color/color_00d39d"
                 android:textSize="@dimen/sp13" />
-            <LinearLayout
-                android:layout_width="0dp"
-                android:layout_height="match_parent"
-                android:layout_weight="0.5"
-                android:orientation="horizontal">
 
-
-                <ImageView
-                    android:layout_width="@dimen/dp20"
-                    android:layout_height="@dimen/dp20"
-                    android:background="@drawable/bg_detail"
-                    android:layout_gravity="center_vertical"
-                    android:layout_marginLeft="@dimen/dp10"
-                    />
-
-            </LinearLayout>
 
         </LinearLayout>
 

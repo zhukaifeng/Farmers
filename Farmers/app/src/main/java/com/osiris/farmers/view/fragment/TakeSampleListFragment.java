@@ -13,6 +13,7 @@ import android.os.RemoteException;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.support.v7.widget.SimpleItemAnimator;
 import android.text.TextUtils;
 import android.view.Gravity;
 import android.view.LayoutInflater;
@@ -187,7 +188,7 @@ public class TakeSampleListFragment extends BaseFragment {
                 loadMoreData();
             }
         });
-
+        ((SimpleItemAnimator)rv_data.getItemAnimator()).setSupportsChangeAnimations(false);
         getData();
 
         getGoodsType();

@@ -9,6 +9,7 @@ import android.widget.TextView;
 
 import com.osiris.farmers.R;
 import com.osiris.farmers.model.DateModel;
+import com.osiris.farmers.model.EvaluateList;
 import com.osiris.farmers.model.MarketEvaluate;
 
 import java.util.ArrayList;
@@ -22,14 +23,14 @@ public class MarketEvaluateAdapter extends RecyclerView.Adapter<RecyclerView.Vie
 
     private MyItemClickListener myItemClickListener;
 
-    private List<MarketEvaluate> dataList = new ArrayList<>();
+    private List<EvaluateList.ZhugpingjiasBean> dataList = new ArrayList<>();
 
 
-    public MarketEvaluateAdapter(List<MarketEvaluate> dataList) {
+    public MarketEvaluateAdapter(List<EvaluateList.ZhugpingjiasBean> dataList) {
         this.dataList = dataList;
     }
 
-    public void setDataList(List<MarketEvaluate> dataList) {
+    public void setDataList(List<EvaluateList.ZhugpingjiasBean> dataList) {
         this.dataList = dataList;
     }
 
@@ -87,16 +88,16 @@ public class MarketEvaluateAdapter extends RecyclerView.Adapter<RecyclerView.Vie
             }
         }
 
-        public void bindData(MarketEvaluate data){
+        public void bindData(EvaluateList.ZhugpingjiasBean data){
             if (getLayoutPosition()%2 == 1){
                 rl_bg.setBackgroundColor(itemView.getResources().getColor(R.color.bg_gray_e9));
             }else {
                 rl_bg.setBackgroundColor(itemView.getResources().getColor(R.color.write));
             }
-            tv_date.setText(data.getDate());
-            tv_name.setText(data.getMarketName());
-            tv_appraise.setText(data.getAppraise());
-            tv_jurisdiction_unit.setText(data.getJurisdictionUnit());
+            tv_date.setText(data.getLlrq().substring(0,10));
+            tv_name.setText(data.getMarketnm());
+          //  tv_appraise.setText(data.getAppraise());
+            tv_jurisdiction_unit.setText(data.getMcrk()+data.getMbrk());
         }
     }
 
