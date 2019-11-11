@@ -1,17 +1,28 @@
 package com.osiris.farmers.view;
 
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.view.View;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import com.google.gson.JsonObject;
+import com.google.gson.JsonParser;
 import com.osiris.farmers.R;
 import com.osiris.farmers.base.BaseActivity;
 import com.osiris.farmers.model.EvaluateList;
+import com.osiris.farmers.model.MakeScoreData;
 import com.osiris.farmers.network.ApiParams;
 import com.osiris.farmers.network.ApiRequestTag;
 import com.osiris.farmers.network.NetRequest;
 import com.osiris.farmers.network.NetRequestResultListener;
+import com.osiris.farmers.utils.JsonUtils;
+import com.osiris.farmers.view.adapter.MarketScoreAdapter;
 
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import butterknife.BindView;
@@ -25,7 +36,11 @@ public class ScoringDetailActivity extends BaseActivity {
 
 	@BindView(R.id.tv_market)
 	TextView tv_market;
+	@BindView(R.id.rv_data)
+	RecyclerView rv_data;
 
+	private List<MakeScoreData.PingjiaxxsBean>  dataList = new ArrayList<>();
+	private MarketScoreAdapter marketScoreAdapter = new MarketScoreAdapter(dataList);
 
 
 
@@ -42,6 +57,9 @@ public class ScoringDetailActivity extends BaseActivity {
 		if (null != data){
 			tv_market.setText(data.getMarketnm());
 		}
+
+		rv_data.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.VERTICAL,false));
+		rv_data.setAdapter(marketScoreAdapter);
 
 		getData();
 	}
@@ -68,6 +86,16 @@ public class ScoringDetailActivity extends BaseActivity {
 			@Override
 			public void requestSuccess(int tag, String successResult) {
 				LogUtils.d("zkf successResult:" + successResult);
+				JsonParser parser = new JsonParser();
+				JsonObject json = parser.parse(successResult).getAsJsonObject();
+				if (json.has("pingjiaxxs")){
+					MakeScoreData.PingjiaxxsBean[] datas = JsonUtils.fromJson(json.get("pingjiaxxs").getAsJsonArray(),
+							MakeScoreData.PingjiaxxsBean[].class);
+					dataList.addAll(Arrays.asList(datas));
+					marketScoreAdapter.notifyDataSetChanged();
+
+				}
+
 			}
 
 			@Override
