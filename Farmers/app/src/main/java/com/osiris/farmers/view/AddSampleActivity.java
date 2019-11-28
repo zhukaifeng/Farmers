@@ -288,6 +288,7 @@ public class AddSampleActivity extends BaseActivity {
                     if (showDataList.size()>0)showDataList.clear();
                     showDataList.addAll(tempList);
                     showDataList.get(0).setSelect(true);
+                    descriptionid = String.valueOf(showDataList.get(0).getComtype());
                     billOflandSelectAdapter.notifyDataSetChanged();
                     getCheckProject(showDataList.get(0).getId());
 
@@ -465,7 +466,8 @@ public class AddSampleActivity extends BaseActivity {
                 commodityid = showDataList.get(position).getId();
                 goodName = showDataList.get(position).getCommoditynm();
                 billOflandSelectAdapter.notifyDataSetChanged();
-
+                descriptionid = String.valueOf(showDataList.get(position).getComtype());
+                LogUtils.d("zkf descriptionid :" + descriptionid);
                 printType = showDataList.get(position).getCommoditynm();
                 getCheckProject(showDataList.get(position).getId());
 
@@ -693,6 +695,8 @@ public class AddSampleActivity extends BaseActivity {
             LogUtils.d("zkf money:" + edt_price.getText().toString());
             printPrince = edt_price.getText().toString();
         }
+        LogUtils.d("zkf paramMap:" + paramMap.toString());
+
         NetRequest.request(url, ApiRequestTag.DATA, paramMap, new NetRequestResultListener() {
             @Override
             public void requestSuccess(int tag, String successResult) {
