@@ -52,7 +52,26 @@
 
         </RelativeLayout>
 
+        <RelativeLayout
+            android:id="@+id/rl_commit"
+            android:layout_width="wrap_content"
+            android:layout_height="@dimen/dp33"
+            android:layout_marginRight="@dimen/dp20"
+            android:layout_marginTop="@dimen/dp20"
+            android:layout_alignParentRight="true"
+            android:visibility="gone"
+            >
 
+            <TextView
+                android:id="@+id/tv_commit"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:layout_gravity="center_vertical"
+                android:textColor="@color/white"
+                android:text="提交"
+                />
+        </RelativeLayout>
         <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="@dimen/dp71"

@@ -295,13 +295,7 @@
             android:textSize="@dimen/sp16"
             android:textStyle="bold"/>
 
-        <TextView
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:layout_weight="0.5"
-            android:gravity="center"
-            android:textColor="@color/color_00d39d"
-            android:textSize="@dimen/sp14"/>
+
     </LinearLayout>
 
     <android.support.v7.widget.RecyclerView

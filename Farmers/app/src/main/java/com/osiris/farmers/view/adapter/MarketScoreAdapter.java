@@ -3,6 +3,8 @@ package com.osiris.farmers.view.adapter;
 import android.annotation.SuppressLint;
 import android.graphics.Color;
 import android.graphics.drawable.GradientDrawable;
+import android.os.Build;
+import android.support.annotation.RequiresApi;
 import android.support.v7.widget.RecyclerView;
 import android.text.TextUtils;
 import android.view.LayoutInflater;
@@ -97,6 +99,7 @@ public class MarketScoreAdapter extends RecyclerView.Adapter<RecyclerView.ViewHo
 			}
 		}
 
+		@RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
 		@SuppressLint("ResourceAsColor")
 		public void bindData(MakeScoreData.PingjiaxxsBean data){
 
@@ -113,6 +116,46 @@ public class MarketScoreAdapter extends RecyclerView.Adapter<RecyclerView.ViewHo
 			if (!TextUtils.isEmpty(data.getMcrk())){
 				tv_score.setText(data.getMcrk());
 			}
+
+			if (data.getMbrk().equals("5")){
+				iv_five.setBackground(itemView.getContext().getDrawable(R.drawable.ic_star));
+				iv_four.setBackground(itemView.getContext().getDrawable(R.drawable.ic_star));
+				iv_three.setBackground(itemView.getContext().getDrawable(R.drawable.ic_star));
+				iv_two.setBackground(itemView.getContext().getDrawable(R.drawable.ic_star));
+				iv_one.setBackground(itemView.getContext().getDrawable(R.drawable.ic_star));
+
+			}else if (data.getMbrk().equals("4")){
+				iv_five.setBackground(itemView.getContext().getDrawable(R.drawable.ic_star));
+				iv_four.setBackground(itemView.getContext().getDrawable(R.drawable.ic_star));
+				iv_three.setBackground(itemView.getContext().getDrawable(R.drawable.ic_star));
+				iv_two.setBackground(itemView.getContext().getDrawable(R.drawable.ic_star));
+				iv_one.setBackground(itemView.getContext().getDrawable(R.drawable.ic_star_un));
+			}else if (data.getMbrk().equals("3")){
+				iv_five.setBackground(itemView.getContext().getDrawable(R.drawable.ic_star));
+				iv_four.setBackground(itemView.getContext().getDrawable(R.drawable.ic_star));
+				iv_three.setBackground(itemView.getContext().getDrawable(R.drawable.ic_star));
+				iv_two.setBackground(itemView.getContext().getDrawable(R.drawable.ic_star_un));
+				iv_one.setBackground(itemView.getContext().getDrawable(R.drawable.ic_star_un));
+			}else if (data.getMbrk().equals("2")){
+				iv_five.setBackground(itemView.getContext().getDrawable(R.drawable.ic_star));
+				iv_four.setBackground(itemView.getContext().getDrawable(R.drawable.ic_star));
+				iv_three.setBackground(itemView.getContext().getDrawable(R.drawable.ic_star_un));
+				iv_two.setBackground(itemView.getContext().getDrawable(R.drawable.ic_star_un));
+				iv_one.setBackground(itemView.getContext().getDrawable(R.drawable.ic_star_un));
+			}else if (data.getMbrk().equals("1")){
+				iv_five.setBackground(itemView.getContext().getDrawable(R.drawable.ic_star));
+				iv_four.setBackground(itemView.getContext().getDrawable(R.drawable.ic_star_un));
+				iv_three.setBackground(itemView.getContext().getDrawable(R.drawable.ic_star_un));
+				iv_two.setBackground(itemView.getContext().getDrawable(R.drawable.ic_star_un));
+				iv_one.setBackground(itemView.getContext().getDrawable(R.drawable.ic_star_un));
+			}else {
+				iv_five.setBackground(itemView.getContext().getDrawable(R.drawable.ic_star_un));
+				iv_four.setBackground(itemView.getContext().getDrawable(R.drawable.ic_star_un));
+				iv_three.setBackground(itemView.getContext().getDrawable(R.drawable.ic_star_un));
+				iv_two.setBackground(itemView.getContext().getDrawable(R.drawable.ic_star_un));
+				iv_one.setBackground(itemView.getContext().getDrawable(R.drawable.ic_star_un));
+			}
+
 
 		}
 	}

@@ -5,5 +5,11 @@
     <item name="tag_punish_name" type="id"/>
     <item name="tag_punish_button" type="id"/>
     <item name="tag_operator_inquiry" type="id"/>
+    <item name="tag_position_one" type="id"/>
+    <item name="tag_position_two" type="id"/>
+    <item name="tag_position_three" type="id"/>
+    <item name="tag_position_four" type="id"/>
+    <item name="tag_position_five" type="id"/>
+
 
 </resources>

@@ -1,9 +1,11 @@
 package com.osiris.farmers.view;
 
+import android.content.Intent;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.widget.LinearLayout;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.google.gson.JsonObject;
@@ -18,6 +20,7 @@ import com.osiris.farmers.network.NetRequest;
 import com.osiris.farmers.network.NetRequestResultListener;
 import com.osiris.farmers.utils.JsonUtils;
 import com.osiris.farmers.view.adapter.MarketScoreAdapter;
+import com.osiris.farmers.view.adapter.MyItemClickListener;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -38,6 +41,7 @@ public class ScoringDetailActivity extends BaseActivity {
 	TextView tv_market;
 	@BindView(R.id.rv_data)
 	RecyclerView rv_data;
+
 
 	private List<MakeScoreData.PingjiaxxsBean>  dataList = new ArrayList<>();
 	private MarketScoreAdapter marketScoreAdapter = new MarketScoreAdapter(dataList);
@@ -60,8 +64,16 @@ public class ScoringDetailActivity extends BaseActivity {
 
 		rv_data.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.VERTICAL,false));
 		rv_data.setAdapter(marketScoreAdapter);
-
+		marketScoreAdapter.setOnItemClick(new MyItemClickListener() {
+			@Override
+			public void onItemClick(View view, int position) {
+				Intent intent = new Intent(ScoringDetailActivity.this,AddScorelActivity.class);
+				intent.putExtra("data",data);
+				startActivity(intent);
+			}
+		});
 		getData();
+
 	}
 
 
