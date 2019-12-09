@@ -25,6 +25,7 @@ import java.util.List;
 import java.util.Map;
 
 import butterknife.BindView;
+import butterknife.OnClick;
 import me.jessyan.autosize.utils.LogUtils;
 
 
@@ -37,6 +38,16 @@ public class ChooseMarketActivity extends BaseActivity {
 
     private List<Market.MarketBean> marketList = new ArrayList<>();
     private MarketNoAdapter typeAdapter = new MarketNoAdapter(marketList);
+
+    @OnClick({R.id.rl_back})
+    void onClick(View v){
+        switch (v.getId()){
+
+            case R.id.rl_back:
+                finish();
+                break;
+        }
+    }
 
     @Override
     public int getLayoutResId() {

@@ -277,7 +277,7 @@
                 android:layout_alignParentRight="true"
                 android:layout_centerVertical="true"
                 android:layout_marginRight="@dimen/dp10"
-                android:layout_marginBottom="@dimen/dp15"
+                android:layout_marginBottom="@dimen/dp175"
                 android:background="@drawable/bg_button_green_radio"
                 android:gravity="center"
                 android:layout_gravity="center_horizontal"
@@ -319,13 +319,35 @@
             android:layout_marginTop="@dimen/dp10"
             android:background="@drawable/red_line">
 
+            <ImageView
+                android:id="@+id/iv_sign"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:visibility="gone"
+                />
+
             <com.osiris.farmers.view.widget.SignView
                 android:id="@+id/sign_view"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:background="#FFFFFF" />/>
+                android:background="#FFFFFF" />
 
         </RelativeLayout>
+        <TextView
+            android:id="@+id/tv_sign_again"
+            android:layout_width="@dimen/dp126"
+            android:layout_height="@dimen/dp33"
+            android:layout_below="@+id/iv_bmp"
+            android:layout_marginTop="@dimen/dp10"
+            android:layout_gravity="center_horizontal"
+            android:background="@drawable/bg_button_green_radio"
+            android:layout_centerHorizontal="true"
+            android:gravity="center"
+            android:text="点击重新签名"
+            android:textColor="@color/write"
+            android:textSize="@dimen/sp15"
+            android:textStyle="bold"
+            />
         <TextView
             android:id="@+id/tv_upload_sign"
             android:layout_width="@dimen/dp126"

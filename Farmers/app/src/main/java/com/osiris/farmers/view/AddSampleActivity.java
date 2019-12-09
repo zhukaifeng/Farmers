@@ -5,6 +5,8 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.ServiceConnection;
 import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.os.Bundle;
 import android.os.Environment;
 import android.os.Handler;
 import android.os.IBinder;
@@ -17,7 +19,9 @@ import android.support.v7.widget.RecyclerView;
 import android.text.TextUtils;
 import android.util.Base64;
 import android.util.Log;
+import android.view.Gravity;
 import android.view.View;
+import android.view.WindowManager;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
@@ -54,6 +58,7 @@ import com.osiris.farmers.view.widget.FullyGridLayoutManager;
 import com.osiris.farmers.view.widget.SignView;
 import com.smartdevice.aidl.IZKCService;
 
+import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStream;
@@ -113,6 +118,8 @@ public class AddSampleActivity extends BaseActivity {
     EditText edt_content;
     @BindView(R.id.iv_search)
     ImageView iv_search;
+    @BindView(R.id.iv_sign)
+    ImageView iv_sign;
 
     private Handler mHandler = new Handler();
     private List<String> picUploadList = new ArrayList<>();
@@ -130,9 +137,23 @@ public class AddSampleActivity extends BaseActivity {
     private String printId;
     private String goodName;
 
-    @OnClick({R.id.iv_close, R.id.tv_count_ok, R.id.tv_price_ok, R.id.tv_print, R.id.tv_ok, R.id.tv_upload_sign,R.id.iv_search})
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_ADJUST_PAN);
+    }
+
+    @OnClick({R.id.iv_close, R.id.tv_count_ok, R.id.tv_price_ok, R.id.tv_print, R.id.tv_ok, R.id.tv_upload_sign,R.id.iv_search,R.id.tv_sign_again})
     void onClick(View v) {
         switch (v.getId()) {
+            case R.id.tv_sign_again:
+                //sssss
+                sign_view.setVisibility(View.VISIBLE);
+                iv_sign.setVisibility(View.GONE);
+                if (sign_view.getTouched()){
+                    sign_view.clear();
+                }
+                break;
             case R.id.tv_print:
                 String title = "";
 
@@ -292,6 +313,10 @@ public class AddSampleActivity extends BaseActivity {
                     billOflandSelectAdapter.notifyDataSetChanged();
                     getCheckProject(showDataList.get(0).getId());
 
+                }else{
+                    Toast toast = Toast.makeText(AddSampleActivity.this,"没有此商品",Toast.LENGTH_SHORT);
+                    toast.setGravity(Gravity.CENTER,0,0);
+                    toast.show();
                 }
 
 
@@ -713,6 +738,20 @@ public class AddSampleActivity extends BaseActivity {
                     scrollview.setVisibility(View.GONE);
                     relative_content.setVisibility(View.VISIBLE);
                     iv_bmp.setImageBitmap(bitmap);
+
+                    String file_path = Environment.getExternalStorageDirectory().getPath() + "/qm.png";
+                    File file = new File(file_path);
+                    if (file.exists()){
+                        sign_view.setVisibility(View.GONE);
+                        iv_sign.setVisibility(View.VISIBLE);
+                        Bitmap bitmap1 = BitmapFactory.decodeFile(file_path);
+                        iv_sign.setImageBitmap(bitmap1);
+                    }else {
+                        sign_view.setVisibility(View.VISIBLE);
+                        iv_sign.setVisibility(View.GONE);
+                    }
+
+
                     //finish();
                 } else {
                     Toast.makeText(AddSampleActivity.this, "采集失败，请重新尝试", Toast.LENGTH_SHORT).show();

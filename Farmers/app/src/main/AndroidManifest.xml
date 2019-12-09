@@ -56,7 +56,8 @@
         <activity android:name=".view.PrintDetailActivity"/>
         <activity android:name=".view.AddSampleActivity"
             android:theme="@style/translucent"
-            />
+            android:windowSoftInputMode="stateVisible|adjustResize"
+        />
         <activity android:name=".view.AddJinhuoListActivity"
             android:theme="@style/translucent"
             />

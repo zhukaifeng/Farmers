@@ -15,6 +15,7 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.SimpleItemAnimator;
 import android.text.TextUtils;
+import android.util.Log;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -26,6 +27,7 @@ import android.widget.ListView;
 import android.widget.PopupWindow;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.osiris.farmers.R;
 import com.osiris.farmers.base.BaseFragment;
@@ -188,7 +190,7 @@ public class TakeSampleListFragment extends BaseFragment {
                 loadMoreData();
             }
         });
-        ((SimpleItemAnimator)rv_data.getItemAnimator()).setSupportsChangeAnimations(false);
+        ((SimpleItemAnimator) rv_data.getItemAnimator()).setSupportsChangeAnimations(false);
         getData();
 
         getGoodsType();
@@ -245,7 +247,7 @@ public class TakeSampleListFragment extends BaseFragment {
 
     }
 
-    @OnClick({R.id.iv_function, R.id.rl_back, R.id.tv_type, R.id.tv_shop_num,R.id.tv_market_name})
+    @OnClick({R.id.iv_function, R.id.rl_back, R.id.tv_type, R.id.rl_select, R.id.tv_market_name})
     void onClick(View v) {
         switch (v.getId()) {
             case R.id.iv_function:
@@ -256,6 +258,15 @@ public class TakeSampleListFragment extends BaseFragment {
 //					takeSampleList.setDelete(true);
 //				}
 //				dataAdapter.notifyDataSetChanged();
+
+                if (stallNameList.size() == 0) {
+                    Toast toast = Toast.makeText(getActivity(), "此菜市场暂无摊位,请重新选择菜市场", Toast.LENGTH_SHORT);
+                    toast.setGravity(Gravity.CENTER, 0, 0);
+                    toast.show();
+                    return;
+                }
+
+
                 Intent intent = new Intent(getActivity(), AddSampleActivity.class);
                 intent.putParcelableArrayListExtra("data_list", (ArrayList<? extends Parcelable>) commodityList);
                 intent.putExtra("boothglid", boothglBean.getId());
@@ -287,7 +298,14 @@ public class TakeSampleListFragment extends BaseFragment {
                 }
 
                 break;
-            case R.id.tv_shop_num:
+            case R.id.rl_select:
+                Log.d("zkf", "click");
+                if (stallNameList.size() == 0) {
+                    Toast toast = Toast.makeText(getActivity(), "此菜市场暂无摊位,请重新选择菜市场", Toast.LENGTH_SHORT);
+                    toast.setGravity(Gravity.CENTER, 0, 0);
+                    toast.show();
+                    return;
+                }
 
                 Intent i = new Intent(getActivity(), ChooseStallNoActivity.class);
                 getActivity().startActivityForResult(i, REQUEST_A);
@@ -326,10 +344,10 @@ public class TakeSampleListFragment extends BaseFragment {
     private void getData() {
         String url = ApiParams.API_HOST + "/app/showAllCysjxz.action";
         Map<String, String> paramMap = new HashMap<>();
-        paramMap.put("pageNo",String.valueOf(pageNum));
-        paramMap.put("pageSize",String.valueOf(pageCount));
-        paramMap.put("id",String.valueOf(GlobalParams.id));
-        if (pageNum>1){
+        paramMap.put("pageNo", String.valueOf(pageNum));
+        paramMap.put("pageSize", String.valueOf(pageCount));
+        paramMap.put("id", String.valueOf(GlobalParams.id));
+        if (pageNum > 1) {
             showLoadDialog();
         }
 
@@ -342,7 +360,7 @@ public class TakeSampleListFragment extends BaseFragment {
                 if (!TextUtils.isEmpty(successResult)) {
                     SampleListData tempData = JsonUtils.fromJson(successResult, SampleListData.class);
                     countGetData = tempData.getCangysjgls().size();
-                    if (pageNum == 1){
+                    if (pageNum == 1) {
                         cangysjglsList.clear();
                     }
                     cangysjglsList.addAll(tempData.getCangysjgls());
@@ -400,7 +418,7 @@ public class TakeSampleListFragment extends BaseFragment {
                     ChooseStallData tempData = JsonUtils.fromJson(temp, ChooseStallData.class);
                     if (stallList.size() > 0) stallList.clear();
                     stallList.addAll(tempData.getBoothgl());
-                    if (stallNameList.size()>0)stallNameList.clear();
+                    if (stallNameList.size() > 0) stallNameList.clear();
                     for (ChooseStallData.BoothglBean boothglBean : stallList) {
                         stallNameList.add(boothglBean.getTwhmc());
                     }
@@ -410,9 +428,23 @@ public class TakeSampleListFragment extends BaseFragment {
                             tv_shop_num.setText(stallNameList.get(0));
                         }
                         getCheckProject();
+                    } else {
+                        tv_shop_num.setText("");
+                        Toast toast = Toast.makeText(getActivity(), "此菜市场暂无摊位,请重新选择菜市场", Toast.LENGTH_SHORT);
+                        toast.setGravity(Gravity.CENTER, 0, 0);
+                        toast.show();
+                        return;
+
                     }
 
 
+                } else {
+
+                    tv_shop_num.setText("");
+                    Toast toast = Toast.makeText(getActivity(), "此菜市场暂无摊位,请重新选择菜市场", Toast.LENGTH_SHORT);
+                    toast.setGravity(Gravity.CENTER, 0, 0);
+                    toast.show();
+                    return;
                 }
 
 
@@ -562,7 +594,7 @@ public class TakeSampleListFragment extends BaseFragment {
                 if (!TextUtils.isEmpty(successResult)) {
                     LogUtils.d("zkf  successResult:" + successResult);
                     SampleNameData tempData = JsonUtils.fromJson(temp, SampleNameData.class);
-                    if (commodityList.size()>0){
+                    if (commodityList.size() > 0) {
                         commodityList.clear();
                     }
                     commodityList.addAll(tempData.getCommodity());

@@ -130,7 +130,7 @@ public class PrintDetailActivity extends BaseActivity {
     public void onViewClicked(View v) {
         switch (v.getId()) {
             case R.id.rl_back:
-
+                finish();
                 break;
             case R.id.tv_price_ok:
                 String title = "";
