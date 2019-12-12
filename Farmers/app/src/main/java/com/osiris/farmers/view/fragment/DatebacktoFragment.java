@@ -1,7 +1,9 @@
 package com.osiris.farmers.view.fragment;
 
+import android.content.Intent;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.text.TextUtils;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
@@ -11,14 +13,29 @@ import android.widget.TextView;
 import com.osiris.farmers.R;
 import com.osiris.farmers.base.BaseFragment;
 import com.osiris.farmers.model.DateBackto;
+import com.osiris.farmers.model.SampleListData;
+import com.osiris.farmers.model.Task;
+import com.osiris.farmers.network.ApiParams;
+import com.osiris.farmers.network.ApiRequestTag;
+import com.osiris.farmers.network.GlobalParams;
+import com.osiris.farmers.network.NetRequest;
+import com.osiris.farmers.network.NetRequestResultListener;
+import com.osiris.farmers.utils.JsonUtils;
+import com.osiris.farmers.view.AddSampleActivity;
+import com.osiris.farmers.view.AddSampleDataActivity;
+import com.osiris.farmers.view.TaskDetailActivity;
 import com.osiris.farmers.view.adapter.DatebacktoAdapter;
 import com.osiris.farmers.view.adapter.MyItemClickListener;
 
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import butterknife.BindView;
 import butterknife.OnClick;
+import me.jessyan.autosize.utils.LogUtils;
 
 public class DatebacktoFragment extends BaseFragment {
 
@@ -40,7 +57,7 @@ public class DatebacktoFragment extends BaseFragment {
     @BindView(R.id.tv_buy)
     TextView tv_buy;
 
-    private List<DateBackto> dataList = new ArrayList<>();
+    private List<Task> dataList = new ArrayList<>();
     private DatebacktoAdapter dataAdapter = new DatebacktoAdapter(dataList);
 
     @Override
@@ -50,10 +67,6 @@ public class DatebacktoFragment extends BaseFragment {
 
     @Override
     protected void initView() {
-        dataList.add(new DateBackto(0123456, "牛肉", "销售", "农批，无"));
-        dataList.add(new DateBackto(0123456, "羊肉", "采购", "农批，无"));
-        dataList.add(new DateBackto(0123456, "鸡肉", "采购", "海批，有"));
-        dataList.add(new DateBackto(0123456, "鱼肉", "采购", "海批，有"));
 
         rv_data.setLayoutManager(new LinearLayoutManager(this.getActivity(), LinearLayoutManager.VERTICAL, false));
         rv_data.setAdapter(dataAdapter);
@@ -61,13 +74,12 @@ public class DatebacktoFragment extends BaseFragment {
         dataAdapter.setOnItemClick(new MyItemClickListener() {
             @Override
             public void onItemClick(View view, int position) {
-                linear_datebackto.setVisibility(View.GONE);
-                linear_datebackto_detail.setVisibility(View.VISIBLE);
-                rl_back.setVisibility(View.VISIBLE);
-                tv_title.setText(getActivity().getString(R.string.organization_datebackto_detail));
-                iv_right_arrow.setVisibility(View.GONE);
+                Intent intent = new Intent(getActivity(), TaskDetailActivity.class);
+                intent.putExtra("data",dataList.get(position));
+                startActivity(intent);
             }
         });
+        getData();
     }
 
     @Override
@@ -102,7 +114,34 @@ public class DatebacktoFragment extends BaseFragment {
         }
     }
 
+    private void getData() {
+        showLoadDialog();
+        String url = ApiParams.API_HOST + "/app/getAllcaiyangsjlr.action";
+        Map<String, String> paramMap = new HashMap<>();
+        paramMap.put("id", String.valueOf(GlobalParams.id));
 
+
+        NetRequest.request(url, ApiRequestTag.DATA, paramMap, new NetRequestResultListener() {
+
+            @Override
+            public void requestSuccess(int tag, String successResult) {
+                //String temp = successResult.substring(1, successResult.length() - 1);
+                if (!TextUtils.isEmpty(successResult)) {
+                    cancelLoadDialog();
+                    Task[] taskList = JsonUtils.fromJson(successResult, Task[].class);
+                    dataList.addAll(Arrays.asList(taskList));
+                    dataAdapter.notifyDataSetChanged();
+                }
+
+            }
+
+            @Override
+            public void requestFailure(int tag, int code, String msg) {
+                cancelLoadDialog();
+            }
+        });
+
+    }
 
 
 

@@ -289,6 +289,7 @@ public class HomeActivity extends BaseActivity {
 						marketList.clear();
 					}
 					marketList.addAll(market.getMarket());
+					GlobalParams.marketList = marketList;
 					if (marketNameList.size()>0){
 						marketNameList.clear();
 					}

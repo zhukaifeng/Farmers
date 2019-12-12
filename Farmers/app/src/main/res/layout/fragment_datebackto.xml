@@ -40,7 +40,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_centerInParent="true"
-                android:text="@string/organization_datebackto"
+                android:text="采样任务"
                 android:textColor="@color/write"
                 android:textSize="@dimen/sp15" />
 
@@ -52,6 +52,7 @@
             android:layout_width="match_parent"
             android:layout_height="@dimen/dp71"
             android:layout_alignParentBottom="true"
+            android:visibility="gone"
             android:background="@drawable/bg_rectange">
 
 
@@ -96,13 +97,13 @@
         android:id="@+id/linear_datebackto"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:visibility="visible"
         android:orientation="vertical">
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="@dimen/dp59"
             android:background="@color/bg_gray_e9"
+            android:visibility="gone"
             android:orientation="horizontal">
 
             <TextView
@@ -166,55 +167,43 @@
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="@dimen/dp59"
-            android:layout_marginTop="@dimen/dp10"
+            android:layout_height="@dimen/dp40"
             android:background="@color/bg_gray_e9"
+            android:gravity="center_vertical"
             android:orientation="horizontal">
 
             <TextView
                 android:layout_width="0dp"
-                android:layout_height="match_parent"
                 android:layout_weight="1"
+                android:layout_height="wrap_content"
                 android:gravity="center"
-                android:text="@string/datebackto_num"
-                android:textStyle="bold" />
+                android:textSize="@dimen/sp10"
+                android:text="区/街道" />
 
             <TextView
                 android:layout_width="0dp"
-                android:layout_height="match_parent"
                 android:layout_weight="1"
+                android:layout_height="wrap_content"
                 android:gravity="center"
-                android:text="@string/sales_name"
-                android:textStyle="bold"
+                android:textSize="@dimen/sp10"
+                android:text="市场" />
 
-                />
 
             <TextView
                 android:layout_width="0dp"
-                android:layout_height="match_parent"
                 android:layout_weight="1"
+                android:layout_height="wrap_content"
                 android:gravity="center"
-                android:text="@string/sale_type"
-                android:textStyle="bold"
-
-                />
-
+                android:textSize="@dimen/sp10"
+                android:text="样品名称" />
             <TextView
                 android:layout_width="0dp"
-                android:layout_height="match_parent"
                 android:layout_weight="1"
+                android:layout_height="wrap_content"
                 android:gravity="center"
-                android:text="@string/store_info"
-                android:textStyle="bold"
+                android:textSize="@dimen/sp10"
+                android:text="检测项目" />
 
-                />
-
-            <TextView
-                android:layout_width="0dp"
-                android:layout_height="match_parent"
-                android:layout_weight="1"
-
-                />
 
 
         </LinearLayout>

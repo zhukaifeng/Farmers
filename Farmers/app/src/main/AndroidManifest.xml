@@ -72,6 +72,7 @@
         <activity android:name=".login.SalesAccountActivity"/>
         <activity android:name=".view.ChooseMarketActivity"/>
         <activity android:name=".view.AddScorelActivity"/>
+        <activity android:name=".view.TaskDetailActivity"/>
 
     </application>
 

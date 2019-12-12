@@ -1,6 +1,7 @@
 package com.osiris.farmers.view.fragment;
 
 import android.content.Intent;
+import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
@@ -43,11 +44,14 @@ public class MarketEvaulateFragment extends BaseFragment {
     LinearLayout linear_calendar;
     @BindView(R.id.iv_select)
     ImageView iv_select;
+    @BindView(R.id.refreshLayout)
+    SwipeRefreshLayout refreshLayout;
 
     private List<EvaluateList.ZhugpingjiasBean> dataList = new ArrayList<>();
     private MarketEvaluateAdapter dataAdapter = new MarketEvaluateAdapter(dataList);
     private boolean selectVisible = true;
-
+    private int pageNum = 1;
+    private int pageCount = 8;
     @Override
     protected int setLayout() {
         return R.layout.activity_evaluate_market;
@@ -69,10 +73,89 @@ public class MarketEvaulateFragment extends BaseFragment {
                 startActivity(intent);
             }
         });
+        refreshLayout.setColorSchemeResources(android.R.color.holo_blue_light, android.R.color.holo_red_light,
+                android.R.color.holo_orange_light, android.R.color.holo_green_light);
+        refreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
+            @Override
+            public void onRefresh() {
+                refreshLayout.setRefreshing(true);
+                previousTotal = 0;
+                pageNum = 1;
+                getListData();
+
+            }
+        });
+        final LinearLayoutManager manager = (LinearLayoutManager) rv_data
+                .getLayoutManager();
+        rv_data.addOnScrollListener(new EndLessOnScrollListener(manager) {
+            @Override
+            public void onLoadMore(int currentPage) {
+                loadMoreData();
+            }
+        });
 
         getListData();
 
     }
+
+    //主要用来存储上一个totalItemCount
+    private int previousTotal = 0;
+
+
+    public abstract class EndLessOnScrollListener extends RecyclerView.OnScrollListener {
+
+        //声明一个LinearLayoutManager
+        private LinearLayoutManager mLinearLayoutManager;
+
+        //当前页，从0开始    private int currentPage = 0;
+        //已经加载出来的Item的数量
+        private int totalItemCount;
+
+        //在屏幕上可见的item数量
+        private int visibleItemCount;
+
+        //在屏幕可见的Item中的第一个
+        private int firstVisibleItem;
+
+        //是否正在上拉数据
+        private boolean loading = true;
+
+        public EndLessOnScrollListener(LinearLayoutManager linearLayoutManager) {
+            this.mLinearLayoutManager = linearLayoutManager;
+        }
+
+        @Override
+        public void onScrolled(RecyclerView recyclerView, int dx, int dy) {
+            super.onScrolled(recyclerView, dx, dy);
+
+            visibleItemCount = recyclerView.getChildCount();
+            totalItemCount = mLinearLayoutManager.getItemCount();
+            firstVisibleItem = mLinearLayoutManager.findFirstVisibleItemPosition();
+            if (loading) {
+                if (totalItemCount > previousTotal) {
+                    loading = false;
+                    previousTotal = totalItemCount;
+                }
+            }
+
+            if (!loading && totalItemCount - visibleItemCount <= firstVisibleItem) {
+                // pageCount ++;
+                onLoadMore(pageCount);
+                loading = true;
+            }
+        }
+
+        /**
+         * 提供一个抽闲方法，在Activity中监听到这个EndLessOnScrollListener
+         * 并且实现这个方法
+         */
+        public abstract void onLoadMore(int currentPage);
+    }
+    private void loadMoreData() {
+        pageNum++;
+        getListData();
+    }
+
 
     @Override
     protected void initData() {
@@ -123,7 +206,9 @@ public class MarketEvaulateFragment extends BaseFragment {
 
                     EvaluateList.ZhugpingjiasBean[] datas = JsonUtils.fromJson(json.get("zhugpingjias").getAsJsonArray(),
                             EvaluateList.ZhugpingjiasBean[].class);
-
+                    if (pageNum == 1) {
+                        dataList.clear();
+                    }
                     dataList.addAll(Arrays.asList(datas));
 
                     dataAdapter.notifyDataSetChanged();
