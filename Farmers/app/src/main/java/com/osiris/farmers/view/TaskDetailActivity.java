@@ -1,5 +1,7 @@
 package com.osiris.farmers.view;
 
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Parcelable;
@@ -81,6 +83,8 @@ public class TaskDetailActivity extends BaseActivity {
     private ChooseStallData.BoothglBean boothglBean = new ChooseStallData.BoothglBean();
     private List<Market.MarketBean> marketList = new ArrayList<>();
     private List<SampleNameData.CommodityBean> commodityList = new ArrayList<>();
+    private boolean choosed;
+    private int yourChoice = 0;
 
     @Override
     public int getLayoutResId() {
@@ -115,6 +119,7 @@ public class TaskDetailActivity extends BaseActivity {
 
                     for (Market.MarketBean marketBean:GlobalParams.marketList){
                         if (task.getScid().contains(marketBean.getMarketnm())){
+                            LogUtils.d("zkf market name:" + marketBean.getMarketnm());
                             marketList.add(marketBean);
                         }
                     }
@@ -125,6 +130,9 @@ public class TaskDetailActivity extends BaseActivity {
                     }else {
                         for (Market.MarketBean marketBean:marketList){
                             LogUtils.d("zkf  dsdsdd:" + marketBean.getMarketnm());
+
+
+
                         }
                     }
 
@@ -176,6 +184,58 @@ public class TaskDetailActivity extends BaseActivity {
         ButterKnife.bind(this);
     }
 
+
+    private void showSingleChoiceDialog(){
+
+       final String items[]=task.getScid().split("[,]");
+
+       // final String[] items = { "01","02","03","04"};
+        final AlertDialog.Builder singleChoiceDialog = new AlertDialog.Builder(TaskDetailActivity.this);
+        singleChoiceDialog.setTitle("请选择市场");
+        // 第二个参数是默认选项，此处设置为0
+        singleChoiceDialog.setSingleChoiceItems(items, 0,
+                new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        LogUtils.d("zkf which:" + which);
+                        yourChoice = which;
+
+                    }
+                });
+        singleChoiceDialog.setPositiveButton("确定",
+                new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        LogUtils.d("zkf yourChoice :" + yourChoice);
+                        tvShichang.setText(items[yourChoice]);
+                        for (Market.MarketBean marketBean:GlobalParams.marketList){
+                            if (task.getScid().contains(marketBean.getMarketnm())){
+                                LogUtils.d("zkf market name:" + marketBean.getMarketnm());
+                                marketList.add(marketBean);
+                            }
+                        }
+                        if (marketList.size()==1){
+                            LogUtils.d("zkf  market " + marketList.get(0).getMarketnm());
+                            marketId = marketList.get(0).getId();
+                            getStallNo();
+                        }else {
+                                LogUtils.d("zkf  dsdsdd:" + marketList.get(yourChoice).getMarketnm());
+                                marketId = marketList.get(yourChoice).getId();
+                                LogUtils.d("zkf marketId:" + marketId);
+                                getStallNo();
+
+                        }
+                        choosed = true;
+                        dialog.dismiss();
+
+                    }
+
+                });
+        singleChoiceDialog.show();
+    }
+
+
+
     @OnClick({R.id.rl_back,R.id.tv_shichang,R.id.tv_tanwei,R.id.tv_add})
     public void onViewClicked(View view) {
         switch (view.getId()) {
@@ -198,6 +258,7 @@ public class TaskDetailActivity extends BaseActivity {
                 if (!TextUtils.isEmpty(tvTanwei.getText().toString())) {
                     intent.putExtra("stall_name", tvTanwei.getText().toString());
                 }
+                intent.putExtra("data",task);
                 LogUtils.d("zkf boothglid222222:" + boothglBean.getId());
                 startActivity(intent);
 
@@ -209,8 +270,15 @@ public class TaskDetailActivity extends BaseActivity {
             case R.id.tv_shichang:
            //     if (!tvShichang.getText().toString().contains("请点击选择市场"))return;
 
-                Intent intent1 = new Intent(this, ChooseMarketActivity.class);
-                startActivity(intent1);
+                if (task.getScid().contains(",") && !choosed){
+                    showSingleChoiceDialog();
+                }else {
+                    Intent intent1 = new Intent(this, ChooseMarketActivity.class);
+                    startActivity(intent1);
+                }
+
+
+
                 break;
             case R.id.tv_tanwei:
 
@@ -224,7 +292,6 @@ public class TaskDetailActivity extends BaseActivity {
             //    if (!tvTanwei.getText().toString().contains("请点击选择摊位"))return;
 
                 if (stallNameList.size() == 0) {
-                    tvTanwei.setText("");
                     Toast toast = Toast.makeText(this, "此菜市场暂无摊位,请重新选择菜市场", Toast.LENGTH_SHORT);
                     toast.setGravity(Gravity.CENTER, 0, 0);
                     toast.show();
@@ -232,6 +299,7 @@ public class TaskDetailActivity extends BaseActivity {
                 }
 
                 Intent i = new Intent(this, ChooseStallNoActivity.class);
+                i.putExtra("marketId",marketId);
                 startActivityForResult(i, REQUEST_A);
 
 
@@ -292,9 +360,16 @@ public class TaskDetailActivity extends BaseActivity {
                     if (stallList.size() > 0) stallList.clear();
                     stallList.addAll(tempData.getBoothgl());
                     if (stallNameList.size() > 0) stallNameList.clear();
-                    for (ChooseStallData.BoothglBean boothglBean : stallList) {
-                        stallNameList.add(boothglBean.getTwhmc());
+                    for (ChooseStallData.BoothglBean boothgl : stallList) {
+                        LogUtils.d("zkf boothgl.getTwhmc():" + boothgl.getTwhmc());
+                        stallNameList.add(boothgl.getTwhmc());
+                        if (boothgl.getTwhmc().contains(task.getTwhid())){
+                            LogUtils.d("zkf boothgl.getTwhmc()222334:" + boothgl.getTwhmc());
+                            boothglBean = boothgl;
+                        }
                     }
+
+
                     if (null != stallList && stallList.size() > 0) {
                         if (stallNameList.size() > 0) {
                            // tv_shop_num.setText(stallNameList.get(0));

@@ -263,13 +263,13 @@ public class AddSampleActivity extends BaseActivity {
                 //zkffffff
                 if (sign_view.getTouched()) {
                     try {
-                        sign_view.save(Environment.getExternalStorageDirectory().getPath() + "/qm.png", false, 10);
+                        sign_view.save(Environment.getExternalStorageDirectory().getPath() + "/"+GlobalParams.id+".png", false, 10);
                         setResult(100);
                         showLoadDialog();
                         mHadler.postDelayed(new Runnable() {
                             @Override
                             public void run() {
-                                uploadTwoBeforePic(Environment.getExternalStorageDirectory().getPath() + "/qm.png");
+                                uploadTwoBeforePic(Environment.getExternalStorageDirectory().getPath() +  "/"+GlobalParams.id+".png");
                             }
                         }, 2000);
                     } catch (IOException e) {
@@ -310,6 +310,7 @@ public class AddSampleActivity extends BaseActivity {
                     showDataList.addAll(tempList);
                     showDataList.get(0).setSelect(true);
                     descriptionid = String.valueOf(showDataList.get(0).getComtype());
+                    commodityid = showDataList.get(0).getId();
                     billOflandSelectAdapter.notifyDataSetChanged();
                     getCheckProject(showDataList.get(0).getId());
 
@@ -739,7 +740,7 @@ public class AddSampleActivity extends BaseActivity {
                     relative_content.setVisibility(View.VISIBLE);
                     iv_bmp.setImageBitmap(bitmap);
 
-                    String file_path = Environment.getExternalStorageDirectory().getPath() + "/qm.png";
+                    String file_path = Environment.getExternalStorageDirectory().getPath() +  "/"+GlobalParams.id+".png";
                     File file = new File(file_path);
                     if (file.exists()){
                         sign_view.setVisibility(View.GONE);

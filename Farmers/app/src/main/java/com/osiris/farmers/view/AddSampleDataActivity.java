@@ -39,6 +39,7 @@ import com.osiris.farmers.base.BaseActivity;
 import com.osiris.farmers.model.CheckProject;
 import com.osiris.farmers.model.SampleNameData;
 import com.osiris.farmers.model.SerachGoodData;
+import com.osiris.farmers.model.Task;
 import com.osiris.farmers.model.TypeSampleTitle;
 import com.osiris.farmers.network.ApiParams;
 import com.osiris.farmers.network.ApiRequestTag;
@@ -85,7 +86,7 @@ public class AddSampleDataActivity extends BaseActivity {
     EditText edt_price;
     @BindView(R.id.edt_count)
     EditText edt_count;
-//    @BindView(R.id.rv_type)
+    //    @BindView(R.id.rv_type)
 //    RecyclerView rv_type;
     @BindView(R.id.recycler)
     RecyclerView recyclerView;
@@ -140,14 +141,14 @@ public class AddSampleDataActivity extends BaseActivity {
         getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_ADJUST_PAN);
     }
 
-    @OnClick({R.id.iv_close, R.id.tv_count_ok, R.id.tv_price_ok, R.id.tv_print, R.id.tv_ok, R.id.tv_upload_sign,R.id.iv_search,R.id.tv_sign_again})
+    @OnClick({R.id.iv_close, R.id.tv_count_ok, R.id.tv_price_ok, R.id.tv_print, R.id.tv_ok, R.id.tv_upload_sign, R.id.iv_search, R.id.tv_sign_again})
     void onClick(View v) {
         switch (v.getId()) {
             case R.id.tv_sign_again:
                 //sssss
                 sign_view.setVisibility(View.VISIBLE);
                 iv_sign.setVisibility(View.GONE);
-                if (sign_view.getTouched()){
+                if (sign_view.getTouched()) {
                     sign_view.clear();
                 }
                 break;
@@ -186,8 +187,7 @@ public class AddSampleDataActivity extends BaseActivity {
                 Date curDate = new Date(System.currentTimeMillis());
                 String time = formatter.format(curDate);
                 title = title + "时间:" + time
-                        + "\n"+"检测员:" + GlobalParams.username;
-
+                        + "\n" + "检测员:" + GlobalParams.username;
 
 
                 //"检测项目:" + printJcmName
@@ -202,7 +202,7 @@ public class AddSampleDataActivity extends BaseActivity {
                     e.printStackTrace();
                 }
                 printPic();
-                String text2 = "\n" + "\n"+ "\n";
+                String text2 = "\n" + "\n" + "\n";
                 try {
                     mIzkcService.printGBKText(text2);
                 } catch (RemoteException e) {
@@ -287,10 +287,10 @@ public class AddSampleDataActivity extends BaseActivity {
 
     private void searchData(String str) {
 
-        String url = ApiParams.API_HOST +"/app/getCommodityByNm.action";
+        String url = ApiParams.API_HOST + "/app/getCommodityByNm.action";
         Map<String, String> paramMap = new HashMap<>();
-        if (!TextUtils.isEmpty(str)){
-            paramMap.put("commoditynm",str);
+        if (!TextUtils.isEmpty(str)) {
+            paramMap.put("commoditynm", str);
         }
 
         NetRequest.request(url, ApiRequestTag.DATA, paramMap, new NetRequestResultListener() {
@@ -299,23 +299,23 @@ public class AddSampleDataActivity extends BaseActivity {
                 LogUtils.d("zkf successResult:" + successResult);
                 JsonParser parser = new JsonParser();
                 JsonArray array = parser.parse(successResult).getAsJsonArray();
-                SerachGoodData[] datas = JsonUtils.fromJson(array,SerachGoodData[].class);
+                SerachGoodData[] datas = JsonUtils.fromJson(array, SerachGoodData[].class);
                 List<SerachGoodData> tempList = new ArrayList<>();
                 tempList.addAll(Arrays.asList(datas));
-                if (tempList.size()>0){
-                    if (showDataList.size()>0)showDataList.clear();
+                if (tempList.size() > 0) {
+                    if (showDataList.size() > 0) showDataList.clear();
                     showDataList.addAll(tempList);
                     showDataList.get(0).setSelect(true);
                     descriptionid = String.valueOf(showDataList.get(0).getComtype());
+                    commodityid = showDataList.get(0).getId();
                     billOflandSelectAdapter.notifyDataSetChanged();
                     getCheckProject(showDataList.get(0).getId());
 
-                }else{
-                    Toast toast = Toast.makeText(AddSampleDataActivity.this,"没有此商品",Toast.LENGTH_SHORT);
-                    toast.setGravity(Gravity.CENTER,0,0);
+                } else {
+                    Toast toast = Toast.makeText(AddSampleDataActivity.this, "没有此商品", Toast.LENGTH_SHORT);
+                    toast.setGravity(Gravity.CENTER, 0, 0);
                     toast.show();
                 }
-
 
 
             }
@@ -373,7 +373,7 @@ public class AddSampleDataActivity extends BaseActivity {
     private BillOflandProjectSelectAdapter billOflandProjectSelectAdapter;
     private BillOflandSelectAdapter billOflandSelectAdapter;
     private List<SampleNameData.CommodityBean> dataList = new ArrayList<>();
-   // private BillOflandTypeSelectAdapter typeSelectAdapter;
+    // private BillOflandTypeSelectAdapter typeSelectAdapter;
     private GridImageAdapter adapter;
     private List<LocalMedia> selectList = new ArrayList<>();
 
@@ -393,6 +393,7 @@ public class AddSampleDataActivity extends BaseActivity {
     private String printPrince = "";
 
     private FileUtils util = new FileUtils();
+    private Task task;
 
 
     @Override
@@ -405,12 +406,13 @@ public class AddSampleDataActivity extends BaseActivity {
     public void init() {
 
 
-     //   dataList = getIntent().getParcelableArrayListExtra("data_list");
+        //   dataList = getIntent().getParcelableArrayListExtra("data_list");
         boothglid = getIntent().getIntExtra("boothglid", 0);
         stallName = getIntent().getStringExtra("stall_name");
         marketName = GlobalParams.currentMarkrtName;
+        task = getIntent().getParcelableExtra("data");
 
-     //   showDataList.addAll(dataList);
+        //   showDataList.addAll(dataList);
 
         for (SampleNameData.CommodityBean commodityBean : dataList) {
             commodityNameList.add(new TypeSampleTitle(commodityBean.getBeifen(), false));
@@ -419,7 +421,18 @@ public class AddSampleDataActivity extends BaseActivity {
         commodityNameList.clear();
         commodityNameList.addAll(ts);
 
-        searchData("");
+
+        if (!TextUtils.isEmpty(task.getYpmc())){
+            edt_content.setText(task.getYpmc());
+            searchData(task.getYpmc());
+        }else {
+            searchData("");
+
+        }
+
+        if (!TextUtils.isEmpty(task.getCysl())){
+            edt_count.setText(task.getCysl());
+        }
 
 //        if (showDataList.size() > 0) {
 //            showDataList.clear();
@@ -555,7 +568,15 @@ public class AddSampleDataActivity extends BaseActivity {
                     if (checkProjectList.size() > 0) checkProjectList.clear();
                     CheckProject tempData = JsonUtils.fromJson(temp, CheckProject.class);
                     checkProjectList.addAll(tempData.getJcxm());
+
+                    for (CheckProject.JcxmBean jcxmBean:checkProjectList){
+                        jcxmBean.setSelect(false);
+                        if (jcxmBean.getJcmc().equals(task.getJcymc())){
+                            jcxmBean.setSelect(true);
+                        }
+                    }
                     billOflandProjectSelectAdapter.notifyDataSetChanged();
+
 
                 }
 
@@ -738,12 +759,12 @@ public class AddSampleDataActivity extends BaseActivity {
 
                     String file_path = Environment.getExternalStorageDirectory().getPath() + "/qm.png";
                     File file = new File(file_path);
-                    if (file.exists()){
+                    if (file.exists()) {
                         sign_view.setVisibility(View.GONE);
                         iv_sign.setVisibility(View.VISIBLE);
                         Bitmap bitmap1 = BitmapFactory.decodeFile(file_path);
                         iv_sign.setImageBitmap(bitmap1);
-                    }else {
+                    } else {
                         sign_view.setVisibility(View.VISIBLE);
                         iv_sign.setVisibility(View.GONE);
                     }
@@ -872,7 +893,7 @@ public class AddSampleDataActivity extends BaseActivity {
                 //String temp = successResult.substring(1, successResult.length() - 1);
 
                 LogUtils.d("zkf temp:" + successResult);
-                Toast.makeText(AddSampleDataActivity.this,"签名上传成功",Toast.LENGTH_SHORT).show();
+                Toast.makeText(AddSampleDataActivity.this, "签名上传成功", Toast.LENGTH_SHORT).show();
                 cancelLoadDialog();
 
             }

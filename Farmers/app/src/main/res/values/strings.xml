@@ -23,7 +23,7 @@
     <string name="place_input_organize">请输入组织代码</string>
     <string name="scan_certificate_of_business">扫描营业执照二维码录入信息</string>
     <string name="confirm_submission">确认提交</string>
-    <string name="retrospect">追溯</string>
+    <string name="retrospect">采样任务</string>
     <string name="sampling">采样</string>
     <string name="booking">记账</string>
     <string name="check">检测</string>
@@ -87,7 +87,7 @@
     <string name="remarks_operator_input_info">注：所有证件仅用于市场信息登记</string>
 
 
-    <string name="date_back_to">追溯</string>
+    <string name="date_back_to">采样任务</string>
     <string name="sample">采样</string>
     <string name="examine_menu">检测</string>
     <string name="mine">我的</string>

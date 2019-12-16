@@ -56,7 +56,7 @@ public class ChooseStallNoActivity extends BaseActivity {
 
 	private List<ChooseStallData.BoothglBean> stallList = new ArrayList<>();
 	private StallNoAdapter typeAdapter = new StallNoAdapter(stallList);
-
+	private int marketId =0;
 
 	@Override
 	public int getLayoutResId() {
@@ -66,6 +66,7 @@ public class ChooseStallNoActivity extends BaseActivity {
 	@Override
 	public void init() {
 
+		marketId = getIntent().getIntExtra("marketId",0);
 		getStallNo();
 		rvData.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false));
 		rvData.setAdapter(typeAdapter);
@@ -88,11 +89,16 @@ public class ChooseStallNoActivity extends BaseActivity {
 
 		String url = ApiParams.API_HOST + "/app/xzboothgl.action";
 		Map<String, String> paramMap = new HashMap<>();
-		paramMap.put("id", String.valueOf(GlobalParams.currentMarketId));
+		if (marketId == 0){
+			paramMap.put("id", String.valueOf(GlobalParams.currentMarketId));
+		}else {
+			paramMap.put("id", String.valueOf(marketId));
+		}
 
 		NetRequest.request(url, ApiRequestTag.DATA, paramMap, new NetRequestResultListener() {
 			@Override
 			public void requestSuccess(int tag, String successResult) {
+				LogUtils.d("zkf getStallNo:" + successResult);
 				String temp = successResult.substring(1, successResult.length() - 1);
 				if (!TextUtils.isEmpty(successResult)) {
 					ChooseStallData tempData = JsonUtils.fromJson(temp, ChooseStallData.class);
