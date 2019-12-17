@@ -33,6 +33,7 @@ import com.osiris.farmers.R;
 import com.osiris.farmers.base.BaseFragment;
 import com.osiris.farmers.event.BoothgEvent;
 import com.osiris.farmers.event.MarketEvent;
+import com.osiris.farmers.event.RefreshEvent;
 import com.osiris.farmers.model.ChooseStallData;
 import com.osiris.farmers.model.GoodsType;
 import com.osiris.farmers.model.Market;
@@ -197,6 +198,13 @@ public class TakeSampleListFragment extends BaseFragment {
         getStallNo();
         bindService();
         getStallName();
+    }
+    @Subscribe(threadMode = ThreadMode.MAIN)
+    public void onGetMessage(RefreshEvent boothglBean) {
+        refreshLayout.setRefreshing(true);
+        previousTotal = 0;
+        pageNum = 1;
+        getData();
     }
 
     private void getGoodsType() {

@@ -19,16 +19,20 @@ import android.util.Base64;
 import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.bumptech.glide.Glide;
 import com.luck.picture.lib.PictureSelector;
 import com.luck.picture.lib.config.PictureConfig;
 import com.luck.picture.lib.config.PictureMimeType;
 import com.luck.picture.lib.entity.LocalMedia;
 import com.osiris.farmers.R;
+import com.osiris.farmers.base.ApiContants;
 import com.osiris.farmers.base.BaseActivity;
+import com.osiris.farmers.event.RefreshEvent;
 import com.osiris.farmers.model.CheckProject;
 import com.osiris.farmers.model.SampleListData;
 import com.osiris.farmers.network.ApiParams;
@@ -83,6 +87,14 @@ public class PrintDetailActivity extends BaseActivity {
     RecyclerView recyclerView;
     @BindView(R.id.rl_print)
     RelativeLayout rl_print;
+    @BindView(R.id.linear_pic)
+    LinearLayout linear_pic;
+    @BindView(R.id.iv_pic1)
+    ImageView iv_pic1;
+    @BindView(R.id.iv_pic2)
+    ImageView iv_pic2;
+    @BindView(R.id.tv_upload_pic)
+    TextView tv_upload_pic;
 
     private SampleListData.CangysjglsBean data;
     private List<LocalMedia> selectList = new ArrayList<>();
@@ -107,6 +119,34 @@ public class PrintDetailActivity extends BaseActivity {
             Bitmap bitmap = ZXingUtils.createQRImage(String.valueOf(data.getId()), 200, 200);
             ivCode.setImageBitmap(bitmap);
 
+            if (!TextUtils.isEmpty(data.getTsremark())) {
+                String items[] = data.getTsremark().split("[,]");
+                LogUtils.d("zkf items length:" + items.length);
+                if (items.length == 1) {
+                    linear_pic.setVisibility(View.VISIBLE);
+                    tv_upload_pic.setVisibility(View.GONE);
+                    recyclerView.setVisibility(View.GONE);
+                    LogUtils.d("zkf ApiParams.API_HOST+\"/caiyang/\"+items[0]:" + ApiParams.API_HOST + "/caiyang/" + items[0]);
+
+                    Glide.with(this).load(ApiParams.API_HOST + "/caiyang/" + items[0]).into(iv_pic1);
+                } else if (items.length == 2) {
+                    linear_pic.setVisibility(View.VISIBLE);
+                    tv_upload_pic.setVisibility(View.GONE);
+                    recyclerView.setVisibility(View.GONE);
+                    LogUtils.d("zkf ApiParams.API_HOST+\"/caiyang/\"+items[0]:" + ApiParams.API_HOST + "/caiyang/" + items[0]);
+                    LogUtils.d("zkf ApiParams.API_HOST+\"/caiyang/\"+items[1]:" + ApiParams.API_HOST + "/caiyang/" + items[1]);
+
+                    Glide.with(this).load(ApiParams.API_HOST + "/caiyang/" + items[0]).into(iv_pic1);
+                    Glide.with(this).load(ApiParams.API_HOST + "/caiyang/" + items[1]).into(iv_pic2);
+                } else {
+                    linear_pic.setVisibility(View.GONE);
+                    tv_upload_pic.setVisibility(View.VISIBLE);
+                }
+
+
+            }
+
+
         }
         FullyGridLayoutManager manager = new FullyGridLayoutManager(this, 1, GridLayoutManager.VERTICAL, false);
         recyclerView.setLayoutManager(manager);
@@ -126,7 +166,7 @@ public class PrintDetailActivity extends BaseActivity {
         ButterKnife.bind(this);
     }
 
-    @OnClick({R.id.rl_back, R.id.tv_price_ok, R.id.rl_upload, R.id.tv_upload_pic})
+    @OnClick({R.id.rl_back, R.id.tv_price_ok, R.id.rl_upload, R.id.tv_upload_pic, R.id.tv_delete})
     public void onViewClicked(View v) {
         switch (v.getId()) {
             case R.id.rl_back:
@@ -153,7 +193,7 @@ public class PrintDetailActivity extends BaseActivity {
                         title = title + "检测项目:" + data.getMbrk().replace(",", "\n")
                                 + "\n";
 
-                    }else {
+                    } else {
                         title = title + "检测项目:" + data.getMbrk()
                                 + "\n";
                     }
@@ -215,6 +255,9 @@ public class PrintDetailActivity extends BaseActivity {
                 }
                 showLoadDialog();
                 uploadTwoBeforePic(selectList.get(0).getCompressPath());
+                break;
+            case R.id.tv_delete:
+                deleteCaiYang();
                 break;
             default:
 
@@ -373,6 +416,31 @@ public class PrintDetailActivity extends BaseActivity {
 
         }
         return result;
+    }
+
+    private void deleteCaiYang() {
+        String url = ApiParams.API_HOST + "/app/delCaiysj.action";//database/wisdom/app/delCaiysj.action
+        Map<String, String> paramMap = new HashMap<>();
+        paramMap.put("id", String.valueOf(data.getId()));
+        NetRequest.request(url, ApiRequestTag.DATA, paramMap, new NetRequestResultListener() {
+
+            @Override
+            public void requestSuccess(int tag, String successResult) {
+                LogUtils.d("zkf successResult :" + successResult);
+                if (successResult.contains("1")) {
+                    Toast.makeText(PrintDetailActivity.this, "删除成功", Toast.LENGTH_SHORT).show();
+                    postEvent(new RefreshEvent());
+                    finish();
+                }
+            }
+
+            @Override
+            public void requestFailure(int tag, int code, String msg) {
+
+            }
+        });
+
+
     }
 
     private void uploadTwoBeforePic(String path) {
