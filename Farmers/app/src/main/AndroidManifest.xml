@@ -74,6 +74,8 @@
         <activity android:name=".view.AddScorelActivity"/>
         <activity android:name=".view.TaskDetailActivity"/>
         <activity android:name=".view.AddSampleDataActivity"/>
+        <activity android:name=".view.ChooseJieDaoActivity"/>
+
 
     </application>
 

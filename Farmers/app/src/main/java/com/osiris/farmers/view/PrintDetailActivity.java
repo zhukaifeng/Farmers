@@ -124,8 +124,8 @@ public class PrintDetailActivity extends BaseActivity {
                 LogUtils.d("zkf items length:" + items.length);
                 if (items.length == 1) {
                     linear_pic.setVisibility(View.VISIBLE);
-                    tv_upload_pic.setVisibility(View.GONE);
-                    recyclerView.setVisibility(View.GONE);
+//                    tv_upload_pic.setVisibility(View.GONE);
+//                    recyclerView.setVisibility(View.GONE);
                     LogUtils.d("zkf ApiParams.API_HOST+\"/caiyang/\"+items[0]:" + ApiParams.API_HOST + "/caiyang/" + items[0]);
 
                     Glide.with(this).load(ApiParams.API_HOST + "/caiyang/" + items[0]).into(iv_pic1);
@@ -484,6 +484,11 @@ public class PrintDetailActivity extends BaseActivity {
                 LogUtils.d("zkf temp:" + successResult);
                 Toast.makeText(PrintDetailActivity.this, "照片上传成功", Toast.LENGTH_SHORT).show();
                 cancelLoadDialog();
+                postEvent(new RefreshEvent());
+                linear_pic.setVisibility(View.VISIBLE);
+                tv_upload_pic.setVisibility(View.GONE);
+                recyclerView.setVisibility(View.GONE);
+                Glide.with(PrintDetailActivity.this).load(selectList.get(0).getCompressPath()).into(iv_pic2);
 
             }
 
