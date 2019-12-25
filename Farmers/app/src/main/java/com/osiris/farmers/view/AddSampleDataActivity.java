@@ -258,22 +258,27 @@ public class AddSampleDataActivity extends BaseActivity {
                 break;
             case R.id.tv_upload_sign:
                 //zkffffff
-                if (sign_view.getTouched()) {
-                    try {
-                        sign_view.save(Environment.getExternalStorageDirectory().getPath() + "/qm.png", false, 10);
-                        setResult(100);
-                        showLoadDialog();
-                        mHadler.postDelayed(new Runnable() {
-                            @Override
-                            public void run() {
-                                uploadTwoBeforePic(Environment.getExternalStorageDirectory().getPath() + "/qm.png");
-                            }
-                        }, 2000);
-                    } catch (IOException e) {
-                        e.printStackTrace();
+                if (iv_sign.getVisibility() == View.VISIBLE){
+                    uploadTwoBeforePic(Environment.getExternalStorageDirectory().getPath() + "/"+GlobalParams.id+".png");
+                }else {
+                    if (sign_view.getTouched()) {
+                        try {
+                            sign_view.save(Environment.getExternalStorageDirectory().getPath() + "/"+GlobalParams.id+".png", false, 10);
+                            setResult(100);
+                            showLoadDialog();
+                            mHadler.postDelayed(new Runnable() {
+                                @Override
+                                public void run() {
+                                    uploadTwoBeforePic(Environment.getExternalStorageDirectory().getPath() + "/"+GlobalParams.id+".png");
+                                }
+                            }, 2000);
+                        } catch (IOException e) {
+                            e.printStackTrace();
+                        }
+                    } else {
+                        Toast.makeText(AddSampleDataActivity.this, "您没有签名~", Toast.LENGTH_SHORT).show();
                     }
-                } else {
-                    Toast.makeText(AddSampleDataActivity.this, "您没有签名~", Toast.LENGTH_SHORT).show();
+
                 }
 
                 break;
@@ -757,7 +762,7 @@ public class AddSampleDataActivity extends BaseActivity {
                     relative_content.setVisibility(View.VISIBLE);
                     iv_bmp.setImageBitmap(bitmap);
 
-                    String file_path = Environment.getExternalStorageDirectory().getPath() + "/qm.png";
+                    String file_path = Environment.getExternalStorageDirectory().getPath() + "/"+GlobalParams.id+".png";
                     File file = new File(file_path);
                     if (file.exists()) {
                         sign_view.setVisibility(View.GONE);

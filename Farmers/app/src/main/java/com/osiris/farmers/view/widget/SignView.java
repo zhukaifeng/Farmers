@@ -385,4 +385,7 @@ public class SignView extends View {
     public boolean getTouched() {
         return isTouched;
     }
+    public void setTouched(boolean isTouched) {
+        this.isTouched = isTouched;
+    }
 }
