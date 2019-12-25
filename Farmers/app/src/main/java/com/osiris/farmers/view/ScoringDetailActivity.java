@@ -93,7 +93,7 @@ public class ScoringDetailActivity extends BaseActivity {
 		Map<String, String> paramMap = new HashMap<>();
 		paramMap.put("id",String.valueOf(data.getId()));
 		paramMap.put("xxz","1");
-
+		LogUtils.d("zkf paramMap:" + paramMap.toString());
 		NetRequest.request(url, ApiRequestTag.DATA, paramMap, new NetRequestResultListener() {
 			@Override
 			public void requestSuccess(int tag, String successResult) {

@@ -95,6 +95,8 @@ public class PrintDetailActivity extends BaseActivity {
     ImageView iv_pic2;
     @BindView(R.id.tv_upload_pic)
     TextView tv_upload_pic;
+    @BindView(R.id.tv_peoject)
+    TextView tv_peoject;
 
     private SampleListData.CangysjglsBean data;
     private List<LocalMedia> selectList = new ArrayList<>();
@@ -116,6 +118,8 @@ public class PrintDetailActivity extends BaseActivity {
             tvNum.setText(data.getSczhutfl());
             tvType.setText(data.getYpbh());
             tvTime.setText(data.getLlrq().substring(0, 10));
+            if (!TextUtils.isEmpty(data.getYplb()))
+                tv_peoject.setText(data.getYplb());
             Bitmap bitmap = ZXingUtils.createQRImage(String.valueOf(data.getId()), 200, 200);
             ivCode.setImageBitmap(bitmap);
 

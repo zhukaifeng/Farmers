@@ -1,10 +1,14 @@
 package com.osiris.farmers.view.fragment;
 
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.text.TextUtils;
 import android.view.View;
+import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 
@@ -13,6 +17,7 @@ import com.google.gson.JsonParser;
 import com.osiris.farmers.R;
 import com.osiris.farmers.base.BaseFragment;
 import com.osiris.farmers.model.EvaluateList;
+import com.osiris.farmers.model.Market;
 import com.osiris.farmers.model.MarketEvaluate;
 import com.osiris.farmers.network.ApiParams;
 import com.osiris.farmers.network.ApiRequestTag;
@@ -23,6 +28,7 @@ import com.osiris.farmers.utils.JsonUtils;
 import com.osiris.farmers.view.MarketEvaluateActivity;
 import com.osiris.farmers.view.NewMarketScoreActivity;
 import com.osiris.farmers.view.ScoringDetailActivity;
+import com.osiris.farmers.view.TaskDetailActivity;
 import com.osiris.farmers.view.adapter.MarketEvaluateAdapter;
 import com.osiris.farmers.view.adapter.MyItemClickListener;
 
@@ -46,16 +52,21 @@ public class MarketEvaulateFragment extends BaseFragment {
     ImageView iv_select;
     @BindView(R.id.refreshLayout)
     SwipeRefreshLayout refreshLayout;
+    @BindView(R.id.edt_search)
+    EditText edt_search;
 
     private List<EvaluateList.ZhugpingjiasBean> dataList = new ArrayList<>();
     private MarketEvaluateAdapter dataAdapter = new MarketEvaluateAdapter(dataList);
     private boolean selectVisible = true;
     private int pageNum = 1;
     private int pageCount = 8;
+    private int xxz = 0;
     @Override
     protected int setLayout() {
         return R.layout.activity_evaluate_market;
     }
+
+
 
     @Override
     protected void initView() {
@@ -70,6 +81,7 @@ public class MarketEvaulateFragment extends BaseFragment {
             public void onItemClick(View view, int position) {
                 Intent intent = new Intent(getActivity(), ScoringDetailActivity.class);
                 intent.putExtra("data",dataList.get(position));
+                intent.putExtra("xxz",xxz);
                 startActivity(intent);
             }
         });
@@ -95,8 +107,48 @@ public class MarketEvaulateFragment extends BaseFragment {
         });
 
         getListData();
-
+        showSingleChoiceDialog();
     }
+
+
+
+
+    private void showSingleChoiceDialog(){
+
+        final String items[]={ "市场评价","经营户评价"};
+
+        // final String[] items = { "01","02","03","04"};
+        final AlertDialog.Builder singleChoiceDialog = new AlertDialog.Builder(getActivity());
+        singleChoiceDialog.setCancelable(false);
+        singleChoiceDialog.setTitle("请选择");
+        // 第二个参数是默认选项，此处设置为0
+        singleChoiceDialog.setSingleChoiceItems(items, 0,
+                new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        LogUtils.d("zkf which:" + which);
+                        xxz = which + 1;
+
+                    }
+                });
+        singleChoiceDialog.setPositiveButton("确定",
+                new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        dialog.dismiss();
+                    }
+
+                });
+        singleChoiceDialog.show();
+    }
+
+
+
+
+
+
+
+
 
     //主要用来存储上一个totalItemCount
     private int previousTotal = 0;
@@ -162,9 +214,15 @@ public class MarketEvaulateFragment extends BaseFragment {
 
     }
 
-    @OnClick({R.id.linear_evaulate,R.id.rl_right,R.id.rl_back})
+    @OnClick({R.id.linear_evaulate,R.id.rl_right,R.id.rl_back,R.id.rl_search})
     void onClick(View v){
         switch (v.getId()){
+            case R.id.rl_search:
+                if (!TextUtils.isEmpty(edt_search.getText().toString())){
+                    return;
+                }
+                getListData();
+                break;
             case R.id.linear_evaulate:
                 if (selectVisible){
                     selectVisible= false;
@@ -194,12 +252,17 @@ public class MarketEvaulateFragment extends BaseFragment {
         paramMap.put("id", String.valueOf(GlobalParams.id));
 
         paramMap.put("pageNo",String.valueOf(1));
-        paramMap.put("marketnm","");
+        if (!TextUtils.isEmpty(edt_search.getText().toString())){
+            paramMap.put("marketnm",edt_search.getText().toString());
+        }else {
+            paramMap.put("marketnm","");
+        }
 
         NetRequest.request(url, ApiRequestTag.DATA, paramMap, new NetRequestResultListener() {
             @Override
             public void requestSuccess(int tag, String successResult) {
                 LogUtils.d("zkf successResult:" + successResult);
+                refreshLayout.setRefreshing(false);
                 JsonParser parser = new JsonParser();
                 JsonObject json = parser.parse(successResult).getAsJsonObject();
                 if (json.has("zhugpingjias")){
@@ -223,6 +286,8 @@ public class MarketEvaulateFragment extends BaseFragment {
             @Override
             public void requestFailure(int tag, int code, String msg) {
                 LogUtils.d("zkf code:" +code +" msg:" +msg);
+                refreshLayout.setRefreshing(false);
+
             }
         });
 
