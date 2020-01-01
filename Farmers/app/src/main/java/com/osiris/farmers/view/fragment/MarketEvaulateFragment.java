@@ -11,6 +11,7 @@ import android.view.View;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.TextView;
 
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
@@ -25,6 +26,7 @@ import com.osiris.farmers.network.GlobalParams;
 import com.osiris.farmers.network.NetRequest;
 import com.osiris.farmers.network.NetRequestResultListener;
 import com.osiris.farmers.utils.JsonUtils;
+import com.osiris.farmers.view.AddScorelActivity;
 import com.osiris.farmers.view.MarketEvaluateActivity;
 import com.osiris.farmers.view.NewMarketScoreActivity;
 import com.osiris.farmers.view.ScoringDetailActivity;
@@ -54,13 +56,15 @@ public class MarketEvaulateFragment extends BaseFragment {
     SwipeRefreshLayout refreshLayout;
     @BindView(R.id.edt_search)
     EditText edt_search;
+    @BindView(R.id.tv_title)
+    TextView tv_title;
 
     private List<EvaluateList.ZhugpingjiasBean> dataList = new ArrayList<>();
     private MarketEvaluateAdapter dataAdapter = new MarketEvaluateAdapter(dataList);
     private boolean selectVisible = true;
     private int pageNum = 1;
     private int pageCount = 8;
-    private int xxz = 0;
+    private int xxz = 1;
     @Override
     protected int setLayout() {
         return R.layout.activity_evaluate_market;
@@ -136,6 +140,11 @@ public class MarketEvaulateFragment extends BaseFragment {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
                         dialog.dismiss();
+                        if (xxz ==1){
+                            tv_title.setText("市场评价");
+                        }else if (xxz ==2){
+                            tv_title.setText("经营户评价");
+                        }
                     }
 
                 });
@@ -237,6 +246,9 @@ public class MarketEvaulateFragment extends BaseFragment {
             case R.id.rl_right:
 //                Intent intent = new Intent(this, getActivity());
 //                startActivity(intent);
+                Intent intent = new Intent(getActivity(), AddScorelActivity.class);
+                intent.putExtra("xxz",xxz);
+                startActivity(intent);
 
                 break;
             case R.id.rl_back:

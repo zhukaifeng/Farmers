@@ -46,7 +46,7 @@ public class ScoringDetailActivity extends BaseActivity {
 	private List<MakeScoreData.PingjiaxxsBean>  dataList = new ArrayList<>();
 	private MarketScoreAdapter marketScoreAdapter = new MarketScoreAdapter(dataList);
 
-
+	private int xxz = 0;
 
 	@Override
 	public int getLayoutResId() {
@@ -56,7 +56,7 @@ public class ScoringDetailActivity extends BaseActivity {
 	@Override
 	public void init() {
 		data = getIntent().getParcelableExtra("data");
-
+		xxz = getIntent().getIntExtra("xxz",0);
 
 		if (null != data){
 			tv_market.setText(data.getMarketnm());
@@ -67,9 +67,9 @@ public class ScoringDetailActivity extends BaseActivity {
 		marketScoreAdapter.setOnItemClick(new MyItemClickListener() {
 			@Override
 			public void onItemClick(View view, int position) {
-				Intent intent = new Intent(ScoringDetailActivity.this,AddScorelActivity.class);
-				intent.putExtra("data",data);
-				startActivity(intent);
+//				Intent intent = new Intent(ScoringDetailActivity.this,AddScorelActivity.class);
+//				intent.putExtra("data",data);
+//				startActivity(intent);
 			}
 		});
 		getData();
@@ -92,7 +92,7 @@ public class ScoringDetailActivity extends BaseActivity {
 		String url = ApiParams.API_HOST + "/app/zgscpingjiaDetal.action";
 		Map<String, String> paramMap = new HashMap<>();
 		paramMap.put("id",String.valueOf(data.getId()));
-		paramMap.put("xxz","1");
+		paramMap.put("xxz",String.valueOf(xxz));
 		LogUtils.d("zkf paramMap:" + paramMap.toString());
 		NetRequest.request(url, ApiRequestTag.DATA, paramMap, new NetRequestResultListener() {
 			@Override
