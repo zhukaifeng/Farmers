@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <RelativeLayout
+        android:id="@+id/rl_top"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/dp181">
+
+        <RelativeLayout
+            android:id="@+id/rl_title"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/dp181"
+            android:background="@drawable/bg_life_payments">
+
+
+            <RelativeLayout
+                android:layout_width="@dimen/dp223"
+                android:layout_height="@dimen/dp33"
+                android:layout_centerHorizontal="true"
+                android:layout_marginTop="@dimen/dp20"
+                android:background="@drawable/bg_round_title">
+
+                <TextView
+                    android:id="@+id/tv_title"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerInParent="true"
+                    android:text="@string/shangpingsuyuan"
+                    android:textColor="@color/write"
+                    android:textSize="@dimen/sp15" />
+
+
+            </RelativeLayout>
+
+
+            <TextView
+                android:id="@+id/tv_choose_time"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentBottom="true"
+                android:text="选择时间"
+                android:textColor="@color/white"
+                android:textSize="30sp" />
+
+            <TextView
+                android:id="@+id/tv_time"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentBottom="true"
+                android:layout_marginLeft="@dimen/dp10"
+                android:layout_toRightOf="@+id/tv_choose_time"
+                android:text="2020-02-17"
+                android:textColor="@color/white"
+                android:textSize="20sp" />
+
+        </RelativeLayout>
+
+    </RelativeLayout>
+
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/rv_data"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/dp10"
+        android:layout_marginLeft="@dimen/dp21"
+        android:layout_marginRight="@dimen/dp21" />
+
+
+</LinearLayout>

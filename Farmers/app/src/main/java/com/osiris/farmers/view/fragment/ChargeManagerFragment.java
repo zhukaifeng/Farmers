@@ -3,6 +3,8 @@ package com.osiris.farmers.view.fragment;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
+import android.widget.LinearLayout;
+import android.widget.TextView;
 
 import com.osiris.farmers.R;
 import com.osiris.farmers.base.BaseFragment;
@@ -18,6 +20,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import butterknife.BindView;
+import butterknife.OnClick;
 
 public class ChargeManagerFragment extends BaseFragment {
 
@@ -27,7 +30,12 @@ public class ChargeManagerFragment extends BaseFragment {
 	RecyclerView rv_type;
 	@BindView(R.id.rv_data_detail)
 	RecyclerView rv_data_detail;
-
+	@BindView(R.id.linear_charge_manager)
+	LinearLayout linear_charge_manager;
+	@BindView(R.id.linear_detail)
+	LinearLayout linear_detail;
+	@BindView(R.id.tv_title)
+	TextView tv_title;
 	private List<ChargeManager> dataList = new ArrayList<>();
 	private ChargeManagerAdapter dataAdapter = new ChargeManagerAdapter(dataList);
 	private List<DateModel> typeList = new ArrayList<>();
@@ -36,6 +44,20 @@ public class ChargeManagerFragment extends BaseFragment {
 	private ChargeDetailAdapter dataDetailAdapter = new ChargeDetailAdapter(dataDetailList);
 
 
+	@OnClick({R.id.rl_back,R.id.rl_back_one})
+	void onnClick(View v){
+		switch (v.getId()){
+			case R.id.rl_back:
+				linear_charge_manager.setVisibility(View.VISIBLE);
+				linear_detail.setVisibility(View.GONE);
+
+				break;
+			case R.id.rl_back_one:
+				getActivity().finish();
+				break;
+		}
+	}
+
 	@Override
 	protected int setLayout() {
 		return R.layout.fragment_charge_manager;
@@ -43,7 +65,7 @@ public class ChargeManagerFragment extends BaseFragment {
 
 	@Override
 	protected void initView() {
-
+		tv_title.setText("交费查询");
 		typeList.add(new DateModel("全部", true));
 		typeList.add(new DateModel("电费", false));
 		typeList.add(new DateModel("水费", false));
@@ -77,6 +99,13 @@ public class ChargeManagerFragment extends BaseFragment {
 		rv_data.setLayoutManager(new LinearLayoutManager(this.getActivity(), LinearLayoutManager.VERTICAL, false));
 		rv_data.setAdapter(dataAdapter);
 		dataAdapter.notifyDataSetChanged();
+		dataAdapter.setOnItemClick(new MyItemClickListener() {
+			@Override
+			public void onItemClick(View view, int position) {
+				linear_charge_manager.setVisibility(View.GONE);
+				linear_detail.setVisibility(View.VISIBLE);
+			}
+		});
 
 
 		rv_type.setLayoutManager(new LinearLayoutManager(getActivity(), LinearLayoutManager.HORIZONTAL, false));

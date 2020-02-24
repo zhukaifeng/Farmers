@@ -2,18 +2,30 @@ package com.osiris.farmers.view;
 
 import android.app.Dialog;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.support.v4.widget.NestedScrollView;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.View;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
+import com.google.gson.JsonObject;
+import com.google.gson.JsonParser;
 import com.osiris.farmers.R;
 import com.osiris.farmers.base.BaseFragment;
+import com.osiris.farmers.model.OperatorInquery;
 import com.osiris.farmers.model.PunishDetail;
 import com.osiris.farmers.model.PunishList;
+import com.osiris.farmers.network.ApiParams;
+import com.osiris.farmers.network.ApiRequestTag;
+import com.osiris.farmers.network.GlobalParams;
+import com.osiris.farmers.network.NetRequest;
+import com.osiris.farmers.network.NetRequestResultListener;
+import com.osiris.farmers.shichang.AddXiaofangActivity;
+import com.osiris.farmers.utils.JsonUtils;
 import com.osiris.farmers.view.adapter.MyItemClickListener;
 import com.osiris.farmers.view.adapter.PunishDetailAdapter;
 import com.osiris.farmers.view.adapter.PunishListAdapter;
@@ -21,7 +33,10 @@ import com.osiris.farmers.view.dialog.ChooseRulesDialog;
 import com.osiris.farmers.view.dialog.DialogClickListener;
 
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import butterknife.BindView;
 import butterknife.OnClick;
@@ -54,7 +69,7 @@ public class AddPunishFragment extends BaseFragment {
     RelativeLayout rl_right;
 
 
-    private List<PunishList> dataList = new ArrayList<>();
+    private List<PunishList.DataBean> dataList = new ArrayList<>();
     private PunishListAdapter dataAdapter = new PunishListAdapter(dataList);
     private List<PunishDetail> detailList = new ArrayList<>();
     private PunishDetailAdapter detailAdapter = new PunishDetailAdapter(detailList);
@@ -66,10 +81,7 @@ public class AddPunishFragment extends BaseFragment {
 
     @Override
     protected void initView() {
-        dataList.add(new PunishList("镇江江南", "028", "张浩", "200元","03.22",false));
-        dataList.add(new PunishList("镇江江南", "028", "张浩", "200元","03.22",false));
-        dataList.add(new PunishList("镇江江南", "028", "张浩", "200元","03.22",true));
-        dataList.add(new PunishList("镇江江南", "028", "张浩", "200元","03.22",true));
+        getTypeData();
 
         //01                      不守规章制度                    200元
         detailList.add(new PunishDetail("01","不守规章制度","200元"));
@@ -110,11 +122,7 @@ public class AddPunishFragment extends BaseFragment {
                     return;
                 }
                 int position = (int) positionTag;
-                if (!dataList.get(position).isClicked()){
-                    dataList.get(position).setClicked(true);
-                }else {
-                    dataList.get(position).setClicked(false);
-                }
+
                 dataAdapter.notifyDataSetChanged();
             }
         });
@@ -139,11 +147,15 @@ public class AddPunishFragment extends BaseFragment {
 
     }
 
-    @OnClick({R.id.rl_add,R.id.rl_back})
+    @OnClick({R.id.rl_right,R.id.rl_back})
     void onClick(View v){
         switch (v.getId()){
-            case R.id.rl_add:
-                showChooseRulesDialog();
+            case R.id.rl_right:
+
+                Intent intent = new Intent(getActivity(), AddXiaofangActivity.class);
+                startActivity(intent);
+
+
                 break;
 
             case R.id.rl_back:
@@ -182,5 +194,41 @@ public class AddPunishFragment extends BaseFragment {
         });
         builder.create().show();
     }
+
+
+    private void getTypeData() {
+
+
+        String url = ApiParams.API_HOST + "/app/getXiaofangdwByUserId.action";
+
+        Map<String, String> paramMap = new HashMap<>();
+        paramMap.put("userId", String.valueOf(GlobalParams.id));
+        paramMap.put("pageNo", String.valueOf(1));
+        paramMap.put("pageSize", String.valueOf(10));
+
+        Log.d("zkf", "params:" + paramMap.toString());
+        NetRequest.request(url, ApiRequestTag.DATA, paramMap, new NetRequestResultListener() {
+            @Override
+            public void requestSuccess(int tag, String successResult) {
+                Log.d("zkf", "data:" + successResult);
+                JsonParser parser = new JsonParser();
+                JsonObject jsonObject = parser.parse(successResult).getAsJsonObject();
+                if (jsonObject.has("data")){
+
+                    PunishList.DataBean[] dataBeans = JsonUtils.fromJson(jsonObject.get("data"), PunishList.DataBean[].class);
+                    dataList.addAll(Arrays.asList(dataBeans));
+                    dataAdapter.notifyDataSetChanged();
+                }
+            }
+
+            @Override
+            public void requestFailure(int tag, int code, String msg) {
+
+            }
+        });
+
+
+    }
+
 
 }

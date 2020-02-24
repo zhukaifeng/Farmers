@@ -129,7 +129,7 @@ public class StockListFragment extends BaseFragment {
             case R.id.rl_add:
                 Intent intent1 = new Intent(getActivity(), AddJinhuoListActivity.class);
                 intent1.putParcelableArrayListExtra("data_list", (ArrayList<? extends Parcelable>) commodityList);
-                intent1.putExtra("jinhuo",customerBean.getUserid());
+                intent1.putExtra("jinhuo", customerBean.getUserid());
                 startActivity(intent1);
                 break;
             case R.id.tv_add:
@@ -154,7 +154,6 @@ public class StockListFragment extends BaseFragment {
     }
 
 
-
     private void getStoreList() {
 
 
@@ -169,7 +168,8 @@ public class StockListFragment extends BaseFragment {
                 LogUtils.d("zkf success data:" + successResult);
                 JsonParser parser = new JsonParser();
                 JsonObject json = parser.parse(successResult).getAsJsonObject();
-                if (json.has("msg") && json.get("msg").getAsString().equals("ok")) {
+
+                if (json.has("msg") && json.get("msg") != null && json.get("msg").getAsString().equals("ok")) {
                     StoreSupplier data = JsonUtils.fromJson(successResult, StoreSupplier.class);
                     if (null != data.getCustomer() && data.getCustomer().size() > 0) {
                         customer.addAll(data.getCustomer());

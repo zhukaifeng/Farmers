@@ -68,7 +68,15 @@
                 android:layout_gravity="center_vertical"
                 />
         </LinearLayout>
-
+        <TextView
+            android:id="@+id/tv_score"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:gravity="left|center_vertical"
+            android:paddingLeft="@dimen/dp3"
+            android:textColor="@color/txt_black_51"
+            android:textSize="@dimen/sp16" />
 
 
     </LinearLayout>

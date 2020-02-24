@@ -14,6 +14,10 @@ import android.widget.TextView;
 import com.osiris.farmers.R;
 import com.osiris.farmers.base.BaseActivity;
 import com.osiris.farmers.event.MarketEvent;
+import com.osiris.farmers.jingyinghu.MenuHomeJYhActivity;
+import com.osiris.farmers.jingyinghu.MenuHomeScGlActivity;
+import com.osiris.farmers.jingyinghu.MenuHomeShouFeiActivity;
+import com.osiris.farmers.jingyinghu.MenuHomeSuyuanActivity;
 import com.osiris.farmers.model.Market;
 import com.osiris.farmers.network.ApiParams;
 import com.osiris.farmers.network.ApiRequestTag;
@@ -154,6 +158,7 @@ public class HomeActivity extends BaseActivity {
 					intent.putExtra("type", 3);
 
 				} else {
+					intent = new Intent(this, MenuHomeJYhActivity.class);
 					intent.putExtra("type", 4);
 
 				}
@@ -172,11 +177,12 @@ public class HomeActivity extends BaseActivity {
 					intent2.putExtra("type", 3);
 
 				} else {
+					intent2 = new Intent(this, MenuHomeScGlActivity.class);
 					intent2.putExtra("type", 4);
 
 				}
 				intent2.putExtra("market_id",marketId);
-				intent2.putExtra("select",1);
+				intent2.putExtra("select",0);
 				startActivity(intent2);
 				break;
 
@@ -192,34 +198,38 @@ public class HomeActivity extends BaseActivity {
 					intent3.putExtra("type", 3);
 
 				} else {
+					intent3 = new Intent(this, MenuHomeShouFeiActivity.class);
 					intent3.putExtra("type", 4);
 
 				}
 				intent3.putExtra("market_id",marketId);
-				intent3.putExtra("select",2);
+				intent3.putExtra("select",0);
 				startActivity(intent3);
 				break;
 
 			case R.id.ll_home_4:
 				Intent intent4;
 				if (pageType == 1) {
+					LogUtils.d("zkf c");
 					intent4 = new Intent(this, SalsersAccountActivity.class);
 					intent4.putExtra("type", 1);
 
 				} else if (pageType == 2) {
-					intent4 = new Intent(this, MenuHomeActivity.class);
+					LogUtils.d("zkf a");
+					intent4 = new Intent(this, ManageHomeActivity.class);
 					intent4.putExtra("type", 2);
 
 				} else if (pageType == 3){
+					LogUtils.d("zkf ab");
 					intent4 = new Intent(this, MenuHomeActivity.class);
 					intent4.putExtra("type", 3);
 
 				}else {
-					intent4 = new Intent(this, MenuHomeActivity.class);
+					intent4 = new Intent(this, MenuHomeSuyuanActivity.class);
 					intent4.putExtra("type", 4);
 				}
 				intent4.putExtra("market_id",marketId);
-				intent4.putExtra("select",3);
+				intent4.putExtra("select",0);
 				startActivity(intent4);
 				break;
 			default:
@@ -247,20 +257,31 @@ public class HomeActivity extends BaseActivity {
 				ivHome2.setBackgroundResource(R.drawable.bg_home_sampling);
 				tvHome2.setText(getString(R.string.sampling));
 				ivHome3.setBackgroundResource(R.drawable.bg_home_check);
-				tvHome3.setText(getString(R.string.check));
+				tvHome3.setText(getString(R.string.danweicchaxun));
 				ivHome4.setBackgroundResource(R.drawable.bg_home_appraise);
-				tvHome4.setText(getString(R.string.appraise));
+				tvHome4.setText(getString(R.string.manage));
 				break;
 
 			case 3:
 				ivHome1.setBackgroundResource(R.drawable.bg_home_operator_management);
-				tvHome1.setText(getString(R.string.operator_management));
+				tvHome1.setText(getString(R.string.shichangjiance));
 				ivHome2.setBackgroundResource(R.drawable.bg_home_marketing_management);
-				tvHome2.setText(getString(R.string.marketing_management));
+				tvHome2.setText(getString(R.string.shangpingsuyuan));
+//				ivHome3.setBackgroundResource(R.drawable.bg_home_charge);
+//				tvHome3.setText(getString(R.string.charge));
+				ivHome3.setBackgroundResource(R.drawable.bg_home_appraise_management);
+				tvHome3.setText(getString(R.string.pingjiaguanli));
+				llHome4.setVisibility(View.INVISIBLE);
+				break;
+			case 4:
+				ivHome1.setBackgroundResource(R.drawable.bg_home_operator_management);
+				tvHome1.setText("信息查询");
+				ivHome2.setBackgroundResource(R.drawable.bg_home_marketing_management);
+				tvHome2.setText("市场管理");
 				ivHome3.setBackgroundResource(R.drawable.bg_home_charge);
-				tvHome3.setText(getString(R.string.charge));
+				tvHome3.setText("缴费查询");
 				ivHome4.setBackgroundResource(R.drawable.bg_home_appraise_management);
-				tvHome4.setText(getString(R.string.appraise_management));
+				tvHome4.setText("溯源质量");
 				break;
 		}
 	}
@@ -297,8 +318,11 @@ public class HomeActivity extends BaseActivity {
 						marketNameList.add(marketBean.getMarketnm());
 					}
 					marketAdapter.notifyDataSetChanged();
-					marketId = marketList.get(0).getId();
-					currentMarketId = marketId;
+					if (marketList.size()>0){
+						marketId = marketList.get(0).getId();
+						currentMarketId = marketId;
+					}
+
 				}
 
 

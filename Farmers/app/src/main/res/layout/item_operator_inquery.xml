@@ -28,7 +28,7 @@
                 android:gravity="center"
                 android:text="@string/pay_stall"
                 android:textColor="@color/txt_black_51"
-                android:textSize="@dimen/sp15"
+                android:textSize="@dimen/sp13"
                 />
 
             <TextView
@@ -38,9 +38,9 @@
                 android:layout_marginTop="@dimen/dp15"
                 android:layout_weight="1"
                 android:gravity="center"
-                android:text="@string/company_name"
+                android:text="地址"
                 android:textColor="@color/txt_black_51"
-                android:textSize="@dimen/sp15"
+                android:textSize="@dimen/sp13"
 
                 />
 
@@ -49,11 +49,11 @@
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:layout_marginTop="@dimen/dp15"
-                android:layout_weight="1"
+                android:layout_weight="1.5"
                 android:gravity="center"
-                android:text="@string/business_license"
-                android:textColor="@color/color_00d39d"
-                android:textSize="@dimen/sp15"
+                android:text="商品编号"
+                android:textColor="@color/txt_black_51"
+                android:textSize="@dimen/sp10"
                 />
 
             <RelativeLayout
@@ -73,13 +73,12 @@
                         android:layout_width="wrap_content"
                         android:layout_height="match_parent"
                         android:layout_marginTop="@dimen/dp15"
-                        android:drawableRight="@drawable/bg_arrow_down_tri"
                         android:drawablePadding="@dimen/dp3"
                         android:gravity="center"
                         android:layout_centerHorizontal="true"
                         android:text="@string/connect"
                         android:textColor="@color/txt_black_51"
-                        android:textSize="@dimen/sp15"
+                        android:textSize="@dimen/sp13"
                         />
 
                     <ImageView
@@ -88,7 +87,7 @@
                         android:layout_height="wrap_content"
                         android:layout_alignParentBottom="true"
                         android:layout_alignParentRight="true"
-                        android:visibility="visible"
+                        android:visibility="gone"
                         android:background="@drawable/bg_arrow_up_tri"
                         android:layout_marginRight="@dimen/dp10"
                         />

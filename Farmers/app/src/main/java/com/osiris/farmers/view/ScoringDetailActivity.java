@@ -3,6 +3,7 @@ package com.osiris.farmers.view;
 import android.content.Intent;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.View;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
@@ -41,8 +42,11 @@ public class ScoringDetailActivity extends BaseActivity {
 	TextView tv_market;
 	@BindView(R.id.rv_data)
 	RecyclerView rv_data;
+	@BindView(R.id.linear_info)
+	LinearLayout linear_info;
 
 
+	private int id;
 	private List<MakeScoreData.PingjiaxxsBean>  dataList = new ArrayList<>();
 	private MarketScoreAdapter marketScoreAdapter = new MarketScoreAdapter(dataList);
 
@@ -55,12 +59,20 @@ public class ScoringDetailActivity extends BaseActivity {
 
 	@Override
 	public void init() {
-		data = getIntent().getParcelableExtra("data");
+		linear_info.setVisibility(View.GONE);
 		xxz = getIntent().getIntExtra("xxz",0);
-
-		if (null != data){
-			tv_market.setText(data.getMarketnm());
+		Log.d("zkf "," ssss   xxz:" + xxz);
+		id = getIntent().getIntExtra("id",0);
+		if (xxz == 1){
+			data = getIntent().getParcelableExtra("data");
+			if (null != data){
+				tv_market.setText(data.getMarketnm());
+			}
 		}
+
+
+
+
 
 		rv_data.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.VERTICAL,false));
 		rv_data.setAdapter(marketScoreAdapter);
@@ -91,7 +103,7 @@ public class ScoringDetailActivity extends BaseActivity {
 	private void getData(){
 		String url = ApiParams.API_HOST + "/app/zgscpingjiaDetal.action";
 		Map<String, String> paramMap = new HashMap<>();
-		paramMap.put("id",String.valueOf(data.getId()));
+		paramMap.put("id",String.valueOf(id));
 		paramMap.put("xxz",String.valueOf(xxz));
 		LogUtils.d("zkf paramMap:" + paramMap.toString());
 		NetRequest.request(url, ApiRequestTag.DATA, paramMap, new NetRequestResultListener() {

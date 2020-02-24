@@ -90,7 +90,7 @@
     <string name="date_back_to">采样任务</string>
     <string name="sample">采样</string>
     <string name="examine_menu">检测</string>
-    <string name="mine">我的</string>
+    <string name="mine">评价</string>
 
 
     <string name="operating_households">经营户</string>
@@ -198,6 +198,26 @@
     <string name="charge_details">收费管理详情</string>
     <string name="bill_of_sales_details">出货单详情</string>
     <string name="goods_detail">商品详情</string>
+    <string name="manage">管理</string>
+    <string name="falvfagui">法律法规</string>
+    <string name="kepu">科普</string>
+    <string name="kaohe">考核</string>
+    <string name="guojiwenxian">国际文献</string>
+    <string name="danweicchaxun">单位查询</string>
+
+    <string name="shichangjiance">市场检查</string>
+    <string name="shangpingsuyuan">商品溯源</string>
+    <string name="pingjiaguanli">评价管理</string>
+    <string name="jyh_chaxun">经营户查询</string>
+    <string name="wode">我的</string>
+    <string name="zhidfu_chaxun">制度查询</string>
+    <string name="jyh_xingwei">经营户行为</string>
+    <string name="shichangxuncha">市场巡查</string>
+    <string name="jiaofeichaxun">交费查询</string>
+    <string name="chufachaxun">处罚查询</string>
+    <string name="shicaizhiliang">食材质量</string>
+    <string name="suyuanxinxi">溯源信息</string>
+
 
 
 </resources>

@@ -1,5 +1,7 @@
 package com.osiris.farmers.login;
 
+import android.content.Intent;
+import android.support.annotation.Nullable;
 import android.support.v4.app.FragmentTabHost;
 import android.widget.FrameLayout;
 import android.widget.LinearLayout;
@@ -9,12 +11,16 @@ import com.osiris.farmers.R;
 import com.osiris.farmers.base.BaseActivity;
 import com.osiris.farmers.goods.fragment.StockListFragment;
 import com.osiris.farmers.goods.fragment.StockPurchaseFragment;
+import com.osiris.farmers.marketcheck.MarketCheckFragment;
+import com.osiris.farmers.marketcheck.SuyuanFragment;
+import com.osiris.farmers.shichang.XiaofangFragment;
 import com.osiris.farmers.view.AddPunishFragment;
 import com.osiris.farmers.view.TabItem;
 import com.osiris.farmers.view.fragment.ChargeManagerFragment;
 import com.osiris.farmers.view.fragment.DatebacktoFragment;
 import com.osiris.farmers.view.fragment.LifePayFragment;
 import com.osiris.farmers.view.fragment.MarketEvaulateFragment;
+import com.osiris.farmers.view.fragment.MarketEvaulateMarketManagerFragment;
 import com.osiris.farmers.view.fragment.MyFragment;
 import com.osiris.farmers.view.fragment.OperatorInquiryFragment;
 import com.osiris.farmers.view.fragment.PersonalLifePayFragment;
@@ -88,7 +94,7 @@ public class MenuHomeActivity extends BaseActivity {
 				});
 				break;
 
-			case 2:
+			case 2://检测机构
 
 				tabhostMainMenu.addTab(tabhostMainMenu.newTabSpec(tag_stock_purchase).setIndicator(new TabItem
 						(this, R.drawable.tab_date_back_to, R.string.date_back_to, 0)), DatebacktoFragment.class, null);
@@ -97,11 +103,11 @@ public class MenuHomeActivity extends BaseActivity {
 						TabItem(this, R.drawable.tab_sample, R.string
 						.sample, 0)), TakeSampleListFragment.class, null);
 
-				tabhostMainMenu.addTab(tabhostMainMenu.newTabSpec(tag_stock_goods).setIndicator(new TabItem(this, R.drawable.tab_examine, R.string.examine_menu, 0)),
+				tabhostMainMenu.addTab(tabhostMainMenu.newTabSpec(tag_stock_goods).setIndicator(new TabItem(this, R.drawable.tab_examine, R.string.danweicchaxun, 0)),
 						TakeSampleFragment.class, null);
 
 				tabhostMainMenu.addTab(tabhostMainMenu.newTabSpec(tag_stock_pay).setIndicator(new
-								TabItem(this, R.drawable.tab_mine, R.string.mine, 0)),
+								TabItem(this, R.drawable.tab_mine, R.string.manage, 0)),
 						MarketEvaulateFragment.class, null);
 
 				tabhostMainMenu.setOnTabChangedListener(new TabHost.OnTabChangeListener() {
@@ -120,18 +126,18 @@ public class MenuHomeActivity extends BaseActivity {
 					}
 				});
 				break;
-			case 3:
+			case 3://监管部门
 
 				tabhostMainMenu.addTab(tabhostMainMenu.newTabSpec(tag_stock_purchase).setIndicator(new TabItem
-						(this, R.drawable.tab_operating, R.string.operating_households, 0)), OperatorInquiryFragment.class, null);
+						(this, R.drawable.tab_operating, R.string.shichangjiance, 0)), MarketCheckFragment.class, null);
 
 				tabhostMainMenu.addTab(tabhostMainMenu.newTabSpec(tag_stock_list).setIndicator(new
 						TabItem(this, R.drawable.tab_market, R.string
-						.market, 0)), AddPunishFragment.class, null);
+						.shangpingsuyuan, 0)), SuyuanFragment.class, null);
 
-				tabhostMainMenu.addTab(tabhostMainMenu.newTabSpec(tag_stock_goods).setIndicator(new
-								TabItem(this, R.drawable.tab_collect_feels, R.string.collect_fees, 0)),
-						LifePayFragment.class, null);
+//				tabhostMainMenu.addTab(tabhostMainMenu.newTabSpec(tag_stock_goods).setIndicator(new
+//								TabItem(this, R.drawable.tab_collect_feels, R.string.collect_fees, 0)),
+//						LifePayFragment.class, null);
 
 				tabhostMainMenu.addTab(tabhostMainMenu.newTabSpec(tag_stock_pay).setIndicator(new
 								TabItem(this, R.drawable.tab_mine, R.string.mine, 0)),
@@ -153,14 +159,14 @@ public class MenuHomeActivity extends BaseActivity {
 					}
 				});
 				break;
-			case 4:
+			case 4://市场管理
 
 				tabhostMainMenu.addTab(tabhostMainMenu.newTabSpec(tag_stock_purchase).setIndicator(new TabItem
 						(this, R.drawable.tab_operating, R.string.operating_households, 0)), OperatorInquiryFragment.class, null);
 
 				tabhostMainMenu.addTab(tabhostMainMenu.newTabSpec(tag_stock_list).setIndicator(new
 						TabItem(this, R.drawable.tab_market, R.string
-						.market, 0)), AddPunishFragment.class, null);
+						.market, 0)), XiaofangFragment.class, null);
 
 				tabhostMainMenu.addTab(tabhostMainMenu.newTabSpec(tag_stock_goods).setIndicator(new
 								TabItem(this, R.drawable.tab_collect_feels, R.string.collect_fees, 0)),
@@ -168,7 +174,7 @@ public class MenuHomeActivity extends BaseActivity {
 
 				tabhostMainMenu.addTab(tabhostMainMenu.newTabSpec(tag_stock_pay).setIndicator(new
 								TabItem(this, R.drawable.tab_mine, R.string.mine, 0)),
-						MyFragment.class, null);
+                        MarketEvaulateMarketManagerFragment.class, null);
 
 				tabhostMainMenu.setOnTabChangedListener(new TabHost.OnTabChangeListener() {
 					@Override
@@ -194,5 +200,11 @@ public class MenuHomeActivity extends BaseActivity {
 		tabhostMainMenu.setCurrentTab(currentPage);
 
 
+	}
+
+
+	@Override
+	protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+		super.onActivityResult(requestCode, resultCode, data);
 	}
 }

@@ -1,4 +1,4 @@
-package com.osiris.farmers.view.adapter;
+package com.osiris.farmers.shichang;
 
 import android.annotation.SuppressLint;
 import android.os.Build;
@@ -10,12 +10,12 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
-import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.osiris.farmers.R;
 import com.osiris.farmers.model.AddScore;
-import com.osiris.farmers.model.MakeScoreData;
+import com.osiris.farmers.model.JinghuPingjia;
+import com.osiris.farmers.view.adapter.MyItemClickListener;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -23,12 +23,12 @@ import java.util.List;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
-public class AddScoreAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>{
+public class AddScoreShichangAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>{
 
 
 	private MyItemClickListener myItemClickListener;
 
-	private List<AddScore.MarketsBean>  dataList = new ArrayList<>();
+	private List<JinghuPingjia.PingjiaxxsBean>  dataList = new ArrayList<>();
 	private View.OnClickListener fiveClickListener;
 	private View.OnClickListener fourClickListener;
 	private View.OnClickListener threeClickListener;
@@ -55,11 +55,11 @@ public class AddScoreAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
 		this.oneClickListener = oneClickListener;
 	}
 
-	public AddScoreAdapter(List<AddScore.MarketsBean> dataList) {
+	public AddScoreShichangAdapter(List<JinghuPingjia.PingjiaxxsBean> dataList) {
 		this.dataList = dataList;
 	}
 
-	public void setDataList(List<AddScore.MarketsBean> dataList) {
+	public void setDataList(List<JinghuPingjia.PingjiaxxsBean> dataList) {
 		this.dataList = dataList;
 	}
 
@@ -103,6 +103,8 @@ public class AddScoreAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
 		TextView tv_name;
 		@BindView(R.id.linear_item)
 		LinearLayout linear_item;
+		@BindView(R.id.tv_score)
+		TextView tv_score;
 
 
 		private MyItemClickListener myItemClickListener;
@@ -123,7 +125,7 @@ public class AddScoreAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
 
 		@RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
 		@SuppressLint("ResourceAsColor")
-		public void bindData(AddScore.MarketsBean data){
+		public void bindData(JinghuPingjia.PingjiaxxsBean data){
 
 			if (getLayoutPosition()%2 == 1){
 				linear_item.setBackgroundColor(itemView.getResources().getColor(R.color.bg_gray_e9));
@@ -132,7 +134,7 @@ public class AddScoreAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
 			}
 
 			if (!TextUtils.isEmpty(data.getMarketnm())){
-				tv_name.setText(data.getMarketnm());
+				tv_name.setText(data.getPingjianr());
 			}
 
 			setFive(iv_five,getLayoutPosition());
@@ -147,38 +149,49 @@ public class AddScoreAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
                 iv_three.setBackground(itemView.getContext().getDrawable(R.drawable.ic_star));
                 iv_two.setBackground(itemView.getContext().getDrawable(R.drawable.ic_star));
                 iv_one.setBackground(itemView.getContext().getDrawable(R.drawable.ic_star));
+				tv_score.setText("非常满意");
 
-            }else if (String.valueOf(data.getScore()).equals("4")){
+			}else if (String.valueOf(data.getScore()).equals("4")){
                 iv_five.setBackground(itemView.getContext().getDrawable(R.drawable.ic_star_un));
                 iv_four.setBackground(itemView.getContext().getDrawable(R.drawable.ic_star));
                 iv_three.setBackground(itemView.getContext().getDrawable(R.drawable.ic_star));
                 iv_two.setBackground(itemView.getContext().getDrawable(R.drawable.ic_star));
                 iv_one.setBackground(itemView.getContext().getDrawable(R.drawable.ic_star));
-            }else if (String.valueOf(data.getScore()).equals("3")){
+				tv_score.setText("满意");
+
+			}else if (String.valueOf(data.getScore()).equals("3")){
                 iv_five.setBackground(itemView.getContext().getDrawable(R.drawable.ic_star_un));
                 iv_four.setBackground(itemView.getContext().getDrawable(R.drawable.ic_star_un));
                 iv_three.setBackground(itemView.getContext().getDrawable(R.drawable.ic_star));
                 iv_two.setBackground(itemView.getContext().getDrawable(R.drawable.ic_star));
                 iv_one.setBackground(itemView.getContext().getDrawable(R.drawable.ic_star));
-            }else if (String.valueOf(data.getScore()).equals("2")){
+				tv_score.setText("一般");
+
+			}else if (String.valueOf(data.getScore()).equals("2")){
                 iv_five.setBackground(itemView.getContext().getDrawable(R.drawable.ic_star_un));
                 iv_four.setBackground(itemView.getContext().getDrawable(R.drawable.ic_star_un));
                 iv_three.setBackground(itemView.getContext().getDrawable(R.drawable.ic_star_un));
                 iv_two.setBackground(itemView.getContext().getDrawable(R.drawable.ic_star));
                 iv_one.setBackground(itemView.getContext().getDrawable(R.drawable.ic_star));
-            }else if (String.valueOf(data.getScore()).equals("1")){
+				tv_score.setText("差");
+
+			}else if (String.valueOf(data.getScore()).equals("1")){
                 iv_five.setBackground(itemView.getContext().getDrawable(R.drawable.ic_star_un));
                 iv_four.setBackground(itemView.getContext().getDrawable(R.drawable.ic_star_un));
                 iv_three.setBackground(itemView.getContext().getDrawable(R.drawable.ic_star_un));
                 iv_two.setBackground(itemView.getContext().getDrawable(R.drawable.ic_star_un));
                 iv_one.setBackground(itemView.getContext().getDrawable(R.drawable.ic_star));
-            }else {
+				tv_score.setText("极差");
+
+			}else {
                 iv_five.setBackground(itemView.getContext().getDrawable(R.drawable.ic_star_un));
                 iv_four.setBackground(itemView.getContext().getDrawable(R.drawable.ic_star_un));
                 iv_three.setBackground(itemView.getContext().getDrawable(R.drawable.ic_star_un));
                 iv_two.setBackground(itemView.getContext().getDrawable(R.drawable.ic_star_un));
                 iv_one.setBackground(itemView.getContext().getDrawable(R.drawable.ic_star_un));
-            }
+				tv_score.setText("");
+
+			}
 
 
 

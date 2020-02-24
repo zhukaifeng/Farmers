@@ -1,0 +1,425 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              android:orientation="vertical"
+              android:layout_width="match_parent"
+              android:layout_height="match_parent">
+
+    <LinearLayout
+        android:id="@+id/linear_charge_manager"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:visibility="visible"
+        android:orientation="vertical"
+        >
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/dp181"
+        android:background="@drawable/bg_charge_pay">
+        <RelativeLayout
+            android:id="@+id/rl_back_one"
+            android:layout_width="@dimen/dp60"
+            android:layout_height="@dimen/dp60"
+            android:layout_marginTop="@dimen/dp20"
+            android:visibility="visible">
+
+            <ImageView
+                android:id="@+id/iv_back_one"
+                android:layout_width="@dimen/dp9"
+                android:layout_height="@dimen/dp16"
+                android:layout_gravity="center_vertical"
+                android:layout_marginLeft="@dimen/dp20"
+                android:layout_marginTop="@dimen/dp9"
+                android:background="@drawable/bg_back"/>
+        </RelativeLayout>
+        <RelativeLayout
+            android:id="@+id/rl_right"
+            android:layout_width="@dimen/dp60"
+            android:layout_height="@dimen/dp60"
+            android:layout_alignParentRight="true"
+            android:layout_marginTop="@dimen/dp20"
+            android:visibility="visible">
+
+            <ImageView
+                android:id="@+id/iv_function"
+                android:layout_width="@dimen/dp21"
+                android:layout_height="@dimen/dp19"
+                android:layout_alignParentRight="true"
+                android:layout_gravity="center_vertical"
+                android:layout_marginTop="@dimen/dp9"
+                android:layout_marginRight="@dimen/dp22"
+                android:background="@drawable/bg_qr"/>
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:layout_width="@dimen/dp223"
+            android:layout_height="@dimen/dp33"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="@dimen/dp20"
+            android:background="@drawable/bg_round_title">
+
+            <TextView
+                android:id="@+id/tv_title"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerInParent="true"
+                android:text="处罚查询"
+                android:textColor="@color/write"
+                android:textSize="@dimen/sp15"/>
+
+
+        </RelativeLayout>
+
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/dp71"
+            android:layout_alignParentBottom="true"
+            android:background="@drawable/bg_rectange">
+
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/dp45"
+                android:layout_marginLeft="@dimen/dp23"
+                android:layout_marginRight="@dimen/dp23"
+                android:background="@drawable/bg_gray_round"
+                android:layout_centerInParent="true"
+                android:orientation="horizontal"
+                >
+
+                <RelativeLayout
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="2"
+                    >
+                    <EditText
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:background="@null"
+                        android:hint="请输入经营户名称"
+                        android:textColorHint="@color/write"
+                        android:textSize="@dimen/sp14"
+                        android:focusable="false"
+                        android:focusableInTouchMode="false"
+                        android:layout_marginLeft="@dimen/dp20"
+                        android:textColor="@color/write"
+                        />
+
+
+                </RelativeLayout>
+                <View
+                    android:layout_width="@dimen/dp1"
+                    android:layout_height="match_parent"
+                    android:background="#EFF1F5"/>
+                <RelativeLayout
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    >
+                    <TextView
+                        android:id="@+id/tv_num"
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:background="@null"
+                        android:gravity="center_vertical"
+                        android:hint="@string/all"
+                        android:focusable="false"
+                        android:focusableInTouchMode="false"
+                        android:textColorHint="@color/write"
+                        android:textColor="@color/write"
+                        android:layout_marginLeft="@dimen/dp15"
+                        android:textSize="@dimen/sp14"
+                        />
+                    <ImageView
+                        android:layout_width="@dimen/dp9"
+                        android:layout_height="@dimen/dp5"
+                        android:background="@drawable/bg_arrow_up"
+                        android:layout_centerVertical="true"
+                        android:layout_marginLeft="@dimen/dp10"
+                        android:layout_toRightOf="@+id/tv_num"
+                        />
+                    <ImageView
+                        android:layout_width="@dimen/dp17"
+                        android:layout_height="@dimen/dp16"
+                        android:background="@drawable/bg_search"
+                        android:layout_centerVertical="true"
+                        android:layout_alignParentRight="true"
+                        android:layout_marginRight="@dimen/dp15"
+                        />
+                </RelativeLayout>
+
+
+            </LinearLayout>
+
+
+
+        </RelativeLayout>
+
+
+    </RelativeLayout>
+
+
+    <RelativeLayout
+        android:id="@+id/relative_type"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/dp60"
+        android:layout_below="@+id/rl_title"
+        android:background="@drawable/bg_evaluate_bottom"
+        android:orientation="vertical">
+
+        <android.support.v7.widget.RecyclerView
+            android:id="@+id/rv_type"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_centerVertical="true" />
+
+    </RelativeLayout>
+
+
+    <LinearLayout
+        android:id="@+id/linear_item"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/dp59"
+        android:layout_marginTop="@dimen/dp10"
+        android:background="@color/bg_gray_e9"
+        android:orientation="horizontal">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/dp59"
+            android:layout_marginLeft="@dimen/dp12"
+            android:orientation="horizontal">
+
+            <TextView
+                android:id="@+id/tv_wholesale_market"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:text="摊位号"
+                android:textSize="@dimen/sp13"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/tv_pay_stall"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:text="摊位主"
+                android:textSize="@dimen/sp13"
+                android:textStyle="bold"
+
+                />
+
+            <TextView
+                android:id="@+id/tv_person_charge"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:text="处罚条例"
+                android:textSize="@dimen/sp13"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/tv_pay_should"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:text="处罚金额"
+                android:textSize="@dimen/sp13"
+                android:textStyle="bold" />
+            <TextView
+                android:id="@+id/tv_pay_not"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:text="凭证"
+                android:textSize="@dimen/sp13"
+                android:textStyle="bold" />
+            <TextView
+                android:id="@+id/tv_date"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:text="@string/date"
+                android:textSize="@dimen/sp13"
+                android:textStyle="bold" />
+
+        </LinearLayout>
+
+
+
+
+    </LinearLayout>
+
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/rv_data"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"/>
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/linear_detail"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:visibility="gone"
+        >
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/dp181"
+            android:background="@drawable/bg_charge_pay">
+
+            <RelativeLayout
+                android:id="@+id/rl_back"
+                android:layout_width="@dimen/dp60"
+                android:layout_height="@dimen/dp60"
+                android:layout_marginTop="@dimen/dp20"
+                android:visibility="visible">
+
+                <ImageView
+                    android:id="@+id/iv_back"
+                    android:layout_width="@dimen/dp9"
+                    android:layout_height="@dimen/dp16"
+                    android:layout_gravity="center_vertical"
+                    android:layout_marginLeft="@dimen/dp20"
+                    android:layout_marginTop="@dimen/dp9"
+                    android:background="@drawable/bg_back"/>
+            </RelativeLayout>
+
+
+            <RelativeLayout
+                android:layout_width="@dimen/dp223"
+                android:layout_height="@dimen/dp33"
+                android:layout_centerHorizontal="true"
+                android:layout_marginTop="@dimen/dp20"
+                android:background="@drawable/bg_round_title">
+
+                <TextView
+                    android:id="@+id/tv_title_detail"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerInParent="true"
+                    android:text="@string/charge_details"
+                    android:textColor="@color/write"
+                    android:textSize="@dimen/sp15"/>
+
+
+            </RelativeLayout>
+
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/dp71"
+                android:layout_alignParentBottom="true"
+                android:background="@drawable/bg_rectange">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textSize="@dimen/sp20"
+                    android:layout_centerVertical="true"
+                    android:textColor="@color/write"
+                    android:layout_marginLeft="@dimen/dp20"
+                    android:text="百花农贸市场·张浩"
+                    />
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textSize="@dimen/sp20"
+                    android:layout_centerVertical="true"
+                    android:textColor="@color/write"
+                    android:layout_toLeftOf="@+id/iv_arrow"
+                    android:layout_marginLeft="@dimen/dp20"
+                    android:layout_marginRight="@dimen/dp10"
+                    android:text="本年"
+                    
+                    />
+
+                
+                <ImageView
+                    android:id="@+id/iv_arrow"
+                    android:layout_width="@dimen/dp9"
+                    android:layout_height="@dimen/dp5"
+                    android:background="@drawable/bg_arrow_up"
+                    android:layout_centerVertical="true"
+                    android:layout_alignParentRight="true"
+                    android:layout_marginRight="@dimen/dp20"
+                    />
+                
+            </RelativeLayout>
+
+
+        </RelativeLayout>
+        
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/dp60"
+            android:background="@color/write"
+            >
+
+            <com.osiris.farmers.view.widget.MyRadioGroup
+                android:id="@+id/rg_company_option_type_container"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:layout_marginLeft="@dimen/dp21"
+                android:layout_marginTop="@dimen/dp20"
+                android:orientation="horizontal">
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginRight="@dimen/dp15"
+                    android:orientation="horizontal">
+
+                    <android.support.v7.widget.AppCompatRadioButton
+                        android:id="@+id/rb_all"
+                        android:layout_width="@dimen/dp60"
+                        android:layout_height="@dimen/dp20"
+                        android:background="@drawable/bg_check_select_top_amount"
+                        android:button="@null"
+                        android:checked="true"
+                        android:paddingLeft="@dimen/dp13"
+                        android:gravity="center"
+                        android:paddingRight="@dimen/dp13"
+                        android:text="本年"
+                        android:textColor="@color/color_check_select_top_txt"/>
+
+                    <android.support.v7.widget.AppCompatRadioButton
+                        android:id="@+id/rb_already_evaluated"
+                        android:layout_width="@dimen/dp60"
+                        android:layout_height="match_parent"
+                        android:layout_marginLeft="@dimen/dp12"
+                        android:background="@drawable/bg_check_select_top_amount"
+                        android:button="@null"
+                        android:paddingLeft="@dimen/dp10"
+                        android:gravity="center"
+                        android:paddingRight="@dimen/dp10"
+                        android:text="本月"
+                        android:textColor="@color/color_check_select_top_txt"/>
+
+                </LinearLayout>
+
+
+            </com.osiris.farmers.view.widget.MyRadioGroup>
+
+        </RelativeLayout>
+        
+
+        <android.support.v7.widget.RecyclerView
+            android:id="@+id/rv_data_detail"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"/>
+
+
+
+    </LinearLayout>
+
+
+</LinearLayout>

@@ -18,7 +18,15 @@ public class EvaluateList {
     private String pd;
     private String num;
     private List<ZhugpingjiasBean> zhugpingjias;
-    private List<?> zhugjyhpingjias;
+    private List<ZhugjyhpingjiasBean> zhugjyhpingjias;
+
+    public List<ZhugjyhpingjiasBean> getZhugjyhpingjias() {
+        return zhugjyhpingjias;
+    }
+
+    public void setZhugjyhpingjias(List<ZhugjyhpingjiasBean> zhugjyhpingjias) {
+        this.zhugjyhpingjias = zhugjyhpingjias;
+    }
 
     public String getPd() {
         return pd;
@@ -44,13 +52,7 @@ public class EvaluateList {
         this.zhugpingjias = zhugpingjias;
     }
 
-    public List<?> getZhugjyhpingjias() {
-        return zhugjyhpingjias;
-    }
 
-    public void setZhugjyhpingjias(List<?> zhugjyhpingjias) {
-        this.zhugjyhpingjias = zhugjyhpingjias;
-    }
 
     public static class ZhugpingjiasBean implements Parcelable {
         /**
@@ -247,4 +249,202 @@ public class EvaluateList {
             this.remark = remark;
         }
     }
+
+
+    public static class ZhugjyhpingjiasBean implements Parcelable{
+        /**
+         * id : 14
+         * jyhid : 163
+         * pingjianr : 2|差|13,3|一般|15,4|满意|23,3|一般|24
+         * pingjiaxj : 江苏省
+         * marketid :
+         * marketnm : 阎绍雨
+         * tsremark : 129
+         * userid : 崇川区市场监督局
+         * username : null
+         * llrq : 2020-02-18 22:23:24
+         * mark :
+         * mbrk : 崇川区
+         * mcrk : 南通市
+         * remark :
+         */
+
+        private int id;
+        private String jyhid;
+        private String pingjianr;
+        private String pingjiaxj;
+        private String marketid;
+        private String marketnm;
+        private String tsremark;
+        private String userid;
+        private Object username;
+        private String llrq;
+        private String mark;
+        private String mbrk;
+        private String mcrk;
+        private String remark;
+
+        protected ZhugjyhpingjiasBean(Parcel in) {
+            id = in.readInt();
+            jyhid = in.readString();
+            pingjianr = in.readString();
+            pingjiaxj = in.readString();
+            marketid = in.readString();
+            marketnm = in.readString();
+            tsremark = in.readString();
+            userid = in.readString();
+            llrq = in.readString();
+            mark = in.readString();
+            mbrk = in.readString();
+            mcrk = in.readString();
+            remark = in.readString();
+        }
+
+        @Override
+        public void writeToParcel(Parcel dest, int flags) {
+            dest.writeInt(id);
+            dest.writeString(jyhid);
+            dest.writeString(pingjianr);
+            dest.writeString(pingjiaxj);
+            dest.writeString(marketid);
+            dest.writeString(marketnm);
+            dest.writeString(tsremark);
+            dest.writeString(userid);
+            dest.writeString(llrq);
+            dest.writeString(mark);
+            dest.writeString(mbrk);
+            dest.writeString(mcrk);
+            dest.writeString(remark);
+        }
+
+        @Override
+        public int describeContents() {
+            return 0;
+        }
+
+        public static final Creator<ZhugjyhpingjiasBean> CREATOR = new Creator<ZhugjyhpingjiasBean>() {
+            @Override
+            public ZhugjyhpingjiasBean createFromParcel(Parcel in) {
+                return new ZhugjyhpingjiasBean(in);
+            }
+
+            @Override
+            public ZhugjyhpingjiasBean[] newArray(int size) {
+                return new ZhugjyhpingjiasBean[size];
+            }
+        };
+
+        public int getId() {
+            return id;
+        }
+
+        public void setId(int id) {
+            this.id = id;
+        }
+
+        public String getJyhid() {
+            return jyhid;
+        }
+
+        public void setJyhid(String jyhid) {
+            this.jyhid = jyhid;
+        }
+
+        public String getPingjianr() {
+            return pingjianr;
+        }
+
+        public void setPingjianr(String pingjianr) {
+            this.pingjianr = pingjianr;
+        }
+
+        public String getPingjiaxj() {
+            return pingjiaxj;
+        }
+
+        public void setPingjiaxj(String pingjiaxj) {
+            this.pingjiaxj = pingjiaxj;
+        }
+
+        public String getMarketid() {
+            return marketid;
+        }
+
+        public void setMarketid(String marketid) {
+            this.marketid = marketid;
+        }
+
+        public String getMarketnm() {
+            return marketnm;
+        }
+
+        public void setMarketnm(String marketnm) {
+            this.marketnm = marketnm;
+        }
+
+        public String getTsremark() {
+            return tsremark;
+        }
+
+        public void setTsremark(String tsremark) {
+            this.tsremark = tsremark;
+        }
+
+        public String getUserid() {
+            return userid;
+        }
+
+        public void setUserid(String userid) {
+            this.userid = userid;
+        }
+
+        public Object getUsername() {
+            return username;
+        }
+
+        public void setUsername(Object username) {
+            this.username = username;
+        }
+
+        public String getLlrq() {
+            return llrq;
+        }
+
+        public void setLlrq(String llrq) {
+            this.llrq = llrq;
+        }
+
+        public String getMark() {
+            return mark;
+        }
+
+        public void setMark(String mark) {
+            this.mark = mark;
+        }
+
+        public String getMbrk() {
+            return mbrk;
+        }
+
+        public void setMbrk(String mbrk) {
+            this.mbrk = mbrk;
+        }
+
+        public String getMcrk() {
+            return mcrk;
+        }
+
+        public void setMcrk(String mcrk) {
+            this.mcrk = mcrk;
+        }
+
+        public String getRemark() {
+            return remark;
+        }
+
+        public void setRemark(String remark) {
+            this.remark = remark;
+        }
+    }
+
 }

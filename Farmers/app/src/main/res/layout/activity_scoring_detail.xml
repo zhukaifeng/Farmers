@@ -1,26 +1,22 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/bg_gray_e9"
-    >
+    android:background="@color/bg_gray_e9">
 
 
     <RelativeLayout
         android:id="@+id/rl_top"
         android:layout_width="match_parent"
         android:layout_height="@dimen/dp181"
-        android:background="@drawable/bg_evaluate"
-        >
+        android:background="@drawable/bg_evaluate">
 
         <RelativeLayout
             android:id="@+id/rl_back"
             android:layout_width="wrap_content"
             android:layout_height="@dimen/dp33"
             android:layout_marginLeft="@dimen/dp20"
-            android:layout_marginTop="@dimen/dp20"
-            >
+            android:layout_marginTop="@dimen/dp20">
 
             <ImageView
                 android:id="@+id/iv_back"
@@ -28,8 +24,7 @@
                 android:layout_height="@dimen/dp16"
                 android:layout_centerVertical="true"
                 android:layout_gravity="center_vertical"
-                android:background="@drawable/bg_back"
-                />
+                android:background="@drawable/bg_back" />
         </RelativeLayout>
 
         <RelativeLayout
@@ -37,17 +32,15 @@
             android:layout_height="@dimen/dp33"
             android:layout_centerHorizontal="true"
             android:layout_marginTop="@dimen/dp20"
-            android:background="@drawable/bg_round_title"
-            >
+            android:background="@drawable/bg_round_title">
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_centerInParent="true"
-                android:text="@string/txt_new_market_score"
+                android:text="市场打分详情"
                 android:textColor="@color/write"
-                android:textSize="@dimen/sp15"
-                />
+                android:textSize="@dimen/sp15" />
 
 
         </RelativeLayout>
@@ -56,11 +49,10 @@
             android:id="@+id/rl_commit"
             android:layout_width="wrap_content"
             android:layout_height="@dimen/dp33"
-            android:layout_marginRight="@dimen/dp20"
-            android:layout_marginTop="@dimen/dp20"
             android:layout_alignParentRight="true"
-            android:visibility="gone"
-            >
+            android:layout_marginTop="@dimen/dp20"
+            android:layout_marginRight="@dimen/dp20"
+            android:visibility="gone">
 
             <TextView
                 android:id="@+id/tv_commit"
@@ -68,17 +60,16 @@
                 android:layout_height="wrap_content"
                 android:layout_centerVertical="true"
                 android:layout_gravity="center_vertical"
-                android:textColor="@color/white"
                 android:text="提交"
-                />
+                android:textColor="@color/white" />
         </RelativeLayout>
+
         <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="@dimen/dp71"
             android:layout_alignParentBottom="true"
-            android:visibility="gone"
             android:background="@drawable/bg_account_bottom"
-            >
+            android:visibility="gone">
 
             <ImageView
                 android:id="@+id/iv_location"
@@ -86,8 +77,7 @@
                 android:layout_height="@dimen/dp25"
                 android:layout_centerVertical="true"
                 android:layout_marginLeft="@dimen/dp41"
-                android:background="@drawable/bg_location"
-                />
+                android:background="@drawable/bg_location" />
 
             <TextView
                 android:id="@+id/tv_market"
@@ -98,8 +88,7 @@
                 android:layout_toRightOf="@+id/iv_location"
                 android:text="华北农贸市场1号摊位"
                 android:textColor="@color/write"
-                android:textSize="@dimen/sp16"
-                />
+                android:textSize="@dimen/sp16" />
 
 
             <ImageView
@@ -110,8 +99,7 @@
                 android:layout_marginRight="@dimen/dp45"
                 android:background="@drawable/bg_arrow_to"
                 android:text="138xxxxxxxx"
-                android:textSize="@dimen/sp16"
-                />
+                android:textSize="@dimen/sp16" />
 
 
         </RelativeLayout>
@@ -119,13 +107,78 @@
 
     </RelativeLayout>
 
+
+    <LinearLayout
+        android:id="@+id/linear_info"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/rl_top"
+        android:layout_marginTop="@dimen/dp10"
+        android:layout_marginLeft="@dimen/dp10"
+        android:orientation="vertical">
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="经营户：" />
+
+            <TextView
+                android:id="@+id/tv_jingyinghu"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="所属市场：" />
+
+            <TextView
+                android:id="@+id/tv_market_shu"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="评价人：" />
+
+            <TextView
+                android:id="@+id/tv_pjr"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="" />
+
+        </LinearLayout>
+
+    </LinearLayout>
+
     <android.support.v7.widget.RecyclerView
         android:id="@+id/rv_data"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/rl_top"
-        />
-
+        android:layout_marginTop="@dimen/dp10"
+        android:layout_below="@+id/linear_info" />
 
 
 </RelativeLayout>

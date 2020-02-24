@@ -7,6 +7,7 @@ import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.text.TextUtils;
+import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.ImageView;
@@ -27,11 +28,14 @@ import com.osiris.farmers.network.NetRequest;
 import com.osiris.farmers.network.NetRequestResultListener;
 import com.osiris.farmers.utils.JsonUtils;
 import com.osiris.farmers.view.AddScorelActivity;
+import com.osiris.farmers.view.AddScorelJgMarketActivity;
+import com.osiris.farmers.view.AddScorelJgUserActivity;
 import com.osiris.farmers.view.MarketEvaluateActivity;
 import com.osiris.farmers.view.NewMarketScoreActivity;
 import com.osiris.farmers.view.ScoringDetailActivity;
 import com.osiris.farmers.view.TaskDetailActivity;
 import com.osiris.farmers.view.adapter.MarketEvaluateAdapter;
+import com.osiris.farmers.view.adapter.MarketEvaluateJyhAdapter;
 import com.osiris.farmers.view.adapter.MyItemClickListener;
 
 import java.util.ArrayList;
@@ -58,6 +62,9 @@ public class MarketEvaulateFragment extends BaseFragment {
     EditText edt_search;
     @BindView(R.id.tv_title)
     TextView tv_title;
+    @BindView(R.id.tv_num)
+    TextView tv_num;
+
 
     private List<EvaluateList.ZhugpingjiasBean> dataList = new ArrayList<>();
     private MarketEvaluateAdapter dataAdapter = new MarketEvaluateAdapter(dataList);
@@ -65,6 +72,13 @@ public class MarketEvaulateFragment extends BaseFragment {
     private int pageNum = 1;
     private int pageCount = 8;
     private int xxz = 1;
+
+
+
+    private List<EvaluateList.ZhugjyhpingjiasBean> dataJyhList = new ArrayList<>();
+    private MarketEvaluateJyhAdapter dataJyhAdapter = new MarketEvaluateJyhAdapter(dataJyhList);
+    private boolean firstIn = true;
+
     @Override
     protected int setLayout() {
         return R.layout.activity_evaluate_market;
@@ -79,13 +93,27 @@ public class MarketEvaulateFragment extends BaseFragment {
 
         rv_data.setLayoutManager(new LinearLayoutManager(getActivity(), LinearLayoutManager.VERTICAL, false));
         rv_data.setAdapter(dataAdapter);
-        dataAdapter.notifyDataSetChanged();
         dataAdapter.setOnItemClick(new MyItemClickListener() {
             @Override
             public void onItemClick(View view, int position) {
                 Intent intent = new Intent(getActivity(), ScoringDetailActivity.class);
                 intent.putExtra("data",dataList.get(position));
                 intent.putExtra("xxz",xxz);
+                intent.putExtra("id",dataList.get(position).getId());
+
+                startActivity(intent);
+            }
+        });
+
+//        rv_data_jyh.setLayoutManager(new LinearLayoutManager(getActivity(), LinearLayoutManager.VERTICAL, false));
+//        rv_data_jyh.setAdapter(dataJyhAdapter);
+        dataJyhAdapter.setOnItemClick(new MyItemClickListener() {
+            @Override
+            public void onItemClick(View view, int position) {
+                Intent intent = new Intent(getActivity(), ScoringDetailActivity.class);
+                intent.putExtra("data",dataJyhList.get(position));
+                intent.putExtra("xxz",xxz);
+                intent.putExtra("id",dataJyhList.get(position).getId());
                 startActivity(intent);
             }
         });
@@ -106,6 +134,7 @@ public class MarketEvaulateFragment extends BaseFragment {
         rv_data.addOnScrollListener(new EndLessOnScrollListener(manager) {
             @Override
             public void onLoadMore(int currentPage) {
+                Log.d("zkf","load more");
                 loadMoreData();
             }
         });
@@ -115,7 +144,18 @@ public class MarketEvaulateFragment extends BaseFragment {
     }
 
 
+    @Override
+    public void onResume() {
+        super.onResume();
+        if (!firstIn){
+            pageNum = 1;
+            previousTotal = 0;
+            getListData();
+        }
+        firstIn = false;
 
+
+    }
 
     private void showSingleChoiceDialog(){
 
@@ -132,7 +172,6 @@ public class MarketEvaulateFragment extends BaseFragment {
                     public void onClick(DialogInterface dialog, int which) {
                         LogUtils.d("zkf which:" + which);
                         xxz = which + 1;
-
                     }
                 });
         singleChoiceDialog.setPositiveButton("确定",
@@ -142,8 +181,21 @@ public class MarketEvaulateFragment extends BaseFragment {
                         dialog.dismiss();
                         if (xxz ==1){
                             tv_title.setText("市场评价");
+                            rv_data.removeAllViews();
+                            tv_num.setText("市场");
+                            rv_data.setAdapter(dataAdapter);
+                            dataAdapter.notifyDataSetChanged();
+                            Log.d("zkf  size:" ,";;;;;" +dataList.size());
                         }else if (xxz ==2){
                             tv_title.setText("经营户评价");
+                            rv_data.removeAllViews();
+                            rv_data.setAdapter(dataJyhAdapter);
+                            dataJyhAdapter.notifyDataSetChanged();
+                            tv_num.setText("经营户");
+                            Log.d("zkf ","kkkkk2");
+
+
+
                         }
                     }
 
@@ -201,6 +253,8 @@ public class MarketEvaulateFragment extends BaseFragment {
 
             if (!loading && totalItemCount - visibleItemCount <= firstVisibleItem) {
                 // pageCount ++;
+                Log.d("zkf","load more ....");
+
                 onLoadMore(pageCount);
                 loading = true;
             }
@@ -246,9 +300,16 @@ public class MarketEvaulateFragment extends BaseFragment {
             case R.id.rl_right:
 //                Intent intent = new Intent(this, getActivity());
 //                startActivity(intent);
-                Intent intent = new Intent(getActivity(), AddScorelActivity.class);
-                intent.putExtra("xxz",xxz);
-                startActivity(intent);
+                if (xxz == 1){
+                    Intent intent = new Intent(getActivity(), AddScorelJgMarketActivity.class);
+                    Log.d("zkf","xxz：" + xxz);
+                    startActivity(intent);
+                }else {
+                    Intent intent = new Intent(getActivity(), AddScorelJgUserActivity.class);
+                    Log.d("zkf","xxz：" + xxz);
+                    startActivity(intent);
+                }
+
 
                 break;
             case R.id.rl_back:
@@ -257,19 +318,21 @@ public class MarketEvaulateFragment extends BaseFragment {
         }
     }
 
+    private int pages = 1;
     private void getListData(){
         String url = ApiParams.API_HOST +"/app/getAllzgscpingja.action";
 
         Map<String, String> paramMap = new HashMap<>();
         paramMap.put("id", String.valueOf(GlobalParams.id));
 
-        paramMap.put("pageNo",String.valueOf(1));
+        paramMap.put("pageNo",String.valueOf(pageNum));
         if (!TextUtils.isEmpty(edt_search.getText().toString())){
             paramMap.put("marketnm",edt_search.getText().toString());
         }else {
             paramMap.put("marketnm","");
         }
 
+        Log.d("zkf  parame:" , paramMap.toString());
         NetRequest.request(url, ApiRequestTag.DATA, paramMap, new NetRequestResultListener() {
             @Override
             public void requestSuccess(int tag, String successResult) {
@@ -285,12 +348,23 @@ public class MarketEvaulateFragment extends BaseFragment {
                         dataList.clear();
                     }
                     dataList.addAll(Arrays.asList(datas));
-
+                    Log.d("zkf","size 1:" + dataList.size());
                     dataAdapter.notifyDataSetChanged();
 
                 }
 
+                if (json.has("zhugjyhpingjias")){
 
+                    EvaluateList.ZhugjyhpingjiasBean[] datas = JsonUtils.fromJson(json.get("zhugjyhpingjias").getAsJsonArray(),
+                            EvaluateList.ZhugjyhpingjiasBean[].class);
+                    if (pageNum == 1) {
+                        dataJyhList.clear();
+                    }
+                    dataJyhList.addAll(Arrays.asList(datas));
+                    Log.d("zkf","size 2:" + dataJyhList.size());
+                    dataJyhAdapter.notifyDataSetChanged();
+
+                }
 
 
             }

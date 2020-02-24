@@ -42,7 +42,7 @@
                 android:layout_gravity="center_vertical"
                 android:layout_marginTop="@dimen/dp9"
                 android:layout_marginRight="@dimen/dp22"
-                android:background="@drawable/bg_qr" />
+                android:background="@drawable/bg_add" />
         </RelativeLayout>
 
         <RelativeLayout
@@ -68,6 +68,7 @@
         <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="@dimen/dp71"
+            android:visibility="gone"
             android:layout_alignParentBottom="true"
             android:background="@drawable/bg_rectange">
 
@@ -120,6 +121,8 @@
                 android:layout_centerInParent="true"
                 android:layout_marginLeft="@dimen/dp23"
                 android:layout_marginRight="@dimen/dp23"
+
+                android:visibility="gone"
                 android:background="@drawable/bg_gray_round"
                 android:orientation="horizontal">
 
@@ -190,12 +193,14 @@
             android:id="@+id/linear_date"
             android:layout_width="match_parent"
             android:layout_height="@dimen/dp50"
+            android:visibility="gone"
             android:orientation="horizontal">
 
             <LinearLayout
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
+
                 android:orientation="horizontal">
 
                 <TextView
@@ -221,6 +226,7 @@
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
+                android:visibility="gone"
                 android:orientation="horizontal">
 
                 <TextView
@@ -248,6 +254,8 @@
             android:layout_width="match_parent"
             android:layout_height="@dimen/dp48"
             android:layout_below="@+id/rl_choose"
+
+            android:visibility="gone"
             android:layout_marginLeft="@dimen/dp10"
             android:layout_marginRight="@dimen/dp10"
             android:background="@color/bg_gray_e9"
@@ -343,6 +351,7 @@
                     android:id="@+id/rl_add"
                     android:layout_width="match_parent"
                     android:layout_height="@dimen/dp48"
+                    android:visibility="gone"
                     android:background="@color/write">
 
                     <TextView
@@ -363,6 +372,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_alignParentBottom="true"
+            android:visibility="gone"
             android:orientation="vertical">
 
             <LinearLayout

@@ -21,8 +21,6 @@ import com.osiris.farmers.network.GlobalParams;
 import com.osiris.farmers.network.NetRequest;
 import com.osiris.farmers.network.NetRequestResultListener;
 import com.osiris.farmers.utils.JsonUtils;
-import com.osiris.farmers.view.adapter.AddScore2Adapter;
-import com.osiris.farmers.view.adapter.AddScoreAdapter;
 import com.osiris.farmers.view.adapter.MarketScoreAdapter;
 
 import java.util.ArrayList;
@@ -36,9 +34,18 @@ import butterknife.OnClick;
 import me.jessyan.autosize.utils.LogUtils;
 
 public class AddScorelActivity extends BaseActivity {
+	@Override
+	public int getLayoutResId() {
+		return 0;
+	}
+
+	@Override
+	public void init() {
+
+	}
 
 
-	//private EvaluateList.ZhugpingjiasBean data;
+	/*//private EvaluateList.ZhugpingjiasBean data;
 
 	@BindView(R.id.tv_market)
 	TextView tv_market;
@@ -334,7 +341,7 @@ public class AddScorelActivity extends BaseActivity {
 			paramMap.put("data","1|差|"+marketsBean.getId());
 
 		}
-		LogUtils.d("zkf paramMap:" +paramMap.toString());
+
 		NetRequest.request(url, ApiRequestTag.DATA, paramMap, new NetRequestResultListener() {
 			@Override
 			public void requestSuccess(int tag, String successResult) {
@@ -394,7 +401,6 @@ public class AddScorelActivity extends BaseActivity {
 			paramMap.put("data","1|差|"+marketsBean.getId());
 
 		}
-		LogUtils.d("zkf paramMap:" +paramMap.toString());
 
 		NetRequest.request(url, ApiRequestTag.DATA, paramMap, new NetRequestResultListener() {
 			@Override
@@ -493,7 +499,7 @@ public class AddScorelActivity extends BaseActivity {
 		});
 
 	}
-
+*/
 
 
 

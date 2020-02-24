@@ -174,6 +174,7 @@ public class LoginFragment extends BaseFragment {
 							intent.putExtra("type", 2);
 
 						} else if (GlobalParams.authority.equals("市场管理")) {
+							LogUtils.d("zkf shichanbgguanli");
 							intent.putExtra("type", 4);
 
 						}

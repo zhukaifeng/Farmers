@@ -23,7 +23,7 @@ public class OperatorInquiryAdapter extends RecyclerView.Adapter<RecyclerView.Vi
 
     private MyItemClickListener myItemClickListener;
 
-    private List<OperatorInquery> dataList = new ArrayList<>();
+    private List<OperatorInquery.DataBean> dataList = new ArrayList<>();
     private View.OnClickListener onButtonClickListener;
 
     public void setOnButtonClickListener(View.OnClickListener onButtonClickListener) {
@@ -31,7 +31,7 @@ public class OperatorInquiryAdapter extends RecyclerView.Adapter<RecyclerView.Vi
     }
 
 
-    public OperatorInquiryAdapter(List<OperatorInquery> dataList) {
+    public OperatorInquiryAdapter(List<OperatorInquery.DataBean> dataList) {
         this.dataList = dataList;
     }
 
@@ -92,30 +92,18 @@ public class OperatorInquiryAdapter extends RecyclerView.Adapter<RecyclerView.Vi
             }
         }
 
-        public void bindData(OperatorInquery data){
+        public void bindData(OperatorInquery.DataBean data){
             if (getLayoutPosition()%2 == 1){
                 linear_item.setBackgroundColor(itemView.getResources().getColor(R.color.bg_gray_e9));
             }else {
                 linear_item.setBackgroundColor(itemView.getResources().getColor(R.color.write));
             }
-            tv_business_lincense.setText(data.getBusinessLincense());
-            tv_company_name.setText(data.getCompanyName());
-            tv_connect.setText(data.getConnect());
-            tv_stall_num.setText(String.valueOf(data.getStallName()));
+            tv_business_lincense.setText(data.getRemark());
+            tv_company_name.setText(data.getMarketnm());
+            tv_connect.setText(data.getJyhmc());
+            tv_stall_num.setText(data.getTwhmc());
 
-            if (data.isClicked()){
-                linear_info.setVisibility(View.VISIBLE);
-                iv_location.setVisibility(View.VISIBLE);
-                Drawable drawable= itemView.getResources().getDrawable(R.drawable.bg_arrow_up_tri);
-                drawable.setBounds(0, 0, drawable.getMinimumWidth(), drawable.getMinimumHeight());
-                tv_connect.setCompoundDrawables(null,null,drawable,null);
-            }else {
-                linear_info.setVisibility(View.GONE);
-                iv_location.setVisibility(View.GONE);
-                Drawable drawable= itemView.getResources().getDrawable(R.drawable.bg_arrow_down_tri);
-                drawable.setBounds(0, 0, drawable.getMinimumWidth(), drawable.getMinimumHeight());
-                tv_connect.setCompoundDrawables(null,null,drawable,null);
-            }
+
             if (onButtonClickListener != null) {
                 tv_connect.setOnClickListener(onButtonClickListener);
                 tv_connect.setTag(R.id.tag_operator_inquiry, getLayoutPosition());

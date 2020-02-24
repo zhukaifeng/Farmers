@@ -1,0 +1,328 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="@color/write">
+
+    <RelativeLayout
+        android:id="@+id/rl_title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content">
+
+        <RelativeLayout
+            android:id="@+id/rl_top"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/dp181"
+            android:background="@drawable/bg_evaluate">
+
+            <RelativeLayout
+                android:id="@+id/rl_back"
+                android:layout_width="wrap_content"
+                android:layout_height="@dimen/dp33"
+                android:layout_marginLeft="@dimen/dp20"
+                android:visibility="gone"
+                android:layout_marginTop="@dimen/dp20">
+
+                <ImageView
+                    android:id="@+id/iv_back"
+                    android:layout_width="@dimen/dp9"
+                    android:layout_height="@dimen/dp16"
+                    android:layout_centerVertical="true"
+                    android:layout_gravity="center_vertical"
+                    android:background="@drawable/bg_back"/>
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:layout_width="@dimen/dp223"
+                android:layout_height="@dimen/dp33"
+                android:layout_centerHorizontal="true"
+                android:layout_marginTop="@dimen/dp20"
+                android:background="@drawable/bg_round_title">
+
+                <TextView
+                    android:id="@+id/tv_title"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerInParent="true"
+                    android:text="@string/market_score"
+                    android:textColor="@color/write"
+                    android:textSize="@dimen/sp15"/>
+
+
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:id="@+id/rl_right"
+                android:layout_width="@dimen/dp60"
+                android:layout_height="@dimen/dp60"
+                android:layout_alignParentRight="true"
+                android:layout_marginTop="@dimen/dp20"
+                android:visibility="visible">
+
+                <ImageView
+                    android:id="@+id/iv_function"
+                    android:layout_width="@dimen/dp17"
+                    android:layout_height="@dimen/dp17"
+                    android:layout_alignParentRight="true"
+                    android:layout_gravity="center_vertical"
+                    android:layout_marginTop="@dimen/dp9"
+                    android:layout_marginRight="@dimen/dp22"
+                    android:background="@drawable/bg_add"/>
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/dp71"
+                android:layout_alignParentBottom="true"
+                android:background="@drawable/bg_account_bottom">
+
+                <LinearLayout
+                    android:id="@+id/linear_search"
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/dp45"
+                    android:layout_centerInParent="true"
+                    android:layout_marginLeft="@dimen/dp23"
+                    android:layout_marginRight="@dimen/dp23"
+                    android:background="@drawable/bg_gray_round"
+                    android:orientation="horizontal">
+
+                    <RelativeLayout
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:visibility="gone"
+                        android:layout_weight="1">
+
+                        <LinearLayout
+                            android:id="@+id/linear_evaulate"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_centerInParent="true"
+                            android:orientation="horizontal">
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginLeft="@dimen/dp20"
+                                android:background="@null"
+                                android:hint="@string/already_evaluated"
+                                android:textColor="@color/write"
+                                android:textColorHint="@color/write"
+                                android:textSize="@dimen/sp14"/>
+
+                            <ImageView
+                                android:id="@+id/iv_select"
+                                android:layout_width="@dimen/dp8"
+                                android:layout_height="@dimen/dp5"
+                                android:layout_gravity="center_vertical"
+                                android:layout_marginLeft="@dimen/dp5"
+                                android:background="@drawable/bg_arrow_up"/>
+                        </LinearLayout>
+                    </RelativeLayout>
+
+                    <View
+                        android:layout_width="@dimen/dp1"
+                        android:layout_height="match_parent"
+                        android:layout_marginTop="@dimen/dp5"
+                        android:layout_marginBottom="@dimen/dp5"
+                        android:visibility="gone"
+                        android:background="#EFF1F5"/>
+
+                    <RelativeLayout
+                        android:id="@+id/relative_search"
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_weight="2">
+
+
+                        <RelativeLayout
+                            android:id="@+id/rl_search"
+                            android:layout_width="@dimen/dp50"
+                            android:layout_height="match_parent"
+                            android:layout_alignParentRight="true"
+                            android:layout_centerVertical="true"
+                            >
+                            <ImageView
+                                android:id="@+id/iv_search"
+                                android:layout_width="@dimen/dp13"
+                                android:layout_height="@dimen/dp15"
+                                android:layout_centerInParent="true"
+                                android:layout_marginRight="@dimen/dp16"
+                                android:background="@drawable/bg_search"/>
+                        </RelativeLayout>
+                        <EditText
+                            android:id="@+id/edt_search"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:layout_marginLeft="@dimen/dp20"
+                            android:background="@null"
+                            android:hint="请输入搜索市场名称"
+                            android:layout_marginRight="@dimen/dp80"
+                            android:textColor="@color/write"
+                            android:textColorHint="@color/write"
+                            android:textSize="@dimen/sp14"/>
+
+
+                    </RelativeLayout>
+
+
+                </LinearLayout>
+
+            </RelativeLayout>
+
+
+        </RelativeLayout>
+
+        <LinearLayout
+            android:id="@+id/linear_calendar"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/dp60"
+            android:layout_alignParentBottom="true"
+            android:layout_marginBottom="@dimen/dp5"
+            android:visibility="gone"
+            android:orientation="vertical">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/dp60"
+                android:background="@drawable/bg_evaluate_bottom"
+                android:orientation="vertical">
+
+                <com.osiris.farmers.view.widget.MyRadioGroup
+                    android:id="@+id/rg_company_option_type_container"
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="@dimen/dp21"
+                    android:layout_marginTop="@dimen/dp20"
+                    android:orientation="horizontal">
+
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal">
+
+                        <android.support.v7.widget.AppCompatRadioButton
+                            android:id="@+id/rb_all"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:background="@drawable/bg_check_select_top_amount"
+                            android:button="@null"
+                            android:checked="true"
+                            android:paddingLeft="@dimen/dp13"
+                            android:paddingRight="@dimen/dp13"
+                            android:text="@string/all"
+                            android:textColor="@color/color_check_select_top_txt"/>
+
+                        <android.support.v7.widget.AppCompatRadioButton
+                            android:id="@+id/rb_already_evaluated"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:background="@drawable/bg_check_select_top_amount"
+                            android:button="@null"
+                            android:paddingLeft="@dimen/dp10"
+                            android:paddingRight="@dimen/dp10"
+                            android:text="@string/already_evaluated"
+                            android:textColor="@color/color_check_select_top_txt"/>
+
+                        <android.support.v7.widget.AppCompatRadioButton
+                            android:id="@+id/rb_not_evaluated"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:background="@drawable/bg_check_select_top_amount"
+                            android:button="@null"
+                            android:paddingLeft="@dimen/dp10"
+                            android:paddingRight="@dimen/dp10"
+                            android:text="@string/not_evaluated"
+                            android:textColor="@color/color_check_select_top_txt"/>
+                    </LinearLayout>
+
+
+                </com.osiris.farmers.view.widget.MyRadioGroup>
+
+
+            </LinearLayout>
+        </LinearLayout>
+    </RelativeLayout>
+
+    <View
+        android:id="@+id/line"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/dp5"
+        android:visibility="gone"
+        android:layout_below="@+id/rl_title"
+        android:background="@color/write"/>
+
+    <LinearLayout
+        android:id="@+id/linear_item"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/dp60"
+        android:layout_below="@+id/rl_title"
+        android:background="@color/background_gray"
+        android:orientation="horizontal"
+        android:paddingLeft="@dimen/dp10"
+        android:paddingRight="@dimen/dp10">
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:text="序号"
+            android:textColor="@color/txt_black_51"
+            android:textSize="@dimen/sp16"
+            android:textStyle="bold"/>
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:text="经营户"
+            android:textColor="@color/txt_black_51"
+            android:textSize="@dimen/sp16"
+            android:textStyle="bold"/>
+        <TextView
+            android:id="@+id/tv_num"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:text="@string/market_name"
+            android:textColor="@color/txt_black_51"
+            android:textSize="@dimen/sp16"
+            android:textStyle="bold"/>
+
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:text="评价人"
+            android:textColor="@color/txt_black_51"
+            android:textSize="@dimen/sp16"
+            android:textStyle="bold"/>
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1.2"
+            android:gravity="center"
+            android:text="@string/date"
+            android:textColor="@color/txt_black_51"
+            android:textSize="@dimen/sp16"
+            android:textStyle="bold"/>
+
+
+    </LinearLayout>
+    <android.support.v4.widget.SwipeRefreshLayout
+        android:id="@+id/refreshLayout"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@+id/linear_item">
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/rv_data"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+      />
+
+    </android.support.v4.widget.SwipeRefreshLayout>
+</RelativeLayout>

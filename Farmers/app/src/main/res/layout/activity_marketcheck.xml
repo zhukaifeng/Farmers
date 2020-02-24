@@ -1,0 +1,113 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <RelativeLayout
+        android:id="@+id/rl_top"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/dp181">
+
+        <RelativeLayout
+            android:id="@+id/rl_title"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/dp181"
+            android:background="@drawable/bg_life_payments">
+
+
+
+            <RelativeLayout
+                android:layout_width="@dimen/dp223"
+                android:layout_height="@dimen/dp33"
+                android:layout_centerHorizontal="true"
+                android:layout_marginTop="@dimen/dp20"
+                android:background="@drawable/bg_round_title">
+
+                <TextView
+                    android:id="@+id/tv_title"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerInParent="true"
+                    android:text="@string/shichangjiance"
+                    android:textColor="@color/write"
+                    android:textSize="@dimen/sp15" />
+
+
+            </RelativeLayout>
+
+
+
+
+        </RelativeLayout>
+
+    </RelativeLayout>
+
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/dp145"
+        android:layout_marginLeft="@dimen/dp10"
+        android:layout_marginTop="@dimen/dp10"
+        android:layout_marginRight="@dimen/dp16"
+        android:focusable="true"
+        android:visibility="visible"
+        android:focusableInTouchMode="true"
+        android:background="@drawable/bg_search_dialog">
+
+
+        <EditText
+            android:id="@+id/edt_content"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@null"
+            android:layout_marginTop="@dimen/dp30"
+            android:layout_marginLeft="@dimen/dp10"
+            android:layout_marginRight="@dimen/dp10"
+            android:hint="@string/write_context"
+            android:paddingLeft="@dimen/dp15"
+            android:paddingTop="10dp"
+            android:gravity="top"
+            android:lines="5"
+            android:textColorHint="@color/txt_black_153"
+            android:textSize="@dimen/sp14"/>
+
+
+
+
+    </RelativeLayout>
+
+
+
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/recycler"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginRight="@dimen/dp21"
+        android:layout_marginLeft="@dimen/dp21"
+        android:layout_marginTop="@dimen/dp20"
+        android:overScrollMode="never" />
+
+
+    <TextView
+        android:id="@+id/tv_ok"
+        android:layout_width="@dimen/dp126"
+        android:layout_height="@dimen/dp33"
+        android:layout_alignParentRight="true"
+        android:layout_centerVertical="true"
+        android:layout_marginRight="@dimen/dp10"
+        android:layout_marginBottom="@dimen/dp175"
+        android:background="@drawable/bg_button_green_radio"
+        android:gravity="center"
+        android:layout_gravity="center_horizontal"
+        android:text="@string/ok"
+        android:textColor="@color/write"
+        android:textSize="@dimen/sp15"
+        android:textStyle="bold"
+        />
+
+
+
+
+
+
+</LinearLayout>

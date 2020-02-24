@@ -14,7 +14,7 @@
             android:layout_width="@dimen/dp60"
             android:layout_height="@dimen/dp60"
             android:layout_marginTop="@dimen/dp20"
-            android:visibility="gone">
+            >
 
             <ImageView
                 android:id="@+id/iv_back"
@@ -32,7 +32,7 @@
             android:layout_height="@dimen/dp60"
             android:layout_alignParentRight="true"
             android:layout_marginTop="@dimen/dp20"
-            android:visibility="visible">
+            android:visibility="gone">
 
             <ImageView
                 android:id="@+id/iv_function"
@@ -69,6 +69,7 @@
             android:layout_width="match_parent"
             android:layout_height="@dimen/dp71"
             android:layout_alignParentBottom="true"
+            android:visibility="gone"
             android:background="@drawable/bg_rectange">
 
 
@@ -173,7 +174,7 @@
                 android:layout_height="match_parent"
                 android:layout_weight="1"
                 android:gravity="center"
-                android:text="@string/company_name"
+                android:text="地址"
                 android:textSize="@dimen/sp18"
                 android:textStyle="bold"
 
@@ -185,7 +186,7 @@
                 android:layout_height="match_parent"
                 android:layout_weight="1"
                 android:gravity="center"
-                android:text="@string/business_license"
+                android:text="手机号"
                 android:textSize="@dimen/sp18"
                 android:textStyle="bold" />
 

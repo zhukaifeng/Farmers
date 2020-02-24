@@ -21,10 +21,10 @@ public class StockPurchaseAdapter extends RecyclerView.Adapter<RecyclerView.View
 
     private MyItemClickListener myItemClickListener;
 
-    private List<StockPurchase> dataList = new ArrayList<>();
+    private List<StockPurchase.DataBean> dataList = new ArrayList<>();
 
 
-    public StockPurchaseAdapter(List<StockPurchase> dataList) {
+    public StockPurchaseAdapter(List<StockPurchase.DataBean> dataList) {
         this.dataList = dataList;
     }
 
@@ -89,18 +89,18 @@ public class StockPurchaseAdapter extends RecyclerView.Adapter<RecyclerView.View
             }
         }
 
-        public void bindData(StockPurchase data){
+        public void bindData(StockPurchase.DataBean data){
             if (getLayoutPosition()%2 == 1){
                 linear_item.setBackgroundColor(itemView.getResources().getColor(R.color.bg_gray_e9));
             }else {
                 linear_item.setBackgroundColor(itemView.getResources().getColor(R.color.write));
             }
-            tv_product_name.setText(data.getProductName());
-            tv_product_count.setText(data.getProductCount());
-            tv_product_price.setText(data.getProductPrice());
-            tv_product_suppliert.setText(data.getProductSuppliert());
-            tv_product_type.setText(data.getProductType());
-            tv_product_date.setText(data.getDate());
+            tv_product_name.setText(data.getSpmc());
+            tv_product_count.setText(data.getSum());
+            tv_product_price.setText(data.getSpdj());
+            tv_product_suppliert.setText(data.getGongys());
+            tv_product_type.setText(data.getSplb());
+            tv_product_date.setText(data.getHycompany());
 
         }
     }

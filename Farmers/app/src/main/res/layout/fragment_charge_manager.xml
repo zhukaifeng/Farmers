@@ -8,14 +8,29 @@
         android:id="@+id/linear_charge_manager"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:visibility="gone"
+        android:visibility="visible"
         android:orientation="vertical"
         >
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="@dimen/dp181"
         android:background="@drawable/bg_charge_pay">
+        <RelativeLayout
+            android:id="@+id/rl_back_one"
+            android:layout_width="@dimen/dp60"
+            android:layout_height="@dimen/dp60"
+            android:layout_marginTop="@dimen/dp20"
+            android:visibility="visible">
 
+            <ImageView
+                android:id="@+id/iv_back_one"
+                android:layout_width="@dimen/dp9"
+                android:layout_height="@dimen/dp16"
+                android:layout_gravity="center_vertical"
+                android:layout_marginLeft="@dimen/dp20"
+                android:layout_marginTop="@dimen/dp9"
+                android:background="@drawable/bg_back"/>
+        </RelativeLayout>
         <RelativeLayout
             android:id="@+id/rl_right"
             android:layout_width="@dimen/dp60"
@@ -47,7 +62,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_centerInParent="true"
-                android:text="@string/charge"
+                android:text="处罚查询"
                 android:textColor="@color/write"
                 android:textSize="@dimen/sp15"/>
 
@@ -81,7 +96,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
                         android:background="@null"
-                        android:hint="@string/hint_input_company"
+                        android:hint="请输入经营户名称"
                         android:textColorHint="@color/write"
                         android:textSize="@dimen/sp14"
                         android:focusable="false"
@@ -179,9 +194,9 @@
                 android:id="@+id/tv_wholesale_market"
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
-                android:layout_weight="1.5"
+                android:layout_weight="1"
                 android:gravity="center"
-                android:text="@string/wholesale_market"
+                android:text="批发市场"
                 android:textSize="@dimen/sp14"
                 android:textStyle="bold" />
 
@@ -191,7 +206,7 @@
                 android:layout_height="match_parent"
                 android:layout_weight="1"
                 android:gravity="center"
-                android:text="@string/pay_stall"
+                android:text="摊位号"
                 android:textSize="@dimen/sp14"
                 android:textStyle="bold"
 
@@ -203,7 +218,7 @@
                 android:layout_height="match_parent"
                 android:layout_weight="1"
                 android:gravity="center"
-                android:text="@string/person_charge"
+                android:text="负责人"
                 android:textSize="@dimen/sp14"
                 android:textStyle="bold" />
 
@@ -213,7 +228,7 @@
                 android:layout_height="match_parent"
                 android:layout_weight="1"
                 android:gravity="center"
-                android:text="@string/pay_should"
+                android:text="应交费"
                 android:textSize="@dimen/sp14"
                 android:textStyle="bold" />
             <TextView
@@ -222,14 +237,14 @@
                 android:layout_height="match_parent"
                 android:layout_weight="1"
                 android:gravity="center"
-                android:text="@string/pay_not"
+                android:text="未交费"
                 android:textSize="@dimen/sp14"
                 android:textStyle="bold" />
             <TextView
                 android:id="@+id/tv_date"
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
-                android:layout_weight="1.5"
+                android:layout_weight="1"
                 android:gravity="center"
                 android:text="@string/date"
                 android:textSize="@dimen/sp14"
@@ -253,6 +268,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical"
+        android:visibility="gone"
         >
         <RelativeLayout
             android:layout_width="match_parent"

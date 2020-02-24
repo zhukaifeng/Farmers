@@ -75,6 +75,28 @@
         <activity android:name=".view.TaskDetailActivity"/>
         <activity android:name=".view.AddSampleDataActivity"/>
         <activity android:name=".view.ChooseJieDaoActivity"/>
+        <activity android:name=".view.MarketManagerDetailActivity"/>
+        <activity android:name=".login.ManageHomeActivity"/>
+        <activity android:name=".view.CXMarketActivity"/>
+
+        <activity android:name=".view.CXStallActivity"/>
+        <activity android:name=".view.WebViewActivity"/>
+        <activity android:name=".marketcheck.SuyuanListActivity"/>
+        <activity android:name=".marketcheck.SuyuanJinDetailActivity"/>
+        <activity android:name=".marketcheck.MarketCheckActivity"/>
+        <activity android:name=".marketcheck.CheckDetailActivity"/>
+        <activity android:name=".shichang.AddXiaofangActivity"/>
+        <activity android:name=".shichang.XiaofangDetail2Activity"/>
+        <activity android:name=".shichang.XiaofangDetailActivity"/>
+        <activity android:name=".shichang.AddXfXcActivity"/>
+        <activity android:name=".shichang.AddScorelShichangActivity"/>
+        <activity android:name=".shichang.ScoringDetailShichangActivity"/>
+        <activity android:name=".view.AddScorelJgMarketActivity"/>
+        <activity android:name=".view.AddScorelJgUserActivity"/>
+        <activity android:name=".jingyinghu.MenuHomeJYhActivity"/>
+        <activity android:name=".jingyinghu.MenuHomeScGlActivity"/>
+        <activity android:name=".jingyinghu.MenuHomeShouFeiActivity"/>
+        <activity android:name=".jingyinghu.MenuHomeSuyuanActivity"/>
 
 
     </application>

@@ -23,23 +23,23 @@ public class PunishListAdapter extends RecyclerView.Adapter<RecyclerView.ViewHol
 
     private MyItemClickListener myItemClickListener;
 
-    private List<PunishList> dataList = new ArrayList<>();
+    private List<PunishList.DataBean> dataList = new ArrayList<>();
     private View.OnClickListener onButtonClickListener;
     private View.OnClickListener onNameClickListener;
 
 
-    public PunishListAdapter(List<PunishList> dataList) {
+    public PunishListAdapter(List<PunishList.DataBean> dataList) {
         this.dataList = dataList;
     }
 
-    public void setDataList(List<PunishList> dataList) {
+    public void setDataList(List<PunishList.DataBean> dataList) {
         this.dataList = dataList;
     }
 
     @Override
     public RecyclerView.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
 
-        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_punishl, parent,false);//解决宽度不能铺满
+        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_xiaofang, parent,false);//解决宽度不能铺满
 
         return new PunishListHolder(view,myItemClickListener);
     }
@@ -67,24 +67,13 @@ public class PunishListAdapter extends RecyclerView.Adapter<RecyclerView.ViewHol
     class PunishListHolder extends RecyclerView.ViewHolder implements View.OnClickListener{
 
 
-        @BindView(R.id.tv_date)
-        TextView tv_date;
-        @BindView(R.id.tv_wholesale_market)
-        TextView tv_wholesale_market;
-        @BindView(R.id.tv_pay_stall)
-        TextView tv_pay_stall;
-        @BindView(R.id.tv_punish)
-        TextView tv_punish;
-        @BindView(R.id.tv_price)
-        TextView tv_price;
-        @BindView(R.id.tv_violation_of_regulations)
-        TextView tv_violation_of_regulations;
-        @BindView(R.id.rl_bg)
-        RelativeLayout rl_bg;
-        @BindView(R.id.iv_tri)
-        ImageView iv_tri;
+        @BindView(R.id.tv_name)
+        TextView tv_name;
+        @BindView(R.id.tv_market)
+        TextView tv_market;
         @BindView(R.id.linear_item)
         LinearLayout linear_item;
+
 
         private MyItemClickListener myItemClickListener;
 
@@ -102,38 +91,15 @@ public class PunishListAdapter extends RecyclerView.Adapter<RecyclerView.ViewHol
             }
         }
 
-        public void bindData(PunishList data){
+        public void bindData(PunishList.DataBean data){
             if (getLayoutPosition()%2 == 1){
+                linear_item.setBackgroundColor(itemView.getResources().getColor(R.color.white));
+            }else {
                 linear_item.setBackgroundColor(itemView.getResources().getColor(R.color.bg_gray_e9));
-            }else {
-                linear_item.setBackgroundColor(itemView.getResources().getColor(R.color.write));
             }
-            tv_date.setText(data.getDate());
-            tv_pay_stall.setText(data.getPayStall());
-            tv_price.setText(data.getPrice());
-            tv_punish.setText(data.getPunish());
-            tv_wholesale_market.setText(data.getWholesaleMarket());
-            if (data.isSelect()){
-                tv_violation_of_regulations.setText(itemView.getResources().getString(R.string.select));
-            }else {
-                tv_violation_of_regulations.setText(itemView.getResources().getString(R.string.unselect));
-            }
+            tv_market.setText(data.getMarketName());
+            tv_name.setText(data.getName());
 
-            if (data.isClicked()){
-                rl_bg.setVisibility(View.VISIBLE);
-                iv_tri.setBackgroundResource(R.drawable.bg_arrow_up_tri);
-            }else {
-                rl_bg.setVisibility(View.GONE);
-                iv_tri.setBackgroundResource(R.drawable.bg_arrow_down_tri);
-            }
-            if (onNameClickListener != null) {
-                tv_punish.setTag(R.id.tag_punish_name, getLayoutPosition());
-                tv_punish.setOnClickListener(onNameClickListener);
-            }
-            if (onButtonClickListener != null) {
-                tv_punish.setTag(R.id.tag_punish_button, getLayoutPosition());
-                tv_punish.setOnClickListener(onButtonClickListener);
-            }
         }
     }
 

@@ -65,10 +65,11 @@ public class MarketEvaluateAdapter extends RecyclerView.Adapter<RecyclerView.Vie
         TextView tv_name;
         @BindView(R.id.tv_appraise)
         TextView tv_appraise;
-        @BindView(R.id.tv_jurisdiction_unit)
-        TextView tv_jurisdiction_unit;
+
         @BindView(R.id.rl_bg)
         RelativeLayout rl_bg;
+        @BindView(R.id.tv_num)
+        TextView tv_num;
 
 
         private MyItemClickListener myItemClickListener;
@@ -102,7 +103,7 @@ public class MarketEvaluateAdapter extends RecyclerView.Adapter<RecyclerView.Vie
 
 
             tv_appraise.setText(data.getUserid());
-            tv_jurisdiction_unit.setText(data.getMcrk() + data.getMbrk());
+            tv_num.setText(String.valueOf(getLayoutPosition()+1));
         }
     }
 
