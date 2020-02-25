@@ -49,7 +49,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_centerInParent="true"
-                        android:text="溯源信息"
+                        android:text="进货信息"
                         android:textColor="@color/write"
                         android:textSize="@dimen/sp15"/>
 
@@ -258,7 +258,7 @@
                     android:background="@color/bg_gray_e9"
                     android:orientation="horizontal">
 
-                    <TextView
+                 <!--   <TextView
                         android:layout_width="0dp"
                         android:layout_height="match_parent"
                         android:layout_weight="1.5"
@@ -266,13 +266,13 @@
                         android:text="@string/product_name"
                         android:textSize="@dimen/sp16"
                         android:textStyle="bold"/>
-
+-->
                     <TextView
                         android:layout_width="0dp"
                         android:layout_height="match_parent"
-                        android:layout_weight="1"
+                        android:layout_weight="1.5"
                         android:gravity="center"
-                        android:text="@string/type"
+                        android:text="商品类别"
                         android:textSize="@dimen/sp16"
                         android:textStyle="bold"/>
 

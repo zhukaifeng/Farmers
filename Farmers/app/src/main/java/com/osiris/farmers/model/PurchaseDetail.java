@@ -1,19 +1,17 @@
 package com.osiris.farmers.model;
 
-import java.util.List;
-
-public class StockPurchase {
+public class PurchaseDetail {
 
 
     /**
      * result : 0
      * message : 1
-     * data : [{"id":9,"splb":"大白菜","spbm":"蔬菜及蔬菜制品","spmc":"","danwei":"","sptm":"","dh":"客户编号1111","riqi":"100","sum":"0","spdj":"22","sphj":"2200","scriqi":"28","rkcangku":"20","gongys":"163","hycompany":"2020-02-20","hydh":"22222","yunfei":"","gldh":"","llrq":"2020-02-21 21:30:58","mark":"","mbrk":"","mcrk":"","remark":""},{"id":10,"splb":"大白菜","spbm":"蔬菜及蔬菜制品","spmc":"","danwei":"","sptm":"","dh":"客户编号1111","riqi":"200","sum":"200","spdj":"10","sphj":"2000","scriqi":"28","rkcangku":"20","gongys":"163","hycompany":"2020-02-21","hydh":"33333","yunfei":"","gldh":"","llrq":"2020-02-21 21:30:58","mark":"","mbrk":"","mcrk":"","remark":""},{"id":11,"splb":"小白菜","spbm":"蔬菜及蔬菜制品","spmc":"","danwei":"","sptm":"","dh":"客户编号222","riqi":"1000","sum":"1000","spdj":"5","sphj":"5000","scriqi":"29","rkcangku":"20","gongys":"163","hycompany":"2020-02-20","hydh":"2222333","yunfei":"","gldh":"","llrq":"2020-02-21 21:30:58","mark":"","mbrk":"","mcrk":"","remark":""},{"id":12,"splb":"大白菜","spbm":"蔬菜及蔬菜制品","spmc":"","danwei":"","sptm":"","dh":"客户编号1111","riqi":"11","sum":"11","spdj":"11","sphj":"121","scriqi":"28","rkcangku":"20","gongys":"163","hycompany":"2020-02-25","hydh":"1122","yunfei":"","gldh":"","llrq":"2020-02-25 20:36:16","mark":"","mbrk":"","mcrk":"","remark":""},{"id":13,"splb":"大青瓜","spbm":"蔬菜及蔬菜制品","spmc":"","danwei":"","sptm":"","dh":"客户编号222","riqi":"12","sum":"12","spdj":"12","sphj":"144","scriqi":"29","rkcangku":"20","gongys":"163","hycompany":"2020-02-25","hydh":"1212","yunfei":"","gldh":"","llrq":"2020-02-25 22:06:54","mark":"","mbrk":"","mcrk":"","remark":""},{"id":14,"splb":"尖椒","spbm":"蔬菜及蔬菜制品","spmc":"","danwei":"","sptm":"","dh":"客户编号222","riqi":"13","sum":"13","spdj":"13","sphj":"169","scriqi":"29","rkcangku":"20","gongys":"163","hycompany":"2020-02-25","hydh":"1313","yunfei":"","gldh":"","llrq":"2020-02-25 22:06:54","mark":"","mbrk":"","mcrk":"","remark":""}]
+     * data : {"id":9,"splb":"大白菜","spbm":"蔬菜及蔬菜制品","spmc":"","danwei":"","sptm":"","dh":"客户编号1111","riqi":"100","sum":"0","spdj":"22","sphj":"2200","scriqi":"28","rkcangku":"20","gongys":"163","hycompany":"2020-02-20","hydh":"22222","yunfei":"","gldh":"","llrq":"2020-02-21 21:30:58","mark":"","mbrk":"","mcrk":"","remark":""}
      */
 
     private int result;
     private String message;
-    private List<DataBean> data;
+    private DataBean data;
 
     public int getResult() {
         return result;
@@ -31,11 +29,11 @@ public class StockPurchase {
         this.message = message;
     }
 
-    public List<DataBean> getData() {
+    public DataBean getData() {
         return data;
     }
 
-    public void setData(List<DataBean> data) {
+    public void setData(DataBean data) {
         this.data = data;
     }
 

@@ -97,6 +97,7 @@
         <activity android:name=".jingyinghu.MenuHomeScGlActivity"/>
         <activity android:name=".jingyinghu.MenuHomeShouFeiActivity"/>
         <activity android:name=".jingyinghu.MenuHomeSuyuanActivity"/>
+        <activity android:name=".jingyinghu.PurchaseDetailActivity"/>
 
 
     </application>

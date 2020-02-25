@@ -7,7 +7,7 @@
 
     <RelativeLayout
         android:id="@+id/rl_bg"
-        android:layout_width="@dimen/dp76"
+        android:layout_width="@dimen/dp120"
         android:layout_height="@dimen/dp28"
         android:layout_centerVertical="true"
         android:layout_marginLeft="@dimen/dp20"
@@ -15,7 +15,7 @@
 
         <TextView
             android:id="@+id/tv_date"
-            android:layout_width="@dimen/dp76"
+            android:layout_width="@dimen/dp110"
             android:layout_height="@dimen/dp28"
             android:layout_centerInParent="true"
             android:gravity="center"
