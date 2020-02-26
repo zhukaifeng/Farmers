@@ -6,7 +6,7 @@
     android:orientation="vertical">
 
     <LinearLayout
-        android:layout_width="180dp"
+        android:layout_width="@dimen/dp220"
         android:layout_height="wrap_content"
         android:background="@drawable/bg_border_green"
         android:gravity="center_horizontal"
@@ -22,28 +22,62 @@
             android:textColor="@color/black"
             android:textSize="@dimen/dp16" />
 
-        <EditText
-            android:id="@+id/prod_num"
+        <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="@dimen/dp40"
+            android:layout_height="wrap_content"
             android:layout_marginLeft="@dimen/dp15"
             android:layout_marginRight="@dimen/dp15"
-            android:gravity="center"
-            android:hint="商品数量"
-            android:inputType="number"
-            android:textSize="@dimen/dp14" />
+            android:gravity="center_vertical">
 
-        <EditText
-            android:id="@+id/prod_price"
+            <EditText
+                android:id="@+id/prod_num"
+                android:layout_width="wrap_content"
+                android:layout_height="@dimen/dp40"
+                android:layout_marginRight="10dp"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:hint="商品数量"
+                android:inputType="number"
+                android:textSize="@dimen/dp14" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="斤" />
+        </LinearLayout>
+
+
+        <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="@dimen/dp40"
+            android:layout_height="wrap_content"
             android:layout_marginLeft="@dimen/dp15"
             android:layout_marginTop="@dimen/dp10"
             android:layout_marginRight="@dimen/dp15"
-            android:gravity="center"
-            android:hint="商品单价"
-            android:inputType="numberDecimal"
-            android:textSize="@dimen/dp14" />
+            android:gravity="center_vertical">
+
+            <EditText
+                android:id="@+id/prod_price"
+                android:layout_width="wrap_content"
+                android:layout_height="@dimen/dp40"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:hint="商品单价"
+                android:layout_marginRight="10dp"
+                android:inputType="numberDecimal"
+                android:textSize="@dimen/dp14" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="元" />
+        </LinearLayout>
+
+        <ImageView
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:layout_marginTop="10dp"
+            android:id="@+id/add_img"
+            android:background="@drawable/addimg_1x"/>
 
         <Button
             android:id="@+id/save"

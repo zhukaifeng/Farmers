@@ -1,5 +1,6 @@
 package com.osiris.farmers.goods.fragment;
 
+import android.app.Activity;
 import android.app.DatePickerDialog;
 import android.app.Dialog;
 import android.content.DialogInterface;
@@ -11,6 +12,8 @@ import android.support.v7.widget.RecyclerView;
 import android.text.Editable;
 import android.text.TextUtils;
 import android.text.TextWatcher;
+import android.util.Base64;
+import android.util.Log;
 import android.view.View;
 import android.widget.DatePicker;
 import android.widget.EditText;
@@ -18,12 +21,18 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.bumptech.glide.Glide;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
+import com.luck.picture.lib.PictureSelector;
+import com.luck.picture.lib.config.PictureConfig;
+import com.luck.picture.lib.config.PictureMimeType;
+import com.luck.picture.lib.entity.LocalMedia;
 import com.osiris.farmers.R;
 import com.osiris.farmers.adapter.BaseAdapter;
 import com.osiris.farmers.base.BaseFragment;
 import com.osiris.farmers.event.BoothgEvent;
+import com.osiris.farmers.event.RefreshEvent;
 import com.osiris.farmers.model.ListResponse;
 import com.osiris.farmers.model.Product;
 import com.osiris.farmers.model.Response;
@@ -41,6 +50,7 @@ import com.osiris.farmers.utils.JsonUtils;
 import com.osiris.farmers.view.AddJinhuoListActivity;
 import com.osiris.farmers.view.AddSampleActivity;
 import com.osiris.farmers.view.ChooseStoreSuoolierActivity;
+import com.osiris.farmers.view.PrintDetailActivity;
 import com.osiris.farmers.view.adapter.MyItemClickListener;
 import com.osiris.farmers.view.adapter.SimpleProdAdapter;
 import com.osiris.farmers.view.adapter.SimpleSupplyerAdapter;
@@ -52,6 +62,9 @@ import com.osiris.farmers.view.dialog.InputProNumDialog;
 import org.greenrobot.eventbus.Subscribe;
 import org.greenrobot.eventbus.ThreadMode;
 
+import java.io.FileInputStream;
+import java.io.IOException;
+import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.HashMap;
@@ -120,6 +133,8 @@ public class StockListFragment extends BaseFragment {
     private SimpleProdAdapter prodAdapter;
     private SimpleSupplyerAdapter supplyerAdapter;
     private Product product;
+    private TextWatcher supplyerWatcher;
+    private InputProNumDialog prodNumDialog;
 
     @Override
     protected int setLayout() {
@@ -171,13 +186,23 @@ public class StockListFragment extends BaseFragment {
         supplyerAdapter.setOnItemClickListener(new BaseAdapter.OnItemClickListener() {
             @Override
             public void onItemClick(int position) {
+                tv_market.removeTextChangedListener(supplyerWatcher);
                 customerBean = supplyerAdapter.getItem(position);
-                tv_market.setText(customerBean.getCommoditynm());
+                tv_market.setText(customerBean.getCustomernm());
                 customer_container.setVisibility(View.GONE);
+                new Handler().postDelayed(new Runnable() {
+                    @Override
+                    public void run() {
+                        initSupplyerWatcher();
+                        tv_market.addTextChangedListener(supplyerWatcher);
+                    }
+                }, 2000);
             }
         });
         initTextWatcher();
+        initSupplyerWatcher();
         tv_booth_num.addTextChangedListener(inputTextWatcher);
+        tv_market.addTextChangedListener(supplyerWatcher);
     }
 
     private void initTextWatcher() {
@@ -190,6 +215,25 @@ public class StockListFragment extends BaseFragment {
             @Override
             public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
                 updateSearchProd(charSequence.toString());
+            }
+
+            @Override
+            public void afterTextChanged(Editable editable) {
+
+            }
+        };
+    }
+
+    private void initSupplyerWatcher() {
+        supplyerWatcher = new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+                getStoreList(charSequence.toString());
             }
 
             @Override
@@ -248,7 +292,7 @@ public class StockListFragment extends BaseFragment {
                     Toast.makeText(getActivity(), "请先添加商品", Toast.LENGTH_SHORT).show();
                     return;
                 }
-                if (customerBean==null){
+                if (customerBean == null) {
                     Toast.makeText(getActivity(), "请先选择客户", Toast.LENGTH_SHORT).show();
                     return;
                 }
@@ -258,7 +302,7 @@ public class StockListFragment extends BaseFragment {
                     StockListData item = dataList.get(i);
                     stringBuilder.append("&data[]=").append(item.getName()).append("，").append(item.getCusNo()).append("，")
                             .append(item.getCount()).append("，").append(item.getPrice()).append("，").append(item.getTime())
-                            .append("，").append(item.getId()).append("，").append(item.getCusId());
+                            .append("，").append(item.getId()).append("，").append(item.getCusId()).append("，").append(prodNumDialog.getPath());
                 }
 
                 NetRequest.request(stringBuilder.toString(), ApiRequestTag.DATA, new HashMap<>(), new NetRequestResultListener() {
@@ -278,7 +322,7 @@ public class StockListFragment extends BaseFragment {
                 });
                 break;
             case R.id.tv_market:
-                getStoreList();
+                getStoreList("");
                 break;
             case R.id.tv_confirm:
                 postStoreInfor();
@@ -288,19 +332,27 @@ public class StockListFragment extends BaseFragment {
                     Toast.makeText(getActivity(), "请选择商品", Toast.LENGTH_SHORT).show();
                     return;
                 }
-                InputProNumDialog.Builder prodNumDialog = new InputProNumDialog.Builder(getActivity());
-                prodNumDialog.setOnSaveClickListener(new InputProNumDialog.Builder.OnSaveClickListener() {
+                InputProNumDialog.Builder prodNumDialogBuilder = new InputProNumDialog.Builder(getActivity());
+                prodNumDialogBuilder.setOnClickListener(new InputProNumDialog.Builder.OnClickListener() {
                     @Override
                     public void onSaveClick(int prodNum, double prodPrice) {
 
                         dataList.add(new StockListData(product.getId(), product.getCommoditynm(), product.getDescriptionnm()
                                 , prodNum, prodPrice, prodNum * prodPrice, true, customerBean.getUserid()
-                                , tv_time.getText().toString(), customerBean.getId()));
+                                , tv_time.getText().toString(), customerBean.getId(), prodNumDialog.getPath()));
                         dataAdapter.notifyDataSetChanged();
                         calculateTotalPrice();
                     }
+
+                    @Override
+                    public void onImgClick() {
+                        PictureSelector.create(StockListFragment.this)
+                                .openCamera(PictureMimeType.ofImage()).compress(true).maxSelectNum(1)
+                                .forResult(PictureConfig.CHOOSE_REQUEST);
+                    }
                 });
-                prodNumDialog.create().show();
+                prodNumDialog = prodNumDialogBuilder.create();
+                prodNumDialog.show();
                 break;
             case R.id.tv_time:
                 Calendar calendar = Calendar.getInstance();
@@ -309,7 +361,7 @@ public class StockListFragment extends BaseFragment {
                     public void onDateSet(DatePicker datePicker, int i, int i1, int i2) {
                         tv_time.setText(i + "-" + getFormatNum(i1 + 1) + "-" + getFormatNum(i2));
                     }
-                }, calendar.get(Calendar.YEAR) - 5, 1, 1).show();
+                }, calendar.get(Calendar.YEAR), calendar.get(Calendar.MONTH + 1), calendar.get(Calendar.DAY_OF_MONTH)).show();
                 break;
             case R.id.rl_add:
                 Intent intent1 = new Intent(getActivity(), AddJinhuoListActivity.class);
@@ -382,8 +434,119 @@ public class StockListFragment extends BaseFragment {
         total_price.setText(totalPrice + "元");
     }
 
+    private void uploadTwoBeforePic(String path) {
 
-    private void getStoreList() {
+        String url = ApiParams.API_HOST + "/app/picUpload.action";//database
+
+        Map<String, String> paramMap = new HashMap<>();
+        paramMap.put("database", "data:image/png;base64," + imageToBase64(path));
+        NetRequest.requestBase64(url, ApiRequestTag.DATA, paramMap, new NetRequestResultListener() {
+            @Override
+            public void requestSuccess(int tag, String successResult) {
+                //String temp = successResult.substring(1, successResult.length() - 1);
+
+                LogUtils.d("zkf temp:" + successResult);
+                if (successResult.contains("png") && prodNumDialog != null) {
+//                    uploadTwoPic(successResult);
+                    prodNumDialog.setImageUrl(path, successResult);
+                }
+                cancelLoadDialog();
+
+            }
+
+            @Override
+            public void requestFailure(int tag, int code, String msg) {
+                cancelLoadDialog();
+            }
+        });
+
+
+    }
+
+    public static String imageToBase64(String path) {
+        if (TextUtils.isEmpty(path)) {
+            return null;
+        }
+        InputStream is = null;
+        byte[] data = null;
+        String result = null;
+        try {
+            is = new FileInputStream(path);
+            //创建一个字符流大小的数组。
+            data = new byte[is.available()];
+            //写入数组
+            is.read(data);
+            //用默认的编码格式进行编码
+            result = Base64.encodeToString(data, Base64.NO_WRAP);
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            if (null != is) {
+                try {
+                    is.close();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            }
+
+        }
+        return result;
+    }
+
+//    private void uploadTwoPic(String path) {
+//        String url = ApiParams.API_HOST + "/app/uploadTwoPic.action";//database
+//
+//        Map<String, String> paramMap = new HashMap<>();
+//        paramMap.put("pic", path);
+//        paramMap.put("id", String.valueOf(data.getId()));
+//        NetRequest.requestBase64(url, ApiRequestTag.DATA, paramMap, new NetRequestResultListener() {
+//            @Override
+//            public void requestSuccess(int tag, String successResult) {
+//                //String temp = successResult.substring(1, successResult.length() - 1);
+//                LogUtils.d("zkf temp:" + successResult);
+//                Toast.makeText(getActivity(), "照片上传成功", Toast.LENGTH_SHORT).show();
+//                cancelLoadDialog();
+//                postEvent(new RefreshEvent());
+//                linear_pic.setVisibility(View.VISIBLE);
+//                tv_upload_pic.setVisibility(View.GONE);
+//                recyclerView.setVisibility(View.GONE);
+//                Glide.with(getActivity()).load(selectList.get(0).getCompressPath()).into(iv_pic2);
+//
+//            }
+//
+//            @Override
+//            public void requestFailure(int tag, int code, String msg) {
+//                cancelLoadDialog();
+//            }
+//        });
+//
+//
+//    }
+
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (resultCode == Activity.RESULT_OK) {
+            switch (requestCode) {
+                case PictureConfig.CHOOSE_REQUEST:
+                    // 图片选择结果回调
+                    List<LocalMedia> selectList = PictureSelector.obtainMultipleResult(data);
+                    // 例如 LocalMedia 里面返回三种path
+                    // 1.media.getPath(); 为原图path
+                    // 2.media.getCutPath();为裁剪后path，需判断media.isCut();是否为true
+                    // 3.media.getCompressPath();为压缩后path，需判断media.isCompressed();是否为true
+                    // 如果裁剪并压缩了，已取压缩路径为准，因为是先裁剪后压缩的
+                    if (selectList != null && selectList.size() > 0) {
+                        LocalMedia media = selectList.get(0);
+                        showLoadDialog();
+                        uploadTwoBeforePic(media.getCompressPath());
+                    }
+                    break;
+            }
+        }
+    }
+
+    private void getStoreList(String name) {
 
 
 //        String url = ApiParams.API_HOST + "/app/changecustomer.action";
@@ -417,6 +580,7 @@ public class StockListFragment extends BaseFragment {
         String url = ApiParams.API_HOST + "/app/getAllCustomerByUserId.action";
         Map<String, String> paramMap = new HashMap<>();
         paramMap.put("userId", String.valueOf(GlobalParams.id));
+        paramMap.put("customerNm", name);
         //  paramMap.put("customernm","null");
         LogUtils.d("zkf userid:" + String.valueOf(GlobalParams.id));
         NetRequest.getRequest(url, ApiRequestTag.DATA, paramMap, new NetRequestResultListener() {

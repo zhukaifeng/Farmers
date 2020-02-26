@@ -12,8 +12,10 @@ public class StockListData {
     private String cusNo;
     private int id;
     private String time;
+    private String imgPath;
 
-    public StockListData(int id, String name, String type, int count, double price, double total, boolean voucher, String cusNo, String time, int cusId) {
+    public StockListData(int id, String name, String type, int count, double price, double total, boolean voucher, String cusNo, String time
+            , int cusId, String imgPath) {
         this.name = name;
         this.cusNo = cusNo;
         this.type = type;
@@ -23,7 +25,16 @@ public class StockListData {
         this.voucher = voucher;
         this.time = time;
         this.id = id;
+        this.imgPath = imgPath;
         this.cusId = cusId;
+    }
+
+    public String getImgPath() {
+        return imgPath;
+    }
+
+    public void setImgPath(String imgPath) {
+        this.imgPath = imgPath;
     }
 
     public int getCusId() {

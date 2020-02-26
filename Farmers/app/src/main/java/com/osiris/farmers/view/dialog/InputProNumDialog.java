@@ -7,11 +7,15 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.Toast;
 
+import com.bumptech.glide.Glide;
 import com.osiris.farmers.R;
 
 public class InputProNumDialog extends Dialog {
+    private String path;
+
     public InputProNumDialog(Context context) {
         super(context);
     }
@@ -20,10 +24,19 @@ public class InputProNumDialog extends Dialog {
         super(context, themeResId);
     }
 
+    public String getPath() {
+        return path;
+    }
+
+    public void setImageUrl(String url, String path) {
+        this.path = path;
+        Glide.with(getContext()).load(url).into((ImageView) findViewById(R.id.add_img));
+    }
+
     public static class Builder {
 
         private Context context;
-        private OnSaveClickListener onSaveClickListener;
+        private OnClickListener onSaveClickListener;
 
         public Builder(Context context) {
             this.context = context;
@@ -35,7 +48,7 @@ public class InputProNumDialog extends Dialog {
          *
          * @return
          */
-        public Builder setOnSaveClickListener(OnSaveClickListener listener) {
+        public Builder setOnClickListener(OnClickListener listener) {
             this.onSaveClickListener = listener;
             return this;
         }
@@ -52,6 +65,15 @@ public class InputProNumDialog extends Dialog {
             EditText prodNumEt = layout.findViewById(R.id.prod_num);
             EditText prodPriceEt = layout.findViewById(R.id.prod_price);
 
+            layout.findViewById(R.id.add_img).setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    if (onSaveClickListener != null) {
+                        onSaveClickListener.onImgClick();
+                    }
+                }
+            });
+
             layout.findViewById(R.id.save).setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
@@ -63,6 +85,10 @@ public class InputProNumDialog extends Dialog {
                     }
                     if (TextUtils.isEmpty(prodPrice)) {
                         Toast.makeText(context, "商品单价不能为空", Toast.LENGTH_SHORT).show();
+                        return;
+                    }
+                    if (dialog.path==null){
+                        Toast.makeText(context, "请上传图片", Toast.LENGTH_SHORT).show();
                         return;
                     }
                     try {
@@ -84,8 +110,10 @@ public class InputProNumDialog extends Dialog {
             return dialog;
         }
 
-        public interface OnSaveClickListener {
+        public interface OnClickListener {
             void onSaveClick(int prodNum, double prodPrice);
+
+            void onImgClick();
         }
     }
 }

@@ -91,7 +91,7 @@ public class StockPurchaseFragment extends BaseFragment {
     private List<DateModel> typeList = new ArrayList<>();
     private TypePurchaseAdapter typeAdapter = new TypePurchaseAdapter(typeList);
 
-//    private List<DateModel> monthList = new ArrayList<>();
+    //    private List<DateModel> monthList = new ArrayList<>();
 //    private DateAdapter monthAdapter = new DateAdapter(monthList);
 //    private List<DateModel> yearList = new ArrayList<>();
 //    private DateAdapter yearAdapter = new DateAdapter(yearList);
@@ -130,12 +130,12 @@ public class StockPurchaseFragment extends BaseFragment {
         tv_date.setText(day + "");
 
 
-        for (int i=0;i<8;i++){
+        for (int i = 0; i < 8; i++) {
             calendar.clear();//记住一定要clear一次
-            calendar.set(Calendar.MONTH,currentMonth);
-            calendar.set(Calendar.DAY_OF_MONTH,currentWeek);
-            calendar.set(Calendar.YEAR,currentYear);
-            calendar.add(Calendar.DATE,-i);//j记住是DATE
+            calendar.set(Calendar.MONTH, currentMonth);
+            calendar.set(Calendar.DAY_OF_MONTH, currentWeek);
+            calendar.set(Calendar.YEAR, currentYear);
+            calendar.add(Calendar.DATE, -i);//j记住是DATE
             frontMonth = calendar.get(Calendar.MONTH);// 获取当前月份
             frontWeek = calendar.get(Calendar.DAY_OF_MONTH);// 获取当前日份的日期号码
             frontYear = calendar.get(Calendar.YEAR);// 获取当前年份
@@ -144,19 +144,6 @@ public class StockPurchaseFragment extends BaseFragment {
             tv_month.setText(frontMonth + "月");
 
         }
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 //  紫包菜        蔬菜     30斤     60元     华北市场   2019.03.20
@@ -202,7 +189,7 @@ public class StockPurchaseFragment extends BaseFragment {
             @Override
             public void onItemClick(View view, int position) {
                 Intent intent = new Intent(getActivity(), PurchaseDetailActivity.class);
-                intent.putExtra("id",dataList.get(position).getId());
+                intent.putExtra("id", dataList.get(position).getId());
                 startActivity(intent);
             }
         });
@@ -228,12 +215,12 @@ public class StockPurchaseFragment extends BaseFragment {
                 break;
             case R.id.linear_month:
             case R.id.tv_month_three://front date
-                new DatePickerDialog(getActivity(), onDateSetListener1,frontYear,frontMonth-1,frontWeek).show();
+                new DatePickerDialog(getActivity(), onDateSetListener1, frontYear, frontMonth - 1, frontWeek).show();
 
                 break;
             case R.id.linear_date:
             case R.id.tv_date://end date
-                new DatePickerDialog(getActivity(), onDateSetListener,currentYear,currentMonth-1,currentWeek).show();
+                new DatePickerDialog(getActivity(), onDateSetListener, currentYear, currentMonth - 1, currentWeek).show();
 
                 break;
         }
@@ -246,19 +233,19 @@ public class StockPurchaseFragment extends BaseFragment {
         @Override
         public void onDateSet(DatePicker view, int year, int monthOfYear, int dayOfMonth) {
             frontYear = year;
-            frontMonth = monthOfYear+1;
+            frontMonth = monthOfYear + 1;
             frontWeek = dayOfMonth;
 
-            tv_month_three.setText(frontWeek+"");
+            tv_month_three.setText(frontWeek + "");
             tv_month.setText(frontMonth + "月");
             tv_year.setText(frontYear + "年");
             Calendar calendar = Calendar.getInstance();
-            for (int i=0;i<8;i++){
+            for (int i = 0; i < 8; i++) {
                 calendar.clear();//记住一定要clear一次
-                calendar.set(Calendar.MONTH,frontMonth);
-                calendar.set(Calendar.DAY_OF_MONTH,frontWeek);
-                calendar.set(Calendar.YEAR,frontYear);
-                calendar.add(Calendar.DATE,+i);//j记住是DATE
+                calendar.set(Calendar.MONTH, frontMonth);
+                calendar.set(Calendar.DAY_OF_MONTH, frontWeek);
+                calendar.set(Calendar.YEAR, frontYear);
+                calendar.add(Calendar.DATE, +i);//j记住是DATE
                 currentMonth = calendar.get(Calendar.MONTH);// 获取当前月份
                 currentWeek = calendar.get(Calendar.DAY_OF_MONTH);// 获取当前日份的日期号码
                 currentYear = calendar.get(Calendar.YEAR);// 获取当前年份
@@ -296,18 +283,18 @@ public class StockPurchaseFragment extends BaseFragment {
         @Override
         public void onDateSet(DatePicker view, int year, int monthOfYear, int dayOfMonth) {
             currentYear = year;
-            currentMonth = monthOfYear+1;
+            currentMonth = monthOfYear + 1;
             currentWeek = dayOfMonth;
             tv_year_two.setText(currentYear + "年");
             tv_month_two.setText(currentMonth + "月");
             tv_date.setText(currentWeek + "");
             Calendar calendar = Calendar.getInstance();
-            for (int i=0;i<8;i++){
+            for (int i = 0; i < 8; i++) {
                 calendar.clear();//记住一定要clear一次
-                calendar.set(Calendar.MONTH,currentMonth);
-                calendar.set(Calendar.DAY_OF_MONTH,currentWeek);
-                calendar.set(Calendar.YEAR,currentYear);
-                calendar.add(Calendar.DATE,-i);//j记住是DATE
+                calendar.set(Calendar.MONTH, currentMonth);
+                calendar.set(Calendar.DAY_OF_MONTH, currentWeek);
+                calendar.set(Calendar.YEAR, currentYear);
+                calendar.add(Calendar.DATE, -i);//j记住是DATE
                 frontMonth = calendar.get(Calendar.MONTH);// 获取当前月份
                 frontWeek = calendar.get(Calendar.DAY_OF_MONTH);// 获取当前日份的日期号码
                 frontYear = calendar.get(Calendar.YEAR);// 获取当前年份
@@ -322,11 +309,11 @@ public class StockPurchaseFragment extends BaseFragment {
     };
 
 
-
-
-
-
     private String splb = "";
+
+    private String getFormatNumber(int num) {
+        return num >= 10 ? String.valueOf(num) : ("0" + num);
+    }
 
 
     ////经营户-进货菜品分类
@@ -340,9 +327,9 @@ public class StockPurchaseFragment extends BaseFragment {
 //        paramMap.put("startDay", "2020-01-01");
 //        paramMap.put("endDay", "2020-02-25");
 
-        paramMap.put("startDay", frontYear+"-"+frontMonth+"-"+frontWeek);
-        paramMap.put("endDay", currentYear+"-"+currentMonth+"-"+currentWeek);
-        Log.d("zkf","params:" + paramMap.toString());
+        paramMap.put("startDay", frontYear + "-" + getFormatNumber(frontMonth) + "-" + getFormatNumber(frontWeek));
+        paramMap.put("endDay", currentYear + "-" + getFormatNumber(currentMonth) + "-" + getFormatNumber(currentWeek));
+        Log.d("zkf", "params:" + paramMap.toString());
 
         NetRequest.request(url, ApiRequestTag.DATA, paramMap, new NetRequestResultListener() {
 
@@ -381,7 +368,7 @@ public class StockPurchaseFragment extends BaseFragment {
 
     }
 
-//http://localhost:8096/wisdom/app/getJYHSprkByJYHUserId.action?
+    //http://localhost:8096/wisdom/app/getJYHSprkByJYHUserId.action?
 // userId=163&startDay=2020-01-01&endDay=2020-02-25&splb=%E5%B0%8F%E7%99%BD%E8%8F%9C
     private void getDataList() {
 

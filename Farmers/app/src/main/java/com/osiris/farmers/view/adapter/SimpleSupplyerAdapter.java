@@ -22,6 +22,6 @@ public class SimpleSupplyerAdapter extends BaseAdapter<StoreSupplier.CustomerBea
     public void onBindViewHolder(BaseViewHolder viewHolder, int position, StoreSupplier.CustomerBean item) {
         super.onBindViewHolder(viewHolder, position, item);
         TextView tvText = (TextView) viewHolder.getView(R.id.tv_text);
-        tvText.setText(item.getCommoditynm());
+        tvText.setText(item.getCustomernm());
     }
 }

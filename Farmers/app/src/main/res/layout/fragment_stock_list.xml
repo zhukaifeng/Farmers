@@ -141,17 +141,18 @@
             android:orientation="horizontal"
             android:visibility="visible">
 
-            <TextView
+            <EditText
                 android:id="@+id/tv_market"
-                android:layout_width="wrap_content"
+                android:layout_width="@dimen/dp120"
                 android:layout_height="wrap_content"
                 android:layout_centerVertical="true"
                 android:layout_marginLeft="@dimen/dp15"
                 android:layout_marginRight="@dimen/dp14"
                 android:layout_toLeftOf="@+id/tv_booth_num"
-                android:drawableRight="@drawable/bg_arrow_down"
+                android:textColorHint="@color/white"
+                android:gravity="center"
                 android:drawablePadding="@dimen/dp8"
-                android:text="@string/supplier"
+                android:hint="@string/supplier"
                 android:textColor="@color/write"
                 android:textSize="@dimen/sp16" />
 
@@ -162,7 +163,7 @@
 
             <EditText
                 android:id="@+id/tv_booth_num"
-                android:layout_width="wrap_content"
+                android:layout_width="120dp"
                 android:layout_height="wrap_content"
                 android:layout_alignParentRight="true"
                 android:layout_centerVertical="true"
