@@ -4,18 +4,58 @@ public class StockListData {
 
     private String name;
     private String type;
-    private String count;
-    private String price;
-    private String total;
+    private int count;
+    private double price;
+    private double total;
     private boolean voucher;
+    private int cusId;
+    private String cusNo;
+    private int id;
+    private String time;
 
-    public StockListData(String name, String type, String count, String price, String total, boolean voucher) {
+    public StockListData(int id, String name, String type, int count, double price, double total, boolean voucher, String cusNo, String time, int cusId) {
         this.name = name;
+        this.cusNo = cusNo;
         this.type = type;
         this.count = count;
         this.price = price;
         this.total = total;
         this.voucher = voucher;
+        this.time = time;
+        this.id = id;
+        this.cusId = cusId;
+    }
+
+    public int getCusId() {
+        return cusId;
+    }
+
+    public void setCusId(int cusId) {
+        this.cusId = cusId;
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
+
+    public String getTime() {
+        return time;
+    }
+
+    public void setTime(String time) {
+        this.time = time;
+    }
+
+    public String getCusNo() {
+        return cusNo;
+    }
+
+    public void setCusNo(String cusNo) {
+        this.cusNo = cusNo;
     }
 
     public String getName() {
@@ -34,27 +74,27 @@ public class StockListData {
         this.type = type;
     }
 
-    public String getCount() {
+    public int getCount() {
         return count;
     }
 
-    public void setCount(String count) {
+    public void setCount(int count) {
         this.count = count;
     }
 
-    public String getPrice() {
+    public double getPrice() {
         return price;
     }
 
-    public void setPrice(String price) {
+    public void setPrice(double price) {
         this.price = price;
     }
 
-    public String getTotal() {
+    public double getTotal() {
         return total;
     }
 
-    public void setTotal(String total) {
+    public void setTotal(double total) {
         this.total = total;
     }
 

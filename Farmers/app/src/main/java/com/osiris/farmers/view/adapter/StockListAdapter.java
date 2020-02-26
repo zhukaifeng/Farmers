@@ -18,13 +18,17 @@ import java.util.List;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
-public class StockListAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>{
+public class StockListAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
 
 
     private MyItemClickListener myItemClickListener;
 
     private List<StockListData> dataList = new ArrayList<>();
+    private OnDeleteClickListener onDeleteClickListener;
 
+    public void setOnDeleteClickListener(OnDeleteClickListener onDeleteClickListener) {
+        this.onDeleteClickListener = onDeleteClickListener;
+    }
 
     public StockListAdapter(List<StockListData> dataList) {
         this.dataList = dataList;
@@ -33,16 +37,28 @@ public class StockListAdapter extends RecyclerView.Adapter<RecyclerView.ViewHold
     @Override
     public RecyclerView.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
 
-        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_bill_of_sales, parent,false);
+        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_bill_of_sales, parent, false);
 
-        return new StockListHolder(view,myItemClickListener);
+        return new StockListHolder(view, myItemClickListener);
     }
 
     @Override
     public void onBindViewHolder(RecyclerView.ViewHolder holder, int position) {
 
-        ((StockListHolder)holder).bindData(dataList.get(position));
+        ((StockListHolder) holder).bindData(dataList.get(position));
+        ((StockListHolder) holder).iv_voucher.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if (onDeleteClickListener != null) {
+                    onDeleteClickListener.onDeleteClick(position);
+                }
+            }
+        });
 
+    }
+
+    public interface OnDeleteClickListener {
+        void onDeleteClick(int position);
     }
 
     @Override
@@ -51,8 +67,7 @@ public class StockListAdapter extends RecyclerView.Adapter<RecyclerView.ViewHold
     }
 
 
-
-    class StockListHolder extends RecyclerView.ViewHolder implements View.OnClickListener{
+    class StockListHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
 
         @BindView(R.id.tv_count)
         TextView tv_count;
@@ -72,42 +87,42 @@ public class StockListAdapter extends RecyclerView.Adapter<RecyclerView.ViewHold
 
         private MyItemClickListener myItemClickListener;
 
-        public StockListHolder(View itemView,MyItemClickListener myItemClickListener) {
+        public StockListHolder(View itemView, MyItemClickListener myItemClickListener) {
             super(itemView);
-            ButterKnife.bind(this,itemView);
+            ButterKnife.bind(this, itemView);
             this.myItemClickListener = myItemClickListener;
             itemView.setOnClickListener(this);
         }
 
         @Override
         public void onClick(View v) {
-            if (null != myItemClickListener){
-                myItemClickListener.onItemClick(itemView,getLayoutPosition());
+            if (null != myItemClickListener) {
+                myItemClickListener.onItemClick(itemView, getLayoutPosition());
             }
         }
 
-        public void bindData(StockListData data){
-            if (getLayoutPosition()%2 == 1){
+        public void bindData(StockListData data) {
+            if (getLayoutPosition() % 2 == 1) {
                 linear_item.setBackgroundColor(itemView.getResources().getColor(R.color.bg_gray_e9));
-            }else {
+            } else {
                 linear_item.setBackgroundColor(itemView.getResources().getColor(R.color.write));
             }
             tv_count.setText(String.valueOf(data.getCount()));
             tv_name.setText(data.getName());
             tv_type.setText(data.getType());
-            tv_price.setText(data.getPrice());
-            tv_total.setText(data.getTotal());
-            if (data.isVoucher()){
-                iv_voucher.setBackgroundResource(R.drawable.bg_has_voucher);
-            }else {
-                iv_voucher.setBackgroundResource(R.drawable.bg_not_voucher);
-            }
+            tv_price.setText(String.valueOf(data.getPrice()));
+            tv_total.setText(String.valueOf(data.getTotal()));
+//            if (data.isVoucher()){
+//                iv_voucher.setBackgroundResource(R.drawable.bg_has_voucher);
+//            }else {
+//                iv_voucher.setBackgroundResource(R.drawable.bg_not_voucher);
+//            }
 
         }
     }
 
 
-    public void setOnItemClick(MyItemClickListener myItemClickListener){
+    public void setOnItemClick(MyItemClickListener myItemClickListener) {
         this.myItemClickListener = myItemClickListener;
     }
 }

@@ -80,7 +80,7 @@
                     android:layout_width="@dimen/dp23"
                     android:layout_height="@dimen/dp23"
                     android:layout_centerInParent="true"
-                    android:background="@drawable/bg_pic_has" />
+                    android:background="@drawable/bg_delete" />
             </RelativeLayout>
 
         </LinearLayout>
