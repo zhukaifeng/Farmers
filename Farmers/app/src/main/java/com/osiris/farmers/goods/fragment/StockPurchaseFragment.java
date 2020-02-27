@@ -397,8 +397,8 @@ public class StockPurchaseFragment extends BaseFragment {
         paramMap.put("userId", String.valueOf(GlobalParams.id));
 //        paramMap.put("startDay", "2020-01-01");
 //        paramMap.put("endDay", "2020-02-25");
-        paramMap.put("startDay", frontYear+"-"+frontMonth+"-"+frontWeek);
-        paramMap.put("endDay", currentYear+"-"+currentMonth+"-"+currentWeek);
+        paramMap.put("startDay", frontYear+"-"+getFormatNumber(frontMonth)+"-"+getFormatNumber(frontWeek));
+        paramMap.put("endDay", currentYear+"-"+getFormatNumber(currentMonth)+"-"+getFormatNumber(currentWeek));
         paramMap.put("splb", splb);
 
         NetRequest.request(url, ApiRequestTag.DATA, paramMap, new NetRequestResultListener() {
