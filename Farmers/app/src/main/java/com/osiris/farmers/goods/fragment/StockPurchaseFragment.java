@@ -84,7 +84,10 @@ public class StockPurchaseFragment extends BaseFragment {
     TextView tv_date;
     @BindView(R.id.tv_total_money)
     TextView tv_total_money;
-
+    @BindView(R.id.tv_nodata1)
+    TextView tv_nodata1;
+    @BindView(R.id.tv_nodata2)
+    TextView tv_nodata2;
 
     private List<StockPurchase.DataBean> dataList = new ArrayList<>();
     private StockPurchaseAdapter dataAdapter = new StockPurchaseAdapter(dataList);
@@ -177,7 +180,7 @@ public class StockPurchaseFragment extends BaseFragment {
 
                 typeAdapter.notifyDataSetChanged();
 
-
+                getDataList();
             }
         });
 
@@ -342,20 +345,36 @@ public class StockPurchaseFragment extends BaseFragment {
                     JsonParser parser = new JsonParser();
                     JsonObject json = parser.parse(successResult).getAsJsonObject();
                     TypeData typeData = JsonUtils.fromJson(json, TypeData.class);
+                    if (typeList.size()>0)typeList.clear();
                     if (typeData.getData().size() > 0) {
                         for (String str : typeData.getData()) {
                             typeList.add(new DateModel(str, false));
                         }
                         typeList.get(0).setClicked(true);
                         splb = typeList.get(0).getDate();
-                        typeAdapter.notifyDataSetChanged();
                         getDataList();
+                        tv_nodata1.setVisibility(View.GONE);
+                        rv_type.setVisibility(View.VISIBLE);
+                    }else {
+                        rv_type.setVisibility(View.GONE);
 
+                        tv_nodata1.setVisibility(View.VISIBLE);
+                        tv_nodata2.setVisibility(View.VISIBLE);
+                        rv_data.setVisibility(View.GONE);
                     }
+
+
+                    typeAdapter.notifyDataSetChanged();
 
 
                     //		typeList.add(new DateModel("蔬菜", true));
 
+                }else {
+                    rv_type.setVisibility(View.GONE);
+
+                    tv_nodata1.setVisibility(View.VISIBLE);
+                    tv_nodata2.setVisibility(View.VISIBLE);
+                    rv_data.setVisibility(View.GONE);
                 }
 
             }
@@ -376,8 +395,10 @@ public class StockPurchaseFragment extends BaseFragment {
         String url = ApiParams.API_HOST + "/app/getJYHSprkByJYHUserId.action";
         Map<String, String> paramMap = new HashMap<>();
         paramMap.put("userId", String.valueOf(GlobalParams.id));
-        paramMap.put("startDay", "2020-01-01");
-        paramMap.put("endDay", "2020-02-25");
+//        paramMap.put("startDay", "2020-01-01");
+//        paramMap.put("endDay", "2020-02-25");
+        paramMap.put("startDay", frontYear+"-"+frontMonth+"-"+frontWeek);
+        paramMap.put("endDay", currentYear+"-"+currentMonth+"-"+currentWeek);
         paramMap.put("splb", splb);
 
         NetRequest.request(url, ApiRequestTag.DATA, paramMap, new NetRequestResultListener() {
@@ -390,23 +411,34 @@ public class StockPurchaseFragment extends BaseFragment {
                     cancelLoadDialog();
                     JsonParser parser = new JsonParser();
                     JsonObject json = parser.parse(successResult).getAsJsonObject();
+                    if (dataList.size() > 0) {
+                        dataList.clear();
+                    }
                     if (json.has("data")) {
                         StockPurchase.DataBean[] taskList = JsonUtils.fromJson(json.get("data"), StockPurchase.DataBean[].class);
-                        if (dataList.size() > 0) {
-                            dataList.clear();
-                        }
+
                         dataList.addAll(Arrays.asList(taskList));
-                        dataAdapter.notifyDataSetChanged();
 
                         int sumMoney = 0;
                         for (StockPurchase.DataBean dataBean : dataList) {
-                            sumMoney = sumMoney + Integer.parseInt(dataBean.getSpdj()) * Integer.parseInt(dataBean.getSum());
+                            sumMoney = sumMoney + Integer.parseInt(dataBean.getSpdj().replace(".0","")) * Integer.parseInt(dataBean.getSum());
                         }
                         tv_total_money.setText(sumMoney + "");
+                        tv_nodata2.setVisibility(View.GONE);
+                        rv_data.setVisibility(View.VISIBLE);
+                    }else {
+                        tv_nodata2.setVisibility(View.VISIBLE);
+                        rv_data.setVisibility(View.GONE);
                     }
+
+                    dataAdapter.notifyDataSetChanged();
 
 
                     //		typeList.add(new DateModel("蔬菜", true));
+
+                }else {
+                    tv_nodata2.setVisibility(View.VISIBLE);
+                    rv_data.setVisibility(View.GONE);
 
                 }
 
