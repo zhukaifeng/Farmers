@@ -400,6 +400,7 @@ public class StockPurchaseFragment extends BaseFragment {
         paramMap.put("startDay", frontYear+"-"+getFormatNumber(frontMonth)+"-"+getFormatNumber(frontWeek));
         paramMap.put("endDay", currentYear+"-"+getFormatNumber(currentMonth)+"-"+getFormatNumber(currentWeek));
         paramMap.put("splb", splb);
+        Log.d("zkf", "params:" + paramMap.toString());
 
         NetRequest.request(url, ApiRequestTag.DATA, paramMap, new NetRequestResultListener() {
 
@@ -413,22 +414,31 @@ public class StockPurchaseFragment extends BaseFragment {
                     JsonObject json = parser.parse(successResult).getAsJsonObject();
                     if (dataList.size() > 0) {
                         dataList.clear();
+                        tv_total_money.setText("0");
                     }
                     if (json.has("data")) {
                         StockPurchase.DataBean[] taskList = JsonUtils.fromJson(json.get("data"), StockPurchase.DataBean[].class);
 
                         dataList.addAll(Arrays.asList(taskList));
+                        if (dataList.size()>0){
+                            int sumMoney = 0;
+                            for (StockPurchase.DataBean dataBean : dataList) {
+                                sumMoney = sumMoney + Integer.parseInt(dataBean.getSpdj().replace(".0","")) * Integer.parseInt(dataBean.getSum());
+                            }
+                            tv_total_money.setText(sumMoney + "");
 
-                        int sumMoney = 0;
-                        for (StockPurchase.DataBean dataBean : dataList) {
-                            sumMoney = sumMoney + Integer.parseInt(dataBean.getSpdj().replace(".0","")) * Integer.parseInt(dataBean.getSum());
+                            tv_nodata2.setVisibility(View.GONE);
+                            rv_data.setVisibility(View.VISIBLE);
+                        }else {
+                            tv_nodata2.setVisibility(View.VISIBLE);
+                            rv_data.setVisibility(View.GONE);
+                            tv_total_money.setText("0");
                         }
-                        tv_total_money.setText(sumMoney + "");
-                        tv_nodata2.setVisibility(View.GONE);
-                        rv_data.setVisibility(View.VISIBLE);
+
                     }else {
                         tv_nodata2.setVisibility(View.VISIBLE);
                         rv_data.setVisibility(View.GONE);
+                        tv_total_money.setText("0");
                     }
 
                     dataAdapter.notifyDataSetChanged();
