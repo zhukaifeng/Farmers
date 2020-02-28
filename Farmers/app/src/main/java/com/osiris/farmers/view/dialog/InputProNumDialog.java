@@ -15,6 +15,7 @@ import com.osiris.farmers.R;
 
 public class InputProNumDialog extends Dialog {
     private String path;
+    private String imgUrl;
 
     public InputProNumDialog(Context context) {
         super(context);
@@ -28,8 +29,13 @@ public class InputProNumDialog extends Dialog {
         return path;
     }
 
+    public String getImgUrl() {
+        return imgUrl;
+    }
+
     public void setImageUrl(String url, String path) {
         this.path = path;
+        this.imgUrl = url;
         Glide.with(getContext()).load(url).into((ImageView) findViewById(R.id.add_img));
     }
 
@@ -87,7 +93,7 @@ public class InputProNumDialog extends Dialog {
                         Toast.makeText(context, "商品单价不能为空", Toast.LENGTH_SHORT).show();
                         return;
                     }
-                    if (dialog.path==null){
+                    if (dialog.path == null) {
                         Toast.makeText(context, "请上传图片", Toast.LENGTH_SHORT).show();
                         return;
                     }

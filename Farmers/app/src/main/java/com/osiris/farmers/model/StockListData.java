@@ -13,9 +13,10 @@ public class StockListData {
     private int id;
     private String time;
     private String imgPath;
+    private String localUrl;
 
     public StockListData(int id, String name, String type, int count, double price, double total, boolean voucher, String cusNo, String time
-            , int cusId, String imgPath) {
+            , int cusId, String imgPath, String localUrl) {
         this.name = name;
         this.cusNo = cusNo;
         this.type = type;
@@ -24,9 +25,18 @@ public class StockListData {
         this.total = total;
         this.voucher = voucher;
         this.time = time;
+        this.localUrl = localUrl;
         this.id = id;
         this.imgPath = imgPath;
         this.cusId = cusId;
+    }
+
+    public String getLocalUrl() {
+        return localUrl;
+    }
+
+    public void setLocalUrl(String localUrl) {
+        this.localUrl = localUrl;
     }
 
     public String getImgPath() {

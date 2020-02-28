@@ -1,6 +1,10 @@
 package com.osiris.farmers.view.adapter;
 
+import android.app.Activity;
+import android.app.AlertDialog;
+import android.content.Context;
 import android.support.v7.widget.RecyclerView;
+import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -8,9 +12,10 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import com.bumptech.glide.Glide;
 import com.osiris.farmers.R;
-import com.osiris.farmers.model.DateBackto;
 import com.osiris.farmers.model.StockListData;
+import com.osiris.farmers.view.BigImageActivity;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -25,12 +30,14 @@ public class StockListAdapter extends RecyclerView.Adapter<RecyclerView.ViewHold
 
     private List<StockListData> dataList = new ArrayList<>();
     private OnDeleteClickListener onDeleteClickListener;
+    private Activity activity;
 
     public void setOnDeleteClickListener(OnDeleteClickListener onDeleteClickListener) {
         this.onDeleteClickListener = onDeleteClickListener;
     }
 
-    public StockListAdapter(List<StockListData> dataList) {
+    public StockListAdapter(Activity activity, List<StockListData> dataList) {
+        this.activity = activity;
         this.dataList = dataList;
     }
 
@@ -46,12 +53,23 @@ public class StockListAdapter extends RecyclerView.Adapter<RecyclerView.ViewHold
     public void onBindViewHolder(RecyclerView.ViewHolder holder, int position) {
 
         ((StockListHolder) holder).bindData(dataList.get(position));
-        ((StockListHolder) holder).iv_voucher.setOnClickListener(new View.OnClickListener() {
+        ((StockListHolder) holder).iv_delete.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 if (onDeleteClickListener != null) {
                     onDeleteClickListener.onDeleteClick(position);
                 }
+            }
+        });
+        Context context = holder.itemView.getContext();
+        ((StockListHolder) holder).pic_detail.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                String imgPath = dataList.get(position).getLocalUrl();
+                if (TextUtils.isEmpty(imgPath)) {
+                    return;
+                }
+                BigImageActivity.showImage(activity, imgPath);
             }
         });
 
@@ -79,11 +97,12 @@ public class StockListAdapter extends RecyclerView.Adapter<RecyclerView.ViewHold
         TextView tv_price;
         @BindView(R.id.tv_total)
         TextView tv_total;
-        @BindView(R.id.iv_voucher)
-        ImageView iv_voucher;
+        @BindView(R.id.iv_delete)
+        ImageView iv_delete;
         @BindView(R.id.linear_item)
         LinearLayout linear_item;
-
+        @BindView(R.id.pic_detail)
+        View pic_detail;
 
         private MyItemClickListener myItemClickListener;
 

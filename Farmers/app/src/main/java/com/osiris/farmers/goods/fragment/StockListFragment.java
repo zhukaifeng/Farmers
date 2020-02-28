@@ -65,8 +65,10 @@ import org.greenrobot.eventbus.ThreadMode;
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStream;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -127,7 +129,7 @@ public class StockListFragment extends BaseFragment {
 
     private StoreSupplier.CustomerBean customerBean;
     private List<StockListData> dataList = new ArrayList<>();
-    private StockListAdapter dataAdapter = new StockListAdapter(dataList);
+    private StockListAdapter dataAdapter;
     private List<StoreSupplier.CustomerBean> customer = new ArrayList<>();
     private List<SampleNameData.CommodityBean> commodityList = new ArrayList<>();
     private SimpleProdAdapter prodAdapter;
@@ -143,7 +145,7 @@ public class StockListFragment extends BaseFragment {
 
     @Override
     protected void initView() {
-
+        dataAdapter = new StockListAdapter(getActivity(), dataList);
         rv_data.setLayoutManager(new LinearLayoutManager(this.getActivity(), LinearLayoutManager.VERTICAL, false));
         rv_data.setAdapter(dataAdapter);
         dataAdapter.setOnItemClick(new MyItemClickListener() {
@@ -167,6 +169,7 @@ public class StockListFragment extends BaseFragment {
         supplyerAdapter = new SimpleSupplyerAdapter(getActivity());
         cus_list.setLayoutManager(new LinearLayoutManager(getActivity()));
         cus_list.setAdapter(supplyerAdapter);
+        tv_time.setText(new SimpleDateFormat("yyyy-MM-dd").format(new Date()));
         prodAdapter.setOnItemClickListener(new BaseAdapter.OnItemClickListener() {
             @Override
             public void onItemClick(int position) {
@@ -339,7 +342,7 @@ public class StockListFragment extends BaseFragment {
 
                         dataList.add(new StockListData(product.getId(), product.getCommoditynm(), product.getDescriptionnm()
                                 , prodNum, prodPrice, prodNum * prodPrice, true, customerBean.getUserid()
-                                , tv_time.getText().toString(), customerBean.getId(), prodNumDialog.getPath()));
+                                , tv_time.getText().toString(), customerBean.getId(), prodNumDialog.getPath(), prodNumDialog.getImgUrl()));
                         dataAdapter.notifyDataSetChanged();
                         calculateTotalPrice();
                     }
