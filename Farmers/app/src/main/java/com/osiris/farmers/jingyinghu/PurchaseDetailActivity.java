@@ -103,11 +103,11 @@ public class PurchaseDetailActivity extends BaseActivity {
                             tv_product_total_price.setText(dataBean.getDh());
 
 
-                        if (!TextUtils.isEmpty(dataBean.getHycompany()))
-                            tv_product_date.setText(dataBean.getHycompany());
+                        if (!TextUtils.isEmpty(dataBean.getMbrk()))
+                            tv_product_date.setText(dataBean.getMbrk());
 
 
-                        if (!TextUtils.isEmpty(dataBean.getHydh()))
+                        if (!TextUtils.isEmpty(dataBean.getRiqi()))
                             tv_product_num_ru.setText(dataBean.getRiqi());
 
                         if (!TextUtils.isEmpty(dataBean.getSum()))

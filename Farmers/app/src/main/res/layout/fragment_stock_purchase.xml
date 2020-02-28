@@ -201,10 +201,15 @@
             </LinearLayout>
         </RelativeLayout>
 
+
+        <android.support.v4.widget.SwipeRefreshLayout
+            android:id="@+id/refreshLayout"
+            android:layout_below="@+id/rl_top"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content">
         <android.support.v4.widget.NestedScrollView
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_below="@+id/rl_top"
             android:scrollbars="none"
             >
 
@@ -337,6 +342,7 @@
                     android:layout_below="@+id/linear_title"/>
             </RelativeLayout>
         </android.support.v4.widget.NestedScrollView>
+        </android.support.v4.widget.SwipeRefreshLayout>
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -787,7 +793,6 @@
                 </LinearLayout>
             </LinearLayout>
         </android.support.v4.widget.NestedScrollView>
-
 
     </LinearLayout>
 

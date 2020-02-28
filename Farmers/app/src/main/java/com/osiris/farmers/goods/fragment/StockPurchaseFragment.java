@@ -2,6 +2,7 @@ package com.osiris.farmers.goods.fragment;
 
 import android.app.DatePickerDialog;
 import android.content.Intent;
+import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.text.TextUtils;
@@ -88,6 +89,8 @@ public class StockPurchaseFragment extends BaseFragment {
     TextView tv_nodata1;
     @BindView(R.id.tv_nodata2)
     TextView tv_nodata2;
+    @BindView(R.id.refreshLayout)
+    SwipeRefreshLayout refreshLayout;
 
     private List<StockPurchase.DataBean> dataList = new ArrayList<>();
     private StockPurchaseAdapter dataAdapter = new StockPurchaseAdapter(dataList);
@@ -198,6 +201,13 @@ public class StockPurchaseFragment extends BaseFragment {
         });
 
         getType();
+
+        refreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
+            @Override
+            public void onRefresh() {
+                getType();
+            }
+        });
 
     }
 
@@ -340,6 +350,7 @@ public class StockPurchaseFragment extends BaseFragment {
             public void requestSuccess(int tag, String successResult) {
                 //String temp = successResult.substring(1, successResult.length() - 1);
                 LogUtils.d("zkf  successResult:" + successResult);
+                refreshLayout.setRefreshing(false);
                 if (!TextUtils.isEmpty(successResult)) {
                     cancelLoadDialog();
                     JsonParser parser = new JsonParser();
@@ -408,6 +419,7 @@ public class StockPurchaseFragment extends BaseFragment {
             public void requestSuccess(int tag, String successResult) {
                 //String temp = successResult.substring(1, successResult.length() - 1);
                 LogUtils.d("zkf  successResult:" + successResult);
+                refreshLayout.setRefreshing(false);
                 if (!TextUtils.isEmpty(successResult)) {
                     cancelLoadDialog();
                     JsonParser parser = new JsonParser();
