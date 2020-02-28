@@ -127,7 +127,13 @@
                 android:layout_marginLeft="@dimen/dp10"
                 android:layout_toRightOf="@+id/tv_supplier"
                 android:background="@drawable/bg_pic_add" />
-
+            <ImageView
+                android:layout_width="@dimen/dp20"
+                android:layout_height="@dimen/dp20"
+                android:layout_centerVertical="true"
+                android:layout_toRightOf="@+id/tv_add"
+                android:layout_marginLeft="@dimen/dp15"
+                android:src="@mipmap/primary_scan"/>
         </RelativeLayout>
 
 
@@ -168,7 +174,6 @@
                 android:layout_alignParentRight="true"
                 android:layout_centerVertical="true"
                 android:layout_marginLeft="@dimen/dp8"
-                android:layout_marginRight="@dimen/dp15"
                 android:drawablePadding="@dimen/dp8"
                 android:gravity="center"
                 android:hint="@string/product_name"
@@ -176,6 +181,11 @@
                 android:textColor="@color/write"
                 android:textColorHint="@color/white"
                 android:textSize="@dimen/sp16" />
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="30dp"
+                android:layout_marginRight="@dimen/dp15"
+                android:src="@mipmap/voice_icon"/>
 
         </LinearLayout>
     </RelativeLayout>
@@ -331,6 +341,15 @@
                 android:layout_weight="1"
                 android:gravity="center"
                 android:text="@string/invoice_for_payment"
+                android:textSize="@dimen/sp14"
+                android:textStyle="bold" />
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:text="删除"
                 android:textSize="@dimen/sp14"
                 android:textStyle="bold" />
 

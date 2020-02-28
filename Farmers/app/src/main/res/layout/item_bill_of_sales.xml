@@ -72,11 +72,24 @@
 
             <RelativeLayout
                 android:layout_width="0dp"
+                android:id="@+id/pic_detail"
                 android:layout_height="match_parent"
                 android:layout_weight="1">
 
                 <ImageView
-                    android:id="@+id/iv_voucher"
+                    android:id="@+id/iv_picture"
+                    android:layout_width="@dimen/dp23"
+                    android:layout_height="@dimen/dp23"
+                    android:layout_centerInParent="true"
+                    android:background="@mipmap/thumb_icon" />
+            </RelativeLayout>
+            <RelativeLayout
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1">
+
+                <ImageView
+                    android:id="@+id/iv_delete"
                     android:layout_width="@dimen/dp23"
                     android:layout_height="@dimen/dp23"
                     android:layout_centerInParent="true"

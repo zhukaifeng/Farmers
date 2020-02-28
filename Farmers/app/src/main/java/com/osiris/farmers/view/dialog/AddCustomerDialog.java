@@ -79,36 +79,37 @@ public class AddCustomerDialog extends Dialog {
                     String cusPhone = cusPhoneEt.getText().toString();
                     String cusLicense = cusLicenseEt.getText().toString();
                     String cusAddr = cusAddrEt.getText().toString();
-                    if (TextUtils.isEmpty(cusNo)){
-                        Toast.makeText(context,"客户编号不能为空",Toast.LENGTH_SHORT).show();
+//                    if (TextUtils.isEmpty(cusNo)){
+//                        Toast.makeText(context,"客户编号不能为空",Toast.LENGTH_SHORT).show();
+//                        return;
+//                    }
+                    if (TextUtils.isEmpty(cusName)) {
+                        Toast.makeText(context, "客户姓名不能为空", Toast.LENGTH_SHORT).show();
                         return;
                     }
-                    if (TextUtils.isEmpty(cusName)){
-                        Toast.makeText(context,"客户姓名不能为空",Toast.LENGTH_SHORT).show();
-                        return;
-                    }
-                    if (TextUtils.isEmpty(cusType)){
-                        Toast.makeText(context,"客户类型不能为空",Toast.LENGTH_SHORT).show();
-                        return;
-                    }
-                    if (TextUtils.isEmpty(cusPhone)){
-                        Toast.makeText(context,"客户电话不能为空",Toast.LENGTH_SHORT).show();
-                        return;
-                    }
-                    if (TextUtils.isEmpty(cusAddr)){
-                        Toast.makeText(context,"客户地址不能为空",Toast.LENGTH_SHORT).show();
-                        return;
-                    }
-                    if (TextUtils.isEmpty(cusLicense)){
-                        Toast.makeText(context,"营业执照不能为空",Toast.LENGTH_SHORT).show();
-                        return;
-                    }
-                    if (TextUtils.isEmpty(cusNo)){
-                        Toast.makeText(context,"客户编号不能为空",Toast.LENGTH_SHORT).show();
-                        return;
-                    }
+//                    if (TextUtils.isEmpty(cusType)){
+//                        Toast.makeText(context,"客户类型不能为空",Toast.LENGTH_SHORT).show();
+//                        return;
+//                    }
+//                    if (TextUtils.isEmpty(cusPhone)){
+//                        Toast.makeText(context,"客户电话不能为空",Toast.LENGTH_SHORT).show();
+//                        return;
+//                    }
+//                    if (TextUtils.isEmpty(cusAddr)){
+//                        Toast.makeText(context,"客户地址不能为空",Toast.LENGTH_SHORT).show();
+//                        return;
+//                    }
+//                    if (TextUtils.isEmpty(cusLicense)){
+//                        Toast.makeText(context,"营业执照不能为空",Toast.LENGTH_SHORT).show();
+//                        return;
+//                    }
+//                    if (TextUtils.isEmpty(cusNo)){
+//                        Toast.makeText(context,"客户编号不能为空",Toast.LENGTH_SHORT).show();
+//                        return;
+//                    }
                     if (onSaveClickListener != null) {
-                        onSaveClickListener.onSaveClick(cusNo, cusName, cusType, cusLink, cusPhone, cusAddr, cusLicense);
+                        onSaveClickListener.onSaveClick(cusNo == null ? "" : cusName, cusName == null ? "" : cusName, cusType == null ? "" : cusType
+                                , cusLink == null ? "" : cusLink, cusPhone == null ? "" : cusPhone, cusAddr == null ? "" : cusAddr, cusLicense == null ? "" : cusLicense);
                     }
                     dialog.dismiss();
                 }
