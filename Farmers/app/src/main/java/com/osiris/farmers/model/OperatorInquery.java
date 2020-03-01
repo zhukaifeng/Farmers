@@ -1,7 +1,5 @@
 package com.osiris.farmers.model;
 
-import com.google.gson.annotations.SerializedName;
-
 import java.util.List;
 
 public class OperatorInquery {
@@ -93,6 +91,22 @@ public class OperatorInquery {
 		private String createtime;
 		private String sex;
 		private String headpic;
+		/**
+		 * shengName : 江苏省
+		 * shiName : 南通市
+		 * regionname : 崇川区
+		 * jyhid : 165
+		 * zhiwei :
+		 * jiedaoName : 观音山街道
+		 * cardId :
+		 */
+
+		private String shengName;
+		private String shiName;
+		private String regionname;
+		private String zhiwei;
+		private String jiedaoName;
+		private String cardId;
 
 		public int getId() {
 			return id;
@@ -268,6 +282,54 @@ public class OperatorInquery {
 
 		public void setHeadpic(String headpic) {
 			this.headpic = headpic;
+		}
+
+		public String getShengName() {
+			return shengName;
+		}
+
+		public void setShengName(String shengName) {
+			this.shengName = shengName;
+		}
+
+		public String getShiName() {
+			return shiName;
+		}
+
+		public void setShiName(String shiName) {
+			this.shiName = shiName;
+		}
+
+		public String getRegionname() {
+			return regionname;
+		}
+
+		public void setRegionname(String regionname) {
+			this.regionname = regionname;
+		}
+
+		public String getZhiwei() {
+			return zhiwei;
+		}
+
+		public void setZhiwei(String zhiwei) {
+			this.zhiwei = zhiwei;
+		}
+
+		public String getJiedaoName() {
+			return jiedaoName;
+		}
+
+		public void setJiedaoName(String jiedaoName) {
+			this.jiedaoName = jiedaoName;
+		}
+
+		public String getCardId() {
+			return cardId;
+		}
+
+		public void setCardId(String cardId) {
+			this.cardId = cardId;
 		}
 	}
 }

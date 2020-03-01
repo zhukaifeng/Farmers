@@ -5,9 +5,11 @@ import android.content.Intent;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.bumptech.glide.Glide;
 import com.osiris.farmers.R;
 import com.osiris.farmers.base.BaseActivity;
 import com.osiris.farmers.model.OperatorInquery;
+import com.osiris.farmers.network.ApiParams;
 
 import butterknife.BindView;
 
@@ -49,9 +51,12 @@ public class BusinessActivity extends BaseActivity {
         return new Intent(context, BusinessActivity.class)
                 .putExtra("avatar", data.getHeadpic()).putExtra("real_name", data.getJyhmc())
                 .putExtra("sex", "男".equals(data.getSex()) ? 0 : 1).putExtra("phone", data.getPhone())
-                .putExtra("idCode", data.getRemark()).putExtra("market", data.getMarketnm())
+                .putExtra("idCode", data.getCardId()).putExtra("market", data.getMarketnm())
                 .putExtra("tanwei", data.getTwhma()).putExtra("busNo", data.getJyhid())
-                .putExtra("businessUser", data.getUser());
+                .putExtra("wechat", data.getMark()).putExtra("alipay", data.getMbrk())
+                .putExtra("businessUser", data.getUser()).putExtra("license_code", data.getRemark())
+                .putExtra("address",data.getShengName()+data.getShiName()+data.getRegionname()+data.getJiedaoName())
+                .putExtra("job",data.getZhiwei());
     }
 
     @Override
@@ -62,13 +67,20 @@ public class BusinessActivity extends BaseActivity {
     @Override
     public void init() {
         Intent dataIntent = getIntent();
+        String baseUrl = ApiParams.API_HOST + "/";
+        Glide.with(this).load(baseUrl + dataIntent.getStringExtra("avatar")).into(iv_user_head);
+        Glide.with(this).load(baseUrl + dataIntent.getStringExtra("wechat")).into(iv_wx_code);
+        Glide.with(this).load(baseUrl + dataIntent.getStringExtra("alipay")).into(iv_zfb_code);
         iv_sex.setSelected(dataIntent.getIntExtra("sex", 0) == 1);
         real_name.setText(dataIntent.getStringExtra("real_name"));
         tv_phone.setText(dataIntent.getStringExtra("phone"));
         id_card.setText(dataIntent.getStringExtra("idCode"));
         tv_market.setText(dataIntent.getStringExtra("market"));
         tw_no.setText(dataIntent.getStringExtra("tanwei"));
-        business_code.setText(String.valueOf(dataIntent.getIntExtra("busNo", 0)));
+        business_code.setText(dataIntent.getStringExtra("busNo"));
         bus_contact.setText(dataIntent.getStringExtra("businessUser"));
+        license_code.setText(dataIntent.getStringExtra("license_code"));
+        tv_address.setText(dataIntent.getStringExtra("address"));
+        tv_job.setText(dataIntent.getStringExtra("job"));
     }
 }

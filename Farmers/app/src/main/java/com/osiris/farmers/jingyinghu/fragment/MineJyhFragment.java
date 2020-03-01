@@ -68,7 +68,7 @@ public class MineJyhFragment extends BaseFragment {
                 JsonObject jsonObject = parser.parse(successResult).getAsJsonObject();
                 if (jsonObject.has("data")) {
                     BusinessInfo info = JsonUtils.fromJson(jsonObject.get("data"), BusinessInfo.class);
-                    Glide.with(getActivity()).load(ApiParams.API_HOST + "/jynsprk/" + info.getHeadpic()).into(iv_avatar);
+                    Glide.with(getActivity()).load(ApiParams.API_HOST + "/" + info.getHeadpic()).into(iv_avatar);
                     tv_user_name.setText("用户名：" + info.getUsername());
                     tv_account.setText("账号：" + info.getLoginname());
                     tv_dept.setText("所属市场：" + info.getMarketName());
