@@ -8,7 +8,7 @@ import android.view.View;
 
 import com.osiris.farmers.R;
 import com.osiris.farmers.base.BaseFragment;
-import com.osiris.farmers.jingyinghu.fragment.ChufazhiduFragment;
+import com.osiris.farmers.jingyinghu.fragment.RegulationFragment;
 import com.osiris.farmers.jingyinghu.fragment.ZhenceFaguiFragment;
 
 import butterknife.BindView;
@@ -54,9 +54,9 @@ public class ZhiduCxFragment extends BaseFragment {
 
     private class myPagerAdapter extends FragmentPagerAdapter {
 
-        String[] title = {"处罚制度", "政策法规"};
-        ChufazhiduFragment fragment1;
-        ZhenceFaguiFragment fragment2;
+        String[] title = {"市场管理制度", "政策法规"};
+        RegulationFragment fragment1;
+        RegulationFragment fragment2;
 
         public myPagerAdapter(FragmentManager fm) {
             super(fm);
@@ -66,10 +66,10 @@ public class ZhiduCxFragment extends BaseFragment {
         public Fragment getItem(int position) {
             switch (position) {
                 case 0:
-                    fragment1 = new ChufazhiduFragment();
+                    fragment1 = RegulationFragment.newInstance(RegulationFragment.TYPE_MANAGE_REGULAR);
                     return fragment1;
                 case 1:
-                    fragment2 = new ZhenceFaguiFragment();
+                    fragment2 = RegulationFragment.newInstance(RegulationFragment.TYPE_LAW_REGULAR);
                     return fragment2;
 
                 default:

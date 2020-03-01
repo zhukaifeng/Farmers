@@ -1,5 +1,7 @@
 package com.osiris.farmers.model;
 
+import com.google.gson.annotations.SerializedName;
+
 import java.util.List;
 
 public class OperatorInquery {
@@ -81,6 +83,16 @@ public class OperatorInquery {
 		private String mbrk;
 		private String mcrk;
 		private String remark;
+		/**
+		 * createtime : 2020-02-16 10:01:39
+		 * sex : 女
+		 * headpic : nan.png
+		 * jyhid : 163
+		 */
+
+		private String createtime;
+		private String sex;
+		private String headpic;
 
 		public int getId() {
 			return id;
@@ -232,6 +244,30 @@ public class OperatorInquery {
 
 		public void setRemark(String remark) {
 			this.remark = remark;
+		}
+
+		public String getCreatetime() {
+			return createtime;
+		}
+
+		public void setCreatetime(String createtime) {
+			this.createtime = createtime;
+		}
+
+		public String getSex() {
+			return sex;
+		}
+
+		public void setSex(String sex) {
+			this.sex = sex;
+		}
+
+		public String getHeadpic() {
+			return headpic;
+		}
+
+		public void setHeadpic(String headpic) {
+			this.headpic = headpic;
 		}
 	}
 }

@@ -29,6 +29,7 @@
     <string name="check">检测</string>
     <string name="purchasing">进货</string>
     <string name="operator_management">经营户管理</string>
+    <string name="operator_info">经营户信息</string>
     <string name="stock">库存</string>
     <string name="appraise">评价</string>
     <string name="appraise_management">评价管理</string>
@@ -212,6 +213,7 @@
     <string name="jyh_chaxun">经营户查询</string>
     <string name="wode">我的</string>
     <string name="zhidfu_chaxun">制度查询</string>
+    <string name="show_msg">通知查看</string>
     <string name="jyh_xingwei">经营户行为</string>
     <string name="shichangxuncha">市场巡查</string>
     <string name="jiaofeichaxun">交费查询</string>

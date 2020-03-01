@@ -22,6 +22,7 @@ import com.osiris.farmers.view.fragment.MarketEvaulateFragment;
 import com.osiris.farmers.view.fragment.OperatorInquiryFragment;
 import com.osiris.farmers.view.fragment.PersonalLifePayFragment;
 import com.osiris.farmers.view.fragment.ShippingStockFragment;
+import com.osiris.farmers.view.fragment.StockMsgFragment;
 import com.osiris.farmers.view.fragment.TakeSampleFragment;
 import com.osiris.farmers.view.fragment.TakeSampleListFragment;
 

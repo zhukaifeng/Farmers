@@ -6,7 +6,7 @@ import com.osiris.farmers.base.BaseFragment;
 public class ZhenceFaguiFragment extends BaseFragment {
     @Override
     protected int setLayout() {
-        return R.layout.fragment_list_zhidu;
+        return R.layout.fragment_list_regulation;
     }
 
     @Override

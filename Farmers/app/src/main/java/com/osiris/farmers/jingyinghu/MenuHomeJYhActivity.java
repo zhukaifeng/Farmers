@@ -24,6 +24,7 @@ import com.osiris.farmers.view.fragment.MarketEvaulateMarketManagerFragment;
 import com.osiris.farmers.view.fragment.OperatorInquiryFragment;
 import com.osiris.farmers.view.fragment.PersonalLifePayFragment;
 import com.osiris.farmers.view.fragment.ShippingStockFragment;
+import com.osiris.farmers.view.fragment.StockMsgFragment;
 import com.osiris.farmers.view.fragment.TakeSampleFragment;
 import com.osiris.farmers.view.fragment.TakeSampleListFragment;
 
@@ -35,6 +36,7 @@ public class MenuHomeJYhActivity extends BaseActivity {
 	FragmentTabHost tabhostMainMenu;
 	@BindView(R.id.frame_home_content)
 	FrameLayout framHomeContent;
+	private final String tag_stock_msg = "stock_msg";
 	private final String tag_stock_purchase = "stock_purchase";
 	private final String tag_stock_list = "stock_list";
 	private final String tag_stock_goods = "stock_goods";
@@ -159,6 +161,9 @@ public class MenuHomeJYhActivity extends BaseActivity {
 				});
 				break;
 			case 4://市场管理
+
+				tabhostMainMenu.addTab(tabhostMainMenu.newTabSpec(tag_stock_msg).setIndicator(new TabItem
+						(this, R.drawable.tab_msg, R.string.show_msg, 0)), StockMsgFragment.class, null);
 
 				tabhostMainMenu.addTab(tabhostMainMenu.newTabSpec(tag_stock_purchase).setIndicator(new TabItem
 						(this, R.drawable.tab_operating, R.string.jyh_chaxun, 0)), OperatorInquiryFragment.class, null);

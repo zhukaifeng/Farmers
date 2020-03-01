@@ -99,6 +99,7 @@
         <activity android:name=".jingyinghu.MenuHomeSuyuanActivity"/>
         <activity android:name=".jingyinghu.PurchaseDetailActivity"/>
         <activity android:name=".view.BigImageActivity" />
+        <activity android:name=".jingyinghu.BusinessActivity" />
 
 
     </application>
