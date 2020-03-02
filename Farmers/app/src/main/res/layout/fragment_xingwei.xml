@@ -38,42 +38,23 @@
                 android:layout_centerHorizontal="true"
                 android:layout_gravity="center_horizontal"
                 android:layout_marginTop="15dp"
-                android:background="@drawable/bg_xiaofang_title"
+
+                android:background="@drawable/bg_round_title"
                 android:gravity="center"
                 >
 
-                <Spinner
-                    android:id="@+id/spinner_market"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:gravity="center_horizontal"
-                    android:layout_marginLeft="@dimen/dp30"
-                    android:layout_marginRight="@dimen/dp30"
-                    android:layout_centerHorizontal="true"
-                    android:layout_gravity="center"
-                    android:background="@color/transparent"
-                    android:dropDownVerticalOffset="34dp"
-
-                    />
 
                 <TextView
-                    android:id="@+id/tv_home_name"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="市场"
-                    android:textColor="@color/color_333333"
-                    android:visibility="gone"
-                    android:layout_centerInParent="true"
-                    android:textSize="14dp" />
+                    android:textColor="@color/white"
+                    android:textSize="@dimen/sp14"
+                    android:text = "经营行为"/>
 
-                <ImageView
-                    android:layout_width="10dp"
-                    android:layout_height="6dp"
-                    android:layout_alignParentRight="true"
-                    android:layout_centerVertical="true"
-                    android:background="@drawable/bg_home_bottom" />
 
             </RelativeLayout>
+
+
 
 
 
@@ -113,7 +94,7 @@
             android:layout_weight="1"
             android:paddingLeft="@dimen/dp10"
             android:gravity="center"
-            android:text="消防点位"
+            android:text="处罚条例"
             android:textStyle="bold"
             android:textSize="@dimen/sp16" />
 
@@ -123,7 +104,7 @@
             android:layout_height="match_parent"
             android:layout_weight="1"
             android:gravity="center"
-            android:text="巡查点位"
+            android:text="市场"
             android:textStyle="bold"
             android:textSize="@dimen/sp16" />
 

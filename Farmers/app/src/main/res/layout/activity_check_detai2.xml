@@ -13,6 +13,7 @@
             android:layout_width="match_parent"
             android:layout_height="@dimen/dp181"
             android:background="@drawable/bg_life_payments">
+
             <RelativeLayout
                 android:id="@+id/rl_back"
                 android:layout_width="@dimen/dp60"
@@ -30,7 +31,6 @@
                     android:background="@drawable/bg_back"/>
             </RelativeLayout>
 
-
             <RelativeLayout
                 android:layout_width="@dimen/dp223"
                 android:layout_height="@dimen/dp33"
@@ -43,7 +43,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_centerInParent="true"
-                    android:text="@string/shichangjiance"
+                    android:text="经营行为"
                     android:textColor="@color/write"
                     android:textSize="@dimen/sp15" />
 

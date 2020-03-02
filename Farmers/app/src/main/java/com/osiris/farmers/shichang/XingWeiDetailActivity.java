@@ -1,10 +1,9 @@
 package com.osiris.farmers.shichang;
 
+import android.content.Intent;
 import android.text.TextUtils;
 import android.view.View;
-import android.widget.ArrayAdapter;
 import android.widget.ImageView;
-import android.widget.Spinner;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
@@ -12,8 +11,8 @@ import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
 import com.osiris.farmers.R;
 import com.osiris.farmers.base.BaseActivity;
-import com.osiris.farmers.model.CheckDetail;
 import com.osiris.farmers.model.XiaofangDe;
+import com.osiris.farmers.model.XingweiDetail;
 import com.osiris.farmers.network.ApiParams;
 import com.osiris.farmers.network.ApiRequestTag;
 import com.osiris.farmers.network.NetRequest;
@@ -27,7 +26,7 @@ import butterknife.BindView;
 import butterknife.OnClick;
 import me.jessyan.autosize.utils.LogUtils;
 
-public class XiaofangDetailActivity extends BaseActivity {
+public class XingWeiDetailActivity extends BaseActivity {
 
 
     @BindView(R.id.tv_content)
@@ -41,11 +40,12 @@ public class XiaofangDetailActivity extends BaseActivity {
     ImageView iv_pic3;
     private int id;
 
+
     @OnClick({R.id.rl_back})
     void onClick(View v){
         switch (v.getId()){
             case R.id.rl_back:
-                finish();
+              finish();
 
                 break;
         }
@@ -54,7 +54,7 @@ public class XiaofangDetailActivity extends BaseActivity {
 
     @Override
     public int getLayoutResId() {
-        return R.layout.activity_check_detai;
+        return R.layout.activity_check_detai2;
     }
 
     @Override
@@ -69,7 +69,7 @@ public class XiaofangDetailActivity extends BaseActivity {
     private void getData() {
 
         showLoadDialog();
-        String url = ApiParams.API_HOST + "/app/getXiaofangxcById.action";//database
+        String url = ApiParams.API_HOST + "/app/getRichangxcById.action";//database
         Map<String, String> paramMap = new HashMap<>();
         paramMap.put("id",String.valueOf(id));
 
@@ -82,12 +82,12 @@ public class XiaofangDetailActivity extends BaseActivity {
                 JsonParser parser = new JsonParser();
                 JsonObject jsonObject = parser.parse(successResult).getAsJsonObject();
                 if (jsonObject.has("data")){
-                    XiaofangDe.DataBean dataBean = JsonUtils.fromJson(jsonObject.get("data"),XiaofangDe.DataBean.class);
-                    if (!TextUtils.isEmpty(dataBean.getTitleMsg())){
-                        tv_content.setText(dataBean.getTitleMsg());
+                    XingweiDetail.DataBean dataBean = JsonUtils.fromJson(jsonObject.get("data"),XingweiDetail.DataBean.class);
+                    if (!TextUtils.isEmpty(dataBean.getResultMsg())){
+                        tv_content.setText(dataBean.getResultMsg());
                     }
                     if (!TextUtils.isEmpty(dataBean.getTupian())){
-                        Glide.with(XiaofangDetailActivity.this).load(ApiParams.API_HOST + "/xiaofangdw/" + dataBean.getTupian()).into(iv_pic1);
+                        Glide.with(XingWeiDetailActivity.this).load(ApiParams.API_HOST + "/richang/" + dataBean.getTupian()).into(iv_pic1);
 
                     }
                 }
