@@ -17,11 +17,11 @@ import butterknife.OnClick;
 public class ZhiduCxFragment extends BaseFragment {
 
 
-
     @BindView(R.id.tab_strip)
     PagerSlidingTabStrip tab_strip;
     @BindView(R.id.viewPager)
     ViewPager mViewPager;
+    private int type;
 
     @OnClick({R.id.rl_back})
     void onClick(View v) {
@@ -40,6 +40,9 @@ public class ZhiduCxFragment extends BaseFragment {
 
     @Override
     protected void initView() {
+        if (getArguments() != null) {
+            type = getArguments().getInt("type");
+        }
         mViewPager.setAdapter(new myPagerAdapter(getActivity().getSupportFragmentManager()));
         tab_strip.setViewPager(mViewPager);
         tab_strip.setTextSize((int) getResources().getDimension(R.dimen.sp16));
@@ -54,7 +57,7 @@ public class ZhiduCxFragment extends BaseFragment {
 
     private class myPagerAdapter extends FragmentPagerAdapter {
 
-        String[] title = {"市场管理制度", "政策法规"};
+        String[] title = {"市场管理制度", type == 3 ? "科普知识" : "政策法规"};
         RegulationFragment fragment1;
         RegulationFragment fragment2;
 

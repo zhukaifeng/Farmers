@@ -1,58 +1,65 @@
 package com.osiris.farmers.view.fragment;
 
-import android.content.Intent;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
+import android.widget.TextView;
 
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
 import com.osiris.farmers.R;
 import com.osiris.farmers.base.BaseFragment;
+import com.osiris.farmers.model.MarketBusinessBean;
 import com.osiris.farmers.model.OperatorInquery;
-import com.osiris.farmers.model.SerachGoodData;
 import com.osiris.farmers.network.ApiParams;
 import com.osiris.farmers.network.ApiRequestTag;
 import com.osiris.farmers.network.GlobalParams;
 import com.osiris.farmers.network.NetRequest;
 import com.osiris.farmers.network.NetRequestResultListener;
+import com.osiris.farmers.shichang.ChargeManageActivity;
 import com.osiris.farmers.utils.JsonUtils;
-import com.osiris.farmers.view.OperatorInputActivity;
+import com.osiris.farmers.view.adapter.MarketBusinessAdapter;
+import com.osiris.farmers.view.adapter.MyItemClickListener;
 import com.osiris.farmers.view.adapter.OperatorInquiryAdapter;
 
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 
 import butterknife.BindView;
 import butterknife.OnClick;
 import me.jessyan.autosize.utils.LogUtils;
 
-public class OperatorInquiryFragment extends BaseFragment {
+public class MarketBusinessFragment extends BaseFragment {
 
     @BindView(R.id.rv_data)
     RecyclerView rv_data;
-    @BindView(R.id.et_tw_code)
-    EditText et_tw_code;
     @BindView(R.id.et_market_name)
     EditText et_market_name;
-    private ArrayList<OperatorInquery.DataBean> dataList = new ArrayList<>();
-    private OperatorInquiryAdapter dataAdapter = new OperatorInquiryAdapter(dataList);
+    @BindView(R.id.tv_title)
+    TextView tv_title;
+    private ArrayList<MarketBusinessBean> dataList = new ArrayList<>();
+    private MarketBusinessAdapter dataAdapter = new MarketBusinessAdapter(dataList);
     private String searchMarketName;
-    private String searchTwCode;
+    public static final int TYPE_PUNISH = 1;
+    public static final int TYPE_CONSUME = 2;
+    private int pageType;
 
 
     @Override
     protected int setLayout() {
-        return R.layout.fragment_operator_inquiry;
+        return R.layout.fragment_market_business;
     }
 
     @Override
     protected void initView() {
+        if (getArguments() != null) {
+            pageType = getArguments().getInt("pageType");
+            tv_title.setText(pageType==TYPE_PUNISH?"处罚查询":"消费查询");
+        }
         rv_data.setLayoutManager(new LinearLayoutManager(this.getActivity(), LinearLayoutManager.VERTICAL, false));
         rv_data.setAdapter(dataAdapter);
         dataAdapter.notifyDataSetChanged();
@@ -74,6 +81,15 @@ public class OperatorInquiryFragment extends BaseFragment {
             }
         });
 
+        dataAdapter.setOnItemClick(new MyItemClickListener() {
+            @Override
+            public void onItemClick(View view, int position) {
+                if (pageType == TYPE_CONSUME) {
+                    startActivity(ChargeManageActivity.getStartIntent(getActivity(), dataList.get(position).getLoginId(), dataList.get(position).getId()));
+                }
+            }
+        });
+
     }
 
     @Override
@@ -81,7 +97,7 @@ public class OperatorInquiryFragment extends BaseFragment {
         getTypeData();
     }
 
-    @OnClick({R.id.rl_back, R.id.btn_search})
+    @OnClick({R.id.btn_search})
     void onClick(View v) {
         switch (v.getId()) {
             case R.id.rl_back:
@@ -89,7 +105,6 @@ public class OperatorInquiryFragment extends BaseFragment {
                 break;
             case R.id.btn_search:
                 searchMarketName = et_market_name.getText().toString();
-                searchTwCode = et_tw_code.getText().toString();
                 initData();
                 break;
         }
@@ -100,11 +115,13 @@ public class OperatorInquiryFragment extends BaseFragment {
     private void getTypeData() {
 
 
-        String url = ApiParams.API_HOST + "/app/getOperatorByUserId.action";
+        String url = ApiParams.API_HOST + "/app/getJYHByJyhName.action";
 
         Map<String, String> paramMap = new HashMap<>();
         paramMap.put("userId", String.valueOf(GlobalParams.id));
-
+        if (searchMarketName != null) {
+            paramMap.put("jyhName", searchMarketName);
+        }
         Log.d("zkf", "params:" + paramMap.toString());
         NetRequest.request(url, ApiRequestTag.DATA, paramMap, new NetRequestResultListener() {
             @Override
@@ -114,17 +131,9 @@ public class OperatorInquiryFragment extends BaseFragment {
                 JsonObject jsonObject = parser.parse(successResult).getAsJsonObject();
                 if (jsonObject.has("data")) {
 
-                    OperatorInquery.DataBean[] dataBeans = JsonUtils.fromJson(jsonObject.get("data"), OperatorInquery.DataBean[].class);
+                    MarketBusinessBean[] dataBeans = JsonUtils.fromJson(jsonObject.get("data"), MarketBusinessBean[].class);
                     dataList.clear();
-                    for (OperatorInquery.DataBean item :
-                            dataBeans) {
-                        if ((searchMarketName == null && searchTwCode == null)
-                                || (searchMarketName == null && item.getTwhmc() != null && searchTwCode != null && item.getTwhmc().contains(searchTwCode))
-                                || (searchTwCode == null && item.getMarketnm() != null && searchMarketName != null && item.getMarketnm().contains(searchMarketName))
-                                || (searchMarketName != null && searchTwCode != null && item.getTwhmc() != null && item.getMarketnm() != null && item.getTwhmc().contains(searchTwCode) && item.getMarketnm().contains(searchMarketName))) {
-                            dataList.add(item);
-                        }
-                    }
+                    dataList.addAll(Arrays.asList(dataBeans));
                     dataAdapter.notifyDataSetChanged();
 
                 }

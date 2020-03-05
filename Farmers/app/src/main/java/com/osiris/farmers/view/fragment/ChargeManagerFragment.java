@@ -87,15 +87,6 @@ public class ChargeManagerFragment extends BaseFragment {
 
 
 
-//镇江江南        028       张浩         500元       0元      2019.03.22
-		dataList.add(new ChargeManager("镇江江南", "028", "张浩", "500元","0元","2019.03.22"));
-		dataList.add(new ChargeManager("镇江江南", "028", "张浩", "500元","0元","2019.03.22"));
-		dataList.add(new ChargeManager("镇江江南", "028", "张浩", "500元","0元","2019.03.22"));
-		dataList.add(new ChargeManager("镇江江南", "028", "张浩", "500元","0元","2019.03.22"));
-		dataList.add(new ChargeManager("镇江江南", "028", "张浩", "500元","0元","2019.03.22"));
-		dataList.add(new ChargeManager("镇江江南", "028", "张浩", "500元","0元","2019.03.22"));
-
-
 		rv_data.setLayoutManager(new LinearLayoutManager(this.getActivity(), LinearLayoutManager.VERTICAL, false));
 		rv_data.setAdapter(dataAdapter);
 		dataAdapter.notifyDataSetChanged();

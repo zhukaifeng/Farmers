@@ -64,97 +64,12 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_centerInParent="true"
-                    android:text="处罚查询"
+                    android:text="收费查询"
                     android:textColor="@color/write"
                     android:textSize="@dimen/sp15" />
 
 
             </RelativeLayout>
-
-
-            <RelativeLayout
-                android:layout_width="match_parent"
-                android:layout_height="@dimen/dp71"
-                android:layout_alignParentBottom="true"
-                android:background="@drawable/bg_rectange">
-
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="@dimen/dp45"
-                    android:layout_centerInParent="true"
-                    android:layout_marginLeft="@dimen/dp23"
-                    android:layout_marginRight="@dimen/dp23"
-                    android:background="@drawable/bg_gray_round"
-                    android:orientation="horizontal">
-
-                    <RelativeLayout
-                        android:layout_width="0dp"
-                        android:layout_height="match_parent"
-                        android:layout_weight="2">
-
-                        <EditText
-                            android:layout_width="match_parent"
-                            android:layout_height="match_parent"
-                            android:layout_marginLeft="@dimen/dp20"
-                            android:background="@null"
-                            android:focusable="false"
-                            android:focusableInTouchMode="false"
-                            android:hint="请输入经营户名称"
-                            android:textColor="@color/write"
-                            android:textColorHint="@color/write"
-                            android:textSize="@dimen/sp14" />
-
-
-                    </RelativeLayout>
-
-                    <View
-                        android:layout_width="@dimen/dp1"
-                        android:layout_height="match_parent"
-                        android:background="#EFF1F5" />
-
-                    <RelativeLayout
-                        android:layout_width="0dp"
-                        android:layout_height="match_parent"
-                        android:layout_weight="1">
-
-                        <TextView
-                            android:id="@+id/tv_num"
-                            android:layout_width="wrap_content"
-                            android:layout_height="match_parent"
-                            android:layout_marginLeft="@dimen/dp15"
-                            android:background="@null"
-                            android:focusable="false"
-                            android:focusableInTouchMode="false"
-                            android:gravity="center_vertical"
-                            android:hint="@string/all"
-                            android:textColor="@color/write"
-                            android:textColorHint="@color/write"
-                            android:textSize="@dimen/sp14" />
-
-                        <ImageView
-                            android:layout_width="@dimen/dp9"
-                            android:layout_height="@dimen/dp5"
-                            android:layout_centerVertical="true"
-                            android:layout_marginLeft="@dimen/dp10"
-                            android:layout_toRightOf="@+id/tv_num"
-                            android:background="@drawable/bg_arrow_up" />
-
-                        <ImageView
-                            android:layout_width="@dimen/dp17"
-                            android:layout_height="@dimen/dp16"
-                            android:layout_alignParentRight="true"
-                            android:layout_centerVertical="true"
-                            android:layout_marginRight="@dimen/dp15"
-                            android:background="@drawable/bg_search" />
-                    </RelativeLayout>
-
-
-                </LinearLayout>
-
-
-            </RelativeLayout>
-
 
         </RelativeLayout>
 

@@ -15,13 +15,18 @@ import java.util.List;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
-public class ChargeManagerAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>{
+public class ChargeManagerAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
 
 
     private MyItemClickListener myItemClickListener;
 
     private List<ChargeManager> dataList = new ArrayList<>();
+    private String account;
 
+    public void setAccount(String account) {
+        this.account = account;
+        notifyDataSetChanged();
+    }
 
     public ChargeManagerAdapter(List<ChargeManager> dataList) {
         this.dataList = dataList;
@@ -34,15 +39,15 @@ public class ChargeManagerAdapter extends RecyclerView.Adapter<RecyclerView.View
     @Override
     public RecyclerView.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
 
-        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_charge_manager, parent,false);//解决宽度不能铺满
+        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_charge_manager, parent, false);//解决宽度不能铺满
 
-        return new ChargeManagerHolder(view,myItemClickListener);
+        return new ChargeManagerHolder(view, myItemClickListener);
     }
 
     @Override
     public void onBindViewHolder(RecyclerView.ViewHolder holder, int position) {
 
-        ((ChargeManagerHolder)holder).bindData(dataList.get(position));
+        ((ChargeManagerHolder) holder).bindData(dataList.get(position));
 
     }
 
@@ -52,11 +57,13 @@ public class ChargeManagerAdapter extends RecyclerView.Adapter<RecyclerView.View
     }
 
 
-    class ChargeManagerHolder extends RecyclerView.ViewHolder implements View.OnClickListener{
+    class ChargeManagerHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
 
 
         @BindView(R.id.tv_wholesale_market)
         TextView tv_wholesale_market;
+        @BindView(R.id.tv_account)
+        TextView tv_account;
         @BindView(R.id.tv_pay_stall)
         TextView tv_pay_stall;
         @BindView(R.id.tv_person_charge)
@@ -71,12 +78,11 @@ public class ChargeManagerAdapter extends RecyclerView.Adapter<RecyclerView.View
         TextView tv_check_detail;
 
 
-
         private MyItemClickListener myItemClickListener;
 
-        public ChargeManagerHolder(View itemView,MyItemClickListener myItemClickListener) {
+        public ChargeManagerHolder(View itemView, MyItemClickListener myItemClickListener) {
             super(itemView);
-            ButterKnife.bind(this,itemView);
+            ButterKnife.bind(this, itemView);
             this.myItemClickListener = myItemClickListener;
             itemView.setOnClickListener(this);
 //            tv_person_charge.setOnClickListener(this);
@@ -85,25 +91,27 @@ public class ChargeManagerAdapter extends RecyclerView.Adapter<RecyclerView.View
 
         @Override
         public void onClick(View v) {
-            if (null != myItemClickListener){
-                myItemClickListener.onItemClick(itemView,getLayoutPosition());
+            if (null != myItemClickListener) {
+                myItemClickListener.onItemClick(itemView, getLayoutPosition());
             }
         }
 
-        public void bindData(ChargeManager data){
+        public void bindData(ChargeManager data) {
 
-            tv_pay_should.setText(data.getPayShould());
-            tv_wholesale_market.setText(data.getWholesaleMarket());
-            tv_pay_stall.setText(data.getPayStall());
-            tv_person_charge.setText(data.getPersonCharge());
-            tv_pay_not.setText(data.getPayNot());
-            tv_date.setText(data.getDate());
+            tv_pay_should.setText(data.getFeiyong());
+            tv_wholesale_market.setText(data.getMarketName());
+            tv_pay_stall.setText(data.getJiaofeiStatus());
+            tv_person_charge.setText(data.getTanweiName());
+            tv_pay_not.setText(data.getJiaofeiStatus());
+            tv_date.setText(data.getRiqi());
+            tv_account.setText(data.getUserName() + "  " + account);
+
 
         }
     }
 
 
-    public void setOnItemClick(MyItemClickListener myItemClickListener){
+    public void setOnItemClick(MyItemClickListener myItemClickListener) {
         this.myItemClickListener = myItemClickListener;
     }
 }

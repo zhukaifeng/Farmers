@@ -1,29 +1,28 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-              android:orientation="vertical"
-              android:layout_width="match_parent"
-              android:layout_height="match_parent">
-
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="@dimen/dp181"
-        android:background="@drawable/bg_operator">
+        android:background="@drawable/bg_charge_pay">
 
         <RelativeLayout
-            android:id="@+id/rl_back"
+            android:id="@+id/rl_back_one"
             android:layout_width="@dimen/dp60"
             android:layout_height="@dimen/dp60"
             android:layout_marginTop="@dimen/dp20"
-            >
+            android:visibility="visible">
 
             <ImageView
-                android:id="@+id/iv_back"
+                android:id="@+id/iv_back_one"
                 android:layout_width="@dimen/dp9"
                 android:layout_height="@dimen/dp16"
                 android:layout_gravity="center_vertical"
                 android:layout_marginLeft="@dimen/dp20"
                 android:layout_marginTop="@dimen/dp9"
-                android:background="@drawable/bg_back"/>
+                android:background="@drawable/bg_back" />
         </RelativeLayout>
 
         <RelativeLayout
@@ -32,17 +31,17 @@
             android:layout_height="@dimen/dp60"
             android:layout_alignParentRight="true"
             android:layout_marginTop="@dimen/dp20"
-            android:visibility="gone">
+            android:visibility="visible">
 
             <ImageView
                 android:id="@+id/iv_function"
-                android:layout_width="@dimen/dp17"
-                android:layout_height="@dimen/dp17"
+                android:layout_width="@dimen/dp21"
+                android:layout_height="@dimen/dp19"
                 android:layout_alignParentRight="true"
                 android:layout_gravity="center_vertical"
                 android:layout_marginTop="@dimen/dp9"
                 android:layout_marginRight="@dimen/dp22"
-                android:background="@drawable/bg_add"/>
+                android:background="@drawable/bg_qr" />
         </RelativeLayout>
 
         <RelativeLayout
@@ -57,9 +56,9 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_centerInParent="true"
-                android:text="@string/operator_inquiry"
+                android:text="交费查询"
                 android:textColor="@color/write"
-                android:textSize="@dimen/sp15"/>
+                android:textSize="@dimen/sp15" />
 
 
         </RelativeLayout>
@@ -75,66 +74,42 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/dp45"
+                android:layout_centerInParent="true"
                 android:layout_marginLeft="@dimen/dp23"
                 android:layout_marginRight="@dimen/dp23"
                 android:background="@drawable/bg_gray_round"
-                android:layout_centerInParent="true"
-                android:orientation="horizontal"
-                >
+                android:orientation="horizontal">
 
                 <RelativeLayout
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
-                    android:layout_weight="1"
-                    >
+                    android:layout_weight="1">
+
                     <EditText
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
+                        android:layout_marginLeft="@dimen/dp20"
                         android:background="@null"
-                        android:hint="@string/hint_input_market"
-                        android:textColorHint="@color/write"
-                        android:textSize="@dimen/sp14"
+                        android:hint="请输入经营户名称"
                         android:id="@+id/et_market_name"
-                        android:layout_marginLeft="@dimen/dp20"
                         android:textColor="@color/write"
-                        />
-
-
-                </RelativeLayout>
-                <View
-                    android:layout_width="@dimen/dp1"
-                    android:layout_height="match_parent"
-                    android:background="#EFF1F5"/>
-                <RelativeLayout
-                    android:layout_width="0dp"
-                    android:layout_height="match_parent"
-                    android:layout_weight="1"
-                    >
-                    <EditText
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:background="@null"
-                        android:hint="@string/pay_stall"
-                        android:id="@+id/et_tw_code"
                         android:textColorHint="@color/write"
-                        android:textColor="@color/write"
-                        android:layout_marginLeft="@dimen/dp20"
-                        android:textSize="@dimen/sp14"
-                        />
+                        android:textSize="@dimen/sp14" />
+
                     <ImageView
-                        android:layout_width="@dimen/dp17"
+                        android:layout_width="@dimen/dp15"
                         android:layout_height="wrap_content"
+                        android:adjustViewBounds="true"
                         android:id="@+id/btn_search"
-                        android:background="@drawable/bg_search"
-                        android:layout_centerVertical="true"
                         android:layout_alignParentRight="true"
+                        android:layout_centerVertical="true"
                         android:layout_marginRight="@dimen/dp15"
-                        />
+                        android:background="@drawable/bg_search" />
+
                 </RelativeLayout>
 
 
             </LinearLayout>
-
 
 
         </RelativeLayout>
@@ -152,8 +127,6 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="@dimen/dp59"
-            android:layout_marginLeft="@dimen/dp20"
-            android:layout_marginRight="@dimen/dp15"
             android:orientation="horizontal">
 
             <TextView
@@ -162,31 +135,32 @@
                 android:layout_height="match_parent"
                 android:layout_weight="1"
                 android:gravity="center"
-                android:text="@string/pay_stall"
+                android:text="经营户"
                 android:textSize="@dimen/sp18"
                 android:textStyle="bold" />
 
             <TextView
-                android:id="@+id/tv_type"
+                android:id="@+id/tv_market"
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
                 android:gravity="center"
-                android:text="地址"
-                android:textSize="@dimen/sp18"
-                android:textStyle="bold"
-
-                />
-
-            <TextView
-                android:id="@+id/tv_count"
-                android:layout_width="0dp"
-                android:layout_height="match_parent"
-                android:layout_weight="1"
-                android:gravity="center"
-                android:text="手机号"
+                android:text="市场"
+                android:visibility="gone"
                 android:textSize="@dimen/sp18"
                 android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/tv_twh"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:visibility="gone"
+                android:text="摊位号"
+                android:textSize="@dimen/sp18"
+                android:textStyle="bold" />
+
 
             <TextView
                 android:id="@+id/tv_price"
@@ -194,7 +168,7 @@
                 android:layout_height="match_parent"
                 android:layout_weight="1"
                 android:gravity="center"
-                android:text="@string/connect"
+                android:text="账号"
                 android:textSize="@dimen/sp18"
                 android:textStyle="bold" />
 
@@ -202,12 +176,11 @@
         </LinearLayout>
 
 
-
-
     </LinearLayout>
+
     <android.support.v7.widget.RecyclerView
         android:id="@+id/rv_data"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"/>
+        android:layout_height="wrap_content" />
 
 </LinearLayout>

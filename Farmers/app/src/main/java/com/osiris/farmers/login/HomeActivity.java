@@ -271,7 +271,8 @@ public class HomeActivity extends BaseActivity {
 //				tvHome3.setText(getString(R.string.charge));
 				ivHome3.setBackgroundResource(R.drawable.bg_home_appraise_management);
 				tvHome3.setText(getString(R.string.pingjiaguanli));
-				llHome4.setVisibility(View.INVISIBLE);
+				ivHome4.setBackgroundResource(R.drawable.bg_home_charge);
+				tvHome4.setText(getString(R.string.show_msg));
 				break;
 			case 4:
 				ivHome1.setBackgroundResource(R.drawable.bg_home_operator_management);

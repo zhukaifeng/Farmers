@@ -1,11 +1,15 @@
 package com.osiris.farmers.jingyinghu.fragment;
 
+import android.content.ActivityNotFoundException;
 import android.content.Context;
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
+import android.provider.Browser;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.text.TextUtils;
+import android.util.Log;
 import android.view.KeyEvent;
 import android.view.View;
 import android.view.inputmethod.EditorInfo;
@@ -17,6 +21,7 @@ import android.widget.Toast;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
 import com.osiris.farmers.R;
+import com.osiris.farmers.adapter.BaseAdapter;
 import com.osiris.farmers.adapter.RegularAdapter;
 import com.osiris.farmers.base.BaseFragment;
 import com.osiris.farmers.model.PurchaseDetail;
@@ -57,12 +62,30 @@ public class RegulationFragment extends BaseFragment {
         return R.layout.fragment_list_regulation;
     }
 
+
+    private void openPDFInBrowser(Context context, String url) {
+        Uri uri = Uri.parse(ApiParams.API_HOST + "/" + url);
+        Intent intent = new Intent(Intent.ACTION_VIEW, uri);
+        intent.putExtra(Browser.EXTRA_APPLICATION_ID, context.getPackageName());
+        try {
+            context.startActivity(intent);
+        } catch (ActivityNotFoundException e) {
+            Log.w("error", "Activity was not found for intent, " + intent.toString());
+        }
+    }
+
     @Override
     protected void initView() {
         type = getArguments().getInt("type");
         adapter = new RegularAdapter(getActivity());
         rv_data.setLayoutManager(new LinearLayoutManager(getActivity()));
         rv_data.setAdapter(adapter);
+        adapter.setOnItemClickListener(new BaseAdapter.OnItemClickListener() {
+            @Override
+            public void onItemClick(int position) {
+                openPDFInBrowser(getActivity(), adapter.getItem(position).getJtnr());
+            }
+        });
         search_content.setOnEditorActionListener(new TextView.OnEditorActionListener() {
             @Override
             public boolean onEditorAction(TextView textView, int i, KeyEvent keyEvent) {
