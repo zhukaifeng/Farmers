@@ -91,6 +91,9 @@
         <activity android:name=".shichang.AddXfXcActivity"/>
         <activity android:name=".shichang.AddScorelShichangActivity"/>
         <activity android:name=".shichang.ScoringDetailShichangActivity"/>
+        <activity android:name=".shichang.AddRcXcActivity"/>
+        <activity android:name=".shichang.XiaoFangRuleActivity"/>
+        <activity android:name=".shichang.XingWeiDetailActivity"/>
         <activity android:name=".view.AddScorelJgMarketActivity"/>
         <activity android:name=".view.AddScorelJgUserActivity"/>
         <activity android:name=".jingyinghu.MenuHomeJYhActivity"/>

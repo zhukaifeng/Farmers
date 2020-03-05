@@ -15,6 +15,7 @@ import com.osiris.farmers.jingyinghu.fragment.MarketEvaulateXyFragment;
 import com.osiris.farmers.jingyinghu.fragment.MineJyhFragment;
 import com.osiris.farmers.marketcheck.MarketCheckFragment;
 import com.osiris.farmers.marketcheck.SuyuanFragment;
+import com.osiris.farmers.shichang.RcXingweiFragment;
 import com.osiris.farmers.shichang.XiaofangFragment;
 import com.osiris.farmers.view.TabItem;
 import com.osiris.farmers.view.fragment.DatebacktoFragment;
@@ -157,11 +158,17 @@ public class MenuHomeScGlActivity extends BaseActivity {
 					}
 				});
 				break;
-			case 4://市场管理
+			case 4://市场管理   行为就是之前的日常     //政策法规:2:法律法规，3:科普，4:考核，5:国际文献
+//zlkmc可为空,pageNo,pageSizes不传查全部
+			//	http://localhost:8096/wisdom/app/allDataMag.action?leibie=2&zlkmc=&pageNo=1&pageSizes=5这个接口你可以用，leibie传3
 
 				tabhostMainMenu.addTab(tabhostMainMenu.newTabSpec(tag_stock_purchase).setIndicator(new TabItem
 						(this, R.drawable.tab_operating, R.string.jyh_xingwei, 0)), MarketEvaulateXyFragment.class, null);
 
+
+				tabhostMainMenu.addTab(tabhostMainMenu.newTabSpec(tag_stock_pay).setIndicator(new
+						TabItem(this, R.drawable.tab_market, R.string
+						.jyh_xingwei, 0)), RcXingweiFragment.class, null);
 				tabhostMainMenu.addTab(tabhostMainMenu.newTabSpec(tag_stock_list).setIndicator(new
 						TabItem(this, R.drawable.tab_market, R.string
 						.shichangxuncha, 0)), XiaofangFragment.class, null);

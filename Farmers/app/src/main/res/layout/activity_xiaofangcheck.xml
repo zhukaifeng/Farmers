@@ -15,6 +15,23 @@
             android:background="@drawable/bg_life_payments">
 
 
+            <RelativeLayout
+                android:id="@+id/rl_back"
+                android:layout_width="@dimen/dp60"
+                android:layout_height="@dimen/dp60"
+                android:layout_marginTop="@dimen/dp20"
+                android:visibility="visible">
+
+                <ImageView
+                    android:id="@+id/iv_back"
+                    android:layout_width="@dimen/dp9"
+                    android:layout_height="@dimen/dp16"
+                    android:layout_gravity="center_vertical"
+                    android:layout_marginLeft="@dimen/dp20"
+                    android:layout_marginTop="@dimen/dp9"
+                    android:background="@drawable/bg_back"/>
+            </RelativeLayout>
+
 
 
             <RelativeLayout
@@ -67,8 +84,37 @@
         </RelativeLayout>
 
     </RelativeLayout>
+    <LinearLayout
+        android:id="@+id/linear_rules"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/dp27"
+        android:gravity="center_vertical"
+        android:orientation="horizontal"
+        android:visibility="gone"
+        android:layout_marginLeft="@dimen/dp15"
+        >
 
 
+
+        <android.support.v7.widget.AppCompatRadioButton
+            android:id="@+id/rb_purchaser"
+            android:layout_width="@dimen/dp75"
+            android:layout_height="@dimen/dp50"
+            android:background="@drawable/bg_rules"
+            android:button="@null"
+            android:checked="true" />
+
+        <TextView
+            android:id="@+id/tv_rules"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="点击选择违反条款"
+            android:textSize="@dimen/sp16"
+            android:layout_marginLeft="@dimen/dp10"
+            />
+
+    </LinearLayout>
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="@dimen/dp145"
@@ -112,6 +158,9 @@
         android:layout_marginLeft="@dimen/dp21"
         android:layout_marginTop="@dimen/dp20"
         android:overScrollMode="never" />
+
+
+
 
 
     <TextView
