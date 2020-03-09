@@ -275,7 +275,7 @@
             android:layout_height="match_parent"
             android:layout_weight="1"
             android:gravity="center"
-            android:text="@string/market_name"
+            android:text="经营户"
             android:textColor="@color/txt_black_51"
             android:textSize="@dimen/sp16"
             android:textStyle="bold"/>

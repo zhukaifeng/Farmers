@@ -22,6 +22,7 @@ import java.util.List;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import me.jessyan.autosize.utils.LogUtils;
 
 public class AddScoreShichangAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>{
 
@@ -132,6 +133,7 @@ public class AddScoreShichangAdapter extends RecyclerView.Adapter<RecyclerView.V
 			}else {
 				linear_item.setBackgroundColor(itemView.getResources().getColor(R.color.write));
 			}
+
 
 			if (!TextUtils.isEmpty(data.getMarketnm())){
 				tv_name.setText(data.getPingjianr());

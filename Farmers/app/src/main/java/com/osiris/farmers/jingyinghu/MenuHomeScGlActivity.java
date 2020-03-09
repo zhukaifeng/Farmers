@@ -15,6 +15,7 @@ import com.osiris.farmers.jingyinghu.fragment.MarketEvaulateXyFragment;
 import com.osiris.farmers.jingyinghu.fragment.MineJyhFragment;
 import com.osiris.farmers.marketcheck.MarketCheckFragment;
 import com.osiris.farmers.marketcheck.SuyuanFragment;
+import com.osiris.farmers.shichang.MarketEvaulateScglFragment;
 import com.osiris.farmers.shichang.RcXingweiFragment;
 import com.osiris.farmers.shichang.XiaofangFragment;
 import com.osiris.farmers.view.TabItem;
@@ -163,7 +164,7 @@ public class MenuHomeScGlActivity extends BaseActivity {
 			//	http://localhost:8096/wisdom/app/allDataMag.action?leibie=2&zlkmc=&pageNo=1&pageSizes=5这个接口你可以用，leibie传3
 
 				tabhostMainMenu.addTab(tabhostMainMenu.newTabSpec(tag_stock_purchase).setIndicator(new TabItem
-						(this, R.drawable.tab_operating, R.string.jyh_xingwei, 0)), MarketEvaulateXyFragment.class, null);
+						(this, R.drawable.tab_operating, R.string.jyh_xingwei, 0)), MarketEvaulateScglFragment.class, null);
 
 
 				tabhostMainMenu.addTab(tabhostMainMenu.newTabSpec(tag_stock_pay).setIndicator(new
