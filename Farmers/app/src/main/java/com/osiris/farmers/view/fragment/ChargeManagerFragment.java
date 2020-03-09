@@ -77,13 +77,13 @@ public class ChargeManagerFragment extends BaseFragment {
 		typeList.add(new DateModel("其他", false));
 
 		//摊位费            未交80元            已交30元            2019.03.22
-		dataDetailList.add(new ChargeDetail("谁费", "未交80元","已交30元","2019.03.22"));
-		dataDetailList.add(new ChargeDetail("电费", "未交80元","已交30元","2019.03.22"));
-		dataDetailList.add(new ChargeDetail("摊位费", "未交80元","已交30元","2019.03.22"));
-		dataDetailList.add(new ChargeDetail("保证金", "未交80元","已交30元","2019.03.22"));
-		dataDetailList.add(new ChargeDetail("物业费", "未交80元","已交30元","2019.03.22"));
-		dataDetailList.add(new ChargeDetail("卫生费", "未交80元","已交30元","2019.03.22"));
-		dataDetailList.add(new ChargeDetail("电梯费", "未交80元","已交30元","2019.03.22"));
+//		dataDetailList.add(new ChargeDetail("谁费", "未交80元","已交30元","2019.03.22"));
+//		dataDetailList.add(new ChargeDetail("电费", "未交80元","已交30元","2019.03.22"));
+//		dataDetailList.add(new ChargeDetail("摊位费", "未交80元","已交30元","2019.03.22"));
+//		dataDetailList.add(new ChargeDetail("保证金", "未交80元","已交30元","2019.03.22"));
+//		dataDetailList.add(new ChargeDetail("物业费", "未交80元","已交30元","2019.03.22"));
+//		dataDetailList.add(new ChargeDetail("卫生费", "未交80元","已交30元","2019.03.22"));
+//		dataDetailList.add(new ChargeDetail("电梯费", "未交80元","已交30元","2019.03.22"));
 
 
 

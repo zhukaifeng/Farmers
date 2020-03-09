@@ -152,8 +152,6 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="@dimen/dp59"
-            android:layout_marginLeft="@dimen/dp20"
-            android:layout_marginRight="@dimen/dp15"
             android:orientation="horizontal">
 
             <TextView

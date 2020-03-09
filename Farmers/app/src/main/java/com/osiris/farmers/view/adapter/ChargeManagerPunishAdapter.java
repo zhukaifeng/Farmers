@@ -8,6 +8,7 @@ import android.widget.TextView;
 
 import com.osiris.farmers.R;
 import com.osiris.farmers.model.ChargeManager;
+import com.osiris.farmers.model.ChargePunish;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -15,12 +16,12 @@ import java.util.List;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
-public class ChargeManagerAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
+public class ChargeManagerPunishAdapter  extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
 
 
     private MyItemClickListener myItemClickListener;
 
-    private List<ChargeManager> dataList = new ArrayList<>();
+    private List<ChargePunish> dataList = new ArrayList<>();
     private String account;
 
     public void setAccount(String account) {
@@ -28,11 +29,11 @@ public class ChargeManagerAdapter extends RecyclerView.Adapter<RecyclerView.View
         notifyDataSetChanged();
     }
 
-    public ChargeManagerAdapter(List<ChargeManager> dataList) {
+    public ChargeManagerPunishAdapter(List<ChargePunish> dataList) {
         this.dataList = dataList;
     }
 
-    public void setDataList(List<ChargeManager> dataList) {
+    public void setDataList(List<ChargePunish> dataList) {
         this.dataList = dataList;
     }
 
@@ -96,14 +97,15 @@ public class ChargeManagerAdapter extends RecyclerView.Adapter<RecyclerView.View
             }
         }
 
-        public void bindData(ChargeManager data) {
+        public void bindData(ChargePunish data) {
 
-            tv_pay_should.setText(data.getFeiyong());
+            tv_pay_should.setText(data.getMoney());
             tv_wholesale_market.setText(data.getMarketName());
-            tv_pay_stall.setText(data.getTanweiName());
+            tv_pay_stall.setText(data.getTwhmc());
             tv_person_charge.setText(data.getUserName());
-            tv_pay_not.setText(data.getJiaofeiStatus());
-            tv_date.setText(data.getRiqi());
+            tv_pay_not.setText(data.getStatus());
+            tv_date.setText(data.getJiaokuanriqi());
+            tv_person_charge.setText(data.getJyhName());
             tv_account.setText(data.getJyhName() + "  " + account);
 
 

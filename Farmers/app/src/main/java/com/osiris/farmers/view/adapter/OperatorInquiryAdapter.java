@@ -96,7 +96,8 @@ public class OperatorInquiryAdapter extends RecyclerView.Adapter<RecyclerView.Vi
             } else {
                 linear_item.setBackgroundColor(itemView.getResources().getColor(R.color.write));
             }
-            tv_business_lincense.setText(data.getRemark());
+//            tv_business_lincense.setText(data.getRemark());
+            tv_business_lincense.setText(data.getPhone());
             tv_company_name.setText(data.getMarketnm());
             tv_connect.setText(data.getJyhmc());
             tv_stall_num.setText(data.getTwhmc());

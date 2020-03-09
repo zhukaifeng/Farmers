@@ -1,0 +1,59 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/linear_detail"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/dp151"
+        android:background="@drawable/bg_charge_pay">
+
+        <RelativeLayout
+            android:id="@+id/rl_back"
+            android:layout_width="@dimen/dp60"
+            android:layout_height="@dimen/dp60"
+            android:layout_marginTop="@dimen/dp20"
+            android:visibility="visible">
+
+            <ImageView
+                android:id="@+id/iv_back"
+                android:layout_width="@dimen/dp9"
+                android:layout_height="@dimen/dp16"
+                android:layout_gravity="center_vertical"
+                android:layout_marginLeft="@dimen/dp20"
+                android:layout_marginTop="@dimen/dp9"
+                android:background="@drawable/bg_back" />
+        </RelativeLayout>
+
+
+        <RelativeLayout
+            android:layout_width="@dimen/dp223"
+            android:layout_height="@dimen/dp33"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="@dimen/dp20"
+            android:background="@drawable/bg_round_title">
+
+            <TextView
+                android:id="@+id/tv_title_detail"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerInParent="true"
+                android:text="罚款详情"
+                android:textColor="@color/write"
+                android:textSize="@dimen/sp15" />
+
+
+        </RelativeLayout>
+
+
+    </RelativeLayout>
+
+
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/rv_data_detail"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+
+
+</LinearLayout>

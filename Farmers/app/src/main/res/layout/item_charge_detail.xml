@@ -22,7 +22,6 @@
                 android:layout_height="match_parent"
                 android:layout_weight="1"
                 android:gravity="center"
-                android:text="镇江江南"
                 android:textSize="@dimen/sp13"
                 android:textColor="@color/txt_black_51" />
 
@@ -32,7 +31,6 @@
                 android:layout_height="match_parent"
                 android:layout_weight="1"
                 android:gravity="center"
-                android:text="028"
                 android:textSize="@dimen/sp13"
 
                 android:textColor="@color/txt_black_51"

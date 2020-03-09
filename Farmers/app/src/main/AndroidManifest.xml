@@ -104,6 +104,9 @@
         <activity android:name=".view.BigImageActivity" />
         <activity android:name=".jingyinghu.BusinessActivity" />
         <activity android:name=".shichang.ChargeManageActivity" />
+        <activity android:name=".shichang.ChargeManagerPunishActivity" />
+        <activity android:name=".shichang.PunishDetailActivity" />
+        <activity android:name=".view.PDFViewerActivity" />
 
 
     </application>

@@ -1,5 +1,6 @@
 package com.osiris.farmers.jingyinghu.fragment;
 
+import android.os.Bundle;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -16,12 +17,15 @@ import com.osiris.farmers.network.GlobalParams;
 import com.osiris.farmers.network.NetRequest;
 import com.osiris.farmers.network.NetRequestResultListener;
 import com.osiris.farmers.utils.JsonUtils;
+import com.osiris.farmers.utils.PreferencesUtils;
 
 import java.util.HashMap;
 import java.util.Map;
 
 import butterknife.BindView;
 import butterknife.OnClick;
+
+import static android.content.Context.MODE_PRIVATE;
 
 public class MineJyhFragment extends BaseFragment {
 
@@ -35,6 +39,9 @@ public class MineJyhFragment extends BaseFragment {
     TextView tv_dept;
     @BindView(R.id.tv_tw)
     TextView tv_tw;
+    @BindView(R.id.tw_ll)
+    View twll;
+    private int type;
 
 
     @OnClick({R.id.rl_back})
@@ -53,7 +60,10 @@ public class MineJyhFragment extends BaseFragment {
 
     @Override
     protected void initView() {
-
+        int userType = PreferencesUtils.getInt(getActivity(), "user_type");
+        if (userType == 4) {
+            twll.setVisibility(View.GONE);
+        }
     }
 
     @Override

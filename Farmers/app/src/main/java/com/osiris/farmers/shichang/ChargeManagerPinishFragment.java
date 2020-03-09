@@ -75,24 +75,18 @@ public class ChargeManagerPinishFragment extends BaseFragment {
 //		typeList.add(new DateModel("其他", false));
 
 		//摊位费            未交80元            已交30元            2019.03.22
-		dataDetailList.add(new ChargeDetail("谁费", "未交80元","已交30元","2019.03.22"));
-		dataDetailList.add(new ChargeDetail("电费", "未交80元","已交30元","2019.03.22"));
-		dataDetailList.add(new ChargeDetail("摊位费", "未交80元","已交30元","2019.03.22"));
-		dataDetailList.add(new ChargeDetail("保证金", "未交80元","已交30元","2019.03.22"));
-		dataDetailList.add(new ChargeDetail("物业费", "未交80元","已交30元","2019.03.22"));
-		dataDetailList.add(new ChargeDetail("卫生费", "未交80元","已交30元","2019.03.22"));
-		dataDetailList.add(new ChargeDetail("电梯费", "未交80元","已交30元","2019.03.22"));
+//		dataDetailList.add(new ChargeDetail("谁费", "未交80元","已交30元","2019.03.22"));
+//		dataDetailList.add(new ChargeDetail("电费", "未交80元","已交30元","2019.03.22"));
+//		dataDetailList.add(new ChargeDetail("摊位费", "未交80元","已交30元","2019.03.22"));
+//		dataDetailList.add(new ChargeDetail("保证金", "未交80元","已交30元","2019.03.22"));
+//		dataDetailList.add(new ChargeDetail("物业费", "未交80元","已交30元","2019.03.22"));
+//		dataDetailList.add(new ChargeDetail("卫生费", "未交80元","已交30元","2019.03.22"));
+//		dataDetailList.add(new ChargeDetail("电梯费", "未交80元","已交30元","2019.03.22"));
 
 
 
 //镇江江南        028       张浩         500元       0元      2019.03.22
-//		dataList.add(new ChargeManager("镇江江南", "028", "张浩", "500元","0元","2019.03.22"));
-//		dataList.add(new ChargeManager("镇江江南", "028", "张浩", "500元","0元","2019.03.22"));
-//		dataList.add(new ChargeManager("镇江江南", "028", "张浩", "500元","0元","2019.03.22"));
-//		dataList.add(new ChargeManager("镇江江南", "028", "张浩", "500元","0元","2019.03.22"));
-//		dataList.add(new ChargeManager("镇江江南", "028", "张浩", "500元","0元","2019.03.22"));
-//		dataList.add(new ChargeManager("镇江江南", "028", "张浩", "500元","0元","2019.03.22"));
-
+		dataList.add(new ChargeManager());
 
 		rv_data.setLayoutManager(new LinearLayoutManager(this.getActivity(), LinearLayoutManager.VERTICAL, false));
 		rv_data.setAdapter(dataAdapter);

@@ -22,6 +22,7 @@ import com.osiris.farmers.network.GlobalParams;
 import com.osiris.farmers.network.NetRequest;
 import com.osiris.farmers.network.NetRequestResultListener;
 import com.osiris.farmers.utils.JsonUtils;
+import com.osiris.farmers.utils.PreferencesUtils;
 import com.osiris.farmers.view.dialog.BillOfSalesDetailDialog;
 import com.osiris.farmers.view.dialog.DialogClickListener;
 
@@ -36,54 +37,55 @@ import static android.content.Context.MODE_PRIVATE;
 
 public class LoginFragment extends BaseFragment {
 
-	@BindView(R.id.ll_login_forget)
-	LinearLayout llLoginForget;
-	@BindView(R.id.et_login_username)
-	EditText etLoginUsername;
-	@BindView(R.id.et_login_password)
-	EditText etLoginPassword;
-	@BindView(R.id.btn_login)
-	Button btnLogin;
-	private SharedPreferences preferences;
-	private SharedPreferences.Editor editor;
-	private String USER_ACCOUNT = "account";
-	private String USER_PWD = "password";
+    @BindView(R.id.ll_login_forget)
+    LinearLayout llLoginForget;
+    @BindView(R.id.et_login_username)
+    EditText etLoginUsername;
+    @BindView(R.id.et_login_password)
+    EditText etLoginPassword;
+    @BindView(R.id.btn_login)
+    Button btnLogin;
+    private SharedPreferences preferences;
+    private SharedPreferences.Editor editor;
+    private String USER_ACCOUNT = "account";
+    private String USER_TYPE = "user_type";
+    private String USER_PWD = "password";
 
-	@Override
-	protected int setLayout() {
-		return R.layout.fragment_login;
-	}
+    @Override
+    protected int setLayout() {
+        return R.layout.fragment_login;
+    }
 
-	@Override
-	protected void initView() {
-		preferences = getActivity().getPreferences(MODE_PRIVATE);
-		editor = preferences.edit();
-		String account = preferences.getString(USER_ACCOUNT, "");
-		String pwd = preferences.getString(USER_PWD, "");
-		LogUtils.d("zkf account:" + account + "   pwd:" + pwd);
-		if (!TextUtils.isEmpty(account)) {
-			etLoginUsername.setText(account);
-		}
-		if (!TextUtils.isEmpty(pwd)) {
-			etLoginPassword.setText(pwd);
-		}
-	}
+    @Override
+    protected void initView() {
+        preferences = getActivity().getPreferences(MODE_PRIVATE);
+        editor = preferences.edit();
+        String account = preferences.getString(USER_ACCOUNT, "");
+        String pwd = preferences.getString(USER_PWD, "");
+        LogUtils.d("zkf account:" + account + "   pwd:" + pwd);
+        if (!TextUtils.isEmpty(account)) {
+            etLoginUsername.setText(account);
+        }
+        if (!TextUtils.isEmpty(pwd)) {
+            etLoginPassword.setText(pwd);
+        }
+    }
 
-	@Override
-	protected void initData() {
+    @Override
+    protected void initData() {
 
-	}
+    }
 
-	@OnClick({R.id.ll_login_forget, R.id.btn_login})
-	void onClick(View view) {
-		switch (view.getId()) {
-			case R.id.ll_login_forget:
-				toClass(getActivity(), ForgetPwdActivity.class);
+    @OnClick({R.id.ll_login_forget, R.id.btn_login})
+    void onClick(View view) {
+        switch (view.getId()) {
+            case R.id.ll_login_forget:
+                toClass(getActivity(), ForgetPwdActivity.class);
 
-				//toClass(getActivity(), MarketEvaluateActivity.class);
-				break;
-			case R.id.btn_login:
-				Login();
+                //toClass(getActivity(), MarketEvaluateActivity.class);
+                break;
+            case R.id.btn_login:
+                Login();
 //				Intent intent = new Intent(getActivity(), HomeActivity.class);
 //
 //				if (TextUtils.isEmpty(etLoginUsername.getText().toString())) {
@@ -103,39 +105,39 @@ public class LoginFragment extends BaseFragment {
 //
 //
 //				startActivity(intent);
-				break;
-		}
-	}
+                break;
+        }
+    }
 
 
-	private void showBillOfSalesDetailDialog() {
-		BillOfSalesDetailDialog.Builder builder = new BillOfSalesDetailDialog.Builder(getActivity());
-		builder.setPositiveButton(new DialogClickListener() {
-			@Override
-			public void onClick(Dialog dialog, String msg) {
+    private void showBillOfSalesDetailDialog() {
+        BillOfSalesDetailDialog.Builder builder = new BillOfSalesDetailDialog.Builder(getActivity());
+        builder.setPositiveButton(new DialogClickListener() {
+            @Override
+            public void onClick(Dialog dialog, String msg) {
 
-			}
+            }
 
-			@Override
-			public void onClick(Dialog dialog) {
-				dialog.dismiss();
-			}
-		});
+            @Override
+            public void onClick(Dialog dialog) {
+                dialog.dismiss();
+            }
+        });
 
-		builder.setNegativeButton(new DialogInterface.OnClickListener() {
-			@Override
-			public void onClick(DialogInterface dialogInterface, int i) {
-				dialogInterface.dismiss();
-			}
-		});
-		builder.create().show();
-	}
-
-
-	private void Login() {
+        builder.setNegativeButton(new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialogInterface, int i) {
+                dialogInterface.dismiss();
+            }
+        });
+        builder.create().show();
+    }
 
 
-		String url = ApiParams.API_HOST + "/inloginApp.action";
+    private void Login() {
+
+
+        String url = ApiParams.API_HOST + "/inloginApp.action";
 
 //		if (TextUtils.isEmpty(etLoginUsername.getText().toString())) {
 //			Toast.makeText(getActivity(), "请输入账号", Toast.LENGTH_SHORT).show();
@@ -145,57 +147,63 @@ public class LoginFragment extends BaseFragment {
 //			Toast.makeText(getActivity(), "请输入登录密码", Toast.LENGTH_SHORT).show();
 //			return;
 //		}
-		Map<String, String> paramMap = new HashMap<>();
-		paramMap.put("username", etLoginUsername.getText().toString());
-		paramMap.put("password", etLoginPassword.getText().toString());
+        Map<String, String> paramMap = new HashMap<>();
+        paramMap.put("username", etLoginUsername.getText().toString());
+        paramMap.put("password", etLoginPassword.getText().toString());
 
 //		paramMap.put("username", "jc1");
 //		paramMap.put("password", "a123456");
 
-		NetRequest.request(url, ApiRequestTag.LOGIN, paramMap, new NetRequestResultListener() {
-			@Override
-			public void requestSuccess(int tag, String successResult) {
-				LogUtils.d("zkf login rsp:" + successResult);
-				String temp = successResult.substring(1, successResult.length() - 1);
-				if (!TextUtils.isEmpty(successResult)) {
-					LoginData loginData = JsonUtils.fromJson(temp, LoginData.class);
-					if (loginData.getMessage().equals("1")) {
-						GlobalParams.authority = loginData.getUser().getAuthority();
-						GlobalParams.username = loginData.getUser().getUsername();
-						GlobalParams.id = loginData.getUser().getId();
-						Intent intent = new Intent(getActivity(), HomeActivity.class);
-						if (GlobalParams.authority.equals("经营户")) {
-							intent.putExtra("type", 1);
+        NetRequest.request(url, ApiRequestTag.LOGIN, paramMap, new NetRequestResultListener() {
+            @Override
+            public void requestSuccess(int tag, String successResult) {
+                LogUtils.d("zkf login rsp:" + successResult);
+                String temp = successResult.substring(1, successResult.length() - 1);
+                if (!TextUtils.isEmpty(successResult)) {
+                    LoginData loginData = JsonUtils.fromJson(temp, LoginData.class);
+                    if (loginData.getMessage().equals("1")) {
+                        GlobalParams.authority = loginData.getUser().getAuthority();
+                        GlobalParams.username = loginData.getUser().getUsername();
+                        GlobalParams.id = loginData.getUser().getId();
+                        Intent intent = new Intent(getActivity(), HomeActivity.class);
+                        int type = 0;
+                        if (GlobalParams.authority.equals("经营户")) {
+                            type = 1;
+                            intent.putExtra("type", 1);
 
-						} else if (GlobalParams.authority.equals("监管部门")) {
-							intent.putExtra("type", 3);
+                        } else if (GlobalParams.authority.equals("监管部门")) {
+                            type = 3;
+                            intent.putExtra("type", 3);
 
-						} else if (GlobalParams.authority.equals("检测机构")) {
-							intent.putExtra("type", 2);
+                        } else if (GlobalParams.authority.equals("检测机构")) {
+                            type = 2;
+                            intent.putExtra("type", 2);
 
-						} else if (GlobalParams.authority.equals("市场管理")) {
-							LogUtils.d("zkf shichanbgguanli");
-							intent.putExtra("type", 4);
+                        } else if (GlobalParams.authority.equals("市场管理")) {
+                            type = 4;
+                            LogUtils.d("zkf shichanbgguanli");
+                            intent.putExtra("type", 4);
 
-						}
-						editor.putString(USER_ACCOUNT, etLoginUsername.getText().toString());
-						editor.putString(USER_PWD, etLoginPassword.getText().toString());
-						editor.commit();
-						startActivity(intent);
-					}
-				}
-
-
-			}
-
-			@Override
-			public void requestFailure(int tag, int code, String msg) {
-
-			}
-		});
+                        }
+                        editor.putString(USER_ACCOUNT, etLoginUsername.getText().toString());
+                        PreferencesUtils.putInt(getActivity(), USER_TYPE, type);
+                        editor.putString(USER_PWD, etLoginPassword.getText().toString());
+                        editor.commit();
+                        startActivity(intent);
+                    }
+                }
 
 
-	}
+            }
+
+            @Override
+            public void requestFailure(int tag, int code, String msg) {
+
+            }
+        });
+
+
+    }
 
 
 }

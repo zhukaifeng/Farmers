@@ -55,8 +55,8 @@ public class BusinessActivity extends BaseActivity {
                 .putExtra("tanwei", data.getTwhma()).putExtra("busNo", data.getJyhid())
                 .putExtra("wechat", data.getMark()).putExtra("alipay", data.getMbrk())
                 .putExtra("businessUser", data.getUser()).putExtra("license_code", data.getRemark())
-                .putExtra("address",data.getShengName()+data.getShiName()+data.getRegionname()+data.getJiedaoName())
-                .putExtra("job",data.getZhiwei());
+                .putExtra("address", data.getShengName() + data.getShiName() + data.getRegionname() + data.getJiedaoName())
+                .putExtra("job", data.getZhiwei());
     }
 
     @Override
@@ -77,6 +77,7 @@ public class BusinessActivity extends BaseActivity {
         id_card.setText(dataIntent.getStringExtra("idCode"));
         tv_market.setText(dataIntent.getStringExtra("market"));
         tw_no.setText(dataIntent.getStringExtra("tanwei"));
+        tv_account.setText(dataIntent.getStringExtra("phone"));
         business_code.setText(dataIntent.getStringExtra("busNo"));
         bus_contact.setText(dataIntent.getStringExtra("businessUser"));
         license_code.setText(dataIntent.getStringExtra("license_code"));

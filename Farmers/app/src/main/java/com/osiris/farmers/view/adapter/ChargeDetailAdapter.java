@@ -94,10 +94,10 @@ public class ChargeDetailAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
             }else {
                 linear_item.setBackgroundColor(itemView.getResources().getColor(R.color.bg_gray_e9));
             }
-            tv_pay_type.setText(data.getChargeType());
-            tv_padding_pay.setText(data.getPaddingPay());
-            tv_has_pay.setText(data.getHasPay());
-            tv_date.setText(data.getDate());
+//            tv_pay_type.setText(data.getChargeType());
+//            tv_padding_pay.setText(data.getPaddingPay());
+//            tv_has_pay.setText(data.getHasPay());
+//            tv_date.setText(data.getDate());
 
         }
     }

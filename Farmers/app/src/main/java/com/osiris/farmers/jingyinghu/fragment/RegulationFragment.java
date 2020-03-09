@@ -20,6 +20,7 @@ import android.widget.Toast;
 
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
+import com.joanzapata.pdfview.PDFView;
 import com.osiris.farmers.R;
 import com.osiris.farmers.adapter.BaseAdapter;
 import com.osiris.farmers.adapter.RegularAdapter;
@@ -31,6 +32,7 @@ import com.osiris.farmers.network.ApiRequestTag;
 import com.osiris.farmers.network.NetRequest;
 import com.osiris.farmers.network.NetRequestResultListener;
 import com.osiris.farmers.utils.JsonUtils;
+import com.osiris.farmers.view.PDFViewerActivity;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -68,7 +70,7 @@ public class RegulationFragment extends BaseFragment {
         Intent intent = new Intent(Intent.ACTION_VIEW, uri);
         intent.putExtra(Browser.EXTRA_APPLICATION_ID, context.getPackageName());
         try {
-            context.startActivity(intent);
+            context.startActivity(PDFViewerActivity.getStartIntent(getActivity(), ApiParams.API_HOST + "/" + url));
         } catch (ActivityNotFoundException e) {
             Log.w("error", "Activity was not found for intent, " + intent.toString());
         }

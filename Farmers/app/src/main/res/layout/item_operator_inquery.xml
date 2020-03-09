@@ -26,7 +26,6 @@
                 android:layout_marginTop="@dimen/dp15"
                 android:layout_weight="1"
                 android:gravity="center"
-                android:visibility="gone"
                 android:text="@string/pay_stall"
                 android:textColor="@color/txt_black_51"
                 android:textSize="@dimen/sp13"

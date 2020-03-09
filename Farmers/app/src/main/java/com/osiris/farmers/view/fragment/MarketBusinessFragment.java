@@ -19,10 +19,10 @@ import com.osiris.farmers.network.GlobalParams;
 import com.osiris.farmers.network.NetRequest;
 import com.osiris.farmers.network.NetRequestResultListener;
 import com.osiris.farmers.shichang.ChargeManageActivity;
+import com.osiris.farmers.shichang.ChargeManagerPunishActivity;
 import com.osiris.farmers.utils.JsonUtils;
 import com.osiris.farmers.view.adapter.MarketBusinessAdapter;
 import com.osiris.farmers.view.adapter.MyItemClickListener;
-import com.osiris.farmers.view.adapter.OperatorInquiryAdapter;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -84,8 +84,11 @@ public class MarketBusinessFragment extends BaseFragment {
         dataAdapter.setOnItemClick(new MyItemClickListener() {
             @Override
             public void onItemClick(View view, int position) {
+                MarketBusinessBean item=dataList.get(position);
                 if (pageType == TYPE_CONSUME) {
-                    startActivity(ChargeManageActivity.getStartIntent(getActivity(), dataList.get(position).getLoginId(), dataList.get(position).getId()));
+                    startActivity(ChargeManageActivity.getStartIntent(getActivity(), item.getLoginId(), item.getId()));
+                }else {
+                    startActivity(ChargeManagerPunishActivity.getStartIntent(getActivity(), item.getLoginId(), item.getId()));
                 }
             }
         });
