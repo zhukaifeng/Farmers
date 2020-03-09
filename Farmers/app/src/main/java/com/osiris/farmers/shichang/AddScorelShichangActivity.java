@@ -93,7 +93,6 @@ public class AddScorelShichangActivity extends BaseActivity {
 //		if (null != data){
 //			tv_market.setText(data.getMarketnm());
 //		}
-        if (xxz == 1) {
             rv_data.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false));
             rv_data.setAdapter(marketScoreAdapter);
 
@@ -185,20 +184,11 @@ public class AddScorelShichangActivity extends BaseActivity {
                     marketScoreAdapter.notifyDataSetChanged();
                 }
             });
-        } else {
-            rv_data.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false));
 
 
+        getData();
 
 
-        }
-
-
-        if (xxz == 1) {
-            getData();
-
-        } else {
-        }
     }
 
 
@@ -209,24 +199,8 @@ public class AddScorelShichangActivity extends BaseActivity {
                 finish();
                 break;
             case R.id.rl_commit:
-                if (xxz == 1) {
-//					for (JinghuPingjia.PingjiaxxsBean data:pingjiaxxs){
-//						if (data.getScore()>0){
-//							totalCommitCount++;
-//						}
-//					}
-                    commitData();
+                commitData();
 
-//					for (JinghuPingjia.PingjiaxxsBean data:pingjiaxxs){
-//						if (data.getScore()>0){
-//							commitData(data);
-//						}
-//					}
-
-                } else {
-
-
-                }
 
                 break;
         }
@@ -322,18 +296,18 @@ public class AddScorelShichangActivity extends BaseActivity {
         String url = ApiParams.API_HOST + "/app/appMarketpingjiaAdd.action";
         Map<String, String> paramMap = new HashMap<>();
         paramMap.put("id", String.valueOf(GlobalParams.id));
-        paramMap.put("type", "1");
 
         NetRequest.request(url, ApiRequestTag.DATA, paramMap, new NetRequestResultListener() {
             @Override
             public void requestSuccess(int tag, String successResult) {
-                LogUtils.d("zkf successResult:" + successResult);
+                LogUtils.d("zkf www2222222successResult:" + successResult);
                 JsonParser parser = new JsonParser();
                 JsonObject json = parser.parse(successResult).getAsJsonObject();
                 if (json.has("pingjiaxxs")) {
-                    JinghuPingjia.PingjiaxxsBean[] datas = JsonUtils.fromJson(json.get("pingjiaxxs"),
+                    JinghuPingjia.PingjiaxxsBean[] datas = JsonUtils.fromJson(json.get("pingjiaxxs").getAsJsonArray(),
                             JinghuPingjia.PingjiaxxsBean[].class);
                     pingjiaxxs.addAll(Arrays.asList(datas));
+                    LogUtils.d("zkf size:" + pingjiaxxs.size());
                     marketScoreAdapter.notifyDataSetChanged();
 
                 }
