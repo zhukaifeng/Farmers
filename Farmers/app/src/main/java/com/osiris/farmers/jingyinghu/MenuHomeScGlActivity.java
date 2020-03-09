@@ -164,7 +164,7 @@ public class MenuHomeScGlActivity extends BaseActivity {
 			//	http://localhost:8096/wisdom/app/allDataMag.action?leibie=2&zlkmc=&pageNo=1&pageSizes=5这个接口你可以用，leibie传3
 
 				tabhostMainMenu.addTab(tabhostMainMenu.newTabSpec(tag_stock_purchase).setIndicator(new TabItem
-						(this, R.drawable.tab_operating, R.string.jyh_xingwei, 0)), MarketEvaulateScglFragment.class, null);
+						(this, R.drawable.tab_operating, R.string.jyh_remark, 0)), MarketEvaulateScglFragment.class, null);
 
 
 				tabhostMainMenu.addTab(tabhostMainMenu.newTabSpec(tag_stock_pay).setIndicator(new

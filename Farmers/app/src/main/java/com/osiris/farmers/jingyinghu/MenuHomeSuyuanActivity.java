@@ -22,6 +22,7 @@ import com.osiris.farmers.view.fragment.MarketEvaulateFragment;
 import com.osiris.farmers.view.fragment.OperatorInquiryFragment;
 import com.osiris.farmers.view.fragment.PersonalLifePayFragment;
 import com.osiris.farmers.view.fragment.ShippingStockFragment;
+import com.osiris.farmers.view.fragment.StockMsgFragment;
 import com.osiris.farmers.view.fragment.TakeSampleFragment;
 import com.osiris.farmers.view.fragment.TakeSampleListFragment;
 
@@ -126,19 +127,36 @@ public class MenuHomeSuyuanActivity extends BaseActivity {
 			case 3://监管部门
 
 				tabhostMainMenu.addTab(tabhostMainMenu.newTabSpec(tag_stock_purchase).setIndicator(new TabItem
-						(this, R.drawable.tab_operating, R.string.shichangjiance, 0)), MarketCheckFragment.class, null);
+						(this, R.drawable.tab_msg, R.string.buhegechuzhi, 0)), StockMsgFragment.class, null);
+
+				tabhostMainMenu.addTab(tabhostMainMenu.newTabSpec(tag_stock_purchase).setIndicator(new TabItem
+						(this, R.drawable.tab_operating, R.string.shicaizhiliang, 0)), ShicaiZhiliangFragment.class, null);
 
 				tabhostMainMenu.addTab(tabhostMainMenu.newTabSpec(tag_stock_list).setIndicator(new
 						TabItem(this, R.drawable.tab_market, R.string
-						.shangpingsuyuan, 0)), SuyuanFragment.class, null);
+						.suyuanxinxi, 0)), StockPurchaseFragment.class, null);
 
-//				tabhostMainMenu.addTab(tabhostMainMenu.newTabSpec(tag_stock_goods).setIndicator(new
-//								TabItem(this, R.drawable.tab_collect_feels, R.string.collect_fees, 0)),
-//						LifePayFragment.class, null);
+				tabhostMainMenu.addTab(tabhostMainMenu.newTabSpec(tag_stock_goods).setIndicator(new
+								TabItem(this, R.drawable.tab_collect_feels, R.string.wode, 0)),
+						MineJyhFragment.class, null);
 
-				tabhostMainMenu.addTab(tabhostMainMenu.newTabSpec(tag_stock_pay).setIndicator(new
-								TabItem(this, R.drawable.tab_mine, R.string.mine, 0)),
-						MarketEvaulateFragment.class, null);
+//				tabhostMainMenu.addTab(tabhostMainMenu.newTabSpec(tag_stock_purchase).setIndicator(new TabItem
+//						(this, R.drawable.tab_msg, R.string.buhegechuzhi, 0)), StockMsgFragment.class, null);
+//
+//				tabhostMainMenu.addTab(tabhostMainMenu.newTabSpec(tag_stock_purchase).setIndicator(new TabItem
+//						(this, R.drawable.tab_operating, R.string.shichangjiance, 0)), MarketCheckFragment.class, null);
+//
+//				tabhostMainMenu.addTab(tabhostMainMenu.newTabSpec(tag_stock_list).setIndicator(new
+//						TabItem(this, R.drawable.tab_market, R.string
+//						.shangpingsuyuan, 0)), SuyuanFragment.class, null);
+//
+////				tabhostMainMenu.addTab(tabhostMainMenu.newTabSpec(tag_stock_goods).setIndicator(new
+////								TabItem(this, R.drawable.tab_collect_feels, R.string.collect_fees, 0)),
+////						LifePayFragment.class, null);
+//
+//				tabhostMainMenu.addTab(tabhostMainMenu.newTabSpec(tag_stock_pay).setIndicator(new
+//								TabItem(this, R.drawable.tab_mine, R.string.mine, 0)),
+//						MarketEvaulateFragment.class, null);
 
 				tabhostMainMenu.setOnTabChangedListener(new TabHost.OnTabChangeListener() {
 					@Override
@@ -157,6 +175,9 @@ public class MenuHomeSuyuanActivity extends BaseActivity {
 				});
 				break;
 			case 4://市场管理
+
+				tabhostMainMenu.addTab(tabhostMainMenu.newTabSpec(tag_stock_purchase).setIndicator(new TabItem
+						(this, R.drawable.tab_msg, R.string.buhegechuzhi, 0)), StockMsgFragment.class, null);
 
 				tabhostMainMenu.addTab(tabhostMainMenu.newTabSpec(tag_stock_purchase).setIndicator(new TabItem
 						(this, R.drawable.tab_operating, R.string.shicaizhiliang, 0)), ShicaiZhiliangFragment.class, null);

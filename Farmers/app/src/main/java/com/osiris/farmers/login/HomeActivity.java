@@ -174,6 +174,7 @@ public class HomeActivity extends BaseActivity {
 				} else if (pageType == 2) {
 					intent2.putExtra("type", 2);
 				} else if (pageType == 3) {
+					intent2 = new Intent(this, MenuHomeSuyuanActivity.class);
 					intent2.putExtra("type", 3);
 
 				} else {
@@ -195,6 +196,7 @@ public class HomeActivity extends BaseActivity {
 					intent3.putExtra("type", 2);
 
 				} else if (pageType == 3) {
+					intent3 = new Intent(this, MenuHomeScGlActivity.class);
 					intent3.putExtra("type", 3);
 
 				} else {
@@ -264,7 +266,7 @@ public class HomeActivity extends BaseActivity {
 
 			case 3:
 				ivHome1.setBackgroundResource(R.drawable.bg_home_operator_management);
-				tvHome1.setText(getString(R.string.shichangjiance));
+				tvHome1.setText(getString(R.string.shichangguanli));
 				ivHome2.setBackgroundResource(R.drawable.bg_home_marketing_management);
 				tvHome2.setText(getString(R.string.shangpingsuyuan));
 //				ivHome3.setBackgroundResource(R.drawable.bg_home_charge);

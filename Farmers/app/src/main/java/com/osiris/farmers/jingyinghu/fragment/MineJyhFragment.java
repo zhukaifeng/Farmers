@@ -1,6 +1,7 @@
 package com.osiris.farmers.jingyinghu.fragment;
 
 import android.os.Bundle;
+import android.text.TextUtils;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -76,7 +77,7 @@ public class MineJyhFragment extends BaseFragment {
             public void requestSuccess(int tag, String successResult) {
                 JsonParser parser = new JsonParser();
                 JsonObject jsonObject = parser.parse(successResult).getAsJsonObject();
-                if (jsonObject.has("data")) {
+                if (jsonObject.has("data")&&!TextUtils.isEmpty(jsonObject.get("data").toString())) {
                     BusinessInfo info = JsonUtils.fromJson(jsonObject.get("data"), BusinessInfo.class);
                     Glide.with(getActivity()).load(ApiParams.API_HOST + "/" + info.getHeadpic()).into(iv_avatar);
                     tv_user_name.setText("用户名：" + info.getUsername());

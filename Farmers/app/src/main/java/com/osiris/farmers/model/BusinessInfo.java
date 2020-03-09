@@ -20,7 +20,7 @@ public class BusinessInfo {
     private String id;
     private String headpic;
     private String username;
-    private int marketId;
+    private String marketId;
 
     public String getMarketName() {
         return marketName;
@@ -78,11 +78,11 @@ public class BusinessInfo {
         this.username = username;
     }
 
-    public int getMarketId() {
+    public String getMarketId() {
         return marketId;
     }
 
-    public void setMarketId(int marketId) {
+    public void setMarketId(String marketId) {
         this.marketId = marketId;
     }
 }
